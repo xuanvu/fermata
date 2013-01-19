@@ -252,10 +252,10 @@ var Fermata = Fermata || {};
   Fermata.Render.prototype.Attributesdata = {
     division: null,
     instrument: null,
-    keys:  {
+    keys: {
       cancel: null,
       fifths: null,
-      mode: null,
+      mode: null
     },
     beat: {
       beats: null,
