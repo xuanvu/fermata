@@ -1,0 +1,86 @@
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+var Fermata = Fermata || {};
+
+if (typeof(Fermata.Render) === "undefined")
+{
+  throw ("Fermata.Render.js MUST be included before Fermata.Render.NoteStorage.js");
+}
+
+(function(){
+  "use strict";
+  
+  Fermata.Render.NoteStorage = function ()
+  {
+    this.init();
+  }
+  
+  var NoteStorage = Fermata.Render.NoteStorage;
+  
+  NoteStorage.prototype.init = function ()
+  {
+    this.data = [];
+  };
+  
+  NoteStorage.prototype.clear = function ()
+  {
+    this.data = [];
+  };
+  
+  NoteStorage.prototype.store = function (note, voice, staff)
+  {
+    this.checkCreateVoice(staff, voice);
+    
+    this.data[staff][voice].push(note);
+  };
+  
+  NoteStorage.prototype.getNotes = function (voice, staff)
+  {
+    if (!this.checkStaff(staff))
+    {
+      throw "there is no note stored for the staff" + staff.toString();
+    }
+    if (!checkVoice(staff, voice))
+    {
+      throw "there is no note stored for the voice " + voice.toString() + 
+      " of the staff " + staff.toString();
+    }
+    return this.data[staff][voice];
+  };
+  
+  NoteStorage.prototype.checkCreateVoice = function (staff, voice)
+  {
+    this.checkCreateStaff(staff);
+    if (this.checkVoice(staff, voice))
+    {
+      this.data[staff][voice] = [];
+    }
+  };
+
+  NoteStorage.prototype.checkCreateStaff = function (staff)
+  {
+    if (this.checkStaff(staff))
+    {
+      this.data[staff] = [];
+    }
+  };
+
+  NoteStorage.prototype.checkVoice = function (staff, voice)
+  {
+    if (!this.checkStaff(staff))
+    {
+      return false;
+    }
+    return typeof(this.data[staff][voice]) !== "undefined";
+  };
+
+  NoteStorage.prototype.checkStaff = function (staff)
+  {
+    return typeof(this.data[staff]) !== "undefined";
+  };
+
+}).call(this);

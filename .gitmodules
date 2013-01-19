@@ -1,3 +1,6 @@
 [submodule "deps/raphael"]
 	path = deps/raphael
 	url = git://github.com/DmitryBaranovskiy/raphael.git
+[submodule "deps/vexflow"]
+	path = deps/vexflow
+	url = git://github.com/0xfe/vexflow.git
