@@ -5,6 +5,11 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.renderAll = function () {
     this.renderScoreHeader(this.data.getScorePartWise());
+    for (var i = 0; i < this.PartListData.length; i++) {
+      //this.staves.push(this.PartListData[i].id);
+      this.staves[this.PartListData[i].id] = new Array();
+      this.container.height += 100;
+    }
     var parts = this.data.getParts();
 
     for (var i = 0 ; i < parts.idx.length ; i++) {
@@ -21,8 +26,6 @@ var Fermata = Fermata || {};
   //Note: info in score element
   Fermata.Render.prototype.renderScorePartwise = function (scorePartwise)
   {
-    //TODO: process document-attributes
-    //this.renderScoreHeader(scorePartwise);
     var _this = this;
     var processes = [
       {
@@ -100,7 +103,7 @@ var Fermata = Fermata || {};
         key: "measure",
         type: this.FuncTypes.PLUS,
         func: function (arg, idx) {
-          _this.renderMeasure(arg, idx);
+          _this.renderMeasure(arg, idx, part.id);
         }
       }
     ];
@@ -127,7 +130,7 @@ var Fermata = Fermata || {};
     {
       key: "backup",
       type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: null//TODO implement this function
+      func: Fermata.Render.prototype.Renderbackup
     },
     {
       key: "forward",
@@ -181,21 +184,27 @@ var Fermata = Fermata || {};
     }
   ];
 
-  Fermata.Render.prototype.renderMeasure = function (measure, measureId)
+
+  Fermata.Render.prototype.renderMeasure = function (measure, measureId, partId)
   {
     // TODO: Need to store it ?
+    var index = 0;
     this.noteData = [];
-
+    for (var pos in this.staves) {
+      if (pos == partId)
+        break;
+      index++;
+    }
     // Stave
     this.renderMeasureAttributes(measure);
     // TODO widths of measures
-    if (this.staves === undefined ||  this.staves[measureId] === undefined && measureId >= this.staves.length) {
+    if (this.staves[partId] === undefined ||  this.staves[partId][measureId] === undefined && measureId >= this.staves[partId].length) {
       if (measureId === 0) {
-        this.staves.push(new Vex.Flow.Stave(10, 0, 100 + measure.note.length * 50));
+        this.staves[partId].push(new Vex.Flow.Stave(10, 0 + index * 100, 100 + measure.note.length * 50));
       }
       else {
-        this.staves.push(new Vex.Flow.Stave(this.staves[this.staves.length - 1].x + this.staves[this.staves.length - 1].width,
-                                            this.staves[this.staves.length - 1].y, measure.note.length * 50));
+        this.staves[partId].push(new Vex.Flow.Stave(this.staves[partId][this.staves[partId].length - 1].x + this.staves[partId][this.staves[partId].length - 1].width,
+                                            this.staves[partId][this.staves[partId].length - 1].y, measure.note.length * 50));
       }
     }
 
@@ -204,20 +213,22 @@ var Fermata = Fermata || {};
     
     // Draw clef and time if needing
     var clefName = Fermata.Mapping.Clef.getVexflow(this.Attributesdata.clef.sign);
-    if (measureId  === 0 || clefName !== this.staves[measureId - 1].clef)
+    if (measureId  === 0 || clefName !== this.staves[partId][measureId - 1].clef)
     {
-      this.staves[measureId].addClef(clefName);
+      this.staves[partId][measureId].addClef(clefName);
 
-      // this.staves[measureId].addTimeSignature(Fermata.Mapping.Clef.getVexflow(this.Attributesdata.beat.beats)[this.Attributesdata.beat.type]);
-      this.staves[measureId].addTimeSignature(this.Attributesdata.beat.beats + '/' + this.Attributesdata.beat.type);
+      // this.staves[partId][measureId].addTimeSignature(Fermata.Mapping.Clef.getVexflow(this.Attributesdata.beat.beats)[this.Attributesdata.beat.type]);
+      this.staves[partId][measureId].addTimeSignature(this.Attributesdata.beat.beats + '/' + this.Attributesdata.beat.type);
 
       if (this.Attributesdata.keys.mode !== null) {
         var keySign = Fermata.Mapping.Clef.Sign.getVexflow(this.Attributesdata.keys.fifths, this.Attributesdata.keys.mode);
-        new Vex.Flow.KeySignature(keySign).addToStave(this.staves[measureId]);
+        new Vex.Flow.KeySignature(keySign).addToStave(this.staves[partId][measureId]);
       }
     }
-    this.staves[measureId].setContext(this.ctx);
-    this.staves[measureId].draw();
+    else
+      this.staves[partId][measureId].clef = clefName;
+    this.staves[partId][measureId].setContext(this.ctx);
+    this.staves[partId][measureId].draw();
 
     // Then Add note to their voice, format them and draw it
     for (var i = 1 ; i < this.noteData.length ; i++) {
@@ -230,7 +241,7 @@ var Fermata = Fermata || {};
         // Add notes to voice
         // Format and justify the notes to 500 pixels
       var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], 200);
-      voice.draw(this.ctx, this.staves[measureId]);
+      voice.draw(this.ctx, this.staves[partId][measureId]);
     }
 
     if (this.renderDirectionData.type !== null) {

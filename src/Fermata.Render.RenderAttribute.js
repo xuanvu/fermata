@@ -112,11 +112,18 @@ var Fermata = Fermata || {};
       {
         key: "clef-octave-change",
         type: this.FuncTypes.QUESTION,
-        func: null
+        func: function (arg) {
+          _this.AttributeClefChange(arg);
+        }
       }
     ];
 
     this.exploreSubNodes(node, process);
+  };
+
+  Fermata.Render.prototype.AttributeClefChange = function (change)
+  {
+    this.Attributesdata.clef.change = change;
   };
 
   Fermata.Render.prototype.AttributesClefLine = function (node)
@@ -161,6 +168,11 @@ var Fermata = Fermata || {};
   Fermata.Render.prototype.renderAttributesTimeTypes = function (node)
   {
     this.Attributesdata.beat.type = node;
+  };
+
+  Fermata.Render.prototype.AttributesStave = function (stave)
+  {
+    this.Attributesdata.stave = stave;
   };
 
   Fermata.Render.prototype.AttributesKeys = function (node)
