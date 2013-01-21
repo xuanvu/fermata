@@ -5,6 +5,7 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.renderBarline = function (score)
   {
+  	//TODO
   };
 
 }).call(this);

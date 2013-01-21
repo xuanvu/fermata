@@ -249,7 +249,7 @@ var Fermata = Fermata || {};
     }
 
     // Then Add note to their voice, format them and draw it
-    /*for (var i = 1 ; i < this.noteData.length ; i++) {
+    for (var i = 1 ; i < this.noteData.length ; i++) {
       var voice = new Vex.Flow.Voice({
         num_beats: this.Attributesdata.beat.beats,
         beat_value: this.Attributesdata.beat.type,
@@ -259,8 +259,8 @@ var Fermata = Fermata || {};
         // Add notes to voice
         // Format and justify the notes to 500 pixels
       var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], 200);
-      voice.draw(this.ctx, this.staves[partId][measureId]);
-    }*/
+      voice.draw(this.ctx, this.staves[partId][i - 1][measureId]);
+    }
 
     if (this.renderDirectionData.type !== null) {
       var tmpNote = {
