@@ -5,7 +5,7 @@ Fermata.Tests.Utils = {};
 Fermata.Tests.Utils.LoadJSONFixture = function (fixture, callback) {
     // Client-side, use jQuery
     if (typeof require === 'undefined') {
-        $.getJSON('fixtures/' + fixture, function(data) {
+        $.getJSON('../fixtures/' + fixture, function(data) {
             callback(data);
         });
     }
