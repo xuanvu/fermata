@@ -1,6 +1,7 @@
+.sconsign.dblite
+.DS_Store
 *~
+*.pyc
 node_modules
 build
-.sconsign.dblite
-*.pyc
-.DS_Store
+tests/mocha/coverage.html
