@@ -255,10 +255,8 @@ var Fermata = Fermata || {};
       }
     }
     // Then Add note to their voice, format them and draw it
-    console.log(this.noteData);
     for (var i = 1 ; i < this.noteData.length ; i++) {
       for (var toto in this.noteData[i]) {
-        console.log(toto);
         var voice = new Vex.Flow.Voice({
         num_beats: this.Attributesdata.beat.beats,
         beat_value: this.Attributesdata.beat.type,

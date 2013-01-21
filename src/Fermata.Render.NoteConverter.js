@@ -30,6 +30,8 @@ if (typeof(Fermata.Render) === "undefined")
   NoteConverter.prototype.division = 0;
   NoteConverter.prototype.beats = 0;
   NoteConverter.prototype.beatType = 0;
+  NoteConverter.prototype.clefName = "";
+  NoteConverter.prototype.change = 0;
   
   NoteConverter.prototype.convert = function (noteData, attributes)
   {
@@ -41,6 +43,9 @@ if (typeof(Fermata.Render) === "undefined")
       this.fillAttributesDefault();
     }
 
+    var key = (typeof(noteData[0].staff) === 'undefined') ? 1 : noteData[0].staff;
+    this.clefName = Fermata.Mapping.Clef.getVexflow(attributes.clef[key - 1].sign);
+    this.change = attributes.clef[key - 1].change;
     var noteType = Fermata.Render.getNoteType(noteData[0]);
     
     if (noteType === NoteType.NORMAL) {
@@ -65,7 +70,7 @@ if (typeof(Fermata.Render) === "undefined")
   
   NoteConverter.prototype.convertPitch = function (dataPitch)
   {
-    var dataOctave = dataPitch.getOctave();
+    var dataOctave = parseInt(dataPitch.getOctave()) - parseInt(this.change);
     var dataStep = dataPitch.getStep();
     
     //TODO: extract on a mapping function instead of use toLowerCase
@@ -115,7 +120,8 @@ if (typeof(Fermata.Render) === "undefined")
     var vexNote = new Vex.Flow.StaveNote({
       keys: vexPitches, 
       duration: vexDuration,
-      stem_direction: stem
+      stem_direction: stem,
+      clef : this.clefName
     });
     
     return vexNote;

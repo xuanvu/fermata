@@ -138,7 +138,7 @@ var Fermata = Fermata || {};
     var clef = { 
                       sign: null,
                       line: null,
-                      change: null
+                      change: 0
                     };
 
     var process = [
