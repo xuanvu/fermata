@@ -105,5 +105,7 @@ fermata_sources.forEach(function(file) {
   concatenated += fs.readFileSync(path.resolve(__dirname, file), 'UTF-8');
 });
 
-vm.runInThisContext(concatenated);
-module.exports = Fermata;
+// VM
+var context = vm.createContext({ require: require });
+vm.runInContext(concatenated, context);
+module.exports = context.Fermata;
