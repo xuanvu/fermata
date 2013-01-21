@@ -72,8 +72,8 @@ var Fermata = Fermata || {};
     this.tieRenderer.render(note, vexNote, voice);
     
     this.recordNote(vexNote, voice);
-  // var noteType = Fermata.Render.getNoteType(note);
-  // console.log(this.renderNoteProcess[noteType].call(this, note));
+    //var noteType = Fermata.Render.getNoteType(note);
+   //console.log(this.renderNoteProcess[noteType].call(this, note));
   };
 
   
