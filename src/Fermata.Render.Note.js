@@ -18,24 +18,40 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.extractNoteVoice = function (note)
   {
-    if (typeof(note.voice) !== "undefined")
+    if (typeof(note[0].voice) !== "undefined")
     {
-      return note.voice;
+      return note[0].voice;
     }
     else
     {
       return "1";
     }
   }
-  
-  Fermata.Render.prototype.recordNote = function (vexNote, voice)
+
+  Fermata.Render.prototype.extractNoteStaff = function (note)
   {
-    if (typeof(this.noteData[voice]) === "undefined")
+    if (typeof(note[0].staff) !== "undefined")
     {
-      this.noteData[voice] = [];
+      return note[0].staff;
     }
-    
-    var noteArray = this.noteData[voice];
+    else
+    {
+      return "1";
+    }
+  };
+  
+  Fermata.Render.prototype.recordNote = function (vexNote, voice, staff)
+  {
+    if (typeof(this.noteData[staff]) === "undefined")
+    {
+      this.noteData[staff] = [];
+    }
+
+    if (typeof(this.noteData[staff][voice]) === 'undefined')
+    { 
+      this.noteData[staff][voice] = [];
+    }
+    var noteArray = this.noteData[staff][voice];
     noteArray.push(vexNote);
   }
 
@@ -64,6 +80,7 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.renderNote = function (note)
   {
+    var staff = this.extractNoteStaff(note);
     var voice = this.extractNoteVoice(note);
     var noteConverter = new NoteConverter();
     
@@ -71,7 +88,7 @@ var Fermata = Fermata || {};
     
     this.tieRenderer.render(note, vexNote, voice);
     
-    this.recordNote(vexNote, voice);
+    this.recordNote(vexNote, voice, staff);
     //var noteType = Fermata.Render.getNoteType(note);
    //console.log(this.renderNoteProcess[noteType].call(this, note));
   };

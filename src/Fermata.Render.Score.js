@@ -255,17 +255,21 @@ var Fermata = Fermata || {};
       }
     }
     // Then Add note to their voice, format them and draw it
+    console.log(this.noteData);
     for (var i = 1 ; i < this.noteData.length ; i++) {
-      var voice = new Vex.Flow.Voice({
+      for (var toto in this.noteData[i]) {
+        console.log(toto);
+        var voice = new Vex.Flow.Voice({
         num_beats: this.Attributesdata.beat.beats,
         beat_value: this.Attributesdata.beat.type,
         resolution: Vex.Flow.RESOLUTION
-      });
-      voice.addTickables(this.noteData[i]);
+        });
+        voice.addTickables(this.noteData[i][toto]);
         // Add notes to voice
         // Format and justify the notes to 500 pixels
-      var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], 200);
+      var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], measure.note.length * 50);
       voice.draw(this.ctx, this.staves[partId][i - 1][measureId]);
+      }
     }
 
     if (this.renderDirectionData.type !== null) {
