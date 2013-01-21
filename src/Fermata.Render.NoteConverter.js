@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 
-
 var Fermata = Fermata || {};
 
 if (typeof(Fermata.Render) === "undefined")
@@ -138,8 +137,7 @@ if (typeof(Fermata.Render) === "undefined")
     }
     else {
       return null;
-    }
-    
-  }
+    } 
+  };
   
 }).call(this);
