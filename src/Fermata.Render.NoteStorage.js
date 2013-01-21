@@ -46,8 +46,8 @@ if (typeof(Fermata.Render) === "undefined")
     }
     if (!checkVoice(staff, voice))
     {
-      throw "there is no note stored for the voice " + voice.toString() + 
-      " of the staff " + staff.toString();
+      throw new Error("there is no note stored for the voice " + voice.toString() + 
+      " of the staff " + staff.toString());
     }
     return this.data[staff][voice];
   };
