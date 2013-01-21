@@ -115,7 +115,7 @@ var Fermata = Fermata || {};
     ];
 
     this.exploreSubNodes(attributes, process);
-    this.Attributesdata = Fermata.Utils.clone(attribut);
+    this.Attributesdata = Fermata.Utils.Clone(attribut);
   };
 
   Fermata.Render.prototype.AttributesSymbol = function (node, attribut)

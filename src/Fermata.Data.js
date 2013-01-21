@@ -4,7 +4,7 @@ var Fermata = Fermata || {};
   "use strict";
 
   Fermata.Data = function (score) {
-    this.score = score || {};
+    this.score = Fermata.Utils.Clone(score) || {};
     this.scoreCache = { part: null }; // derivated score object for faster access
 
     // Init new score
@@ -23,13 +23,14 @@ var Fermata = Fermata || {};
     // Cache fncs
     cacheParts: function () {
       // Only one part, converting into array of objects
-      if (Object.prototype.toString.call(this.score['score-partwise']['part-list']['score-part']) !== '[object Array]') {
-        this.score['score-partwise']['part-list']['score-part'] = [this.score['score-partwise']['part-list']['score-part']];
-      }
+      // --> now done by musicjson library
+      // if (Object.prototype.toString.call(this.score['score-partwise']['part-list']['score-part']) !== '[object Array]') {
+      //   this.score['score-partwise']['part-list']['score-part'] = [this.score['score-partwise']['part-list']['score-part']];
+      // }
 
-      if (Object.prototype.toString.call(this.score['score-partwise'].part) !== '[object Array]') {
-        this.score['score-partwise'].part = [this.score['score-partwise'].part];
-      }
+      // if (Object.prototype.toString.call(this.score['score-partwise'].part) !== '[object Array]') {
+      //   this.score['score-partwise'].part = [this.score['score-partwise'].part];
+      // }
 
       var cur, cached, i;
 
