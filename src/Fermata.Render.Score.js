@@ -15,6 +15,14 @@ var Fermata = Fermata || {};
       var part = parts.idx[i];
       this.renderPart(part);
     }
+    // draw line between each part drawn
+    if (parts.idx.length > 1)
+    {
+      var line = new Vex.Flow.StaveConnector(this.staves[0][0], this.staves[this.stave.length - 1][this.staves[this.stave.length - 1]]);
+      line.setType(Vex.Flow.StaveConnector.type.SINGLE);
+      line.setContext(this.setContext);
+      line.draw();
+    }
     this.render();
   };
 
@@ -240,14 +248,12 @@ var Fermata = Fermata || {};
        // Draw connector if needed
       if (i === this.Attributesdata.stave - 1 && this.Attributesdata.stave > 1)
       {
-        console.log(this.staves[partId][this.Attributesdata.partSymbol.topStaff - 1]);
        var connector = new Vex.Flow.StaveConnector(this.staves[partId][this.Attributesdata.partSymbol.topStaff - 1][0], this.staves[partId][this.Attributesdata.partSymbol.bottomStaff - 1][0]); 
        connector.setType(Fermata.Mapping.Connector.getVexflow(this.Attributesdata.partSymbol.symbol));
        connector.setContext(this.ctx);
        connector.draw();
       }
     }
-
     // Then Add note to their voice, format them and draw it
     for (var i = 1 ; i < this.noteData.length ; i++) {
       var voice = new Vex.Flow.Voice({
