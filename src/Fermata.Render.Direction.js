@@ -31,7 +31,7 @@ var Fermata = Fermata || {};
     noteAfter: null,
     type: null,
     offset: null,
-    voice: 1,
+    voice: 1
   };
 
   Fermata.Render.prototype.renderDirectionProcess = [

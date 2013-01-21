@@ -1,0 +1,12 @@
+{
+  "name": "Fermata",
+  "version": "0.0.1",
+  "description": "MusicXML engraving javascript library using vexflow",
+  "dependencies": {
+    "node-raphael": ">= 0.1.7"
+  },
+  "scripts": {
+    "preinstall": "scons build/fermata/fermata.node.js"
+  },
+  "main": "./build/fermata/fermata.node.js"
+}

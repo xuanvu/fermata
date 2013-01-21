@@ -309,7 +309,6 @@ var Fermata = Fermata || {};
     attribut.keys.fifths = node;
   };
 
-  Fermata.Render.prototype.Attributesdata = {
-  };
+  Fermata.Render.prototype.Attributesdata = {};
 
 }).call(this);
