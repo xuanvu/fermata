@@ -18,33 +18,53 @@ var Fermata = Fermata || {};
   Fermata.Render.prototype.renderAttributes = function (attributes)
   {
     // Elements entities will be implement later
+
+    var attribut = {
+      division: null,
+      instrument: null,
+      keys:  {
+        cancel: null,
+        fifths: null,
+        mode: null,
+      },
+      beat: {
+        beats: null,
+        type: null,
+        interchangeable: null
+      },
+      clef: [],
+      stave: 1
+    };
+
     var _this = this;
     var process = [
       {
         key: "divisions",
         type: this.FuncTypes.QUESTION,
         func: function (arg) {
-          _this.Attributedivision(arg);
+          _this.Attributedivision(arg, attribut);
         }
       },
       {
         key: "key",
         type: this.FuncTypes.STAR,
         func: function (arg) {
-          _this.AttributesKeys(arg);
+          _this.AttributesKeys(arg, attribut);
         }
       },
       {
         key: "time",
         type: this.FuncTypes.STAR,
         func: function (arg) {
-          _this.AttributesTime(arg);
+          _this.AttributesTime(arg, attribut);
         }
       },
       {
         key: "staves",
         type: this.FuncTypes.QUESTION,
-        func: _this.AttributesStave
+        func: function (arg) {
+          _this.AttributesStave(arg, attribut);
+        }
       },
       {
         key: "part-symbol",
@@ -55,14 +75,14 @@ var Fermata = Fermata || {};
         key: "instruments",
         type: this.FuncTypes.QUESTION,
         func: function (arg) {
-          _this.AttributeInstrument(arg);
+          _this.AttributeInstrument(arg, attribut);
         }
       },
       {
         key: "clef",
         type: this.FuncTypes.STAR,
         func: function (arg) {
-          _this.AttributesClef(arg);
+          _this.AttributesClef(arg, attribut);
         }
       },
       {
@@ -88,55 +108,63 @@ var Fermata = Fermata || {};
     ];
 
     this.exploreSubNodes(attributes, process);
+    this.Attributesdata = Fermata.Utils.clone(attribut);
   };
 
-  Fermata.Render.prototype.AttributesClef = function (node)
+  Fermata.Render.prototype.AttributesClef = function (node, attribut)
   {
     // TOdo beaucoup d'Entities ici !
     var _this = this;
+    var clef = { 
+                      sign: null,
+                      line: null,
+                      change: null
+                    };
+
     var process = [
       {
         key: "sign",
         type: this.FuncTypes.DEFAULT,
         func: function (arg) {
-          _this.AttributesClefSign(arg);
+          _this.AttributesClefSign(arg, clef);
         }
       },
       {
         key: "line",
         type: this.FuncTypes.QUESTION,
         func: function (arg) {
-          _this.AttributesClefLine(arg);
+          _this.AttributesClefLine(arg, clef);
         }
       },
       {
         key: "clef-octave-change",
         type: this.FuncTypes.QUESTION,
         func: function (arg) {
-          _this.AttributeClefChange(arg);
+          _this.AttributeClefChange(arg, clef);
         }
       }
     ];
 
     this.exploreSubNodes(node, process);
+    attribut.clef.push(clef);
   };
 
-  Fermata.Render.prototype.AttributeClefChange = function (change)
+  Fermata.Render.prototype.AttributeClefChange = function (change, attribut)
   {
-    this.Attributesdata.clef.change = change;
+    attribut.change = change;
   };
 
-  Fermata.Render.prototype.AttributesClefLine = function (node)
+  Fermata.Render.prototype.AttributesClefLine = function (node, attribut)
   {
-    this.Attributesdata.clef.line = node;
+    attribut.line = node;
   };
 
-  Fermata.Render.prototype.AttributesClefSign = function (node)
+  Fermata.Render.prototype.AttributesClefSign = function (node, attribut)
   {
-    this.Attributesdata.clef.sign = node;
+    attribut.sign = node;
   };
 
-  Fermata.Render.prototype.AttributesTime = function (node)
+  Fermata.Render.prototype.AttributesTime = function (node, attribut)
   {
     //To do géré la multidefinition de beat
     var _this = this;
@@ -145,14 +173,14 @@ var Fermata = Fermata || {};
         key: "beats",
         type: this.FuncTypes.DEFAULT,
         func: function (arg) {
-          _this.renderAttributesTimeBeats(arg);
+          _this.renderAttributesTimeBeats(arg, attribut);
         }
       },
       {
         key: "beat-type",
         type: this.FuncTypes.DEFAULT,
         func: function (arg) {
-          _this.renderAttributesTimeTypes(arg);
+          _this.renderAttributesTimeTypes(arg, attribut);
         }
       }
     ];
@@ -160,22 +188,22 @@ var Fermata = Fermata || {};
     this.exploreSubNodes(node, process);
   };
 
-  Fermata.Render.prototype.renderAttributesTimeBeats = function (node)
+  Fermata.Render.prototype.renderAttributesTimeBeats = function (node, attribut)
   {
-    this.Attributesdata.beat.beats = node;
+    attribut.beat.beats = node;
   };
 
-  Fermata.Render.prototype.renderAttributesTimeTypes = function (node)
+  Fermata.Render.prototype.renderAttributesTimeTypes = function (node, attribut)
   {
-    this.Attributesdata.beat.type = node;
+    attribut.beat.type = node;
   };
 
-  Fermata.Render.prototype.AttributesStave = function (stave)
+  Fermata.Render.prototype.AttributesStave = function (stave, attribut)
   {
-    this.Attributesdata.stave = stave;
+    attribut.stave = stave;
   };
 
-  Fermata.Render.prototype.AttributesKeys = function (node)
+  Fermata.Render.prototype.AttributesKeys = function (node, attribut)
   {
     var _this = this,
         process;
@@ -192,14 +220,14 @@ var Fermata = Fermata || {};
           key: "fifths",
           type: this.FuncTypes.DEFAULT,
           func: function (arg) {
-            _this.AttributeKeyFifth(arg);
+            _this.AttributeKeyFifth(arg, attribut);
           }
         },
         {
           key: "mode",
           type: this.FuncTypes.QUESTION,
           func: function (arg) {
-            _this.AttributeKeyMode(arg);
+            _this.AttributeKeyMode(arg, attribut);
           }
         }
       ];
@@ -239,47 +267,29 @@ var Fermata = Fermata || {};
     this.exploreSubNodes(node, process);
   };
 
-  Fermata.Render.prototype.AttributeKeyMode = function (node)
+  Fermata.Render.prototype.AttributeKeyMode = function (node, attribut)
   {
     //if (node !== 'major' || node !== 'minor')
       //throw ("Bad mode settings !!");
-    this.Attributesdata.keys.mode = node;
+    attribut.keys.mode = node;
   };
 
-  Fermata.Render.prototype.Attributedivision = function (node)
+  Fermata.Render.prototype.Attributedivision = function (node, attribut)
   {
-    this.Attributesdata.division = node;
+    attribut.division = node;
   };
 
-  Fermata.Render.prototype.AttributeInstrument = function (node)
+  Fermata.Render.prototype.AttributeInstrument = function (node, attribut)
   {
-    this.Attributesdata.instrument = node;
+    attribut.instrument = node;
   };
 
-  Fermata.Render.prototype.AttributeKeyFifth = function (node)
+  Fermata.Render.prototype.AttributeKeyFifth = function (node, attribut)
   {
-    this.Attributesdata.keys.fifths = node;
+    attribut.keys.fifths = node;
   };
 
   Fermata.Render.prototype.Attributesdata = {
-    division: null,
-    instrument: null,
-    keys:  {
-      cancel: null,
-      fifths: null,
-      mode: null,
-    },
-    beat: {
-      beats: null,
-      type: null,
-      interchangeable: null
-    },
-    clef: {
-      sign: null,
-      line: null,
-      change: null
-    },
-    stave: 1
   };
 
 }).call(this);
