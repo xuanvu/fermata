@@ -96,7 +96,6 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.renderPart = function (part)
   {
-    console.log(part);
     var _this = this;
     var processes = [
       {
@@ -211,7 +210,7 @@ var Fermata = Fermata || {};
       }
       if (this.staves[partId][i].length === 0 ||  this.staves[partId][i][measureId] === undefined && measureId >= this.staves[partId][i].length) {
         if (measureId === 0) {
-          this.staves[partId][i].push(new Vex.Flow.Stave(10, 0 + index * 100, 100 + measure.note.length * 50));
+          this.staves[partId][i].push(new Vex.Flow.Stave(20, 0 + index * 100, 100 + measure.note.length * 50));
           }
         else {
           this.staves[partId][i].push(new Vex.Flow.Stave(this.staves[partId][i][this.staves[partId][i].length - 1].x + this.staves[partId][i][this.staves[partId][i].length - 1].width,
@@ -237,6 +236,16 @@ var Fermata = Fermata || {};
         this.staves[partId][i][measureId].clef = clefName;
       this.staves[partId][i][measureId].setContext(this.ctx);
       this.staves[partId][i][measureId].draw();
+
+       // Draw connector if needed
+      if (i === this.Attributesdata.stave - 1 && this.Attributesdata.stave > 1)
+      {
+        console.log(this.staves[partId][this.Attributesdata.partSymbol.topStaff - 1]);
+       var connector = new Vex.Flow.StaveConnector(this.staves[partId][this.Attributesdata.partSymbol.topStaff - 1][0], this.staves[partId][this.Attributesdata.partSymbol.bottomStaff - 1][0]); 
+       connector.setType(Fermata.Mapping.Connector.getVexflow(this.Attributesdata.partSymbol.symbol));
+       connector.setContext(this.ctx);
+       connector.draw();
+      }
     }
 
     // Then Add note to their voice, format them and draw it

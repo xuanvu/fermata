@@ -29,7 +29,7 @@ var Fermata = Fermata || {};
   Fermata.Render.prototype.renderSymbolGroup = function (groupSymbol) {
     if (typeof(groupSymbol.content) === 'undefined' && typeof(groupSymbol) === 'string')
       this.GroupPartData.groupSymbol = groupSymbol;
-    else if (typeof(groupSymbol.content) === "string") {
+    else if (typeof(groupSymbol.content) === 'string') {
       this.GroupPartData.groupSymbol = groupSymbol.content;
     }
     else

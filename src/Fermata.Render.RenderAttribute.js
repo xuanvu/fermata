@@ -33,7 +33,12 @@ var Fermata = Fermata || {};
         interchangeable: null
       },
       clef: [],
-      stave: 1
+      stave: 1,
+      partSymbol: {
+        topStaff : 1,
+        bottomStaff : 2,
+        symbol : 'brace'
+      }
     };
 
     var _this = this;
@@ -69,7 +74,9 @@ var Fermata = Fermata || {};
       {
         key: "part-symbol",
         type: this.FuncTypes.QUESTION,
-        func: null // TODO
+        func: function (arg) {
+          _ths.AttributesSymbol(arg, attribut);
+        }
       },
       {
         key: "instruments",
@@ -109,6 +116,19 @@ var Fermata = Fermata || {};
 
     this.exploreSubNodes(attributes, process);
     this.Attributesdata = Fermata.Utils.clone(attribut);
+  };
+
+  Fermata.Render.prototype.AttributesSymbol = function (node, attribut)
+  {
+    if (typeof(node.content) === 'undefined' && typeof(node) === 'string')
+      attribut.partSymbol.symbol = node;
+    else if (typeof(node.content) === 'string')
+      attribut.partSymbol.symbol = node.content;
+
+    if (node["top-staff"])
+      attribut.partSymbol.topStaff = node["top-staff"];
+    if (node["bottom-staff"])
+      attribut.partSymbol.bottomStaff = node["bottom-staff"];
   };
 
   Fermata.Render.prototype.AttributesClef = function (node, attribut)
