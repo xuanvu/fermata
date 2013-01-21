@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "MusicXML engraving javascript library using vexflow",
   "dependencies": {
-    "node-raphael": ">= 0.1.7"
+    "jsdom": ">= 0.3.4"
   },
   "scripts": {
     "preinstall": "scons build/fermata/fermata.node.js"

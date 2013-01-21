@@ -3,6 +3,7 @@ var Fermata = Fermata || {};
 (function () {
   "use strict";
 
+  Fermata.document = Vex.document;
   Fermata.Render = function (data, container) {
     this.data = data;
     this.container = container;
@@ -11,21 +12,7 @@ var Fermata = Fermata || {};
     //NOTE: should be don by IOC
     this.tieRenderer = new Fermata.Render.TieRenderer();
     this.noteStorage = new Fermata.Render.NoteStorage();
-
-    // Client-side
-    if (container !== undefined) {
-      this.renderer = new Vex.Flow.Renderer(this.container, Vex.Flow.Renderer.Backends.CANVAS);
-    }
-    // Server-side // TODO
-    else {
-      var raphael = require('node-raphael');
-      raphael.generate(500, 500, function(r) {
-
-      });
-      console.log(Vex.Flow.Renderer.Backends);
-      this.renderer = new Vex.Flow.Renderer(r, Vex.Flow.Renderer.Backends.RAPHAEL);
-    }
-
+    this.renderer = new Vex.Flow.Renderer(this.container, Vex.Flow.Renderer.Backends.CANVAS);
     this.ctx = this.renderer.getContext();
 
   //data.sortMeasure();
