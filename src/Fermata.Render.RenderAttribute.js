@@ -25,7 +25,7 @@ var Fermata = Fermata || {};
       keys:  {
         cancel: null,
         fifths: null,
-        mode: null,
+        mode: null
       },
       beat: {
         beats: null,
