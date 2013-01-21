@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <title>Mocha</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="lib/browser/mocha.css" />
+    <script src="./lib/browser/jquery.js"></script>
+    <script src="./lib/mocha.js"></script>
+    <script src="./lib/assert.js"></script>
+    <script>mocha.setup('bdd')</script>
+
+    <!-- VexFlow Uncompiled Sources -->
+    <script src="../../deps/vexflow/src/header.js"></script>
+    <script src="../../deps/vexflow/src/vex.js"></script>
+    <script src="../../deps/vexflow/src/flow.js"></script>
+    <script src="../../deps/vexflow/src/fraction.js"></script>
+    <script src="../../deps/vexflow/src/fonts/vexflow_font.js"></script>
+    <script src="../../deps/vexflow/src/glyph.js"></script>
+    <script src="../../deps/vexflow/src/tables.js"></script>
+    <script src="../../deps/vexflow/src/stave.js"></script>
+    <script src="../../deps/vexflow/src/staveconnector.js"></script>
+    <script src="../../deps/vexflow/src/tabstave.js"></script>
+    <script src="../../deps/vexflow/src/voice.js"></script>
+    <script src="../../deps/vexflow/src/voicegroup.js"></script>
+    <script src="../../deps/vexflow/src/modifier.js"></script>
+    <script src="../../deps/vexflow/src/modifiercontext.js"></script>
+    <script src="../../deps/vexflow/src/accidental.js"></script>
+    <script src="../../deps/vexflow/src/dot.js"></script>
+    <script src="../../deps/vexflow/src/tickcontext.js"></script>
+    <script src="../../deps/vexflow/src/tickable.js"></script>
+    <script src="../../deps/vexflow/src/note.js"></script>
+    <script src="../../deps/vexflow/src/bend.js"></script>
+    <script src="../../deps/vexflow/src/stavenote.js"></script>
+    <script src="../../deps/vexflow/src/tabnote.js"></script>
+    <script src="../../deps/vexflow/src/barnote.js"></script>
+    <script src="../../deps/vexflow/src/ghostnote.js"></script>
+    <script src="../../deps/vexflow/src/formatter.js"></script>
+    <script src="../../deps/vexflow/src/stavetie.js"></script>
+    <script src="../../deps/vexflow/src/stavehairpin.js"></script>
+    <script src="../../deps/vexflow/src/tabtie.js"></script>
+    <script src="../../deps/vexflow/src/tabslide.js"></script>
+    <script src="../../deps/vexflow/src/beam.js"></script>
+    <script src="../../deps/vexflow/src/vibrato.js"></script>
+    <script src="../../deps/vexflow/src/annotation.js"></script>
+    <script src="../../deps/vexflow/src/tuning.js"></script>
+    <script src="../../deps/vexflow/src/stavemodifier.js"></script>
+    <script src="../../deps/vexflow/src/keysignature.js"></script>
+    <script src="../../deps/vexflow/src/timesignature.js"></script>
+    <script src="../../deps/vexflow/src/clef.js"></script>
+    <script src="../../deps/vexflow/src/music.js"></script>
+    <script src="../../deps/vexflow/src/keymanager.js"></script>
+    <script src="../../deps/vexflow/src/renderer.js"></script>
+    <script src="../../deps/vexflow/src/stavebarline.js"></script>
+    <script src="../../deps/vexflow/src/stavevolta.js"></script>
+    <script src="../../deps/vexflow/src/staverepetition.js"></script>
+    <script src="../../deps/vexflow/src/stavesection.js"></script>
+    <script src="../../deps/vexflow/src/stavetempo.js"></script>
+    <script src="../../deps/vexflow/src/articulation.js"></script>
+    <script src="../../deps/vexflow/src/tremolo.js"></script>
+    <script src="../../deps/vexflow/src/raphaelcontext.js"></script>
+    <script src="../../deps/vexflow/src/tuplet.js"></script>
+    <script src="../../deps/vexflow/src/boundingbox.js"></script>
+    <script src="../../deps/vexflow/src/textnote.js"></script>
+    <script src="../../deps/vexflow/src/strokes.js"></script>
+    <script src="../../deps/vexflow/src/stringnumber.js"></script>
+    <script src="../../deps/vexflow/src/frethandfinger.js"></script>
+
+    <!-- Fermat srcs -->
+    <script src="../../src/Fermata.js"></script>
+    <script src="../../src/Fermata.Utils.js"></script>
+    <script src="../../src/Fermata.Data.js"></script>
+    <script src="../../src/Fermata.Mapping.Clef.js"></script>
+    <script src="../../src/Fermata.Mapping.Direction.js"></script>
+    <script src="../../src/Fermata.Mapping.Connector.js"></script>
+    <script src="../../src/Fermata.Render.js"></script>
+    <script src="../../src/Fermata.Render.Call.js"></script>
+    <script src="../../src/Fermata.Render.SymbolSize.js"></script>
+    <script src="../../src/Fermata.Render.NoteStorage.js"></script>
+    <script src="../../src/Fermata.Render.NoteType.js"></script>
+    <script src="../../src/Fermata.Render.SoundType.js"></script>
+    <script src="../../src/Fermata.Render.PitchPitched.js"></script>
+    <script src="../../src/Fermata.Render.PitchRest.js"></script>
+    <script src="../../src/Fermata.Render.PitchUnpitched.js"></script>
+    <script src="../../src/Fermata.Render.NoteConverter.js"></script>
+    <script src="../../src/Fermata.Render.TieRenderer.js"></script>
+    <script src="../../src/Fermata.Render.GraceNote.js"></script>
+    <script src="../../src/Fermata.Render.CueNote.js"></script>
+    <script src="../../src/Fermata.Render.NormalNote.js"></script>
+    <script src="../../src/Fermata.Render.Note.js"></script>
+    <script src="../../src/Fermata.Render.RenderAttribute.js"></script>
+    <script src="../../src/Fermata.Render.Direction.js"></script>
+    <script src="../../src/Fermata.Render.Barline.js"></script>
+    <script src="../../src/Fermata.Render.Backup.js"></script>
+    <script src="../../src/Fermata.Render.Score.js"></script>
+    <script src="../../src/Fermata.Render.PartList.js"></script>
+    <script src="../../src/Fermata.Render.Header.js"></script>
+
+    <!-- Tests -->
+    <script src="../Fermata.Tests.Utils.js"></script>
+    <script src="../Fermata.Data.js"></script>
+    <script>
+      onload = function(){
+        var runner = mocha.run();
+      };
+    </script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+  </body>
+</html>

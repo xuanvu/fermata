@@ -54,7 +54,7 @@ var Fermata = Fermata || {};
         throw ("scorePart without any ID, check file !");
     this.scorePartData.id = part["$id"];
     this.exploreSubNodes(part, this.renderScorePartProcess, this);
-    this.PartListData[this.PartListData.length] = Fermata.Utils.clone(this.scorePartData);
+    this.PartListData[this.PartListData.length] = Fermata.Utils.Clone(this.scorePartData);
     for (var prop in this.scorePartData) {
 
       if (this.scorePartData.hasOwnProperty(prop) && typeof(this.scorePartData[prop]) !== 'object' ) { 

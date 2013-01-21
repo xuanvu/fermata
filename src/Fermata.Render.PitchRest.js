@@ -31,6 +31,7 @@ var Fermata = Fermata || {};
     }
     else
     {
+      //TODO: check what is the good default value
       return "E";
     }
   };
@@ -48,7 +49,8 @@ var Fermata = Fermata || {};
     }
     else
     {
-      return "4";
+      //TODO: check what is the good default value
+      return "5";
     }
   };
   

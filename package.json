@@ -5,6 +5,10 @@
   "dependencies": {
     "jsdom": ">= 0.3.4"
   },
+  "devDependencies" : {
+    "jshint": "latest",
+    "mocha": "latest"
+  },
   "scripts": {
     "preinstall": "scons build/fermata/fermata.node.js"
   },

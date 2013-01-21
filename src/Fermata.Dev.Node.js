@@ -106,6 +106,10 @@ fermata_sources.forEach(function(file) {
 });
 
 // VM
-var context = vm.createContext({ require: require });
+if (typeof _$jscoverage === 'undefined') {
+  _$jscoverage = {};
+}
+
+var context = vm.createContext({ require: require, console: console, _$jscoverage: _$jscoverage });
 vm.runInContext(concatenated, context);
 module.exports = context.Fermata;
