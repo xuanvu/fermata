@@ -13,12 +13,17 @@ var Fermata = Fermata || {};
     this.noteStorage = new Fermata.Render.NoteStorage();
 
     // Client-side
-    if (container !== null) {
+    if (container !== undefined) {
       this.renderer = new Vex.Flow.Renderer(this.container, Vex.Flow.Renderer.Backends.CANVAS);
     }
     // Server-side // TODO
     else {
-      this.renderer = new Vex.Flow.Renderer(this.container, Vex.Flow.Renderer.Backends.SVG);
+      var raphael = require('node-raphael');
+      raphael.generate(500, 500, function(r) {
+
+      });
+      console.log(Vex.Flow.Renderer.Backends);
+      this.renderer = new Vex.Flow.Renderer(r, Vex.Flow.Renderer.Backends.RAPHAEL);
     }
 
     this.ctx = this.renderer.getContext();
