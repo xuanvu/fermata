@@ -20,6 +20,9 @@ var Fermata = Fermata || {};
   
   var PitchRest = Fermata.Render.PitchRest;
   
+  //includes
+  var Clef = Fermata.Mapping.Clef;
+  
   //TODO: use the mapping file
   PitchRest.ClefMapping = {
     "treble": {
@@ -49,7 +52,7 @@ var Fermata = Fermata || {};
     }
     else
     {
-      return PitchRest.ClefMapping[this.clef].step;
+      return Clef.getMusicXml(this.clef);
     }
   };
   
