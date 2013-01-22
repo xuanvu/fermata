@@ -246,15 +246,26 @@ var Fermata = Fermata || {};
       this.staves[partId][i][measureId].setContext(this.ctx);
       this.staves[partId][i][measureId].draw();
 
-       // Draw connector if needed
-      if (i === this.Attributesdata.stave - 1 && this.Attributesdata.stave > 1)
+      // Draw line in case of sytem
+      if (this.Attributesdata.stave > 1)
+      {
+        console.log(this.staves[partId]);
+        var line = new Vex.Flow.StaveConnector(this.staves[partId][0][measureId], this.staves[partId][i][measureId]);
+        line.setType(Vex.Flow.StaveConnector.type.SINGLE);
+        line.setContext(this.ctx);
+        line.draw();
+      }
+    }
+
+    // Draw connector if needed
+      if (this.Attributesdata.stave > 1)
       {
        var connector = new Vex.Flow.StaveConnector(this.staves[partId][this.Attributesdata.partSymbol.topStaff - 1][0], this.staves[partId][this.Attributesdata.partSymbol.bottomStaff - 1][0]); 
        connector.setType(Fermata.Mapping.Connector.getVexflow(this.Attributesdata.partSymbol.symbol));
        connector.setContext(this.ctx);
        connector.draw();
       }
-    }
+
     // Then Add note to their voice, format them and draw it
     for (var i = 1 ; i < this.noteData.length ; i++) {
       for (var toto in this.noteData[i]) {
@@ -270,17 +281,19 @@ var Fermata = Fermata || {};
       voice.draw(this.ctx, this.staves[partId][i - 1][measureId]);
       }
     }
-
-    if (this.renderDirectionData.type !== null) {
+    for (var i = 0; i < this.renderDirectionData.length; i++) {
+      var data = this.renderDirectionData[i];
       var tmpNote = {
-        first_note : this.noteData[this.renderDirectionData.voice][this.renderDirectionData.noteBefore],
-        last_note : this.noteData[this.renderDirectionData.voice][this.renderDirectionData.noteAfter]
+        first_note : this.getNote(data.noteAfter),
+        last_note : this.getNote(data.noteBefore)
       };
-
-      var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(this.renderDirectionData.type));
+      var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data.type));
       hp.setContext(this.ctx);
       hp.setPosition(Fermata.Mapping.Direction.getVexflow(this.renderDirectionData.placement));
       hp.draw();
+      if (i === this.renderDirectionData.length -1 ) {
+        this.renderDirectionData = new Array();
+      }
     }
   };
 

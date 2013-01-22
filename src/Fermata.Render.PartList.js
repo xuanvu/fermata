@@ -8,6 +8,14 @@ var Fermata = Fermata || {};
 (function () {
   "use strict";
 
+  Fermata.Render.prototype.getNbStave = function ()
+  {
+    var nb = 0;
+    for (var i in this.staves)
+      nb++;
+    return nb;
+  };
+
    Fermata.Render.prototype.RenderPartName = function (partName)
   {
     if (typeof(partName.content) === 'undefined' && typeof(partName) === 'string') {

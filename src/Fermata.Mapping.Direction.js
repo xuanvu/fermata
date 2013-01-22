@@ -7,7 +7,7 @@ Fermata.Mapping.Direction = {};
 
 	Fermata.Mapping.Direction.musicXMLToVexflow = {
     "crescendo": 1,
-    "diminuedo" : 2,
+    "diminuendo" : 2,
     "above": 3,
     "below": 4
   };

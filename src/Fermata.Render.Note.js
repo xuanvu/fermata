@@ -226,5 +226,21 @@ var Fermata = Fermata || {};
       }
     }
   };
+
+  Fermata.Render.prototype.getNote = function (number)
+  {
+    var pos = 0;
+    while (true) {
+      for (var first in this.noteData) {
+        for (var second in this.noteData[first]) {
+          for (var third = 0; third < this.noteData[first][second].length ; third++) {
+            if (pos === number)
+              return this.noteData[first][second][third];
+            pos++;
+          }
+        }
+      }
+    }
+  };
   
 }).call(this);
