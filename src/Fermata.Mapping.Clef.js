@@ -55,10 +55,9 @@ Fermata.Mapping.Clef = {};
   ];
 
   var vexFlowToMusicXml = {};
-
-  for (var key in this.musicXMLToVexflow) {
-    if (this.musicXMLToVexflow.hasOwnProperty(key)) {
-      this.vexFlowToMusicXml[musicXMLToVexflow[key]] = key;
+  for (var key in musicXMLToVexflow) {
+    if (musicXMLToVexflow.hasOwnProperty(key)) {
+      vexFlowToMusicXml[musicXMLToVexflow[key]] = key;
     }
   }
 
