@@ -93,6 +93,8 @@ if (typeof(Fermata.Render) === "undefined")
     
     // Stem
     var stem = noteData[0].stem && noteData[0].stem.content;
+    var auto_stem = false;
+
     if (stem === 'down') {
       stem = Vex.Flow.StaveNote.STEM_DOWN;
     }
@@ -101,7 +103,7 @@ if (typeof(Fermata.Render) === "undefined")
     }
     // Choice best stem
     else {
-      stem = dataPitch.getOctave() < 5 ? Vex.Flow.StaveNote.STEM_UP : Vex.Flow.StaveNote.STEM_DOWN;
+      auto_stem = true;
     }
 
     if (dataPitch.getType() === SoundType.REST) {
@@ -119,6 +121,7 @@ if (typeof(Fermata.Render) === "undefined")
       keys: vexPitches, 
       duration: vexDuration,
       stem_direction: stem,
+      auto_stem : auto_stem,
       clef : this.clefName
     });
     
