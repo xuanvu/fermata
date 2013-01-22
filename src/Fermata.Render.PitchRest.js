@@ -11,12 +11,30 @@ var Fermata = Fermata || {};
   //includes
   var SoundType = Fermata.Render.SoundType;
   
-  Fermata.Render.PitchRest = function (noteData)
+  //TODO better constructor (check args)
+  Fermata.Render.PitchRest = function (noteData, clef)
   {
     this.data = noteData;
+    this.clef = clef;
   };
   
   var PitchRest = Fermata.Render.PitchRest;
+  
+  //TODO: use the mapping file
+  PitchRest.ClefMapping = {
+    "treble": {
+      step: "B", 
+      octave: 4
+    },
+    "alto": {
+      step: "C",
+      octave: 4
+    },
+    "bass": {
+      step: "D", 
+      octave: 3
+    }
+  };
   
   PitchRest.prototype.getType = function ()
   {
@@ -31,8 +49,7 @@ var Fermata = Fermata || {};
     }
     else
     {
-      //TODO: check what is the good default value
-      return "B";
+      return PitchRest.ClefMapping[this.clef].step;
     }
   };
   
@@ -49,8 +66,7 @@ var Fermata = Fermata || {};
     }
     else
     {
-      //TODO: check what is the good default value
-      return "4";
+      return PitchRest.ClefMapping[this.clef].octave;
     }
   };
   
