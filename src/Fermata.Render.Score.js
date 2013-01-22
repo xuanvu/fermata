@@ -18,13 +18,14 @@ var Fermata = Fermata || {};
     // draw line between each part drawn
     if (parts.idx.length > 1)
     {
-      var line = new Vex.Flow.StaveConnector(this.staves[0][0], this.staves[this.stave.length - 1][this.staves[this.stave.length - 1]]);
+      var info = Fermata.Utils.FirstLast(this.staves);
+      var line = new Vex.Flow.StaveConnector(this.staves[info.first][0][0], this.staves[info.last][this.staves[info.last].length - 1][0]);
       line.setType(Vex.Flow.StaveConnector.type.SINGLE);
-      line.setContext(this.setContext);
+      line.setContext(this.ctx);
       line.draw();
     }
-    this.render();
-  };
+    this.render()
+;  };
 
   Fermata.Render.prototype.render = function () {
     
