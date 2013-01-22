@@ -20,20 +20,14 @@ var Fermata = Fermata || {};
   
   var PitchRest = Fermata.Render.PitchRest;
   
+  //includes
+  var Clef = Fermata.Mapping.Clef;
+  
   //TODO: use the mapping file
   PitchRest.ClefMapping = {
-    "treble": {
-      step: "B", 
-      octave: 4
-    },
-    "alto": {
-      step: "C",
-      octave: 4
-    },
-    "bass": {
-      step: "D", 
-      octave: 3
-    }
+    "treble": 4,
+    "alto": 4,
+    "bass": 3
   };
   
   PitchRest.prototype.getType = function ()
@@ -49,7 +43,7 @@ var Fermata = Fermata || {};
     }
     else
     {
-      return PitchRest.ClefMapping[this.clef].step;
+      return Clef.getMusicXml(this.clef);
     }
   };
   
@@ -66,7 +60,7 @@ var Fermata = Fermata || {};
     }
     else
     {
-      return PitchRest.ClefMapping[this.clef].octave;
+      return PitchRest.ClefMapping[this.clef];
     }
   };
   
