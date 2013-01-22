@@ -32,7 +32,7 @@ var Fermata = Fermata || {};
     else
     {
       //TODO: check what is the good default value
-      return "E";
+      return "B";
     }
   };
   
@@ -50,7 +50,7 @@ var Fermata = Fermata || {};
     else
     {
       //TODO: check what is the good default value
-      return "5";
+      return "4";
     }
   };
   
