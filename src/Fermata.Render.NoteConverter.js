@@ -101,7 +101,7 @@ if (typeof(Fermata.Render) === "undefined")
     }
     // Choice best stem
     else {
-      stem = noteData[0].pitch.octave < 5 ? Vex.Flow.StaveNote.STEM_UP : Vex.Flow.StaveNote.STEM_DOWN;
+      stem = dataPitch.getOctave() < 5 ? Vex.Flow.StaveNote.STEM_UP : Vex.Flow.StaveNote.STEM_DOWN;
     }
 
     if (dataPitch.getType() === SoundType.REST) {
