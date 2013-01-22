@@ -133,7 +133,7 @@ if (typeof(Fermata.Render) === "undefined")
       return new PitchPitched(noteData);
     }
     else if (soundType === SoundType.REST) {
-      return new PitchRest(noteData);
+      return new PitchRest(noteData, this.clefName);
     }
     else {
       return null;
