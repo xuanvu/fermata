@@ -5,7 +5,7 @@ var Fermata = Fermata || {};
 	
   Fermata.Utils = {};
   Fermata.Utils.Clone = function(obj) {
-    var newObj = (obj instanceof Array) ? [] : {};
+    var newObj = (Object.prototype.toString.call(obj) === '[object Array]') ? [] : {};
     for (var i in obj) {
       if (obj.hasOwnProperty(i)) {
         if (obj[i] && typeof obj[i] == "object") {
