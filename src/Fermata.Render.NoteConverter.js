@@ -35,9 +35,11 @@ if (typeof(Fermata.Render) === "undefined")
   {
     if (typeof(attributes) !== "undefined") {
       this.fillAttributes(attributes);
+      console.log("rien a declarer");
     }
     else
     {
+      console.log("devrait etre plein");
       this.fillAttributesDefault();
     }
 
@@ -79,9 +81,11 @@ if (typeof(Fermata.Render) === "undefined")
   
   NoteConverter.prototype.convertDuration = function (noteData)
   {
+    console.log(noteData.duration);
     var dataDuration = noteData.duration;
+    console.log(this.divisions);
     var actualDuration = dataDuration / this.divisions;
-    var vexDuration = (this.beatType / actualDuration).toString();
+    var vexDuration = Math.round(this.beatType / actualDuration).toString();
     
     return vexDuration;
   }
