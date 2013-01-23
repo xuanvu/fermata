@@ -90,7 +90,7 @@ if (typeof(Fermata.Render) === "undefined")
   {
     var dataPitch = this.extractPitch(noteData[0]);
     var vexDuration = this.convertDuration(noteData[0]);
-    
+
     // Stem
     var stem = noteData[0].stem && noteData[0].stem.content;
     var auto_stem = false;

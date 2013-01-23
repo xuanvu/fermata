@@ -232,14 +232,12 @@ var Fermata = Fermata || {};
       if (measureId  === 0 || clefName !== this.staves[partId][i][measureId - 1].clef)
       {
        this.staves[partId][i][measureId].addClef(clefName);
-
         if (this.Attributesdata.keys.mode !== null) {
           var keySign = Fermata.Mapping.Clef.Sign.getVexflow(this.Attributesdata.keys.fifths, this.Attributesdata.keys.mode);
           new Vex.Flow.KeySignature(keySign).addToStave(this.staves[partId][i][measureId]);
-
-        // this.staves[partId][measureId].addTimeSignature(Fermata.Mapping.Clef.getVexflow(this.Attributesdata.beat.beats)[this.Attributesdata.beat.type]);
-        this.staves[partId][i][measureId].addTimeSignature(this.Attributesdata.beat.beats + '/' + this.Attributesdata.beat.type);
         }
+        //this.staves[partId][measureId].addTimeSignature(Fermata.Mapping.Clef.getVexflow(this.Attributesdata.beat.beats)[this.Attributesdata.beat.type]);
+        this.staves[partId][i][measureId].addTimeSignature(this.Attributesdata.beat.beats + '/' + this.Attributesdata.beat.type);
       }
       else
         this.staves[partId][i][measureId].clef = clefName;
@@ -249,7 +247,6 @@ var Fermata = Fermata || {};
       // Draw line in case of sytem
       if (this.Attributesdata.stave > 1)
       {
-        console.log(this.staves[partId]);
         var line = new Vex.Flow.StaveConnector(this.staves[partId][0][measureId], this.staves[partId][i][measureId]);
         line.setType(Vex.Flow.StaveConnector.type.SINGLE);
         line.setContext(this.ctx);
