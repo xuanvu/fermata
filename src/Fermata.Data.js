@@ -22,16 +22,6 @@ var Fermata = Fermata || {};
   Fermata.Data.prototype = {
     // Cache fncs
     cacheParts: function () {
-      // Only one part, converting into array of objects
-      // --> now done by musicjson library
-      // if (Object.prototype.toString.call(this.score['score-partwise']['part-list']['score-part']) !== '[object Array]') {
-      //   this.score['score-partwise']['part-list']['score-part'] = [this.score['score-partwise']['part-list']['score-part']];
-      // }
-
-      // if (Object.prototype.toString.call(this.score['score-partwise'].part) !== '[object Array]') {
-      //   this.score['score-partwise'].part = [this.score['score-partwise'].part];
-      // }
-
       var cur, cached, i;
 
       // Index with 'part' idx, ids and names
@@ -52,32 +42,6 @@ var Fermata = Fermata || {};
       }
 
       return this.scoreCache.part;
-    },
-    // Should be done on server-side while converting xml to json
-    sortMeasure: function () {
-      if (this.scoreCache.part === null) {
-        this.cacheParts();
-      }
-
-      for (var i = 0 ; i < this.scoreCache.part.idx.length ; ++i) {
-        // Only one measure, converting into array of objects
-        if (Object.prototype.toString.call(this.scoreCache.part.idx[i].measure) !== '[object Array]') {
-          this.scoreCache.part.idx[i].measure = [this.scoreCache.part.idx[i].measure];
-        }
-
-        var measureSorted = [];
-        for (var j = 0 ; j < this.scoreCache.part.idx[i].measure.length ; ++j) {
-          var cur = this.scoreCache.part.idx[i].measure[j];
-          if (cur.note === 'object') {
-            cur.note = [cur.note];
-          }
-
-          // Insert into new array
-          measureSorted[parseInt(cur.number, 10)] = cur;
-        }
-
-        this.scoreCache.part.idx[i].measure = measureSorted;
-      }
     },
 
     // Getters
@@ -100,15 +64,6 @@ var Fermata = Fermata || {};
         if      (this.scoreCache.part.idx[id] !== undefined) { return this.scoreCache.part.idx[id]; }
         else if (this.scoreCache.part.id[id] !== undefined) { return this.scoreCache.part.id[id]; }
         else if (this.scoreCache.part.name[id] !== undefined) { return this.scoreCache.part.name[id]; }
-      }
-    },
-    // Prefer using measure[] for performance reasons while working on multiple measures
-    // Use sortMesure() to sort ids
-    getMesure: function (id, part, partType) {
-      part = this.getPart(part, partType);
-
-      if (part !== undefined) {
-        return part.measure[id];
       }
     }
   };
