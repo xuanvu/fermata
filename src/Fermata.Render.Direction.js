@@ -14,7 +14,8 @@ var Fermata = Fermata || {};
   };
 
   Fermata.Render.prototype.renderDirectionType = function (node) {
-    if (node.wedge !== undefined && node.wedge["$type"] !== "stop") {
+    console.log(node);
+    if (node.wedge !== undefined && node.wedge["$type"] !== "stop" || node.wedge["$type"] === "word") {
       var tmp = {
         placement: null,
         noteBefore: null,
@@ -49,6 +50,120 @@ var Fermata = Fermata || {};
   };
 
   Fermata.Render.prototype.renderDirectionData = [];
+
+
+  Fermata.Render.prototype.renderDirectionTypeProcess = [
+    {
+      key: "rehearsal",
+      type: Fermata.Render.prototype.FuncTypes.PLUS,
+      func: null // TODO
+    },
+    {
+      key: "segno",
+      type: Fermata.Render.prototype.FuncTypes.PLUS,
+      func: null // TODO
+    },
+    {
+      key: "words",
+      type: Fermata.Render.prototype.FuncTypes.PLUS,
+      func: null // TODO
+    },
+    {
+      key: "coda",
+      type: Fermata.Render.prototype.FuncTypes.PLUS,
+      func: null // TODO
+    },
+    {
+      key: "wedge",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "dynamics",
+      type: Fermata.Render.prototype.FuncTypes.PLUS,
+      func: null // TODO
+    },
+    {
+      key: "dashes",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "bracket",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "pedal",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "metronome",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "octave-shift",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "harp-pedals",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "damp",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "damp-all",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "eyeglasses",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "scordatura",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "image",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "principal-voice",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "accordion-registration",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "string-mute",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    },
+    {
+      key: "percussion",
+      type: Fermata.Render.prototype.FuncTypes.PLUS,
+      func: null // TODO
+    },
+    {
+      key: "other-direction",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: null // TODO
+    }
+  ];
 
   Fermata.Render.prototype.renderDirectionProcess = [
     { 
