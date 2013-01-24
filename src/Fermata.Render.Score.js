@@ -268,13 +268,13 @@ var Fermata = Fermata || {};
 
     // Then Add note to their voice, format them and draw it
     for (var staffIdx = 1 ; staffIdx < this.noteData.length ; staffIdx++) {
-      for (var toto in this.noteData[staffIdx]) {
+      for (var voiceIdx in this.noteData[staffIdx]) {
         var voice = new Vex.Flow.Voice({
           num_beats: this.Attributesdata.beat.beats,
           beat_value: this.Attributesdata.beat.type,
           resolution: Vex.Flow.RESOLUTION
         });
-        voice.addTickables(this.noteData[staffIdx][toto]);
+        voice.addTickables(this.noteData[staffIdx][voiceIdx]);
         // Add notes to voice
         // Format and justify the notes to 500 pixels
         var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], measure.note.length * 50);
