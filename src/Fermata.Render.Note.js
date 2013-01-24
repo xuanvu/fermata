@@ -88,6 +88,7 @@ var Fermata = Fermata || {};
     
     this.tieRenderer.render(note, vexNote, voice);
     
+    this.noteStorage.store(vexNote, voice, staff);
     this.recordNote(vexNote, voice, staff);
     //var noteType = Fermata.Render.getNoteType(note);
    //console.log(this.renderNoteProcess[noteType].call(this, note));
