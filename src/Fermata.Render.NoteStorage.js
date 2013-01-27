@@ -24,6 +24,7 @@ if (typeof(Fermata.Render) === "undefined")
   NoteStorage.prototype.init = function ()
   {
     this.data = [];
+    this.allNotes = [];
   };
   
   NoteStorage.prototype.clear = function ()
@@ -36,6 +37,7 @@ if (typeof(Fermata.Render) === "undefined")
     this.checkCreateVoice(staff, voice);
     
     this.data[staff][voice].push(note);
+    this.allNotes.push(note);
   };
   
   NoteStorage.prototype.getNotes = function (voice, staff)
@@ -52,10 +54,15 @@ if (typeof(Fermata.Render) === "undefined")
     return this.data[staff][voice];
   };
   
+  NoteStorage.prototype.getAllNotes = function ()
+  {
+    return (this.allNotes);
+  }
+  
   NoteStorage.prototype.checkCreateVoice = function (staff, voice)
   {
     this.checkCreateStaff(staff);
-    if (this.checkVoice(staff, voice))
+    if (!this.checkVoice(staff, voice))
     {
       this.data[staff][voice] = [];
     }
@@ -63,7 +70,7 @@ if (typeof(Fermata.Render) === "undefined")
 
   NoteStorage.prototype.checkCreateStaff = function (staff)
   {
-    if (this.checkStaff(staff))
+    if (!this.checkStaff(staff))
     {
       this.data[staff] = [];
     }

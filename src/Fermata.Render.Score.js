@@ -25,7 +25,7 @@ var Fermata = Fermata || {};
       line.draw();
     }
     // this.render()
-;  };
+  };
 
   // Fermata.Render.prototype.render = function () {
     
@@ -111,71 +111,71 @@ var Fermata = Fermata || {};
   };
 
   Fermata.Render.prototype.renderMeasureProcess = [
-    {
-      key: "attributes",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: Fermata.Render.prototype.renderAttributes
-    },
-    {
-      key: "note",
-      type: Fermata.Render.prototype.FuncTypes.QUESTION,
-      func: Fermata.Render.prototype.renderNotes
-    },
-    {
-      key: "backup",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: Fermata.Render.prototype.Renderbackup
-    },
-    {
-      key: "forward",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: null//TODO implement this function
-    },
-    {
-      key: "direction",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: Fermata.Render.prototype.renderDirection
-    },
-    {
-      key: "harmony",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: Fermata.Render.prototype.renderHarmony
-    },
-    {
-      key: "figured-bass",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: null//TODO implement this function
-    },
-    {
-      key: "print",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: Fermata.Render.prototype.renderPrint
-    },
-    {
-      key: "sound",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: null//TODO implement this function
-    },
-    {
-      key: "barline",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: Fermata.Render.prototype.renderBarline
-    },
-    {
-      key: "grouping",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: null//TODO implement this function
-    },
-    {
-      key: "link",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: null//TODO implement this function
-    },
-    {
-      key: "bookmark",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
-      func: null//TODO implement this function
-    }
+  {
+    key: "attributes",
+    type: Fermata.Render.prototype.FuncTypes.STAR,
+    func: Fermata.Render.prototype.renderAttributes
+  },
+  {
+    key: "note",
+    type: Fermata.Render.prototype.FuncTypes.QUESTION,
+    func: Fermata.Render.prototype.renderNotes
+  },
+  {
+    key: "backup",
+    type: Fermata.Render.prototype.FuncTypes.STAR,
+    func: Fermata.Render.prototype.Renderbackup
+  },
+  {
+    key: "forward",
+    type: Fermata.Render.prototype.FuncTypes.STAR,
+    func: null//TODO implement this function
+  },
+  {
+    key: "direction",
+    type: Fermata.Render.prototype.FuncTypes.STAR,
+    func: Fermata.Render.prototype.renderDirection
+  },
+  {
+    key: "harmony",
+    type: Fermata.Render.prototype.FuncTypes.STAR,
+    func: Fermata.Render.prototype.renderHarmony
+  },
+  {
+    key: "figured-bass",
+    type: Fermata.Render.prototype.FuncTypes.STAR,
+    func: null//TODO implement this function
+  },
+  {
+    key: "print",
+    type: Fermata.Render.prototype.FuncTypes.STAR,
+    func: Fermata.Render.prototype.renderPrint
+  },
+  {
+    key: "sound",
+    type: Fermata.Render.prototype.FuncTypes.STAR,
+    func: null//TODO implement this function
+  },
+  {
+    key: "barline",
+    type: Fermata.Render.prototype.FuncTypes.STAR,
+    func: Fermata.Render.prototype.renderBarline
+  },
+  {
+    key: "grouping",
+    type: Fermata.Render.prototype.FuncTypes.STAR,
+    func: null//TODO implement this function
+  },
+  {
+    key: "link",
+    type: Fermata.Render.prototype.FuncTypes.STAR,
+    func: null//TODO implement this function
+  },
+  {
+    key: "bookmark",
+    type: Fermata.Render.prototype.FuncTypes.STAR,
+    func: null//TODO implement this function
+  }
   ];
 
 
@@ -206,10 +206,10 @@ var Fermata = Fermata || {};
       if (this.staves[partId][i].length === 0 ||  this.staves[partId][i][measureId] === undefined && measureId >= this.staves[partId][i].length) {
         if (measureId === 0) {
           this.staves[partId][i].push(new Vex.Flow.Stave(20, 0 + index * 100, 100 + measure.note.length * 50));
-          }
+        }
         else {
           this.staves[partId][i].push(new Vex.Flow.Stave(this.staves[partId][i][this.staves[partId][i].length - 1].x + this.staves[partId][i][this.staves[partId][i].length - 1].width,
-                                              this.staves[partId][i][this.staves[partId][i].length - 1].y, measure.note.length * 50));
+            this.staves[partId][i][this.staves[partId][i].length - 1].y, measure.note.length * 50));
         }
       }
 
@@ -217,15 +217,13 @@ var Fermata = Fermata || {};
       var clefName = Fermata.Mapping.Clef.getVexflow(this.Attributesdata.clef[i].sign);
       if (measureId  === 0 || clefName !== this.staves[partId][i][measureId - 1].clef)
       {
-       this.staves[partId][i][measureId].addClef(clefName);
-
+        this.staves[partId][i][measureId].addClef(clefName);
         if (this.Attributesdata.keys.mode !== null) {
           var keySign = Fermata.Mapping.Clef.Sign.getVexflow(this.Attributesdata.keys.fifths, this.Attributesdata.keys.mode);
           new Vex.Flow.KeySignature(keySign).addToStave(this.staves[partId][i][measureId]);
-
-        // this.staves[partId][measureId].addTimeSignature(Fermata.Mapping.Clef.getVexflow(this.Attributesdata.beat.beats)[this.Attributesdata.beat.type]);
-        this.staves[partId][i][measureId].addTimeSignature(this.Attributesdata.beat.beats + '/' + this.Attributesdata.beat.type);
         }
+        //this.staves[partId][measureId].addTimeSignature(Fermata.Mapping.Clef.getVexflow(this.Attributesdata.beat.beats)[this.Attributesdata.beat.type]);
+        this.staves[partId][i][measureId].addTimeSignature(this.Attributesdata.beat.beats + '/' + this.Attributesdata.beat.type);
       }
       else
         this.staves[partId][i][measureId].clef = clefName;
@@ -235,7 +233,6 @@ var Fermata = Fermata || {};
       // Draw line in case of sytem
       if (this.Attributesdata.stave > 1)
       {
-        console.log(this.staves[partId]);
         var line = new Vex.Flow.StaveConnector(this.staves[partId][0][measureId], this.staves[partId][i][measureId]);
         line.setType(Vex.Flow.StaveConnector.type.SINGLE);
         line.setContext(this.ctx);
@@ -244,27 +241,27 @@ var Fermata = Fermata || {};
     }
 
     // Draw connector if needed
-      if (this.Attributesdata.stave > 1)
-      {
-       var connector = new Vex.Flow.StaveConnector(this.staves[partId][this.Attributesdata.partSymbol.topStaff - 1][0], this.staves[partId][this.Attributesdata.partSymbol.bottomStaff - 1][0]); 
-       connector.setType(Fermata.Mapping.Connector.getVexflow(this.Attributesdata.partSymbol.symbol));
-       connector.setContext(this.ctx);
-       connector.draw();
-      }
+    if (this.Attributesdata.stave > 1)
+    {
+      var connector = new Vex.Flow.StaveConnector(this.staves[partId][this.Attributesdata.partSymbol.topStaff - 1][0], this.staves[partId][this.Attributesdata.partSymbol.bottomStaff - 1][0]); 
+      connector.setType(Fermata.Mapping.Connector.getVexflow(this.Attributesdata.partSymbol.symbol));
+      connector.setContext(this.ctx);
+      connector.draw();
+    }
 
     // Then Add note to their voice, format them and draw it
-    for (var i = 1 ; i < this.noteData.length ; i++) {
-      for (var toto in this.noteData[i]) {
+    for (var staffIdx = 1 ; staffIdx < this.noteData.length ; staffIdx++) {
+      for (var voiceIdx in this.noteData[staffIdx]) {
         var voice = new Vex.Flow.Voice({
-        num_beats: this.Attributesdata.beat.beats,
-        beat_value: this.Attributesdata.beat.type,
-        resolution: Vex.Flow.RESOLUTION
+          num_beats: this.Attributesdata.beat.beats,
+          beat_value: this.Attributesdata.beat.type,
+          resolution: Vex.Flow.RESOLUTION
         });
-        voice.addTickables(this.noteData[i][toto]);
+        voice.addTickables(this.noteData[staffIdx][voiceIdx]);
         // Add notes to voice
         // Format and justify the notes to 500 pixels
-      var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], measure.note.length * 50);
-      voice.draw(this.ctx, this.staves[partId][i - 1][measureId]);
+        var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], measure.note.length * 50);
+        voice.draw(this.ctx, this.staves[partId][staffIdx - 1][measureId]);
       }
     }
     for (var i = 0; i < this.renderDirectionData.length; i++) {
