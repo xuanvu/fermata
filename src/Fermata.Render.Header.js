@@ -20,11 +20,11 @@ var Fermata = Fermata || {};
 		return ; // TODO
 	};
 
-	Fermata.Render.prototype.RenderHeaderdefaults = function (param) {
+	Fermata.Render.prototype.renderHeaderdefaults = function (param) {
 		return ; // TODO
 	};
 
-	Fermata.Render.prototype.RenderHeaderCredit = function (credit) {
+	Fermata.Render.prototype.renderHeaderCredit = function (credit) {
 		return ; // TODO
 	};
 

@@ -14,8 +14,5 @@ var Fermata = Fermata || {};
     this.noteStorage = new Fermata.Render.NoteStorage();
     this.renderer = new Vex.Flow.Renderer(this.container, Vex.Flow.Renderer.Backends.CANVAS);
     this.ctx = this.renderer.getContext();
-
-  //data.sortMeasure();
-  //console.log(data.getMesure(1, 'P1'));
   };
 }).call(this);

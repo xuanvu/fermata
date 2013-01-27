@@ -24,99 +24,85 @@ var Fermata = Fermata || {};
       line.setContext(this.ctx);
       line.draw();
     }
-    this.render()
+    // this.render()
 ;  };
 
-  Fermata.Render.prototype.render = function () {
+  // Fermata.Render.prototype.render = function () {
     
-  };
+  // };
 
   //Note: info in score element
-  Fermata.Render.prototype.renderScorePartwise = function (scorePartwise)
-  {
-    var _this = this;
-    var processes = [
-      {
-        key: "part",
-        type: this.FuncTypes.PLUS,
-        func: function () {
-          _this.renderPart();
-        }
-      }
-    ];
+  // Fermata.Render.prototype.renderScorePartwise = function (scorePartwise)
+  // {
+  //   console.log(scorePartwise);
 
-    this.exploreSubNodes(scorePartwise, processes);
-  };
+  //   var _this = this;
+  //   var processes = [
+  //     {
+  //       key: "part",
+  //       type: Fermata.Render.prototype.FuncTypes.PLUS,
+  //       func: function () {
+  //         _this.renderPart();
+  //       }
+  //     }
+  //   ];
+
+  //   this.exploreSubNodes(scorePartwise, processes);
+  // };
+
+  Fermata.Render.prototype.renderScoreHeaderProcess = [
+    {
+      key: "attributes",
+      type: Fermata.Render.prototype.FuncTypes.STAR,
+      func: Fermata.Render.prototype.renderAttributes
+    },
+    {
+      key: "part-list",
+      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      func: Fermata.Render.prototype.renderPartList
+    },
+    {
+      key: "work",
+      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      func: Fermata.Render.prototype.renderPartList
+    },
+    {
+      key: "movement-number",
+      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      func: Fermata.Render.prototype.renderHeaderMovNum
+    },
+    {
+      key: "movement-title",
+      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      func: Fermata.Render.prototype.renderHeaderMovTitle
+    },
+    {
+      key: "identification",
+      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      func: Fermata.Render.prototype.renderHeaderIdentifi
+    },
+    {
+      key: "defaults",
+      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      func: Fermata.Render.prototype.renderHeaderdefaults
+    },
+    {
+      key: "credit",
+      type: Fermata.Render.prototype.FuncTypes.STAR,
+      func: Fermata.Render.prototype.renderHeaderCredit
+    }
+  ];
 
   Fermata.Render.prototype.renderScoreHeader = function (scoreHeader)
   {
-    var _this = this;
-    var processes = [
-      {
-        key: "part-list",
-        type: this.FuncTypes.DEFAULT,
-        func: function (arg) {
-          _this.renderPartList(arg) }
-      },
-      {
-        key: "work",
-        type: this.FuncTypes.QUESTION,
-        func: function (arg) {
-          _this.renderPartList(arg) }
-      },
-      {
-        key: "movement-number",
-        type: this.FuncTypes.QUESTION,
-        func: function (arg) {
-          _this.renderHeaderMovNum(arg) }
-      },
-      {
-        key: "movement-title",
-        type: this.FuncTypes.QUESTION,
-        func: function (arg) {
-          _this.renderHeaderMovTitle(arg)
-        }
-      },
-      {
-        key: "identification",
-        type: this.FuncTypes.QUESTION,
-        func: function (arg) {
-          _this.renderHeaderIdentifi(arg)
-        }
-      },
-      {
-        key: "defaults",
-        type: this.FuncTypes.QUESTION,
-        func: function (arg) {
-          _this.RenderHeaderdefaults(arg)
-        }
-      },
-      {
-        key: "credit",
-        type: this.FuncTypes.STAR,
-        func: function (arg) {
-          _this.RenderHeaderCredit(arg)
-        }
-      }
-    ];
-
-    this.exploreSubNodes(scoreHeader, processes);
+    this.exploreSubNodes(scoreHeader, this.renderScoreHeaderProcess, this);
   };
 
   Fermata.Render.prototype.renderPart = function (part)
   {
-    var _this = this;
-    var processes = [
-      {
-        key: "measure",
-        type: this.FuncTypes.PLUS,
-        func: function (arg, idx) {
-          _this.renderMeasure(arg, idx, part.id);
-        }
-      }
-    ];
-
-    this.exploreSubNodes(part, processes);
+    for (var i = 0 ; i < part.measure.length ; ++i) {
+      this.renderMeasure(part.measure[i], i, part.id);
+    }
   };
 
   Fermata.Render.prototype.renderPrint = function (print)
