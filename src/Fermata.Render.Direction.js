@@ -14,8 +14,8 @@ var Fermata = Fermata || {};
   };
 
   Fermata.Render.prototype.renderDirectionType = function (node) {
-    console.log(node);
-    if (node.wedge !== undefined && node.wedge["$type"] !== "stop" || node.wedge["$type"] === "word") {
+    // console.log(node);
+    if (node.wedge !== undefined && node.wedge.$type !== "stop" || node.wedge.$type === "word") {
       var tmp = {
         placement: null,
         noteBefore: null,
@@ -26,7 +26,7 @@ var Fermata = Fermata || {};
         staff: 1
       };
       this.renderDirectionData.push(Fermata.Utils.Clone(tmp));
-      this.renderDirectionData[this.renderDirectionData.length - 1].type = node.wedge["$type"];
+      this.renderDirectionData[this.renderDirectionData.length - 1].type = node.wedge.$type;
     }
   };
 
@@ -35,8 +35,9 @@ var Fermata = Fermata || {};
   };
 
   Fermata.Render.prototype.renderDirectionAttribute = function (node) {
-     if (node["$placement"] !== 'undefined')
-      this.renderDirectionData[this.renderDirectionData.length - 1].placement = node["$placement"];
+    if (node.$placement !== 'undefined') {
+      this.renderDirectionData[this.renderDirectionData.length - 1].placement = node.$placement;
+    }
   };
 
   Fermata.Render.prototype.renderDirectionVoice = function (node)

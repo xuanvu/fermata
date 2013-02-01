@@ -1,18 +1,19 @@
-/*global Vex:false */
 var Fermata = Fermata || {};
 
 (function () {
   "use strict";
 
   Fermata.Render.prototype.renderAll = function () {
+    var i;
+
     this.renderScoreHeader(this.data.getScorePartWise());
-    for (var i = 0; i < this.PartListData.length; i++) {
-      this.staves[this.PartListData[i].id] = new Array();
+    for (i = 0; i < this.PartListData.length; i++) {
+      this.staves[this.PartListData[i].id] = [];
       this.container.height += 100;
     }
     var parts = this.data.getParts();
 
-    for (var i = 0 ; i < parts.idx.length ; i++) {
+    for (i = 0 ; i < parts.idx.length ; i++) {
       var part = parts.idx[i];
       this.renderPart(part);
     }
@@ -25,7 +26,7 @@ var Fermata = Fermata || {};
       line.setContext(this.ctx);
       line.draw();
     }
-    console.log(this.ctx);
+    // console.log(this.ctx);
     // this.render()
   };
 
@@ -201,7 +202,7 @@ var Fermata = Fermata || {};
     for (var i = 0; i < this.Attributesdata.stave; i++)
     {
       if (this.staves[partId][i] === undefined) {
-        this.staves[partId][i] = new Array();
+        this.staves[partId][i] = [];
         if (i > 0)
           index++;
       }
@@ -266,7 +267,7 @@ var Fermata = Fermata || {};
         voice.draw(this.ctx, this.staves[partId][staffIdx - 1][measureId]);
       }
     }
-    for (var i = 0; i < this.renderDirectionData.length; i++) {
+    for (i = 0; i < this.renderDirectionData.length; i++) {
       var data = this.renderDirectionData[i];
       var tmpNote = {
         first_note : this.getNote(data.noteAfter),
@@ -277,7 +278,7 @@ var Fermata = Fermata || {};
       hp.setPosition(Fermata.Mapping.Direction.getVexflow(this.renderDirectionData.placement));
       hp.draw();
       if (i === this.renderDirectionData.length -1 ) {
-        this.renderDirectionData = new Array();
+        this.renderDirectionData = [];
       }
     }
   };

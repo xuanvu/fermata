@@ -75,7 +75,7 @@ var Fermata = Fermata || {};
         key: "part-symbol",
         type: this.FuncTypes.QUESTION,
         func: function (arg) {
-          _ths.AttributesSymbol(arg, attribut);
+          _this.AttributesSymbol(arg, attribut);
         }
       },
       {

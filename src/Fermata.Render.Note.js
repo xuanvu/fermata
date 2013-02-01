@@ -26,7 +26,7 @@ var Fermata = Fermata || {};
     {
       return "1";
     }
-  }
+  };
 
   Fermata.Render.prototype.extractNoteStaff = function (note)
   {
@@ -53,12 +53,12 @@ var Fermata = Fermata || {};
     }
     var noteArray = this.noteData[staff][voice];
     noteArray.push(vexNote);
-  }
+  };
 
   Fermata.Render.prototype.isChordNote = function (note)
   {
     return typeof(note.chord) !== "undefined";
-  }
+  };
 
   Fermata.Render.prototype.renderNotes = function (notes)
   {
@@ -76,7 +76,7 @@ var Fermata = Fermata || {};
       }
       this.renderNote(notesToRender);
     }
-  }
+  };
 
   Fermata.Render.prototype.renderNote = function (note)
   {

@@ -1,17 +1,6 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 var Fermata = Fermata || {};
 
-if (typeof(Fermata.Render) === "undefined")
-{
-  throw ("Fermata.Render.js MUST be included before Fermata.Render.NoteConverter.js");
-}
-
 (function(){
-  
   //includes
   var NoteType = Fermata.Render.NoteType;
   var SoundType = Fermata.Render.SoundType;
@@ -21,7 +10,7 @@ if (typeof(Fermata.Render) === "undefined")
   Fermata.Render.NoteConverter = function ()
   {
     
-  }
+  };
   
   var NoteConverter = Fermata.Render.NoteConverter;
   
@@ -70,14 +59,14 @@ if (typeof(Fermata.Render) === "undefined")
   
   NoteConverter.prototype.convertPitch = function (dataPitch)
   {
-    var dataOctave = parseInt(dataPitch.getOctave()) - parseInt(this.change);
+    var dataOctave = parseInt(dataPitch.getOctave(), 10) - parseInt(this.change, 10);
     var dataStep = dataPitch.getStep();
     
     //TODO: extract on a mapping function instead of use toLowerCase
     var vexPitch = dataStep.toLowerCase() + "/" + dataOctave; 
     
     return vexPitch;
-  }
+  };
   
   NoteConverter.prototype.convertDuration = function (noteData)
   {
@@ -88,7 +77,7 @@ if (typeof(Fermata.Render) === "undefined")
     var vexDuration = Math.round(this.beatType / actualDuration).toString();
     
     return vexDuration;
-  }
+  };
   
   NoteConverter.prototype.convertNormalNote = function (noteData)
   {

@@ -1,4 +1,3 @@
-/*global Vex:false */
 var Fermata = Fermata || {};
 
 (function () {
@@ -8,7 +7,7 @@ var Fermata = Fermata || {};
   Fermata.Render = function (data, container) {
     this.data = data;
     this.container = container;
-    this.staves = new Array();
+    this.staves = [];
     this.noteData = [];
     //NOTE: should be don by IOC
     this.tieRenderer = new Fermata.Render.TieRenderer();

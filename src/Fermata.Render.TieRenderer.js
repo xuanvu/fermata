@@ -1,4 +1,3 @@
-/*global Vex:false */
 var Fermata = Fermata || {};
 
 (function(){
@@ -7,7 +6,7 @@ var Fermata = Fermata || {};
   Fermata.Render.TieRenderer = function ()
   {
     this.init();
-  }
+  };
   
   var TieRenderer = Fermata.Render.TieRenderer;
   
@@ -36,7 +35,7 @@ var Fermata = Fermata || {};
   {
     this.vexNote = vexNote;
     this.voice = voice;
-  }
+  };
 
   TieRenderer.prototype.isNoteTieStart = function (note)
   {
@@ -79,7 +78,7 @@ var Fermata = Fermata || {};
   TieRenderer.prototype.isNoteTie = function (note)
   {
     return typeof(note.tie) !== "undefined";
-  }
+  };
 
   TieRenderer.prototype.drawTie = function ()
   {
@@ -94,11 +93,11 @@ var Fermata = Fermata || {};
       tie.setContext(this.ctx);
       //TODO: store the tie
       tie.draw();    
-  }
+  };
 
-   TieRenderer.prototype.saveTieNote = function ()
+  TieRenderer.prototype.saveTieNote = function ()
   {
     this.tieNoteStack[this.voice] = this.vexNote;
-  }
+  };
 
 }).call(this);

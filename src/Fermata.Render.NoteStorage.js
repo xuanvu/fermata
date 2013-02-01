@@ -1,15 +1,4 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 var Fermata = Fermata || {};
-
-if (typeof(Fermata.Render) === "undefined")
-{
-  throw ("Fermata.Render.js MUST be included before Fermata.Render.NoteStorage.js");
-}
 
 (function(){
   "use strict";
@@ -17,7 +6,7 @@ if (typeof(Fermata.Render) === "undefined")
   Fermata.Render.NoteStorage = function ()
   {
     this.init();
-  }
+  };
   
   var NoteStorage = Fermata.Render.NoteStorage;
   
@@ -46,7 +35,7 @@ if (typeof(Fermata.Render) === "undefined")
     {
       throw "there is no note stored for the staff" + staff.toString();
     }
-    if (!checkVoice(staff, voice))
+    if (!this.checkVoice(staff, voice))
     {
       throw new Error("there is no note stored for the voice " + voice.toString() + 
       " of the staff " + staff.toString());
@@ -56,8 +45,8 @@ if (typeof(Fermata.Render) === "undefined")
   
   NoteStorage.prototype.getAllNotes = function ()
   {
-    return (this.allNotes);
-  }
+    return this.allNotes;
+  };
   
   NoteStorage.prototype.checkCreateVoice = function (staff, voice)
   {
