@@ -15,4 +15,8 @@ var Fermata = Fermata || {};
     this.renderer = new Vex.Flow.Renderer(this.container, Vex.Flow.Renderer.Backends.CANVAS);
     this.ctx = this.renderer.getContext();
   };
+
+  Fermata.Render.prototype.getStaves() = function() {
+    return this.staves;
+  };
 }).call(this);
