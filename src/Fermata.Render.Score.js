@@ -24,6 +24,7 @@ var Fermata = Fermata || {};
       line.setContext(this.ctx);
       line.draw();
     }
+    console.log(this.ctx);
     // this.render()
   };
 

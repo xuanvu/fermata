@@ -16,7 +16,7 @@ var Fermata = Fermata || {};
     this.ctx = this.renderer.getContext();
   };
 
-  Fermata.Render.prototype.getStaves() = function() {
+  Fermata.Render.prototype.getStaves = function() {
     return this.staves;
   };
 }).call(this);
