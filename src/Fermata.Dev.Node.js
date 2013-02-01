@@ -1,4 +1,4 @@
-// 
+//
 // Developpement only, use SCons otherwise to build
 //
 
@@ -6,10 +6,17 @@ var vm = require('vm'),
     fs = require('fs'),
     path = require('path');
 
-var vexflow_sources, fermata_sources;
+if (typeof _$jscoverage === 'undefined') {
+  _$jscoverage = {};
+}
 
-// Sources list
-vexflow_sources = [
+(function () {
+  "use strict";
+
+  var vexflow_sources, fermata_sources;
+
+  // Sources list
+  vexflow_sources = [
     "header.js",
     "vex.js",
     "flow.js",
@@ -64,9 +71,9 @@ vexflow_sources = [
     "frethandfinger.js",
     "stringnumber.js",
     "strokes.js"
-    ];
+  ];
 
-fermata_sources = [
+  fermata_sources = [
     "Fermata.js",
     "Fermata.Utils.js",
     "Fermata.Data.js",
@@ -94,22 +101,20 @@ fermata_sources = [
     "Fermata.Render.PartList.js",
     "Fermata.Render.Header.js",
     "Fermata.Node.js"
-    ];
+  ];
 
-// Execute
-var concatenated = '';
-vexflow_sources.forEach(function(file) {
-  concatenated += fs.readFileSync(path.resolve(__dirname, '../deps/vexflow/src', file), 'UTF-8');
-});
-fermata_sources.forEach(function(file) {
-  concatenated += fs.readFileSync(path.resolve(__dirname, file), 'UTF-8');
-});
+  // Execute
+  var concatenated = '';
+  vexflow_sources.forEach(function (file) {
+    concatenated += fs.readFileSync(path.resolve(__dirname, '../deps/vexflow/src', file), 'UTF-8');
+  });
+  fermata_sources.forEach(function (file) {
+    concatenated += fs.readFileSync(path.resolve(__dirname, file), 'UTF-8');
+  });
 
-// VM
-if (typeof _$jscoverage === 'undefined') {
-  _$jscoverage = {};
-}
+  // VM
+  var context = vm.createContext({ require: require, console: console, _$jscoverage: _$jscoverage });
+  vm.runInContext(concatenated, context);
 
-var context = vm.createContext({ require: require, console: console, _$jscoverage: _$jscoverage });
-vm.runInContext(concatenated, context);
-module.exports = context.Fermata;
+  module.exports = context.Fermata;
+}).call(this);
