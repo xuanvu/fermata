@@ -1,15 +1,5 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
+/*global Vex:false */
 var Fermata = Fermata || {};
-
-if (typeof(Fermata.Render) === "undefined")
-{
-  throw ("Fermata.Render.js MUST be included before Fermata.Render.TieRenderer.js");
-}
 
 (function(){
   "use strict";

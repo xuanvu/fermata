@@ -1,3 +1,4 @@
+/*global Vex:false */
 var Fermata = Fermata || {};
 
 (function () {
