@@ -30,6 +30,24 @@ if (typeof require !== 'undefined') {
         var noteStorage = new NoteStorage();
       });
     });
+    
+    describe("#store", function () {
+      it("store single note", function () {
+        // given
+        var noteStorage = new NoteStorage();
+        var expected = {};
+        var voice = 1;
+        var staff = 1;
+
+        // when
+        noteStorage.store(expected, voice, staff);
+        
+        // then
+        var actual = noteStorage.getNotes(voice, staff);
+        assert.strictEqual(actual, expected, "bad note returned");
+      });
+    });
+    
   });
   
 }).call(this);
