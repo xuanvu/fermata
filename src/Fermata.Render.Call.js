@@ -10,10 +10,10 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.FuncTypes =
   {
-    STAR: "*",
-    PLUS: "+",
-    QUESTION: "?",
-    DEFAULT: "default"
+    $0n: '*',
+    $1n: '+',
+    $01: '?',
+    $1: 'default'
   };
 
   /**
@@ -35,38 +35,58 @@ var Fermata = Fermata || {};
     for (var i = 0 ; i < processes.length ; i++)
     {
       var process = processes[i];
+      var _arguments = [];
+      if (arguments.length > 3) {
+        for (var j = 3 ; j < arguments.length ; j++) {
+          _arguments.push(arguments[j]);
+        }
+      }
+
+      // console.log('process', process, arguments, _arguments);
 
       // 0 to n
-      if (process.type === this.FuncTypes.STAR) {
+      if (process.type === this.FuncTypes.$0n) {
         if (typeof(object[process.key]) !== "undefined") {
-          this.callProcessMultiple(object[process.key], _this, process.func);
+          this.callProcessMultiple(object[process.key], _this, process.func, _arguments);
         }
       }
       // 0 or 1
-      else if (process.type === this.FuncTypes.QUESTION) {
+      else if (process.type === this.FuncTypes.$01) {
         if (typeof(object[process.key]) !== "undefined") {
-          process.func.call(_this, object[process.key]);
+          _arguments.unshift(object[process.key]);
+          process.func.apply(_this, _arguments);
         }
       }
       // 1 to n
-      else if (process.type === this.FuncTypes.PLUS) {
-        this.callProcessMultiple(object[process.key], _this, process.func);
+      else if (process.type === this.FuncTypes.$1n) {
+        this.callProcessMultiple(object[process.key], _this, process.func, _arguments);
       }
       // 1
-      else if (process.type === this.FuncTypes.DEFAULT) {
-        process.func.call(_this, object[process.key]);
+      else if (process.type === this.FuncTypes.$1) {
+        _arguments.unshift(object[process.key]);
+        process.func.apply(_this, _arguments);
       }
     }
   };
 
-  Fermata.Render.prototype.callProcessMultiple = function (child, _this, func)
+  Fermata.Render.prototype.callProcessMultiple = function (child, _this, func, _arguments)
   {
     if (Object.prototype.toString.call(child) !== '[object Array]') {
-      func.call(_this, child);
+      _arguments.unshift(child);
+      // console.log('callProcessMultiple', _arguments);
+      func.apply(_this, _arguments);
     }
     else {
+      _arguments.unshift(child);
       for (var i = 0 ; i < child.length ; i++) {
-        func.call(_this, child[i], i);
+        var _argumentsOne = [child[i], i];
+        for (var j = 0 ; j < _arguments.length ; j++) {
+          _argumentsOne.push(_arguments[j]);
+        }
+
+        // console.log('_argumentsOne', _argumentsOne);
+
+        func.apply(_this, _argumentsOne);
       }
     }
   };

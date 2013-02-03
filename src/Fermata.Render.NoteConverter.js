@@ -24,7 +24,7 @@ var Fermata = Fermata || {};
   {
     if (typeof(attributes) !== "undefined") {
       this.fillAttributes(attributes);
-      // console.log("rien a declarer");
+      // console.log("rien a declarer")
     }
     else
     {

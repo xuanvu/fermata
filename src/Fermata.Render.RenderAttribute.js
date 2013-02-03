@@ -1,121 +1,28 @@
-/*
-  Files that is containing all functions to treat with measures
-  attributes
-  */
-
 var Fermata = Fermata || {};
-
-/*
-    this functions takes a node of attribute using to
-    describes a measure.
-    it's not the same as renderMeasureAttributes using to parse
-    attribute in XML declaration !!
-   */
 
 (function () {
   "use strict";
 
-  Fermata.Render.prototype.renderAttributes = function (attributes)
-  {
-    // Elements entities will be implement later
-
-    var attribut = {
-      division: null,
-      instrument: null,
-      keys:  {
-        cancel: null,
-        fifths: null,
-        mode: null
-      },
-      beat: {
-        beats: null,
-        type: null,
-        interchangeable: null
-      },
-      clef: [],
-      stave: 1,
-      partSymbol: {
-        topStaff : 1,
-        bottomStaff : 2,
-        symbol : 'brace'
-      }
-    };
-
-    var _this = this;
-    var process = [
-      {
-        key: "divisions",
-        type: this.FuncTypes.QUESTION,
-        func: function (arg) {
-          _this.Attributedivision(arg, attribut);
-        }
-      },
-      {
-        key: "key",
-        type: this.FuncTypes.STAR,
-        func: function (arg) {
-          _this.AttributesKeys(arg, attribut);
-        }
-      },
-      {
-        key: "time",
-        type: this.FuncTypes.STAR,
-        func: function (arg) {
-          _this.AttributesTime(arg, attribut);
-        }
-      },
-      {
-        key: "staves",
-        type: this.FuncTypes.QUESTION,
-        func: function (arg) {
-          _this.AttributesStave(arg, attribut);
-        }
-      },
-      {
-        key: "part-symbol",
-        type: this.FuncTypes.QUESTION,
-        func: function (arg) {
-          _this.AttributesSymbol(arg, attribut);
-        }
-      },
-      {
-        key: "instruments",
-        type: this.FuncTypes.QUESTION,
-        func: function (arg) {
-          _this.AttributeInstrument(arg, attribut);
-        }
-      },
-      {
-        key: "clef",
-        type: this.FuncTypes.STAR,
-        func: function (arg) {
-          _this.AttributesClef(arg, attribut);
-        }
-      },
-      {
-        key: "staff-details",
-        type: this.FuncTypes.STAR,
-        func: null // TODO
-      },
-      {
-        key: "transpose",
-        type: this.FuncTypes.STAR,
-        func: null // TODO
-      },
-      {
-        key: "directive",
-        type: this.FuncTypes.STAR,
-        func: null // TODO
-      },
-      {
-        key: "measure-style",
-        type: this.FuncTypes.STAR,
-        func: null
-      }
-    ];
-
-    this.exploreSubNodes(attributes, process);
-    this.Attributesdata = Fermata.Utils.Clone(attribut);
+  Fermata.Render.prototype.renderAttributesDefault = {
+    division: null,
+    instrument: null,
+    keys:  {
+      cancel: null,
+      fifths: null,
+      mode: null
+    },
+    beat: {
+      beats: null,
+      type: null,
+      interchangeable: null
+    },
+    clef: [],
+    stave: 1,
+    partSymbol: {
+      topStaff : 1,
+      bottomStaff : 2,
+      symbol : 'brace'
+    }
   };
 
   Fermata.Render.prototype.AttributesSymbol = function (node, attribut)
@@ -136,29 +43,29 @@ var Fermata = Fermata || {};
     // TOdo beaucoup d'Entities ici !
     var _this = this;
     var clef = { 
-                      sign: null,
-                      line: null,
-                      change: 0
-                    };
+        sign: null,
+        line: null,
+        change: 0
+      };
 
     var process = [
       {
         key: "sign",
-        type: this.FuncTypes.DEFAULT,
+        type: Fermata.Render.prototype.FuncTypes.$1,
         func: function (arg) {
           _this.AttributesClefSign(arg, clef);
         }
       },
       {
         key: "line",
-        type: this.FuncTypes.QUESTION,
+        type: Fermata.Render.prototype.FuncTypes.$01,
         func: function (arg) {
           _this.AttributesClefLine(arg, clef);
         }
       },
       {
         key: "clef-octave-change",
-        type: this.FuncTypes.QUESTION,
+        type: Fermata.Render.prototype.FuncTypes.$01,
         func: function (arg) {
           _this.AttributeClefChange(arg, clef);
         }
@@ -191,14 +98,14 @@ var Fermata = Fermata || {};
     var process = [
       {
         key: "beats",
-        type: this.FuncTypes.DEFAULT,
+        type: Fermata.Render.prototype.FuncTypes.$1,
         func: function (arg) {
           _this.renderAttributesTimeBeats(arg, attribut);
         }
       },
       {
         key: "beat-type",
-        type: this.FuncTypes.DEFAULT,
+        type: Fermata.Render.prototype.FuncTypes.$1,
         func: function (arg) {
           _this.renderAttributesTimeTypes(arg, attribut);
         }
@@ -233,19 +140,19 @@ var Fermata = Fermata || {};
       process = [
         {
           key: "cancel",
-          type: this.FuncTypes.QUESTION,
+          type: Fermata.Render.prototype.FuncTypes.$01,
           func: null // TODO
         },
         {
           key: "fifths",
-          type: this.FuncTypes.DEFAULT,
+          type: Fermata.Render.prototype.FuncTypes.$1,
           func: function (arg) {
             _this.AttributeKeyFifth(arg, attribut);
           }
         },
         {
           key: "mode",
-          type: this.FuncTypes.QUESTION,
+          type: Fermata.Render.prototype.FuncTypes.$01,
           func: function (arg) {
             _this.AttributeKeyMode(arg, attribut);
           }
@@ -259,17 +166,17 @@ var Fermata = Fermata || {};
       process = [
         {
           key: "key-step",
-          type: this.FuncTypes.DEFAULT,
+          type: Fermata.Render.prototype.FuncTypes.$1,
           func: null // TODO
         },
         {
           key: "key-alter",
-          type: this.FuncTypes.DEFAULT,
+          type: Fermata.Render.prototype.FuncTypes.$1,
           func: null // TODO
         },
         {
           key: "key-accidental",
-          type: this.FuncTypes.QUESTION,
+          type: Fermata.Render.prototype.FuncTypes.$01,
           func: null // TODO
         }
       ];
@@ -279,7 +186,7 @@ var Fermata = Fermata || {};
     process = [
       {
         key: "key-octave",
-        type: this.FuncTypes.STAR,
+        type: Fermata.Render.prototype.FuncTypes.$0n,
         func: null
       }
     ];
@@ -309,6 +216,27 @@ var Fermata = Fermata || {};
     attribut.keys.fifths = node;
   };
 
-  Fermata.Render.prototype.Attributesdata = {};
+
+  var _render = Fermata.Render.prototype;
+  Fermata.Render.prototype.renderAttributesProcess = [
+    { key: 'divisions', type: _render.FuncTypes.$01, func: _render.Attributedivision },
+    { key: 'key', type: _render.FuncTypes.$0n, func: _render.AttributesKeys },
+    { key: 'time', type: _render.FuncTypes.$0n, func: _render.AttributesTime },
+    { key: 'staves', type: _render.FuncTypes.$01, func: _render.AttributesStave },
+    { key: 'part-symbol', type: _render.FuncTypes.$01, func: _render.AttributesSymbol },
+    { key: 'instruments', type: _render.FuncTypes.$01, func: _render.AttributeInstrument },
+    { key: 'clef', type: _render.FuncTypes.$0n, func: _render.AttributesClef },
+    { key: 'staff-details', type: _render.FuncTypes.$0n, func: null },
+    { key: 'transpose', type: _render.FuncTypes.$0n, func: null },
+    { key: 'directive', type: _render.FuncTypes.$0n, func: null },
+    { key: 'dirmeasure-styleective', type: _render.FuncTypes.$0n, func: null }
+  ];
+
+  Fermata.Render.prototype.renderAttributes = function (attributes)
+  {
+    this.cur.measure.$fermata.attributes = Fermata.Utils.Clone(Fermata.Render.prototype.renderAttributesDefault);
+    this.exploreSubNodes(attributes, Fermata.Render.prototype.renderAttributesProcess,
+                         this, this.cur.measure.$fermata.attributes);
+  };
 
 }).call(this);

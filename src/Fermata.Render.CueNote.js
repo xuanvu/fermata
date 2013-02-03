@@ -14,7 +14,7 @@ var Fermata = Fermata || {};
     var processes = [
       {
         key: "cue",
-        type: this.FuncTypes.DEFAULT,
+        type: this.FuncTypes.$1,
         func: null//TODO: implement the function
       }
     ];

@@ -8,15 +8,16 @@ var Fermata = Fermata || {};
 (function () {
   "use strict";
 
-  Fermata.Render.prototype.getNbStave = function ()
-  {
-    var nb = 0;
-    for (var i in this.staves)
-      nb++;
-    return nb;
-  };
+  // Fermata.Render.prototype.getNbStave = function ()
+  // {
+  //   var nb = 0;
+  //   for (var i in this.staves) {
+  //     nb++;
+  //   }
+  //   return nb;
+  // };
 
-   Fermata.Render.prototype.RenderPartName = function (partName)
+  Fermata.Render.prototype.RenderPartName = function (partName)
   {
     if (typeof(partName.content) === 'undefined' && typeof(partName) === 'string') {
       this.scorePartData.partName = partName;
@@ -58,15 +59,19 @@ var Fermata = Fermata || {};
   };
 
   Fermata.Render.prototype.renderScorePart = function (part) {
-    if (typeof(part.$id) === 'undefined')
-        throw ("scorePart without any ID, check file !");
+    if (typeof(part.$id) === 'undefined') {
+      throw ("scorePart without any ID, check file !");
+    }
+
     this.scorePartData.id = part.$id;
     this.exploreSubNodes(part, this.renderScorePartProcess, this);
+
     this.PartListData[this.PartListData.length] = Fermata.Utils.Clone(this.scorePartData);
     for (var prop in this.scorePartData) {
-
-      if (this.scorePartData.hasOwnProperty(prop) && typeof(this.scorePartData[prop]) !== 'object' ) { 
-        this.scorePartData[prop] = null; } }
+      if (this.scorePartData.hasOwnProperty(prop) && typeof(this.scorePartData[prop]) !== 'object') { 
+        this.scorePartData[prop] = null;
+      }
+    }
   };
 
    Fermata.Render.prototype.renderpartGroup = function (group) {
@@ -76,7 +81,7 @@ var Fermata = Fermata || {};
       this.scorePartData[val].partGroup.bairline = this.GroupPartData.barline;
       this.scorePartData[val].partGroup.symbol = this.GroupPartData.symbol;
       for (var prop in this.GroupPartData) { 
-        if (this.GroupPartData.hasOwnProperty(prop) && typeof(this.GroupPartData[prop]) !== 'object' ) { 
+        if (this.GroupPartData.hasOwnProperty(prop) && typeof(this.GroupPartData[prop]) !== 'object') { 
           this.GroupPartData[prop] = null;
         }
       }
@@ -100,12 +105,12 @@ var Fermata = Fermata || {};
   Fermata.Render.prototype.renderPartListProcess = [
     {
       key: "score-part",
-      type: Fermata.Render.prototype.FuncTypes.PLUS,
+      type: Fermata.Render.prototype.FuncTypes.$1n,
       func: Fermata.Render.prototype.renderScorePart
     },
     {
       key: "part-group",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
+      type: Fermata.Render.prototype.FuncTypes.$0n,
       func: Fermata.Render.prototype.renderpartGroup
     }
   ];
@@ -113,42 +118,42 @@ var Fermata = Fermata || {};
   Fermata.Render.prototype.renderScorePartProcess = [
     {
       key: "identification",
-      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      type: Fermata.Render.prototype.FuncTypes.$01,
       func: null // todo
     },
     {
       key: "part-name",
-      type: Fermata.Render.prototype.FuncTypes.DEFAULT,
+      type: Fermata.Render.prototype.FuncTypes.$1,
       func: Fermata.Render.prototype.RenderPartName
     },
     {
       key: "part-name-display",
-      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      type: Fermata.Render.prototype.FuncTypes.$01,
       func: null //todo
     },
     {
       key: "part-abbreviation",
-      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      type: Fermata.Render.prototype.FuncTypes.$01,
       func: Fermata.Render.prototype.renderScorePartAbbreviation
     },
     {
       key: "part-abbreviation-display",
-      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      type: Fermata.Render.prototype.FuncTypes.$01,
       func: null // todo
     },
     {
       key: "group",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
+      type: Fermata.Render.prototype.FuncTypes.$0n,
       func: null //todo
     },
     {
       key: "score-instrument",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
+      type: Fermata.Render.prototype.FuncTypes.$0n,
       func: Fermata.Render.prototype.renderScoreInstrument
     },
     {
       key: "part-group",
-      type: Fermata.Render.prototype.FuncTypes.STAR,
+      type: Fermata.Render.prototype.FuncTypes.$0n,
       func: Fermata.Render.prototype.renderScorePartNumber
     }
   ];
@@ -156,37 +161,37 @@ var Fermata = Fermata || {};
   Fermata.Render.prototype.RenderPartGroupProcess = [
     {
       key: "group-name",
-      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      type: Fermata.Render.prototype.FuncTypes.$01,
       func : null // todo
     },
     {
       key: "group-name-display",
-      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      type: Fermata.Render.prototype.FuncTypes.$01,
       func: null
     },
     {
       key: "group-abbreviation",
-      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      type: Fermata.Render.prototype.FuncTypes.$01,
       func: null //TODO
     },
     {
       key: "group-abbreviation-display",
-      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      type: Fermata.Render.prototype.FuncTypes.$01,
       func: null // TODO
     },
     {
       key: "group-symbol",
-      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      type: Fermata.Render.prototype.FuncTypes.$01,
       func: Fermata.Render.prototype.renderSymbolGroup
     },
     {
       key: "group-barline",
-      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      type: Fermata.Render.prototype.FuncTypes.$01,
       func: Fermata.Render.prototype.renderBarline
     },
     {
       key: "group-time",
-      type: Fermata.Render.prototype.FuncTypes.QUESTION,
+      type: Fermata.Render.prototype.FuncTypes.$01,
       func: null
     }
   ];
@@ -197,15 +202,15 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.GroupPartData = {
     symbol: null,
-    bairline:null
+    bairline: null
   };
 
   Fermata.Render.prototype.scorePartData = {
-    id :null,
+    id: null,
     partName: null,
-    abbreviation : null,
-    scoreInstrument : null,
-    midiInstrument : null,
+    abbreviation: null,
+    scoreInstrument: null,
+    midiInstrument: null,
     partGroup: {
       number: null,
       symbol: null,

@@ -42,16 +42,16 @@ var Fermata = Fermata || {};
   
   Fermata.Render.prototype.recordNote = function (vexNote, voice, staff)
   {
-    if (typeof(this.noteData[staff]) === "undefined")
+    if (typeof(this.cur.measure.$fermata.vexNotes[staff]) === "undefined")
     {
-      this.noteData[staff] = [];
+      this.cur.measure.$fermata.vexNotes[staff] = [];
     }
 
-    if (typeof(this.noteData[staff][voice]) === 'undefined')
+    if (typeof(this.cur.measure.$fermata.vexNotes[staff][voice]) === 'undefined')
     { 
-      this.noteData[staff][voice] = [];
+      this.cur.measure.$fermata.vexNotes[staff][voice] = [];
     }
-    var noteArray = this.noteData[staff][voice];
+    var noteArray = this.cur.measure.$fermata.vexNotes[staff][voice];
     noteArray.push(vexNote);
   };
 
@@ -84,12 +84,14 @@ var Fermata = Fermata || {};
     var voice = this.extractNoteVoice(note);
     var noteConverter = new NoteConverter();
     
-    var vexNote = noteConverter.convert(note, this.Attributesdata);
-    
-    this.tieRenderer.render(note, vexNote, voice);
-    
-    this.noteStorage.store(vexNote, voice, staff);
+    var vexNote = noteConverter.convert(note, this.cur.measure.$fermata.attributes);
+
+    // TODO MOVE
+    // this.tieRenderer.render(note, vexNote, voice);
+    // this.noteStorage.store(vexNote, voice, staff);
     this.recordNote(vexNote, voice, staff);
+
+
     //var noteType = Fermata.Render.getNoteType(note);
    //console.log(this.renderNoteProcess[noteType].call(this, note));
   };
@@ -114,19 +116,19 @@ var Fermata = Fermata || {};
     var processes = [
     {
       key: "pitch",
-      type: this.FuncTypes.QUESTION,
+      type: this.FuncTypes.$01,
       func: function (arg) {
         _this.renderPitch(arg);
       }
     },
     {
       key: "unpitched",
-      type: this.FuncTypes.QUESTION,
+      type: this.FuncTypes.$01,
       func: null//TODO: implement the function
     },
     {
       key: "rest",
-      type: this.FuncTypes.QUESTION,
+      type: this.FuncTypes.$01,
       func: null//TODO: implement the function
     }
     ];
@@ -146,7 +148,7 @@ var Fermata = Fermata || {};
     var processes = [
     {
       key: "type",
-      type: this.FuncTypes.QUESTION,
+      type: this.FuncTypes.$01,
       func: function (arg) {
         _this.renderType(arg);
       }//TODO: add the others elements
@@ -232,11 +234,11 @@ var Fermata = Fermata || {};
   {
     var pos = 0;
     while (true) {
-      for (var first in this.noteData) {
-        for (var second in this.noteData[first]) {
-          for (var third = 0; third < this.noteData[first][second].length ; third++) {
+      for (var first in this.cur.measure.$fermata.vexNotes) {
+        for (var second in this.cur.measure.$fermata.vexNotes[first]) {
+          for (var third = 0; third < this.cur.measure.$fermata.vexNotes[first][second].length ; third++) {
             if (pos === number)
-              return this.noteData[first][second][third];
+              return this.cur.measure.$fermata.vexNotes[first][second][third];
             pos++;
           }
         }

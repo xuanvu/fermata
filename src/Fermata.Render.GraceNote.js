@@ -14,14 +14,14 @@ var Fermata = Fermata || {};
     var processes = [
       {
         key: "grace",
-        type: this.FuncTypes.DEFAULT,
+        type: this.FuncTypes.$1,
         func: function (arg) {
           _this.renderGrace(arg);
         }
       },
       {
         key: "tie",
-        type: this.FuncTypes.STAR,
+        type: this.FuncTypes.$0n,
         func: null//TODO implement
       }
     ];

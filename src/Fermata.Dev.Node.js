@@ -97,9 +97,11 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Render.RenderAttribute.js",
     "Fermata.Render.Direction.js",
     "Fermata.Render.Barline.js",
-    "Fermata.Render.Score.js",
     "Fermata.Render.PartList.js",
     "Fermata.Render.Header.js",
+    "Fermata.Render.Score.js",
+    "Fermata.Drawer.js",
+    "Fermata.Drawer.Score.js",
     "Fermata.Node.js"
   ];
 

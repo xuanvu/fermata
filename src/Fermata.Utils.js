@@ -4,11 +4,11 @@ var Fermata = Fermata || {};
 	"use strict";
 	
   Fermata.Utils = {};
-  Fermata.Utils.Clone = function(obj) {
+  Fermata.Utils.Clone = function (obj) {
     var newObj = (Object.prototype.toString.call(obj) === '[object Array]') ? [] : {};
     for (var i in obj) {
       if (obj.hasOwnProperty(i)) {
-        if (obj[i] && typeof obj[i] == "object") {
+        if (obj[i] && typeof obj[i] === "object") {
           newObj[i] = Fermata.Utils.Clone(obj[i]);
         }
         else {
@@ -21,6 +21,7 @@ var Fermata = Fermata || {};
 
   Fermata.Utils.FirstLast = function (obj)
   {
+    console.log(obj);
     var info = {
       first : null,
       last : null

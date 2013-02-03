@@ -5,7 +5,7 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.PedalType =
   {
-    START: "start",
+    0nT: "start",
     STOP: "stop",
     CONTINUE: "continue",
     CHANGE: "change"
@@ -17,7 +17,7 @@ var Fermata = Fermata || {};
 
     var processes = [
       {
-        val: this.PedalType.START,
+        val: this.PedalType.0nT,
         func: function () {
           this.renderStartPedal();
         }

@@ -90,20 +90,34 @@
     <script src="../../src/Fermata.Render.Direction.js"></script>
     <script src="../../src/Fermata.Render.Barline.js"></script>
     <script src="../../src/Fermata.Render.Backup.js"></script>
-    <script src="../../src/Fermata.Render.Score.js"></script>
     <script src="../../src/Fermata.Render.PartList.js"></script>
     <script src="../../src/Fermata.Render.Header.js"></script>
+    <script src="../../src/Fermata.Render.Score.js"></script>
+    <script src="../../src/Fermata.Drawer.js"></script>
+    <script src="../../src/Fermata.Drawer.Score.js"></script>
 
     <!-- Tests -->
     <script src="../Fermata.Tests.Utils.js"></script>
-    <script src="../Fermata.Data.js"></script>
+    <script src="../Fermata.Tests.Data.js"></script>
+    <script src="../Fermata.Tests.Render.Score.js"></script>
+    <script src="../Fermata.Tests.Drawer.js"></script>
     <script>
-      onload = function(){
-        var runner = mocha.run();
-      };
+        onload = function() {
+            var runner = mocha.run();
+            runner.globals(['glyphTypeProperties']);
+        };
     </script>
   </head>
   <body>
     <div id="mocha"></div>
+    <div id="container">
+        <h1>Tests containers</h1>
+        <ul>
+            <li>
+                <h2>Hello-World</h2>
+                <canvas class="hello-world" width="200px", height="100px"></canvas>
+            </li>
+        </ul>
+    </div>
   </body>
 </html>
