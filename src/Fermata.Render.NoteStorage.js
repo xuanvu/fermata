@@ -33,7 +33,7 @@ var Fermata = Fermata || {};
   {
     if (!this.checkStaff(staff))
     {
-      throw "there is no note stored for the staff" + staff.toString();
+      throw new Error("there is no note stored for the staff" + staff.toString());
     }
     if (!this.checkVoice(staff, voice))
     {
