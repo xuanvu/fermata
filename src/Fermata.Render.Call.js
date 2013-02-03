@@ -24,20 +24,28 @@ var Fermata = Fermata || {};
    * key is the key of the child element.
    * func is the function to apply to the child elements
    */
-  Fermata.Render.prototype.exploreSubNodes = function (object, processes, _this)
+  Fermata.Render.prototype.exploreSubNodes = function (p)
   {
+    if (p === 'undefined' || typeof(p) !== 'object') {
+      return false;
+    }
+
+    // p -> { object, processes, ctx }
+
     // Default context
-    if (_this === undefined) {
-      _this = this;
+    if (p.ctx === undefined) {
+      p.ctx = this;
     }
 
     // Execute processes
-    for (var i = 0 ; i < processes.length ; i++)
+    for (var i = 0 ; i < p.processes.length ; i++)
     {
-      var process = processes[i];
+      var process = p.processes[i];
+      console.log(process);
+
       var _arguments = [];
-      if (arguments.length > 3) {
-        for (var j = 3 ; j < arguments.length ; j++) {
+      if (arguments.length > 1) {
+        for (var j = 1 ; j < arguments.length ; j++) {
           _arguments.push(arguments[j]);
         }
       }
@@ -46,25 +54,25 @@ var Fermata = Fermata || {};
 
       // 0 to n
       if (process.type === this.FuncTypes.$0n) {
-        if (typeof(object[process.key]) !== "undefined") {
-          this.callProcessMultiple(object[process.key], _this, process.func, _arguments);
+        if (typeof(p.object[process.key]) !== "undefined") {
+          this.callProcessMultiple(p.object[process.key], p.ctx, process.func, _arguments);
         }
       }
       // 0 or 1
       else if (process.type === this.FuncTypes.$01) {
-        if (typeof(object[process.key]) !== "undefined") {
-          _arguments.unshift(object[process.key]);
-          process.func.apply(_this, _arguments);
+        if (typeof(p.object[process.key]) !== "undefined") {
+          _arguments.unshift(p.object[process.key]);
+          process.func.apply(p.ctx, _arguments);
         }
       }
       // 1 to n
       else if (process.type === this.FuncTypes.$1n) {
-        this.callProcessMultiple(object[process.key], _this, process.func, _arguments);
+        this.callProcessMultiple(p.object[process.key], p.ctx, process.func, _arguments);
       }
       // 1
       else if (process.type === this.FuncTypes.$1) {
-        _arguments.unshift(object[process.key]);
-        process.func.apply(_this, _arguments);
+        _arguments.unshift(p.object[process.key]);
+        process.func.apply(p.ctx, _arguments);
       }
     }
   };

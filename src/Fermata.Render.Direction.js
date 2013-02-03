@@ -5,7 +5,7 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.renderDirection = function (direction)
   {
-    this.exploreSubNodes(direction, this.renderDirectionProcess, this);
+    this.exploreSubNodes({ object: direction, processes: this.renderDirectionProcess, ctx: this });
     this.renderDirectionAttribute(direction);
     if (this.renderDirectionData[this.renderDirectionData.length - 1].type !== null &&this.renderDirectionData[this.renderDirectionData.length - 1].noteAfter === null)
       this.renderDirectionData[this.renderDirectionData.length - 1].noteAfter = direction.noteAfter;

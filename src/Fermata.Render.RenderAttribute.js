@@ -72,7 +72,7 @@ var Fermata = Fermata || {};
       }
     ];
 
-    this.exploreSubNodes(node, process);
+    this.exploreSubNodes({ object: node, processes: process });
     attribut.clef.push(clef);
   };
 
@@ -112,7 +112,7 @@ var Fermata = Fermata || {};
       }
     ];
 
-    this.exploreSubNodes(node, process);
+    this.exploreSubNodes({ object: node, processes: process });
   };
 
   Fermata.Render.prototype.renderAttributesTimeBeats = function (node, attribut)
@@ -158,7 +158,7 @@ var Fermata = Fermata || {};
           }
         }
       ];
-      this.exploreSubNodes(node, process);
+      this.exploreSubNodes({ object: node, processes: process });
     }
     else
     {
@@ -180,7 +180,7 @@ var Fermata = Fermata || {};
           func: null // TODO
         }
       ];
-      this.exploreSubNodes(node, process);
+      this.exploreSubNodes({ object: node, processes: process });
     }
     
     process = [
@@ -191,7 +191,7 @@ var Fermata = Fermata || {};
       }
     ];
     
-    this.exploreSubNodes(node, process);
+    this.exploreSubNodes({ object: node, processes: process });
   };
 
   Fermata.Render.prototype.AttributeKeyMode = function (node, attribut)
@@ -235,8 +235,8 @@ var Fermata = Fermata || {};
   Fermata.Render.prototype.renderAttributes = function (attributes)
   {
     this.cur.measure.$fermata.attributes = Fermata.Utils.Clone(Fermata.Render.prototype.renderAttributesDefault);
-    this.exploreSubNodes(attributes, Fermata.Render.prototype.renderAttributesProcess,
-                         this, this.cur.measure.$fermata.attributes);
+    this.exploreSubNodes({ object: attributes, processes: Fermata.Render.prototype.renderAttributesProcess,
+                           ctx: this }, this.cur.measure.$fermata.attributes);
   };
 
 }).call(this);

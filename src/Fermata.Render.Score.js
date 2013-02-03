@@ -25,7 +25,7 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.renderScoreHeader = function (scoreHeader)
   {
-    this.exploreSubNodes(scoreHeader, this.renderScoreHeaderProcess, this);
+    this.exploreSubNodes({ object: scoreHeader, processes: this.renderScoreHeaderProcess, ctx: this });
   };
 
   Fermata.Render.prototype.renderPart = function (part, partIdx)
@@ -74,7 +74,7 @@ var Fermata = Fermata || {};
     this.renderMeasureAttributes(measure);
 
     // Measure content
-    this.exploreSubNodes(measure, this.renderMeasureProcess, this);
+    this.exploreSubNodes({ object: measure, processes: this.renderMeasureProcess, ctx: this });
 
     // TODO widths of measures
     // for (var i = 0; i < this.Attributesdata.stave; i++)

@@ -133,7 +133,7 @@ var Fermata = Fermata || {};
     }
     ];
  
-    this.exploreSubNodes(fullNote, processes);
+    this.exploreSubNodes({ object: fullNote, processes: processes });
     
     var chord = false;
     if (typeof(fullNote.chord) !== "undefined")
@@ -155,7 +155,7 @@ var Fermata = Fermata || {};
     }
     ];
   
-    this.exploreSubNodes(note, processes);
+    this.exploreSubNodes({ object: note, processes: processes });
   };
   
   Fermata.Render.prototype.renderPitch = function (pitch)

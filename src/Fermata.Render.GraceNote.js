@@ -25,7 +25,7 @@ var Fermata = Fermata || {};
         func: null//TODO implement
       }
     ];
-    this.exploreSubNodes(graceNote, processes);
+    this.exploreSubNodes({ object: graceNote, processes: processes });
     
     this.renderNoteCommon(graceNote);
     this.renderFullNote(graceNote);

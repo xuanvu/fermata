@@ -18,7 +18,7 @@ var Fermata = Fermata || {};
         func: null//TODO: implement the function
       }
     ];
-    this.exploreSubNodes(cueNote, processes);
+    this.exploreSubNodes({ object: cueNote, processes: processes });
       
     this.renderFullNote(cueNote);
     var duration = cueNote.duration;
