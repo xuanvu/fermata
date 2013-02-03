@@ -29,7 +29,7 @@ if (typeof require !== 'undefined') {
       it("test of the constructor", function (){
         var noteStorage = new NoteStorage();
       });
-    })
+    });
   });
   
 }).call(this);
