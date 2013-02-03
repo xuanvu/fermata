@@ -17,34 +17,6 @@ var Fermata = Fermata || {};
   //   return nb;
   // };
 
-  Fermata.Render.prototype.RenderPartName = function (partName)
-  {
-    if (typeof(partName.content) === 'undefined' && typeof(partName) === 'string') {
-      this.scorePartData.partName = partName;
-    }
-    else if (typeof(partName.content) === 'string') {
-      this.scorePartData.partName = partName.content;
-    }
-    else
-      return ;
-  };
-
-  Fermata.Render.prototype.renderBarline = function (barline) {
-    if (barline === "yes")
-      this.GroupPartData.barline = true;
-    this.GroupPartData.barline = false;
-  };
-
-  Fermata.Render.prototype.renderSymbolGroup = function (groupSymbol) {
-    if (typeof(groupSymbol.content) === 'undefined' && typeof(groupSymbol) === 'string')
-      this.GroupPartData.groupSymbol = groupSymbol;
-    else if (typeof(groupSymbol.content) === 'string') {
-      this.GroupPartData.groupSymbol = groupSymbol.content;
-    }
-    else
-      return ;
-  };
-
   Fermata.Render.prototype.isPartGroupExist = function (number) {
     for (var i = 0; i < this.PartListData.length; i++) {
       if (this.PartListData[i].partGroup.number === number)
@@ -53,79 +25,56 @@ var Fermata = Fermata || {};
     return -1;
   };
 
-  Fermata.Render.prototype.renderScorePartNumber = function (partGroup)
-  {
-    this.scorePartData.partGroup.number = partGroup;
-  };
-
   Fermata.Render.prototype.renderScorePart = function (part) {
-    if (typeof(part.$id) === 'undefined') {
-      throw ("scorePart without any ID, check file !");
-    }
-
-    this.scorePartData.id = part.$id;
+    // this.scorePartData.id = part.$id;
     this.exploreSubNodes({ object: part, processes: this.renderScorePartProcess, ctx: this });
 
-    this.PartListData[this.PartListData.length] = Fermata.Utils.Clone(this.scorePartData);
-    for (var prop in this.scorePartData) {
-      if (this.scorePartData.hasOwnProperty(prop) && typeof(this.scorePartData[prop]) !== 'object') { 
-        this.scorePartData[prop] = null;
-      }
-    }
+    // this.PartListData[this.PartListData.length] = Fermata.Utils.Clone(this.scorePartData);
+    // for (var prop in this.scorePartData) {
+    //   if (this.scorePartData.hasOwnProperty(prop) && typeof(this.scorePartData[prop]) !== 'object') { 
+    //     this.scorePartData[prop] = null;
+    //   }
+    // }
   };
 
-   Fermata.Render.prototype.renderpartGroup = function (group) {
+   Fermata.Render.prototype.renderPartGroup = function (group) {
     var val;
-    if (group.type === "start" && (val = this.isPartGroupExist(group)) > 0) {
-      this.exploreSubNodes({ object: part, processes: this.renderPartGroupProcess, ctx: this });
-      this.scorePartData[val].partGroup.bairline = this.GroupPartData.barline;
-      this.scorePartData[val].partGroup.symbol = this.GroupPartData.symbol;
-      for (var prop in this.GroupPartData) { 
-        if (this.GroupPartData.hasOwnProperty(prop) && typeof(this.GroupPartData[prop]) !== 'object') { 
-          this.GroupPartData[prop] = null;
-        }
-      }
+    if (group.type === 'start' && (val = this.isPartGroupExist(group)) > 0) {
+      this.exploreSubNodes({ object: group, processes: this.renderPartGroupProcess, ctx: this });
+      // this.scorePartData[val].partGroup.bairline = this.GroupPartData.barline;
+      // this.scorePartData[val].partGroup.symbol = this.GroupPartData.symbol;
+      // for (var prop in this.GroupPartData) { 
+      //   if (this.GroupPartData.hasOwnProperty(prop) && typeof(this.GroupPartData[prop]) !== 'object') { 
+      //     this.GroupPartData[prop] = null;
+      //   }
+      // }
     }
-  };
-
-  Fermata.Render.prototype.renderScoreInstrument = function (instrument)
-  {
-    this.scorePartData.scoreInstrument = instrument;
-  };
-
-  Fermata.Render.prototype.RenderMidiInstrument = function (midi)
-  {
-    this.scorePartData.midiInstrument = midi;
-  };
-
-  Fermata.Render.prototype.renderScorePartAbbreviation = function (abbre) {
-    this.scorePartData.abbreviation = abbre;
   };
 
   var _render = Fermata.Render.prototype;
   Fermata.Render.prototype.renderPartListProcess = [
     { key: "score-part", type: Fermata.Render.prototype.FuncTypes.$1n, func: Fermata.Render.prototype.renderScorePart },
-    { key: "part-group", type: Fermata.Render.prototype.FuncTypes.$0n, func: Fermata.Render.prototype.renderpartGroup }
+    { key: "part-group", type: Fermata.Render.prototype.FuncTypes.$0n, func: Fermata.Render.prototype.renderPartGroup }
   ];
 
   Fermata.Render.prototype.renderScorePartProcess = [
     { key: "identification", type: Fermata.Render.prototype.FuncTypes.$01, func: null },
-    { key: "part-name", type: Fermata.Render.prototype.FuncTypes.$1, func: Fermata.Render.prototype.RenderPartName },
+    { key: "part-name", type: Fermata.Render.prototype.FuncTypes.$1, dataType: 'string' },
     { key: "part-name-display", type: Fermata.Render.prototype.FuncTypes.$01, func: null },
-    { key: "part-abbreviation", type: Fermata.Render.prototype.FuncTypes.$01, func: Fermata.Render.prototype.renderScorePartAbbreviation },
+    { key: "part-abbreviation", type: Fermata.Render.prototype.FuncTypes.$01, dataType: 'string' },
     { key: "part-abbreviation-display", type: Fermata.Render.prototype.FuncTypes.$01, func: null },
     { key: "group", type: Fermata.Render.prototype.FuncTypes.$0n, func: null },
-    { key: "score-instrument", type: Fermata.Render.prototype.FuncTypes.$0n, func: Fermata.Render.prototype.renderScoreInstrument },
-    { key: "part-group", type: Fermata.Render.prototype.FuncTypes.$0n, func: Fermata.Render.prototype.renderScorePartNumber }
+    { key: "score-instrument", type: Fermata.Render.prototype.FuncTypes.$0n, dataType: 'string' },
+    { key: "part-group", type: Fermata.Render.prototype.FuncTypes.$0n, dataType: 'string' }
   ];
 
   Fermata.Render.prototype.RenderPartGroupProcess = [
-    { key: "group-name", type: Fermata.Render.prototype.FuncTypes.$01, func : null },
+    { key: "group-name", type: Fermata.Render.prototype.FuncTypes.$01, func: null },
     { key: "group-name-display", type: Fermata.Render.prototype.FuncTypes.$01, func: null },
     { key: "group-abbreviation", type: Fermata.Render.prototype.FuncTypes.$01, func: null },
     { key: "group-abbreviation-display", type: Fermata.Render.prototype.FuncTypes.$01, func: null },
-    { key: "group-symbol", type: Fermata.Render.prototype.FuncTypes.$01, func: Fermata.Render.prototype.renderSymbolGroup },
-    { key: "group-barline", type: Fermata.Render.prototype.FuncTypes.$01, func: Fermata.Render.prototype.renderBarline },
+    { key: "group-symbol", type: Fermata.Render.prototype.FuncTypes.$01, dataType: 'string' },
+    { key: "group-barline", type: Fermata.Render.prototype.FuncTypes.$01, dataType: 'bool' },
     { key: "group-time", type: Fermata.Render.prototype.FuncTypes.$01, func: null }
   ];
 

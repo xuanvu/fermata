@@ -26,22 +26,21 @@ var Fermata = Fermata || {};
    */
   Fermata.Render.prototype.exploreSubNodes = function (p)
   {
+    // p -> { object, processes, ctx }
     if (p === 'undefined' || typeof(p) !== 'object') {
       return false;
     }
-
-    // p -> { object, processes, ctx }
 
     // Default context
     if (p.ctx === undefined) {
       p.ctx = this;
     }
 
+
     // Execute processes
     for (var i = 0 ; i < p.processes.length ; i++)
     {
       var process = p.processes[i];
-      console.log(process);
 
       var _arguments = [];
       if (arguments.length > 1) {
@@ -50,7 +49,54 @@ var Fermata = Fermata || {};
         }
       }
 
-      // console.log('process', process, arguments, _arguments);
+      // Helpers
+      if (typeof(process.dataType) !== 'undefined') {
+        if (typeof(process._key) === 'undefined') {
+          if (typeof(process.dataKey) === 'undefined' || process.dataKey === 'CamelCase') {
+            process._key = process.key.replace(/-([a-z])/g, function (c) { return c[1].toUpperCase() });
+          }
+          else {
+            process._key = process.key;
+          }
+        }
+
+        switch (process.dataType) {
+          case 'string':
+            process.func = function (str) { p.object[process._key] = typeof(p.object[process.key]) === 'string' ? p.object[process.key] : ''; };
+            break;
+          case 'int':
+            process.func = function (str) {
+              if (typeof(p.object) === 'number') {
+                p.object[process._key] = p.object[process.key];
+              }
+              else if (typeof(p.object) === 'string') {
+                p.object[process._key] = parseInt(p.object[process.key], 10);
+              }
+              else {
+                p.object[process._key] = 0;
+              }
+            };
+            break;
+          case 'bool':
+            process.func = function (str) {
+              if (typeof(p.object) === 'boolean') {
+                p.object[process._key] = p.object[process.key];
+              }
+              else if (p.object === 'yes') {
+                p.object[process._key] = true;
+              }
+              else {
+                p.object[process._key] = false;
+              }
+            };
+            break;  
+        }
+      }
+
+      // if (typeof(process.func) !== 'function') {
+      //   console.warn('Fermata.Render.Call: No function defined for process', process);
+      //   continue;
+      // }
 
       // 0 to n
       if (process.type === this.FuncTypes.$0n) {
@@ -81,7 +127,6 @@ var Fermata = Fermata || {};
   {
     if (Object.prototype.toString.call(child) !== '[object Array]') {
       _arguments.unshift(child);
-      // console.log('callProcessMultiple', _arguments);
       func.apply(_this, _arguments);
     }
     else {
@@ -92,11 +137,8 @@ var Fermata = Fermata || {};
           _argumentsOne.push(_arguments[j]);
         }
 
-        // console.log('_argumentsOne', _argumentsOne);
-
         func.apply(_this, _argumentsOne);
       }
     }
-  };
-  
+  };  
 }).call(this);
