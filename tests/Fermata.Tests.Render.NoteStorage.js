@@ -123,7 +123,7 @@ if (typeof require !== 'undefined') {
         noteStorage.store(expected, voice, staff);
         
         // then
-        var actual = noteStorage.getNotes(voice, staff);
+        var actual = noteStorage.getNotes(voice, staff)[0];
         assert.strictEqual(actual, expected, "bad note returned");
       });
     });
