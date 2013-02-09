@@ -8,9 +8,7 @@ var Fermata = Fermata || {};
   var PitchRest = Fermata.Render.PitchRest;
   
   Fermata.Render.NoteConverter = function ()
-  {
-    
-  };
+  {};
   
   var NoteConverter = Fermata.Render.NoteConverter;
   
@@ -24,11 +22,8 @@ var Fermata = Fermata || {};
   {
     if (typeof(attributes) !== "undefined") {
       this.fillAttributes(attributes);
-      // console.log("rien a declarer")
     }
-    else
-    {
-      // console.log("devrait etre plein");
+    else {
       this.fillAttributesDefault();
     }
 
