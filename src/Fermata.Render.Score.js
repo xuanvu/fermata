@@ -41,7 +41,7 @@ var Fermata = Fermata || {};
   };
 
   Fermata.Render.prototype.renderMeasureProcess = [
-    { key: "attributes", type: _render.FuncTypes.$0n, func: _render.renderAttributes },
+    { key: "attributes", type: _render.FuncTypes.$1n, func: _render.renderAttributes },
     { key: "note", type: _render.FuncTypes.$01, func: _render.renderNotes },
     { key: "backup", type: _render.FuncTypes.$0n, func: _render.Renderbackup },
     { key: "forward", type: _render.FuncTypes.$0n, func: null },

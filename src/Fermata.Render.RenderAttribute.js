@@ -235,8 +235,12 @@ var Fermata = Fermata || {};
   Fermata.Render.prototype.renderAttributes = function (attributes)
   {
     this.cur.measure.$fermata.attributes = Fermata.Utils.Clone(Fermata.Render.prototype.renderAttributesDefault);
-    this.exploreSubNodes({ object: attributes, processes: Fermata.Render.prototype.renderAttributesProcess,
-                           ctx: this }, this.cur.measure.$fermata.attributes);
+    // TODO: use last measures attributes
+
+    if (typeof(attributes) !== 'undefined') {
+      this.exploreSubNodes({ object: attributes, processes: Fermata.Render.prototype.renderAttributesProcess,
+                             ctx: this }, this.cur.measure.$fermata.attributes);
+    }
   };
 
 }).call(this);
