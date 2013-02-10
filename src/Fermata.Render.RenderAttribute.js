@@ -38,8 +38,9 @@ var Fermata = Fermata || {};
       attribut.partSymbol.bottomStaff = node["bottom-staff"];
   };
 
-  Fermata.Render.prototype.AttributesClef = function (node, attribut)
+  Fermata.Render.prototype.AttributesClef = function (node, i, attribut)
   {
+    console.log('AttributesClef', node, attribut);
     // TOdo beaucoup d'Entities ici !
     var _this = this;
     var clef = { 
@@ -73,6 +74,7 @@ var Fermata = Fermata || {};
     ];
 
     this.exploreSubNodes({ object: node, processes: process });
+    console.log(attribut);
     attribut.clef.push(clef);
   };
 
@@ -91,7 +93,7 @@ var Fermata = Fermata || {};
     attribut.sign = node;
   };
 
-  Fermata.Render.prototype.AttributesTime = function (node, attribut)
+  Fermata.Render.prototype.AttributesTime = function (node, i, attribut)
   {
     //To do géré la multidefinition de beat
     var _this = this;
@@ -130,10 +132,12 @@ var Fermata = Fermata || {};
     attribut.stave = stave;
   };
 
-  Fermata.Render.prototype.AttributesKeys = function (node, attribut)
+  Fermata.Render.prototype.AttributesKeys = function (node, i, attribut)
   {
     var _this = this,
         process;
+
+    console.log('AttributesKeys', attribut);
 
     if (typeof(node.fifths) !== "undefined")
     {
@@ -244,6 +248,7 @@ var Fermata = Fermata || {};
     }
 
     if (typeof(attributes) !== 'undefined') {
+      console.log('renderAttributes subs', this.cur.measure.$fermata.attributes);
       this.exploreSubNodes({ object: attributes, processes: Fermata.Render.prototype.renderAttributesProcess,
                              ctx: this }, this.cur.measure.$fermata.attributes);
     }
