@@ -42,7 +42,7 @@
   {
     this.beatType = attributes.beat.type;
     this.beats = attributes.beat.beats;
-    this.divisions = attributes.division;
+    this.divisions = attributes.divisions;
   };
   
   NoteConverter.prototype.fillAttributesDefault = function ()

@@ -28,6 +28,9 @@
       p.ctx = this;
     }
 
+    if (p.out === undefined) {
+      p.out = p.object;
+    }
 
     // Execute processes
     for (var i = 0 ; i < p.processes.length ; i++)
@@ -54,31 +57,31 @@
 
         switch (process.dataType) {
         case 'string':
-          process.func = function (str) { p.object[process._key] = typeof(p.object[process.key]) === 'string' ? p.object[process.key] : ''; };
+          process.func = function (str) { p.out[process._key] = typeof(p.object[process.key]) === 'string' ? p.object[process.key] : ''; };
           break;
         case 'int':
           process.func = function (str) {
-            if (typeof(p.object) === 'number') {
-              p.object[process._key] = p.object[process.key];
+            if (typeof(p.object[process.key]) === 'number') {
+              p.out[process._key] = p.object[process.key];
             }
-            else if (typeof(p.object) === 'string') {
-              p.object[process._key] = parseInt(p.object[process.key], 10);
+            else if (typeof(p.object[process.key]) === 'string') {
+              p.out[process._key] = parseInt(p.object[process.key], 10);
             }
             else {
-              p.object[process._key] = 0;
+              p.out[process._key] = 0;
             }
           };
           break;
         case 'bool':
           process.func = function (str) {
             if (typeof(p.object) === 'boolean') {
-              p.object[process._key] = p.object[process.key];
+              p.out[process._key] = p.object[process.key];
             }
             else if (p.object === 'yes') {
-              p.object[process._key] = true;
+              p.out[process._key] = true;
             }
             else {
-              p.object[process._key] = false;
+              p.out[process._key] = false;
             }
           };
           break;

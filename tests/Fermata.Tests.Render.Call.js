@@ -15,6 +15,7 @@ if (typeof require !== 'undefined') {
   Fermata.Tests = require('./Fermata.Tests.Utils.js').Tests;
 }
 
+// Missing: helpers, out
 describe('Fermata.Render.Call', function () {
   var helloWorld, fermataRender, _render = Fermata.Render.prototype;
   before(function (done) {

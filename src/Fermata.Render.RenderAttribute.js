@@ -2,7 +2,7 @@
   "use strict";
 
   Fermata.Render.prototype.renderAttributesDefault = {
-    division: null,
+    divisions: null,
     instrument: null,
     keys:  {
       cancel: null,
@@ -129,6 +129,11 @@
     attribut.beat.type = node;
   };
 
+  Fermata.Render.prototype.AttributesStave = function (stave, attribut)
+  {
+    attribut.stave = stave;
+  };
+
   Fermata.Render.prototype.AttributesKeys = function (node, i, attribut)
   {
     var _this = this,
@@ -202,6 +207,10 @@
     attribut.keys.mode = node;
   };
 
+  Fermata.Render.prototype.AttributeInstrument = function (node, attribut)
+  {
+    attribut.instrument = node;
+  };
 
   Fermata.Render.prototype.AttributeKeyFifth = function (node, attribut)
   {
@@ -211,12 +220,12 @@
 
   var _render = Fermata.Render.prototype;
   Fermata.Render.prototype.renderAttributesProcess = [
-    { key: 'divisions', type: _render.FuncTypes.$01, dataType: 'string' },
+    { key: 'divisions', type: _render.FuncTypes.$01, dataType: 'int' },
     { key: 'key', type: _render.FuncTypes.$0n, func: _render.AttributesKeys },
     { key: 'time', type: _render.FuncTypes.$0n, func: _render.AttributesTime },
-    { key: 'staves', type: _render.FuncTypes.$01, dataType: 'string' },
+    { key: 'staves', type: _render.FuncTypes.$01, func: _render.AttributesStave },
     { key: 'part-symbol', type: _render.FuncTypes.$01, func: _render.AttributesSymbol },
-    { key: 'instruments', type: _render.FuncTypes.$01, dataType: 'string' },
+    { key: 'instruments', type: _render.FuncTypes.$01, func: _render.AttributeInstrument },
     { key: 'clef', type: _render.FuncTypes.$0n, func: _render.AttributesClef },
     { key: 'staff-details', type: _render.FuncTypes.$0n, func: null },
     { key: 'transpose', type: _render.FuncTypes.$0n, func: null },
@@ -238,7 +247,8 @@
     if (typeof(attributes) !== 'undefined') {
       // console.log('renderAttributes subs', this.cur.measure.$fermata.attributes);
       this.exploreSubNodes({ object: attributes, processes: Fermata.Render.prototype.renderAttributesProcess,
-                             ctx: this }, this.cur.measure.$fermata.attributes);
+                             ctx: this, out: this.cur.measure.$fermata.attributes }, this.cur.measure.$fermata.attributes);
+      // console.log(this.cur.measure.$fermata.attributes);
     }
   };
 
