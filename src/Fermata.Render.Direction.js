@@ -1,5 +1,3 @@
-var Fermata = Fermata || {};
-
 (function () {
   "use strict";
 
@@ -7,10 +5,13 @@ var Fermata = Fermata || {};
   {
     this.exploreSubNodes({ object: direction, processes: this.renderDirectionProcess, ctx: this });
     this.renderDirectionAttribute(direction);
-    if (this.renderDirectionData[this.renderDirectionData.length - 1].type !== null &&this.renderDirectionData[this.renderDirectionData.length - 1].noteAfter === null)
+    if (this.renderDirectionData[this.renderDirectionData.length - 1].type !== null &&
+        this.renderDirectionData[this.renderDirectionData.length - 1].noteAfter === null) {
       this.renderDirectionData[this.renderDirectionData.length - 1].noteAfter = direction.noteAfter;
-    else
+    }
+    else {
       this.renderDirectionData[this.renderDirectionData.length - 1].noteBefore = direction.noteBefore;
+    }
   };
 
   Fermata.Render.prototype.renderDirectionType = function (node) {
@@ -47,7 +48,7 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.renderDirectionStaff = function (staff)
   {
-    this.renderDirectionData[this.renderDirectionData.length - 1].staff = staff ;
+    this.renderDirectionData[this.renderDirectionData.length - 1].staff = staff;
   };
 
   Fermata.Render.prototype.renderDirectionData = [];
@@ -167,7 +168,7 @@ var Fermata = Fermata || {};
   ];
 
   Fermata.Render.prototype.renderDirectionProcess = [
-    { 
+    {
       key: "direction-type",
       type: Fermata.Render.prototype.FuncTypes.$1n,
       func: Fermata.Render.prototype.renderDirectionType

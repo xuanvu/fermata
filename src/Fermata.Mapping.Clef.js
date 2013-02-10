@@ -1,14 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-var Fermata =          Fermata || {};
-Fermata.Mapping =      Fermata.Mapping || {};
-Fermata.Mapping.Clef = {};
-
 (function () {
   "use strict";
+
+  Fermata.Mapping = Fermata.Mapping || {};
+  Fermata.Mapping.Clef = {};
 
   var musicXMLToVexflow = {
     "G": "treble",

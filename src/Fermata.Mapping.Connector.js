@@ -1,9 +1,8 @@
-var Fermata =          Fermata || {};
-Fermata.Mapping =      Fermata.Mapping || {};
-Fermata.Mapping.Connector = {};
-
 (function () {
   "use strict";
+
+  Fermata.Mapping = Fermata.Mapping || {};
+  Fermata.Mapping.Connector = {};
 
   Fermata.Mapping.Connector.MusicXmlToVexflow = {
     "single" : 1,

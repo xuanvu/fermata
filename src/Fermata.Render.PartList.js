@@ -3,8 +3,6 @@ Organisation of the score (multi-part based, or not, on many staff, etc...)
 It gonna fill a structure of data, used by the render-score
 */
 
-var Fermata = Fermata || {};
-
 (function () {
   "use strict";
 
@@ -32,20 +30,20 @@ var Fermata = Fermata || {};
 
     // this.PartListData[this.PartListData.length] = Fermata.Utils.Clone(this.scorePartData);
     // for (var prop in this.scorePartData) {
-    //   if (this.scorePartData.hasOwnProperty(prop) && typeof(this.scorePartData[prop]) !== 'object') { 
+    //   if (this.scorePartData.hasOwnProperty(prop) && typeof(this.scorePartData[prop]) !== 'object') {
     //     this.scorePartData[prop] = null;
     //   }
     // }
   };
 
-   Fermata.Render.prototype.renderPartGroup = function (group) {
+  Fermata.Render.prototype.renderPartGroup = function (group) {
     var val;
     if (group.type === 'start' && (val = this.isPartGroupExist(group)) > 0) {
       this.exploreSubNodes({ object: group, processes: this.renderPartGroupProcess, ctx: this });
       // this.scorePartData[val].partGroup.bairline = this.GroupPartData.barline;
       // this.scorePartData[val].partGroup.symbol = this.GroupPartData.symbol;
-      // for (var prop in this.GroupPartData) { 
-      //   if (this.GroupPartData.hasOwnProperty(prop) && typeof(this.GroupPartData[prop]) !== 'object') { 
+      // for (var prop in this.GroupPartData) {
+      //   if (this.GroupPartData.hasOwnProperty(prop) && typeof(this.GroupPartData[prop]) !== 'object') {
       //     this.GroupPartData[prop] = null;
       //   }
       // }

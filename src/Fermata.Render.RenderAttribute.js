@@ -1,5 +1,3 @@
-var Fermata = Fermata || {};
-
 (function () {
   "use strict";
 
@@ -27,23 +25,27 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.AttributesSymbol = function (node, attribut)
   {
-    if (typeof(node.content) === 'undefined' && typeof(node) === 'string')
+    if (typeof(node.content) === 'undefined' && typeof(node) === 'string') {
       attribut.partSymbol.symbol = node;
-    else if (typeof(node.content) === 'string')
+    }
+    else if (typeof(node.content) === 'string') {
       attribut.partSymbol.symbol = node.content;
+    }
 
-    if (node["top-staff"])
+    if (node["top-staff"]) {
       attribut.partSymbol.topStaff = node["top-staff"];
-    if (node["bottom-staff"])
+    }
+    if (node["bottom-staff"]) {
       attribut.partSymbol.bottomStaff = node["bottom-staff"];
+    }
   };
 
   Fermata.Render.prototype.AttributesClef = function (node, i, attribut)
   {
-    console.log('AttributesClef', node, attribut);
+    // console.log('AttributesClef', node, attribut);
     // TOdo beaucoup d'Entities ici !
     var _this = this;
-    var clef = { 
+    var clef = {
         sign: null,
         line: null,
         change: 0
@@ -74,7 +76,7 @@ var Fermata = Fermata || {};
     ];
 
     this.exploreSubNodes({ object: node, processes: process });
-    console.log(attribut);
+    // console.log(attribut);
     attribut.clef.push(clef);
   };
 
@@ -137,7 +139,7 @@ var Fermata = Fermata || {};
     var _this = this,
         process;
 
-    console.log('AttributesKeys', attribut);
+    // console.log('AttributesKeys', attribut);
 
     if (typeof(node.fifths) !== "undefined")
     {
@@ -248,7 +250,7 @@ var Fermata = Fermata || {};
     }
 
     if (typeof(attributes) !== 'undefined') {
-      console.log('renderAttributes subs', this.cur.measure.$fermata.attributes);
+      // console.log('renderAttributes subs', this.cur.measure.$fermata.attributes);
       this.exploreSubNodes({ object: attributes, processes: Fermata.Render.prototype.renderAttributesProcess,
                              ctx: this }, this.cur.measure.$fermata.attributes);
     }

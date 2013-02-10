@@ -1,16 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-var Fermata = Fermata || {};
-
 (function () {
   "use strict";
-  
-  //includes
-  var SoundType = Fermata.Render.SoundType;
-  
+
   Fermata.Render.PitchPitched = function (noteData)
   {
     this.data = noteData;
@@ -20,7 +10,7 @@ var Fermata = Fermata || {};
   
   PitchPitched.prototype.getType = function ()
   {
-    return SoundType.PITCH;
+    return Fermata.Render.SoundType.PITCH;
   };
   
   PitchPitched.prototype.getStep = function ()

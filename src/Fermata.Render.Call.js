@@ -1,15 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-var Fermata = Fermata || {};
-
 (function () {
   "use strict";
 
-  Fermata.Render.prototype.FuncTypes =
-  {
+  Fermata.Render.prototype.FuncTypes = {
     $0n: '*',
     $1n: '+',
     $01: '?',
@@ -53,7 +45,7 @@ var Fermata = Fermata || {};
       if (typeof(process.dataType) !== 'undefined') {
         if (typeof(process._key) === 'undefined') {
           if (typeof(process.dataKey) === 'undefined' || process.dataKey === 'CamelCase') {
-            process._key = process.key.replace(/-([a-z])/g, function (c) { return c[1].toUpperCase() });
+            process._key = process.key.replace(/-([a-z])/g, function (c) { return c[1].toUpperCase(); });
           }
           else {
             process._key = process.key;
@@ -61,35 +53,35 @@ var Fermata = Fermata || {};
         }
 
         switch (process.dataType) {
-          case 'string':
-            process.func = function (str) { p.object[process._key] = typeof(p.object[process.key]) === 'string' ? p.object[process.key] : ''; };
-            break;
-          case 'int':
-            process.func = function (str) {
-              if (typeof(p.object) === 'number') {
-                p.object[process._key] = p.object[process.key];
-              }
-              else if (typeof(p.object) === 'string') {
-                p.object[process._key] = parseInt(p.object[process.key], 10);
-              }
-              else {
-                p.object[process._key] = 0;
-              }
-            };
-            break;
-          case 'bool':
-            process.func = function (str) {
-              if (typeof(p.object) === 'boolean') {
-                p.object[process._key] = p.object[process.key];
-              }
-              else if (p.object === 'yes') {
-                p.object[process._key] = true;
-              }
-              else {
-                p.object[process._key] = false;
-              }
-            };
-            break;  
+        case 'string':
+          process.func = function (str) { p.object[process._key] = typeof(p.object[process.key]) === 'string' ? p.object[process.key] : ''; };
+          break;
+        case 'int':
+          process.func = function (str) {
+            if (typeof(p.object) === 'number') {
+              p.object[process._key] = p.object[process.key];
+            }
+            else if (typeof(p.object) === 'string') {
+              p.object[process._key] = parseInt(p.object[process.key], 10);
+            }
+            else {
+              p.object[process._key] = 0;
+            }
+          };
+          break;
+        case 'bool':
+          process.func = function (str) {
+            if (typeof(p.object) === 'boolean') {
+              p.object[process._key] = p.object[process.key];
+            }
+            else if (p.object === 'yes') {
+              p.object[process._key] = true;
+            }
+            else {
+              p.object[process._key] = false;
+            }
+          };
+          break;
         }
       }
 
@@ -139,5 +131,5 @@ var Fermata = Fermata || {};
         func.apply(_this, _argumentsOne);
       }
     }
-  };  
+  };
 }).call(this);

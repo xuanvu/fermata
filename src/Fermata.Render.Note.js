@@ -1,10 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-var Fermata = Fermata || {};
-
 (function () {
   "use strict";
 
@@ -18,37 +11,31 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.extractNoteVoice = function (note)
   {
-    if (typeof(note[0].voice) !== "undefined")
-    {
+    if (typeof(note[0].voice) !== "undefined") {
       return note[0].voice;
     }
-    else
-    {
-      return "1";
+    else {
+      return 1;
     }
   };
 
   Fermata.Render.prototype.extractNoteStaff = function (note)
   {
-    if (typeof(note[0].staff) !== "undefined")
-    {
+    if (typeof(note[0].staff) !== "undefined") {
       return note[0].staff;
     }
-    else
-    {
-      return "1";
+    else {
+      return 1;
     }
   };
   
   Fermata.Render.prototype.recordNote = function (vexNote, voice, staff)
   {
-    if (typeof(this.cur.measure.$fermata.vexNotes[staff]) === "undefined")
-    {
+    if (typeof(this.cur.measure.$fermata.vexNotes[staff]) === "undefined") {
       this.cur.measure.$fermata.vexNotes[staff] = [];
     }
 
-    if (typeof(this.cur.measure.$fermata.vexNotes[staff][voice]) === 'undefined')
-    { 
+    if (typeof(this.cur.measure.$fermata.vexNotes[staff][voice]) === 'undefined') {
       this.cur.measure.$fermata.vexNotes[staff][voice] = [];
     }
     var noteArray = this.cur.measure.$fermata.vexNotes[staff][voice];
@@ -114,23 +101,23 @@ var Fermata = Fermata || {};
   {
     var _this = this;
     var processes = [
-    {
-      key: "pitch",
-      type: this.FuncTypes.$01,
-      func: function (arg) {
-        _this.renderPitch(arg);
+      {
+        key: "pitch",
+        type: this.FuncTypes.$01,
+        func: function (arg) {
+          _this.renderPitch(arg);
+        }
+      },
+      {
+        key: "unpitched",
+        type: this.FuncTypes.$01,
+        func: null//TODO: implement the function
+      },
+      {
+        key: "rest",
+        type: this.FuncTypes.$01,
+        func: null//TODO: implement the function
       }
-    },
-    {
-      key: "unpitched",
-      type: this.FuncTypes.$01,
-      func: null//TODO: implement the function
-    },
-    {
-      key: "rest",
-      type: this.FuncTypes.$01,
-      func: null//TODO: implement the function
-    }
     ];
  
     this.exploreSubNodes({ object: fullNote, processes: processes });
@@ -146,13 +133,13 @@ var Fermata = Fermata || {};
   {
     var _this = this;
     var processes = [
-    {
-      key: "type",
-      type: this.FuncTypes.$01,
-      func: function (arg) {
-        _this.renderType(arg);
-      }//TODO: add the others elements
-    }
+      {
+        key: "type",
+        type: this.FuncTypes.$01,
+        func: function (arg) {
+          _this.renderType(arg);
+        }//TODO: add the others elements
+      }
     ];
   
     this.exploreSubNodes({ object: note, processes: processes });
@@ -235,11 +222,16 @@ var Fermata = Fermata || {};
     var pos = 0;
     while (true) {
       for (var first in this.cur.measure.$fermata.vexNotes) {
-        for (var second in this.cur.measure.$fermata.vexNotes[first]) {
-          for (var third = 0; third < this.cur.measure.$fermata.vexNotes[first][second].length ; third++) {
-            if (pos === number)
-              return this.cur.measure.$fermata.vexNotes[first][second][third];
-            pos++;
+        if (this.cur.measure.$fermata.vexNotes.hasOwnProperty(first)) {
+          for (var second in this.cur.measure.$fermata.vexNotes[first]) {
+            if (this.cur.measure.$fermata.vexNotes[first].hasOwnProperty(second)) {
+              for (var third = 0; third < this.cur.measure.$fermata.vexNotes[first][second].length ; third++) {
+                if (pos === number) {
+                  return this.cur.measure.$fermata.vexNotes[first][second][third];
+                }
+                pos++;
+              }
+            }
           }
         }
       }

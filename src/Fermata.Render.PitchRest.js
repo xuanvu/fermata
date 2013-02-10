@@ -1,16 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-var Fermata = Fermata || {};
-
 (function () {
   "use strict";
-  
-  //includes
-  var SoundType = Fermata.Render.SoundType;
-  
+
   //TODO better constructor (check args)
   Fermata.Render.PitchRest = function (noteData, clef)
   {
@@ -32,7 +22,7 @@ var Fermata = Fermata || {};
   
   PitchRest.prototype.getType = function ()
   {
-    return SoundType.REST;
+    return Fermata.Render.SoundType.REST;
   };
   
   PitchRest.prototype.getStep = function ()

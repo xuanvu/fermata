@@ -1,6 +1,4 @@
-var Fermata = Fermata || {};
-
-(function(){
+(function () {
   "use strict";
   
   Fermata.Render.NoteStorage = function ()
@@ -37,7 +35,7 @@ var Fermata = Fermata || {};
     }
     if (!this.checkVoice(staff, voice))
     {
-      throw new Error("there is no note stored for the voice " + voice.toString() + 
+      throw new Error("there is no note stored for the voice " + voice.toString() +
       " of the staff " + staff.toString());
     }
     return this.data[staff][voice];

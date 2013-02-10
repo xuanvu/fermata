@@ -1,6 +1,4 @@
-var Fermata = Fermata || {};
-
-(function(){
+(function () {
   "use strict";
   
   Fermata.Render.TieRenderer = function ()
@@ -82,17 +80,17 @@ var Fermata = Fermata || {};
 
   TieRenderer.prototype.drawTie = function ()
   {
-      var previousVexNote = this.tieNoteStack[this.voice];
-      var tie = new Vex.Flow.StaveTie({
-        first_note: previousVexNote,
-        last_note: this.vexNote,
-        first_indices: [0],
-        last_indices: [0]
-      });
-  
-      tie.setContext(this.ctx);
-      //TODO: store the tie
-      tie.draw();    
+    var previousVexNote = this.tieNoteStack[this.voice];
+    var tie = new Vex.Flow.StaveTie({
+      first_note: previousVexNote,
+      last_note: this.vexNote,
+      first_indices: [0],
+      last_indices: [0]
+    });
+
+    tie.setContext(this.ctx);
+    //TODO: store the tie
+    tie.draw();
   };
 
   TieRenderer.prototype.saveTieNote = function ()

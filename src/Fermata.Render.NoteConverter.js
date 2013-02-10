@@ -1,6 +1,6 @@
-var Fermata = Fermata || {};
+(function () {
+  "use strict";
 
-(function(){
   //includes
   var NoteType = Fermata.Render.NoteType;
   var SoundType = Fermata.Render.SoundType;
@@ -58,7 +58,7 @@ var Fermata = Fermata || {};
     var dataStep = dataPitch.getStep();
     
     //TODO: extract on a mapping function instead of use toLowerCase
-    var vexPitch = dataStep.toLowerCase() + "/" + dataOctave; 
+    var vexPitch = dataStep.toLowerCase() + '/' + dataOctave;
     
     return vexPitch;
   };
@@ -106,7 +106,7 @@ var Fermata = Fermata || {};
     }
     
     var vexNote = new Vex.Flow.StaveNote({
-      keys: vexPitches, 
+      keys: vexPitches,
       duration: vexDuration,
       stem_direction: stem,
       auto_stem : auto_stem,
@@ -128,7 +128,7 @@ var Fermata = Fermata || {};
     }
     else {
       return null;
-    } 
+    }
   };
   
 }).call(this);

@@ -1,14 +1,11 @@
-var Fermata = Fermata || {};
-
 (function () {
   "use strict";
 
-  Fermata.Render.prototype.PedalType =
-  {
-    0nT: "start",
-    STOP: "stop",
-    CONTINUE: "continue",
-    CHANGE: "change"
+  Fermata.Render.prototype.PedalType = {
+    '0nT': "start",
+    'STOP': "stop",
+    'CONTINUE': "continue",
+    'CHANGE': "change"
   };
 
   Fermata.Render.prototype.renderPedal = function (pedal)

@@ -1,5 +1,3 @@
-var Fermata = Fermata || {};
-
 (function () {
   "use strict";
 
