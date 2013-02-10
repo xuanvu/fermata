@@ -1,4 +1,5 @@
-all:	hint coverage test
+#all:	hint coverage test
+all:	hint test
 
 hint:
 	node_modules/.bin/jshint src
