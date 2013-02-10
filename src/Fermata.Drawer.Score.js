@@ -40,21 +40,25 @@ var Fermata = Fermata || {};
   Fermata.Drawer.prototype.drawMeasure = function (measure, measureIdx, partIdx)
   {
     // TODO: Need to store it ?
+    // Use for (;;;)
     var index = 0;
     for (var pos in this.staves) {
-      if (pos == partIdx)
-        break;
-      index += this.staves[pos].length;
+      if (this.staves.hasOwnProperty(pos)) {
+        if (pos === partIdx) {
+          break;
+        }
+        index += this.staves[pos].length;
+      }
     }
-
 
     // TODO widths of measures
     for (var i = 0; i < measure.$fermata.attributes.stave; i++)
     {
       if (this.staves[partIdx][i] === undefined) {
         this.staves[partIdx][i] = [];
-        if (i > 0)
+        if (i > 0) {
           index++;
+        }
       }
       if (this.staves[partIdx][i].length === 0 ||  this.staves[partIdx][i][measureIdx] === undefined && measureIdx >= this.staves[partIdx][i].length) {
         if (measureIdx === 0) {
@@ -97,7 +101,7 @@ var Fermata = Fermata || {};
     // Draw connector if needed
     if (measure.$fermata.attributes.stave > 1)
     {
-      var connector = new Vex.Flow.StaveConnector(this.staves[partIdx][measure.$fermata.attributes.partSymbol.topStaff - 1][0], this.staves[partIdx][measure.$fermata.attributes.partSymbol.bottomStaff - 1][0]); 
+      var connector = new Vex.Flow.StaveConnector(this.staves[partIdx][measure.$fermata.attributes.partSymbol.topStaff - 1][0], this.staves[partIdx][measure.$fermata.attributes.partSymbol.bottomStaff - 1][0]);
       connector.setType(Fermata.Mapping.Connector.getVexflow(measure.$fermata.attributes.partSymbol.symbol));
       connector.setContext(this.ctx);
       connector.draw();
@@ -105,17 +109,20 @@ var Fermata = Fermata || {};
 
     // Then Add note to their voice, format them and draw it
     for (var staffIdx = 1 ; staffIdx < measure.$fermata.vexNotes.length ; staffIdx++) {
+      // TODO: Why start by 1 ?
       for (var voiceIdx in measure.$fermata.vexNotes[staffIdx]) {
-        var voice = new Vex.Flow.Voice({
-          num_beats: measure.$fermata.attributes.beat.beats,
-          beat_value: measure.$fermata.attributes.beat.type,
-          resolution: Vex.Flow.RESOLUTION
-        });
-        voice.addTickables(measure.$fermata.vexNotes[staffIdx][voiceIdx]);
-        // Add notes to voice
-        // Format and justify the notes to 500 pixels
-        var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], measure.note.length * 50);
-        voice.draw(this.ctx, this.staves[partIdx][staffIdx - 1][measureIdx]);
+        if (measure.$fermata.vexNotes[staffIdx].hasOwnProperty(voiceIdx)) {
+          var voice = new Vex.Flow.Voice({
+            num_beats: measure.$fermata.attributes.beat.beats,
+            beat_value: measure.$fermata.attributes.beat.type,
+            resolution: Vex.Flow.RESOLUTION
+          });
+          voice.addTickables(measure.$fermata.vexNotes[staffIdx][voiceIdx]);
+          // Add notes to voice
+          // Format and justify the notes to 500 pixels
+          var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], measure.note.length * 50);
+          voice.draw(this.ctx, this.staves[partIdx][staffIdx - 1][measureIdx]);
+        }
       }
     }
     // TODO: clean & mv renderDirectionData
