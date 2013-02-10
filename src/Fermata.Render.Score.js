@@ -34,7 +34,7 @@ var Fermata = Fermata || {};
       this.renderMeasure(part.measure[i], i, partIdx);
     }
   };
-
+  
   Fermata.Render.prototype.renderPrint = function (print)
   {
     return;
@@ -124,7 +124,7 @@ var Fermata = Fermata || {};
     // // Draw connector if needed
     // if (this.Attributesdata.stave > 1)
     // {
-    //   var connector = new Vex.Flow.StaveConnector(this.staves[partId][this.Attributesdata.partSymbol.topStaff - 1][0], this.staves[partId][this.Attributesdata.partSymbol.bottomStaff - 1][0]); 
+    //   var connector = new Vex.Flow.StaveConnector(this.staves[partId][this.Attributesdata.partSymbol.topStaff - 1][0], this.staves[partId][this.Attributesdata.partSymbol.bottomStaff - 1][0]);
     //   connector.setType(Fermata.Mapping.Connector.getVexflow(this.Attributesdata.partSymbol.symbol));
     //   connector.setContext(this.ctx);
     //   connector.draw();
@@ -162,7 +162,7 @@ var Fermata = Fermata || {};
     delete this.cur;
   };
 
-  Fermata.Render.prototype.renderMeasureAttributes = function(measure)
+  Fermata.Render.prototype.renderMeasureAttributes = function (measure)
   {
     //TODO : do the rest
     var number = measure.$number;
@@ -176,20 +176,20 @@ var Fermata = Fermata || {};
       if (measure.implicit === "yes") {
         implicit = true;
       }
-      else if (measure.implicit !== "no") {
+      // else if (measure.implicit !== "no") {
       //invalid value
       //TODO: should we raise an exception ?
-      }
+      // }
     }
 
     if (typeof(measure["non-controlling"]) !== "undefined") {
       if (measure["non-controlling"] === "yes") {
         nonControlling = true;
       }
-      else if (measure["non-controlling"] !== "no") {
+      // else if (measure["non-controlling"] !== "no") {
       //invalid value
       //TODO: should we raise an exception ?
-      }
+      // }
     }
 
     if (typeof(measure.width) !== "undefined") {
