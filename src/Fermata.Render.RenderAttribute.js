@@ -15,7 +15,7 @@
       interchangeable: null
     },
     clef: [],
-    stave: 1,
+    staves: 1,
     partSymbol: {
       topStaff : 1,
       bottomStaff : 2,
@@ -129,11 +129,6 @@
     attribut.beat.type = node;
   };
 
-  Fermata.Render.prototype.AttributesStave = function (stave, attribut)
-  {
-    attribut.stave = stave;
-  };
-
   Fermata.Render.prototype.AttributesKeys = function (node, i, attribut)
   {
     var _this = this,
@@ -223,7 +218,7 @@
     { key: 'divisions', type: _render.FuncTypes.$01, dataType: 'int' },
     { key: 'key', type: _render.FuncTypes.$0n, func: _render.AttributesKeys },
     { key: 'time', type: _render.FuncTypes.$0n, func: _render.AttributesTime },
-    { key: 'staves', type: _render.FuncTypes.$01, func: _render.AttributesStave },
+    { key: 'staves', type: _render.FuncTypes.$01, dataType: 'int' },
     { key: 'part-symbol', type: _render.FuncTypes.$01, func: _render.AttributesSymbol },
     { key: 'instruments', type: _render.FuncTypes.$01, func: _render.AttributeInstrument },
     { key: 'clef', type: _render.FuncTypes.$0n, func: _render.AttributesClef },

@@ -50,7 +50,7 @@
     }
 
     // TODO widths of measures
-    for (var i = 0; i < measure.$fermata.attributes.stave; i++)
+    for (var i = 0; i < measure.$fermata.attributes.staves; i++)
     {
       if (this.staves[partIdx][i] === undefined) {
         this.staves[partIdx][i] = [];
@@ -87,7 +87,7 @@
       this.staves[partIdx][i][measureIdx].draw();
 
       // Draw line in case of sytem
-      if (measure.$fermata.attributes.stave > 1)
+      if (measure.$fermata.attributes.staves > 1)
       {
         var line = new Vex.Flow.StaveConnector(this.staves[partIdx][0][measureIdx], this.staves[partIdx][i][measureIdx]);
         line.setType(Vex.Flow.StaveConnector.type.SINGLE);
@@ -97,7 +97,7 @@
     }
 
     // Draw connector if needed
-    if (measure.$fermata.attributes.stave > 1)
+    if (measure.$fermata.attributes.staves > 1)
     {
       var connector = new Vex.Flow.StaveConnector(this.staves[partIdx][measure.$fermata.attributes.partSymbol.topStaff - 1][0], this.staves[partIdx][measure.$fermata.attributes.partSymbol.bottomStaff - 1][0]);
       connector.setType(Fermata.Mapping.Connector.getVexflow(measure.$fermata.attributes.partSymbol.symbol));
