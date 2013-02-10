@@ -19,8 +19,9 @@ var Fermata = Fermata || {};
 
   Fermata.Render.prototype.isPartGroupExist = function (number) {
     for (var i = 0; i < this.PartListData.length; i++) {
-      if (this.PartListData[i].partGroup.number === number)
+      if (this.PartListData[i].partGroup.number === number) {
         return i;
+      }
     }
     return -1;
   };
