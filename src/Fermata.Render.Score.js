@@ -11,7 +11,7 @@
 
   var _render = Fermata.Render.prototype;
   Fermata.Render.prototype.renderScoreHeaderProcess = [
-    { key: "attributes", type: _render.FuncTypes.$0n, func: _render.renderAttributes },
+    { key: "attributes", type: _render.FuncTypes.$0n, func: /*_render.renderAttributes*/ null }, // really ? hmmm... no.
     { key: "part-list", type: _render.FuncTypes.$1, func: _render.renderPartList },
     { key: "work", type: _render.FuncTypes.$01, func: _render.renderPartList },
     { key: "movement-number", type: _render.FuncTypes.$01, func: _render.renderHeaderMovNum },
