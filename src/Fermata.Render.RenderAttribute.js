@@ -28,7 +28,7 @@
   Fermata.Render.prototype.AttributesClefProcess = [
     { key: 'sign', type: _render.FuncTypes.$1, dataType: 'string' },
     { key: 'line', type: _render.FuncTypes.$01, dataType: 'int' },
-    { key: 'clef-octave-change', type: _render.FuncTypes.$01, dataType: 'int' }
+    { key: 'clef-octave-change', type: _render.FuncTypes.$01, dataType: 'int', dataKey: 'change'}
   ];
 
   Fermata.Render.prototype.AttributesClef = function (node, i, attribut)
