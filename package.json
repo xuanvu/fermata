@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "MusicXML engraving javascript library using vexflow",
   "dependencies": {
-    "jsdom": ">= 0.3.4"
+    "jsdom": ">= 0.3.4",
+    "canvas": ">= 1.0.0"
   },
   "devDependencies" : {
     "jshint": "latest",
