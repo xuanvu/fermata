@@ -104,16 +104,16 @@ var Fermata = Fermata || {};
           this.callProcessMultiple(p.object[process.key], p.ctx, process.func, _arguments);
         }
       }
+      // 1 to n
+      else if (process.type === this.FuncTypes.$1n) {
+        this.callProcessMultiple(p.object[process.key], p.ctx, process.func, _arguments);
+      }
       // 0 or 1
       else if (process.type === this.FuncTypes.$01) {
         if (typeof(p.object[process.key]) !== "undefined") {
           _arguments.unshift(p.object[process.key]);
           process.func.apply(p.ctx, _arguments);
         }
-      }
-      // 1 to n
-      else if (process.type === this.FuncTypes.$1n) {
-        this.callProcessMultiple(p.object[process.key], p.ctx, process.func, _arguments);
       }
       // 1
       else if (process.type === this.FuncTypes.$1) {
@@ -126,11 +126,10 @@ var Fermata = Fermata || {};
   Fermata.Render.prototype.callProcessMultiple = function (child, _this, func, _arguments)
   {
     if (Object.prototype.toString.call(child) !== '[object Array]') {
-      _arguments.unshift(child);
+      _arguments.unshift(child, 0);
       func.apply(_this, _arguments);
     }
     else {
-      _arguments.unshift(child);
       for (var i = 0 ; i < child.length ; i++) {
         var _argumentsOne = [child[i], i];
         for (var j = 0 ; j < _arguments.length ; j++) {
