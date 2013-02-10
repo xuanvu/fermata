@@ -4,16 +4,13 @@
   Fermata.Drawer.prototype.drawAll = function () {
     var i;
 
-    // TODO
-    // this.renderScoreHeader(this.data.getScorePartWise());
+    // Todo: precalcul in render
+    for (i = 0 ; i < this.parts.idx.length ; i++) {
+      this.container.height += 100;
+    }
 
-    // for (var i = 0; i < this.PartListData.length; i++) {
-    //   // this.staves[this.PartListData[i].id] = [];
-    //   this.container.height += 100;
-    // }
     for (i = 0 ; i < this.parts.idx.length ; i++) {
       this.staves[i] = [];
-      this.container.height += 100;
       this.drawPart(this.parts.idx[i], i);
     }
 
@@ -107,7 +104,6 @@
 
     // Then Add note to their voice, format them and draw it
     for (var staffIdx = 1 ; staffIdx < measure.$fermata.vexNotes.length ; staffIdx++) {
-      // TODO: Why start by 1 ?
       for (var voiceIdx in measure.$fermata.vexNotes[staffIdx]) {
         if (measure.$fermata.vexNotes[staffIdx].hasOwnProperty(voiceIdx)) {
           var voice = new Vex.Flow.Voice({
