@@ -112,7 +112,8 @@
     "maxerr"        : 500,      // Maximum errors before stopping.
     "predef"        : [         // Extra globals.
         "Vex",
-        "_$jscoverage"
+        "_$jscoverage",
+        "Fermata"
     ],
     "indent"        : 2         // Specify indentation spacing
 }
