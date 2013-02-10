@@ -1,9 +1,6 @@
 (function () {
   "use strict";
 
-  var SymbolSize = Fermata.Render.SymbolSize;
-  var NoteConverter = Fermata.Render.NoteConverter;
-
   Fermata.Render.prototype.renderNoteProcess = {};
   Fermata.Render.prototype.renderNoteProcess[Fermata.Render.NoteType.NORMAL] = Fermata.Render.prototype.renderNormalNote;
   Fermata.Render.prototype.renderNoteProcess[Fermata.Render.NoteType.CUE] = Fermata.Render.prototype.renderCueNote;
@@ -11,22 +8,12 @@
 
   Fermata.Render.prototype.extractNoteVoice = function (note)
   {
-    if (typeof(note[0].voice) !== "undefined") {
-      return note[0].voice;
-    }
-    else {
-      return 1;
-    }
+    return (typeof(note[0].voice) !== 'undefined') ? note[0].voice : 1;
   };
 
   Fermata.Render.prototype.extractNoteStaff = function (note)
   {
-    if (typeof(note[0].staff) !== "undefined") {
-      return note[0].staff;
-    }
-    else {
-      return 1;
-    }
+    return (typeof(note[0].staff) !== 'undefined') ? note[0].staff : 1;
   };
   
   Fermata.Render.prototype.recordNote = function (vexNote, voice, staff)
@@ -38,13 +25,13 @@
     if (typeof(this.cur.measure.$fermata.vexNotes[staff][voice]) === 'undefined') {
       this.cur.measure.$fermata.vexNotes[staff][voice] = [];
     }
-    var noteArray = this.cur.measure.$fermata.vexNotes[staff][voice];
-    noteArray.push(vexNote);
+
+    this.cur.measure.$fermata.vexNotes[staff][voice].push(vexNote);
   };
 
   Fermata.Render.prototype.isChordNote = function (note)
   {
-    return typeof(note.chord) !== "undefined";
+    return typeof(note.chord) !== 'undefined';
   };
 
   Fermata.Render.prototype.renderNotes = function (notes)
@@ -69,7 +56,7 @@
   {
     var staff = this.extractNoteStaff(note);
     var voice = this.extractNoteVoice(note);
-    var noteConverter = new NoteConverter();
+    var noteConverter = new Fermata.Render.NoteConverter();
     
     var vexNote = noteConverter.convert(note, this.cur.measure.$fermata.attributes);
 
@@ -97,6 +84,7 @@
     }
   };
   
+  // Unused ?
   Fermata.Render.prototype.renderFullNote = function (fullNote)
   {
     var _this = this;
@@ -202,17 +190,17 @@
     
   Fermata.Render.prototype.renderType = function (type)
   {
-    var size = SymbolSize.FULL;
+    var size = Fermata.Render.SymbolSize.FULL;
     
     if (typeof(type.size) !== "undefined")
     {
-      if (type.size === SymbolSize.CUE)
+      if (type.size === Fermata.Render.SymbolSize.CUE)
       {
-        size = SymbolSize.CUE;
+        size = Fermata.Render.SymbolSize.CUE;
       }
-      else if (type.size === SymbolSize.LARGE)
+      else if (type.size === Fermata.Render.SymbolSize.LARGE)
       {
-        size = SymbolSize.LARGE;
+        size = Fermata.Render.SymbolSize.LARGE;
       }
     }
   };
