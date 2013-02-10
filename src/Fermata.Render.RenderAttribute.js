@@ -129,11 +129,6 @@
     attribut.beat.type = node;
   };
 
-  Fermata.Render.prototype.AttributesStave = function (stave, attribut)
-  {
-    attribut.stave = stave;
-  };
-
   Fermata.Render.prototype.AttributesKeys = function (node, i, attribut)
   {
     var _this = this,
@@ -207,15 +202,6 @@
     attribut.keys.mode = node;
   };
 
-  Fermata.Render.prototype.Attributedivision = function (node, attribut)
-  {
-    attribut.division = node;
-  };
-
-  Fermata.Render.prototype.AttributeInstrument = function (node, attribut)
-  {
-    attribut.instrument = node;
-  };
 
   Fermata.Render.prototype.AttributeKeyFifth = function (node, attribut)
   {
@@ -225,12 +211,12 @@
 
   var _render = Fermata.Render.prototype;
   Fermata.Render.prototype.renderAttributesProcess = [
-    { key: 'divisions', type: _render.FuncTypes.$01, func: _render.Attributedivision },
+    { key: 'divisions', type: _render.FuncTypes.$01, dataType: 'string' },
     { key: 'key', type: _render.FuncTypes.$0n, func: _render.AttributesKeys },
     { key: 'time', type: _render.FuncTypes.$0n, func: _render.AttributesTime },
-    { key: 'staves', type: _render.FuncTypes.$01, func: _render.AttributesStave },
+    { key: 'staves', type: _render.FuncTypes.$01, dataType: 'string' },
     { key: 'part-symbol', type: _render.FuncTypes.$01, func: _render.AttributesSymbol },
-    { key: 'instruments', type: _render.FuncTypes.$01, func: _render.AttributeInstrument },
+    { key: 'instruments', type: _render.FuncTypes.$01, dataType: 'string' },
     { key: 'clef', type: _render.FuncTypes.$0n, func: _render.AttributesClef },
     { key: 'staff-details', type: _render.FuncTypes.$0n, func: null },
     { key: 'transpose', type: _render.FuncTypes.$0n, func: null },
