@@ -19,21 +19,10 @@ var Fermata = Fermata || {};
     return newObj;
   };
 
+  // Delete ?
   Fermata.Utils.FirstLast = function (obj)
   {
-    console.log(obj);
-    var info = {
-      first : null,
-      last : null
-    };
-    var index = 0;
-    for (var i in obj) {
-      if (index === 0)
-        info.first = i;
-      index++;
-    }
-    info.last = i;
-    return info;
+    return ({ first: 0, last: obj.length - 1 });
   };
 
 }).call(this);
