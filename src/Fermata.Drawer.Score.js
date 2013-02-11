@@ -80,6 +80,21 @@
       else {
         this.staves[partIdx][i][measureIdx].clef = clefName;
       }
+
+      if (measure.$fermata.barline !== undefined)
+      {
+        console.log(measure.$fermata.barline)
+        switch (measure.$fermata.barline.location) {
+          case 'right':
+            this.staves[partIdx][i][measureIdx].setEndBarType(Fermata.Mapping.Barline.getVexflow(measure.$fermata.barline.barStyle));
+            break;
+          case 'left':
+            this.staves[partIdx][i][measureIdx].setBegBarType(Fermata.Mapping.Barline.getVexflow(measure.$fermata.barline.barStyle));
+            break;
+          default:
+            break;
+        }
+      }
       this.staves[partIdx][i][measureIdx].setContext(this.ctx);
       this.staves[partIdx][i][measureIdx].draw();
 
