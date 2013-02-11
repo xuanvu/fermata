@@ -1,12 +1,14 @@
 (function () {
   "use strict";
 
+  Drawer.PART_HEIGHT = 100;
+
   Fermata.Drawer.prototype.drawAll = function () {
     var i;
 
     // Todo: precalcul in render
     for (i = 0 ; i < this.parts.idx.length ; i++) {
-      this.container.height += 100;
+      this.container.height += Drawer.PART_HEIGHT;
     }
 
     for (i = 0 ; i < this.parts.idx.length ; i++) {
