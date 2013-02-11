@@ -83,7 +83,6 @@
 
       if (measure.$fermata.barline !== undefined)
       {
-        console.log(measure.$fermata.barline)
         switch (measure.$fermata.barline.location) {
         case 'right':
           this.staves[partIdx][i][measureIdx].setEndBarType(Fermata.Mapping.Barline.getVexflow(measure.$fermata.barline.barStyle));
