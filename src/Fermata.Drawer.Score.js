@@ -116,7 +116,7 @@
     }
 
     // Draw connector if needed
-    if ( measureIdx === 0 && measure.$fermata.attributes.staves > 1)
+    if (measureIdx === 0 && measure.$fermata.attributes.staves > 1)
     {
       var connector = new Vex.Flow.StaveConnector(measure.$fermata.vexStaves[measure.$fermata.attributes.partSymbol.topStaff - 1], measure.$fermata.vexStaves[measure.$fermata.attributes.partSymbol.bottomStaff - 1]);
       connector.setType(Fermata.Mapping.Connector.getVexflow(measure.$fermata.attributes.partSymbol.symbol));

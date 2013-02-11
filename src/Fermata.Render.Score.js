@@ -70,11 +70,11 @@
     // console.log(measure.$fermata);
   };
 
-  Fermata.Render.prototype.renderMeasureWidth = function() {
+  Fermata.Render.prototype.renderMeasureWidth = function () {
     console.log(this.cur.measure);
   };
 
-  Fermata.Render.prototype.renderStaves = function(measure, measureIdx, partIdx) {
+  Fermata.Render.prototype.renderStaves = function (measure, measureIdx, partIdx) {
     var $fermata = measure.$fermata,
         $fermataLastMeasure = measureIdx === 0 ? null : this.cur.part.measure[measureIdx - 1].$fermata;
 
