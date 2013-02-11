@@ -7,9 +7,7 @@
     var i;
 
     // Todo: precalcul in render
-    for (i = 0 ; i < this.parts.idx.length ; i++) {
-      this.container.height += Drawer.PART_HEIGHT;
-    }
+    this.container.height += this.parts.idx.length * Drawer.PART_HEIGHT;
 
     for (i = 0 ; i < this.parts.idx.length ; i++) {
       this.staves[i] = [];
