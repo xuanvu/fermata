@@ -85,14 +85,14 @@
       {
         console.log(measure.$fermata.barline)
         switch (measure.$fermata.barline.location) {
-          case 'right':
-            this.staves[partIdx][i][measureIdx].setEndBarType(Fermata.Mapping.Barline.getVexflow(measure.$fermata.barline.barStyle));
-            break;
-          case 'left':
-            this.staves[partIdx][i][measureIdx].setBegBarType(Fermata.Mapping.Barline.getVexflow(measure.$fermata.barline.barStyle));
-            break;
-          default:
-            break;
+        case 'right':
+          this.staves[partIdx][i][measureIdx].setEndBarType(Fermata.Mapping.Barline.getVexflow(measure.$fermata.barline.barStyle));
+          break;
+        case 'left':
+          this.staves[partIdx][i][measureIdx].setBegBarType(Fermata.Mapping.Barline.getVexflow(measure.$fermata.barline.barStyle));
+          break;
+        default:
+          break;
         }
       }
       this.staves[partIdx][i][measureIdx].setContext(this.ctx);
