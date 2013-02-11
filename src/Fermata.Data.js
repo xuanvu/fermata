@@ -20,12 +20,14 @@
   Fermata.Data.prototype = {
     // Cache fncs
     cacheParts: function () {
-      var cur, cached, i;
+      var cur, cached, i, parts;
 
       // Index with 'part' idx, ids and names
       this.scoreCache.part = { idx: [], id: {}, name: {} };
-      for (i = 0 ; i < this.score['score-partwise']['part-list']['score-part'].length ; ++i) {
-        cur = this.score['score-partwise']['part-list']['score-part'][i];
+      parts = this.score['score-partwise']['part-list']['score-part'];
+
+      for (i = 0 ; i < parts.length ; ++i) {
+        cur = parts[i];
         cached = {id: cur.$id, name: cur['part-name'], measure: null};
 
         this.scoreCache.part.id[cur.$id] = cached;
