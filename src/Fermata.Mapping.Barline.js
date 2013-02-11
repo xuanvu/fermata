@@ -21,6 +21,6 @@
 	Fermata.Mapping.Barline.getVexflow = function (musicXML)
 	{
 		return Fermata.Mapping.Barline.MusicXmlToVexflow[musicXML];
-	}
+	};
 
 }).call(this);
