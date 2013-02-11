@@ -4,12 +4,10 @@
   Drawer.PART_HEIGHT = 100;
 
   Fermata.Drawer.prototype.drawAll = function () {
-    var i;
-
     // Todo: precalcul in render
     this.container.height += this.parts.idx.length * Drawer.PART_HEIGHT;
 
-    for (i = 0 ; i < this.parts.idx.length ; i++) {
+    for (var i = 0 ; i < this.parts.idx.length ; i++) {
       this.staves[i] = [];
       this.drawPart(this.parts.idx[i], i);
     }
