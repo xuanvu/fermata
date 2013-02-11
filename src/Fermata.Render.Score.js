@@ -57,142 +57,115 @@
   Fermata.Render.prototype.renderMeasure = function (measure, measureIdx, partIdx)
   {
     this.cur = { measure: measure, measureIdx: measureIdx, part: this.parts.idx[partIdx], partIdx: partIdx };
-    measure.$fermata = { vexNotes: [] };
-
-    // TODO: Need to store it ?
-    // var index = 0;
-    // this.noteData = [];
-    // for (var pos in this.staves) {
-    //   if (pos == partId)
-    //     break;
-    //   index += this.staves[pos].length;
-    // }
+    measure.$fermata = { vexNotes: [], vexStaves: [], vexVoices: [] };
 
     // Stave
-    this.renderMeasureAttributes(measure);
+    // this.renderMeasureAttributes(measure);
 
     // Measure content
     this.exploreSubNodes({ object: measure, processes: this.renderMeasureProcess, ctx: this });
+    // this.renderMeasureWidth();
+    this.renderStaves(measure, measureIdx, partIdx);
 
-    // TODO widths of measures
-    // for (var i = 0; i < this.Attributesdata.stave; i++)
-    // {
-    //   if (this.staves[partId][i] === undefined) {
-    //     this.staves[partId][i] = [];
-    //     if (i > 0)
-    //       index++;
-    //   }
-    //   if (this.staves[partId][i].length === 0 ||  this.staves[partId][i][measureId] === undefined && measureId >= this.staves[partId][i].length) {
-    //     if (measureId === 0) {
-    //       this.staves[partId][i].push(new Vex.Flow.Stave(20, 0 + index * 100, 100 + measure.note.length * 50));
-    //     }
-    //     else {
-    //       this.staves[partId][i].push(new Vex.Flow.Stave(this.staves[partId][i][this.staves[partId][i].length - 1].x + this.staves[partId][i][this.staves[partId][i].length - 1].width,
-    //         this.staves[partId][i][this.staves[partId][i].length - 1].y, measure.note.length * 50));
-    //     }
-    //   }
-
-    //   // Draw clef and time if needing
-    //   var clefName = Fermata.Mapping.Clef.getVexflow(this.Attributesdata.clef[i].sign);
-    //   if (measureId  === 0 || clefName !== this.staves[partId][i][measureId - 1].clef)
-    //   {
-    //     this.staves[partId][i][measureId].addClef(clefName);
-    //     if (this.Attributesdata.keys.mode !== null) {
-    //       var keySign = Fermata.Mapping.Clef.Sign.getVexflow(this.Attributesdata.keys.fifths, this.Attributesdata.keys.mode);
-    //       new Vex.Flow.KeySignature(keySign).addToStave(this.staves[partId][i][measureId]);
-    //     }
-    //     //this.staves[partId][measureId].addTimeSignature(Fermata.Mapping.Clef.getVexflow(this.Attributesdata.beat.beats)[this.Attributesdata.beat.type]);
-    //     this.staves[partId][i][measureId].addTimeSignature(this.Attributesdata.beat.beats + '/' + this.Attributesdata.beat.type);
-    //   }
-    //   else
-    //     this.staves[partId][i][measureId].clef = clefName;
-    //   this.staves[partId][i][measureId].setContext(this.ctx);
-    //   this.staves[partId][i][measureId].draw();
-
-    //   // Draw line in case of sytem
-    //   if (this.Attributesdata.stave > 1)
-    //   {
-    //     var line = new Vex.Flow.StaveConnector(this.staves[partId][0][measureId], this.staves[partId][i][measureId]);
-    //     line.setType(Vex.Flow.StaveConnector.type.SINGLE);
-    //     line.setContext(this.ctx);
-    //     line.draw();
-    //   }
-    // }
-
-    // // Draw connector if needed
-    // if (this.Attributesdata.stave > 1)
-    // {
-    //   var connector = new Vex.Flow.StaveConnector(this.staves[partId][this.Attributesdata.partSymbol.topStaff - 1][0], this.staves[partId][this.Attributesdata.partSymbol.bottomStaff - 1][0]);
-    //   connector.setType(Fermata.Mapping.Connector.getVexflow(this.Attributesdata.partSymbol.symbol));
-    //   connector.setContext(this.ctx);
-    //   connector.draw();
-    // }
-
-    // // Then Add note to their voice, format them and draw it
-    // for (var staffIdx = 1 ; staffIdx < this.noteData.length ; staffIdx++) {
-    //   for (var voiceIdx in this.noteData[staffIdx]) {
-    //     var voice = new Vex.Flow.Voice({
-    //       num_beats: this.Attributesdata.beat.beats,
-    //       beat_value: this.Attributesdata.beat.type,
-    //       resolution: Vex.Flow.RESOLUTION
-    //     });
-    //     voice.addTickables(this.noteData[staffIdx][voiceIdx]);
-    //     // Add notes to voice
-    //     // Format and justify the notes to 500 pixels
-    //     var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], measure.note.length * 50);
-    //     voice.draw(this.ctx, this.staves[partId][staffIdx - 1][measureId]);
-    //   }
-    // }
-    // for (i = 0; i < this.renderDirectionData.length; i++) {
-    //   var data = this.renderDirectionData[i];
-    //   var tmpNote = {
-    //     first_note : this.getNote(data.noteAfter),
-    //     last_note : this.getNote(data.noteBefore)
-    //   };
-    //   var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data.type));
-    //   hp.setContext(this.ctx);
-    //   hp.setPosition(Fermata.Mapping.Direction.getVexflow(this.renderDirectionData.placement));
-    //   hp.draw();
-    //   if (i === this.renderDirectionData.length -1 ) {
-    //     this.renderDirectionData = [];
-    //   }
-    // }
-    delete this.cur;
+    // console.log(measure.$fermata);
   };
 
-  Fermata.Render.prototype.renderMeasureAttributes = function (measure)
-  {
-    //TODO : do the rest
-    var number = measure.$number;
-    var implicit = false;
-    var nonControlling = false;
-    var width = 0; //TODO: default value unknown. We have to lnow which one it is
+  Fermata.Render.prototype.renderMeasureWidth = function() {
+    console.log(this.cur.measure);
+  };
 
+  Fermata.Render.prototype.renderStaves = function(measure, measureIdx, partIdx) {
+    var $fermata = measure.$fermata,
+        $fermataLastMeasure = measureIdx === 0 ? null : this.cur.part.measure[measureIdx - 1].$fermata;
 
-    //TODO: refactor the verification
-    if (typeof(measure.implicit) !== "undefined") {
-      if (measure.implicit === "yes") {
-        implicit = true;
+    measure.$width = parseInt(measure.$width, 10);
+    this.cur.part.$fermata = this.cur.part.$fermata || {};
+    this.cur.part.$fermata.staveY = partIdx === 0 ? 0 : this.parts.idx[partIdx - 1].$fermata.nextStaveY + 100;
+    this.cur.part.$fermata.nextStaveY = this.cur.part.$fermata.staveY;
+
+    for (var i = 0; i < $fermata.attributes.staves; i++) {
+      if ($fermata.vexStaves[i] === undefined) {
+        if (measureIdx === 0) {
+          $fermata.vexStaves[i] = new Vex.Flow.Stave(20, (this.cur.part.$fermata.nextStaveY += i * 100), /*measure.note.length * 50*/measure.$width);
+        }
+        else {
+          $fermata.vexStaves[i] = new Vex.Flow.Stave($fermataLastMeasure.vexStaves[i].x + $fermataLastMeasure.vexStaves[i].width,
+            $fermataLastMeasure.vexStaves[i].y, /*measure.note.length * 50*/measure.$width);
+        }
       }
-      // else if (measure.implicit !== "no") {
-      //invalid value
-      //TODO: should we raise an exception ?
-      // }
+
+      // Draw clef and time if needing
+      var clefName = Fermata.Mapping.Clef.getVexflow($fermata.attributes.clef[i].sign);
+      $fermata.voiceWidth = 0;
+      if (measureIdx  === 0 || clefName !== $fermataLastMeasure.vexStaves[i].clef)
+      {
+        $fermata.vexStaves[i].addClef(clefName);
+        $fermata.voiceWidth += 25;
+        if ($fermata.attributes.keys.mode !== null) {
+          var keySign = Fermata.Mapping.Clef.Sign.getVexflow($fermata.attributes.keys.fifths, $fermata.attributes.keys.mode);
+          new Vex.Flow.KeySignature(keySign).addToStave($fermata.vexStaves[i]);
+        }
+        
+        $fermata.vexStaves[i].addTimeSignature($fermata.attributes.beat.beats + '/' + $fermata.attributes.beat.type);
+        $fermata.voiceWidth += 25;
+      }
+      else {
+        $fermata.vexStaves[i].clef = clefName;
+      }
     }
 
-    if (typeof(measure["non-controlling"]) !== "undefined") {
-      if (measure["non-controlling"] === "yes") {
-        nonControlling = true;
+    for (var staffIdx = 1 ; staffIdx < $fermata.vexNotes.length ; staffIdx++) {
+      for (var voiceIdx in $fermata.vexNotes[staffIdx]) {
+        if ($fermata.vexNotes[staffIdx].hasOwnProperty(voiceIdx)) {
+          var voice = new Vex.Flow.Voice({
+            num_beats: measure.$fermata.attributes.beat.beats,
+            beat_value: measure.$fermata.attributes.beat.type,
+            resolution: Vex.Flow.RESOLUTION
+          });
+          voice.addTickables($fermata.vexNotes[staffIdx][voiceIdx]);
+          // Add notes to voice
+          // Format and justify the notes to 500 pixels
+          var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], /*measure.note.length * 50*/ measure.$width - $fermata.voiceWidth - 15);
+          $fermata.vexVoices.push(voice);
+          // voice.draw(this.ctx, $fermata.vexStaves[staffIdx - 1]);
+        }
       }
-      // else if (measure["non-controlling"] !== "no") {
-      //invalid value
-      //TODO: should we raise an exception ?
-      // }
-    }
-
-    if (typeof(measure.width) !== "undefined") {
-      width = measure.width; //TODO: check if the value is a number
     }
   };
+
+  // Fermata.Render.prototype.renderMeasureAttributes = function (measure)
+  // {
+  //   //TODO : do the rest
+  //   var number = measure.$number;
+  //   var implicit = false;
+  //   var nonControlling = false;
+  //   var width = 0; //TODO: default value unknown. We have to lnow which one it is
+
+
+  //   //TODO: refactor the verification
+  //   if (typeof(measure.implicit) !== "undefined") {
+  //     if (measure.implicit === "yes") {
+  //       implicit = true;
+  //     }
+  //     // else if (measure.implicit !== "no") {
+  //     //invalid value
+  //     //TODO: should we raise an exception ?
+  //     // }
+  //   }
+
+  //   if (typeof(measure["non-controlling"]) !== "undefined") {
+  //     if (measure["non-controlling"] === "yes") {
+  //       nonControlling = true;
+  //     }
+  //     // else if (measure["non-controlling"] !== "no") {
+  //     //invalid value
+  //     //TODO: should we raise an exception ?
+  //     // }
+  //   }
+
+  //   if (typeof(measure.width) !== "undefined") {
+  //     width = measure.width; //TODO: check if the value is a number
+  //   }
+  // };
 
 }).call(this);
