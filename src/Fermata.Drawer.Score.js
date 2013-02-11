@@ -87,6 +87,19 @@
       //   this.staves[partIdx][i][measureIdx].clef = clefName;
       // }
 
+      if (measure.$fermata.barline !== undefined)
+      {
+        switch (measure.$fermata.barline.location) {
+        case 'right':
+          measure.$fermata.vexStaves[i].setEndBarType(Fermata.Mapping.Barline.getVexflow(measure.$fermata.barline.barStyle));
+          break;
+        case 'left':
+          measure.$fermata.vexStaves[i].setBegBarType(Fermata.Mapping.Barline.getVexflow(measure.$fermata.barline.barStyle));
+          break;
+        default:
+          break;
+        }
+      }
 
       // console.log('STAVE', measure.$fermata);
       measure.$fermata.vexStaves[i].setContext(this.ctx);
