@@ -53,9 +53,9 @@
 
       // Get by type (Fermata.Data.cacheParts)
       if (type !== undefined) {
-        if      (type === Fermata.Data.cacheParts.IDX) { return this.scoreCache.part.idx[id]; }
-        else if (type === Fermata.Data.cacheParts.ID) { return this.scoreCache.part.id[id]; }
-        else if (type === Fermata.Data.cacheParts.NAME) { return this.scoreCache.part.name[id]; }
+        if      (type === CacheParts.IDX) { return this.scoreCache.part.idx[id]; }
+        else if (type === CacheParts.ID) { return this.scoreCache.part.id[id]; }
+        else if (type === CacheParts.NAME) { return this.scoreCache.part.name[id]; }
       }
       // Get without type (getPart with type is preferred for performance reasons)
       else {
