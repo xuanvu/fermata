@@ -89,18 +89,18 @@
 
       if (measure.$fermata.barline !== undefined)
       {
-        for (var u = 0; u < measure.$fermata.barline.length; u++)
-          {
-            var _barline = measure.$fermata.barline[u];
-            var type = 'normal';
-            if (_barline.repeat.direction !== "")
-              type = _barline.repeat.direction;
+        for (var u = 0; u < measure.$fermata.barline.length; u++) {
+          var _barline = measure.$fermata.barline[u];
+          var type = 'normal';
+          if (_barline.repeat.direction !== "") {
+            type = _barline.repeat.direction;
+          }
           switch (_barline.location) {
           case 'right':
-             measure.$fermata.vexStaves[i].setEndBarType(Fermata.Mapping.Barline.getVexflow(type, _barline.barStyle));
+            measure.$fermata.vexStaves[i].setEndBarType(Fermata.Mapping.Barline.getVexflow(type, _barline.barStyle));
             break;
           case 'left':
-              measure.$fermata.vexStaves[i].setBegBarType(Fermata.Mapping.Barline.getVexflow(type, _barline.barStyle));
+            measure.$fermata.vexStaves[i].setBegBarType(Fermata.Mapping.Barline.getVexflow(type, _barline.barStyle));
             break;
           default:
             break;

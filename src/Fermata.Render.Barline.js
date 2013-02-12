@@ -13,10 +13,10 @@
 
   var _render = Fermata.Render.prototype;
 
-  Fermata.Render.prototype.renderBarlineRepeat = function(repeat)
+  Fermata.Render.prototype.renderBarlineRepeat = function (repeat)
   {
-    this.exploreSubNodes({object: repeat, processes: _render.renderBarlineRepeatProcess, ctx: this, out: this.cur.measure.$fermata.barline[this.cur.measure.$fermata.barline.length - 1].repeat})
-  }
+    this.exploreSubNodes({object: repeat, processes: _render.renderBarlineRepeatProcess, ctx: this, out: this.cur.measure.$fermata.barline[this.cur.measure.$fermata.barline.length - 1].repeat});
+  };
 
 
   Fermata.Render.prototype.barlineProcess = [
@@ -35,8 +35,8 @@
   {
     if (this.cur.measure.$fermata.barline === undefined) {
       this.cur.measure.$fermata.barline = [];
-    }
-    this.cur.measure.$fermata.barline.push(Fermata.Utils.Clone(_render.renderBarlineDefault))
+ x   }
+    this.cur.measure.$fermata.barline.push(Fermata.Utils.Clone(_render.renderBarlineDefault));
     this.exploreSubNodes({object: score, processes: _render.barlineProcess, ctx: this, out: this.cur.measure.$fermata.barline[this.cur.measure.$fermata.barline.length - 1]});
   };
 
