@@ -23,9 +23,6 @@
 
 	Fermata.Mapping.Barline.getVexflow = function (type, style)
 	{
-		console.log(type)
-		console.log(style)
-		console.log(Fermata.Mapping.Barline.MusicXmlToVexflow[type][style]);
 		return Fermata.Mapping.Barline.MusicXmlToVexflow[type][style];
 	};
 
