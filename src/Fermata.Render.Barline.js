@@ -35,7 +35,7 @@
   {
     if (this.cur.measure.$fermata.barline === undefined) {
       this.cur.measure.$fermata.barline = [];
- x   }
+    }
     this.cur.measure.$fermata.barline.push(Fermata.Utils.Clone(_render.renderBarlineDefault));
     this.exploreSubNodes({object: score, processes: _render.barlineProcess, ctx: this, out: this.cur.measure.$fermata.barline[this.cur.measure.$fermata.barline.length - 1]});
   };
