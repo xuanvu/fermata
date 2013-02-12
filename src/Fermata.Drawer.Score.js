@@ -26,6 +26,7 @@
       line.setContext(this.ctx);
       line.draw();
     }
+    console.log(this.parts);
   };
 
   Fermata.Drawer.prototype.drawPart = function (part, partIdx)
@@ -89,10 +90,11 @@
 
       if (measure.$fermata.barline !== undefined)
       {
+        console.log(measure.$fermata.barline);
         for (var u = 0; u < measure.$fermata.barline.length; u++) {
           var _barline = measure.$fermata.barline[u];
           var type = 'normal';
-          if (_barline.repeat.direction !== "") {
+          if (_barline.repeat.direction !== null) {
             type = _barline.repeat.direction;
           }
           switch (_barline.location) {
