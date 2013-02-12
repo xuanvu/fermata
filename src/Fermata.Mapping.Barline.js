@@ -15,12 +15,18 @@
 // };
 
 	Fermata.Mapping.Barline.MusicXmlToVexflow = {
-		'light-heavy' : 2
+		'normal' : {'light-heavy' : 2},
+		'forward' : {'heavy-light' : 4, 'light-heavy': 4},
+		'backward' : {'heavy-light' : 5, 'light-heavy': 5},
+		'both' : {'heavy-light' : 5, 'light-heavy': 5}
 	};
 
-	Fermata.Mapping.Barline.getVexflow = function (musicXML)
+	Fermata.Mapping.Barline.getVexflow = function (type, style)
 	{
-		return Fermata.Mapping.Barline.MusicXmlToVexflow[musicXML];
+		console.log(type)
+		console.log(style)
+		console.log(Fermata.Mapping.Barline.MusicXmlToVexflow[type][style]);
+		return Fermata.Mapping.Barline.MusicXmlToVexflow[type][style];
 	};
 
 }).call(this);
