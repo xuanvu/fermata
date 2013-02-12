@@ -8,7 +8,7 @@
     this.staves = [];
     this.container = container;
 
-    this.renderer = new Vex.Flow.Renderer(this.container, Vex.Flow.Renderer.Backends.CANVAS);
+    this.renderer = new Vex.Flow.Renderer(this.container, Vex.Flow.Renderer.Backends.RAPHAEL);
     this.ctx = this.renderer.getContext();
   };
 }).call(this);
