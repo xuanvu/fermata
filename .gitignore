@@ -3,6 +3,7 @@
 *~
 *.pyc
 node_modules
+npm-debug.log
 build
 tests/mocha/coverage.html
 /nbproject/
