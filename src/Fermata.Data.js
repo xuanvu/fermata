@@ -63,6 +63,16 @@
         else if (this.scoreCache.part.id[id] !== undefined) { return this.scoreCache.part.id[id]; }
         else if (this.scoreCache.part.name[id] !== undefined) { return this.scoreCache.part.name[id]; }
       }
+    },
+    forEachPart: function (callback) {
+      // Refresh cache
+      if (this.scoreCache.part === null) {
+        this.cacheParts();
+      }
+
+      for (var i = 0 ; i < this.scoreCache.part.idx.length ; i++) {
+        callback(this.scoreCache.part.idx[i], i);
+      }
     }
   };
 

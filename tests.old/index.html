@@ -65,6 +65,7 @@
     <script src="../src/Fermata.js"></script>
     <script src="../src/Fermata.Utils.js"></script>
     <script src="../src/Fermata.Data.js"></script>
+    <script src="../src/Fermata.Data.Edit.js"></script>
     <script src="../src/Fermata.Mapping.Clef.js"></script>
     <script src="../src/Fermata.Mapping.Direction.js"></script>
     <script src="../src/Fermata.Mapping.Connector.js"></script>
@@ -93,9 +94,15 @@
     <script src="../src/Fermata.Render.Score.js"></script>
     <script src="../src/Fermata.Drawer.js"></script>
     <script src="../src/Fermata.Drawer.Score.js"></script>
+
+    <!-- deps for this test -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   </head>
   <body>
     <div class="container-score"><canvas id="canvas-score" width="1700px"></canvas></div>
+
+    <!-- test edit -->
+    Measure <input type="input" value="3" id="idMeasure" /><input type="button" id="addMeasure" value="addMeasure()" />
 
     <script>
         // Hello World
@@ -119,6 +126,13 @@
 
         var drawer = new Fermata.Drawer(data, document.getElementById('canvas-score'));
         drawer.drawAll();
+
+        // Test edition
+        $('#addMeasure').click(function() {
+          data.addMeasure($('#idMeasure').val());
+          render.renderAll();
+          drawer.drawAll();
+        });
     </script>
   </body>
 </html>
