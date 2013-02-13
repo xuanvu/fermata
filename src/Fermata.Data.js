@@ -11,7 +11,7 @@
     }
   };
 
-  Fermata.Data.cacheParts = {
+  var CacheParts = Fermata.Data.cacheParts = {
     IDX: 0,
     ID: 1,
     NAME: 2
