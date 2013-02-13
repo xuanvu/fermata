@@ -3,4 +3,4 @@
 	url = git://github.com/FlatIO/vexflow.git
 [submodule "deps/raphael"]
 	path = deps/raphael
-	url = git@github.com:DmitryBaranovskiy/raphael.git
+	url = git://github.com/DmitryBaranovskiy/raphael.git
