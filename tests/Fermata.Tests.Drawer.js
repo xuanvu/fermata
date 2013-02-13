@@ -36,8 +36,7 @@ describe('Fermata.Drawer', function () {
 
       var fermataDrawer = new Fermata.Drawer(fermataData, container);
       assert.ok(fermataDrawer.renderer instanceof Fermata.Vex.Flow.Renderer);
-      assert.ok(typeof require !== 'undefined' ? fermataDrawer.ctx.canvas instanceof Canvas : fermataDrawer.ctx instanceof CanvasRenderingContext2D);
-
+      assert.ok(typeof module !== 'undefined' ? fermataDrawer.ctx.canvas instanceof Canvas : fermataDrawer.ctx instanceof Vex.Flow.RaphaelContext);
     });
   });
 
