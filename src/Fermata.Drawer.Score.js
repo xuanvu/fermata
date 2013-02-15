@@ -24,7 +24,6 @@
       line.setContext(this.ctx);
       line.draw();
     }
-    console.log(this.parts);
   };
 
   Fermata.Drawer.prototype.drawPart = function (part, partIdx)

@@ -20,7 +20,7 @@ describe('Fermata.Drawer', function () {
   var helloWorld, container;
 
   beforeEach(function (done) {
-    container = Fermata.Tests.Utils.CreateCanvas('canvas.hello-world');
+    container = Fermata.Tests.Utils.CreateCanvas('#hello-world');
 
     Fermata.Tests.Utils.LoadJSONFixture('hello-world.min.json', function (fixture) {
       helloWorld = fixture;
