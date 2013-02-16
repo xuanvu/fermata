@@ -40,4 +40,9 @@
     
   };
   
+  BeamProcessor.prototype.getBeamNumber = function (beam)
+  {
+    return beam.number;
+  };
+  
 }).call(this);
