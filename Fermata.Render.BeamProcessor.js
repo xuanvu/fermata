@@ -11,6 +11,6 @@
   BeamProcessor.hasBeam = function (note)
   {
     return typeof(note.beam) != "undefined";
-  }
+  };
   
 }).call(this);
