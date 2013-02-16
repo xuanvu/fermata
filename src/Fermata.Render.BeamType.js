@@ -1,7 +1,7 @@
 (function () {
   "use strict";
   
-  Fermata.Render.NoteType =
+  Fermata.Render.BeamType =
   {
     begin: "begin",
     cont: "continue",
