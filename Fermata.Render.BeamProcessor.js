@@ -6,6 +6,9 @@
     this.$fermata = $fermata;
   };
   
+  // includes
+  var BeamType = Fermata.Render.BeamType;
+  
   var BeamProcessor = Fermata.Render.BeamProcessor;
   
   BeamProcessor.hasBeam = function (note)
