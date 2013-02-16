@@ -48,4 +48,17 @@
     return beam.number;
   };
   
+  BeamProcessor.prototype.getBeamType = function (beam)
+  {
+    for (var beamType in BeamType)
+    {
+      if (beam.content === BeamType[beamType])
+      {
+        return beamType;
+      }
+    }
+    
+    throw new Error("the beam type " + beam.content + " in not recognized");
+  };
+  
 }).call(this);
