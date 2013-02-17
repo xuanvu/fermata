@@ -3,9 +3,9 @@
   
   Fermata.Render.BeamType =
   {
-    begin: "begin",
-    cont: "continue",
-    end: "end"
+    BEGIN: "begin",
+    CONTINUE: "continue",
+    END: "end"
   };
   
 }).call(this);
