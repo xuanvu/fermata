@@ -70,7 +70,7 @@
   BeamProcessor.prototype.continueBeam = function ()
   {
     this.beamNotes[this.beamNumber].push(this.vexNote);
-  }
+  };
 
   BeamProcessor.prototype.extractBeamData = function (beam)
   {
