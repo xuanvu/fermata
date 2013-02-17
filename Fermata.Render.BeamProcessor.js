@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  Fermata.Render.BeamProcessor= function ($fermata)
+  Fermata.Render.BeamProcessor = function ($fermata)
   {
     this.$fermata = $fermata;
   };
@@ -20,11 +20,11 @@
   {
     if (note.beam instanceof Array)
     {
-      this.processBeams(beam, vexNote);
+      this.processBeams(note.beam, vexNote);
     }
     else
     {
-      this.processBeam(beam, vexNote);
+      this.processBeam(note.beam, vexNote);
     }
   };
   
@@ -34,7 +34,7 @@
     {
       var beam = beams[i];
       
-      this.processSingleBeam(beam);
+      this.processBeam(beam);
     }
   };
   
@@ -42,7 +42,7 @@
   {
     
   };
-  
+
   BeamProcessor.prototype.getBeamNumber = function (beam)
   {
     return beam.number;
