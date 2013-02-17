@@ -4,6 +4,12 @@
   Fermata.Render.BeamProcessor = function ($fermata)
   {
     this.$fermata = $fermata;
+
+    this.beamNumber = 0;
+    this.beamType = "";
+    this.vexNote = null;
+    
+    this.beamNotes = [];
   };
   
   // includes
