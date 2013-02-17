@@ -19,11 +19,26 @@ if (typeof require !== 'undefined') {
   var BeamProcessor = Fermata.Render.BeamProcessor;
   var BeamType = Fermata.Render.BeamType;
   
-  //var assert = require("assert");
   describe("Fermata.Render.BeamProcessor", function () {
     describe("#constructor", function (){
       it("test of the constructor", function (){
         var beamProcessor = new BeamProcessor();
+      });
+    });
+    
+    describe("#getBeamNumber", function (){
+      it("test of the method", function (){
+        var expected = 3;
+
+        // Given
+        var beam = {};
+        beam.number = expected;
+
+        // When
+        var actual = BeamProcessor.getBeamType(beam);
+
+        // Then
+        assert.strictEqual(actual, expected);
       });
     });
     
