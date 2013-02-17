@@ -32,7 +32,7 @@ if (typeof require !== 'undefined') {
 
         // Given
         var beam = {};
-        beam.number = expected;
+        beam.$number = expected;
 
         // When
         var actual = BeamProcessor.getBeamNumber(beam);
