@@ -54,6 +54,10 @@
     {
       this.beginBeam();
     }
+    else if (this.beamType === BeamType.CONTINUE)
+    {
+      this.continueBeam();
+    }
   };
   
   BeamProcessor.prototype.beginBeam = function ()
@@ -62,7 +66,12 @@
     
     this.beamNotes[this.beamNumber].push(this.vexNote);
   };
-  
+
+  BeamProcessor.prototype.continueBeam = function ()
+  {
+    this.beamNotes[this.beamNumber].push(this.vexNote);
+  }
+
   BeamProcessor.prototype.extractBeamData = function (beam)
   {
     this.beamNumber = BeamProcessor.getBeamNumber(beam);
