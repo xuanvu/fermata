@@ -58,6 +58,10 @@
     {
       this.continueBeam();
     }
+    else
+    {
+      this.endBeam();
+    }
   };
   
   BeamProcessor.prototype.beginBeam = function ()
@@ -70,6 +74,15 @@
   BeamProcessor.prototype.continueBeam = function ()
   {
     this.beamNotes[this.beamNumber].push(this.vexNote);
+  };
+  
+  BeamProcessor.prototype.endBeam = function ()
+  {
+    var notes = this.beamNotes[this.beamNumber];
+    notes.push(this.vexNote);
+
+    var vexBeam = new Vex.Flow.Beam(notes);
+    this.$fermata.vexBeams.push(vexBeam);
   };
 
   BeamProcessor.prototype.extractBeamData = function (beam)
