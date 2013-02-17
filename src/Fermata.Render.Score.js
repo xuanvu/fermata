@@ -9,6 +9,9 @@
     }
   };
 
+  // Includes
+  var BeamProcessor = Fermata.Render.BeamProcessor;
+
   var _render = Fermata.Render.prototype;
   Fermata.Render.prototype.renderScoreHeaderProcess = [
     { key: "attributes", type: _render.FuncTypes.$0n, func: /*_render.renderAttributes*/ null }, // really ? hmmm... no.
