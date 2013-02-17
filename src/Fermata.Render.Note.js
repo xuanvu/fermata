@@ -1,5 +1,8 @@
 (function () {
   "use strict";
+  
+  // Includes
+  var BeamProcessor = Fermata.Render.BeamProcessor;
 
   Fermata.Render.prototype.renderNoteProcess = {};
   Fermata.Render.prototype.renderNoteProcess[Fermata.Render.NoteType.NORMAL] = Fermata.Render.prototype.renderNormalNote;
