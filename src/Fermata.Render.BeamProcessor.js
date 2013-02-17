@@ -48,7 +48,13 @@
   
   BeamProcessor.prototype.processBeam = function (beam)
   {
-    
+    this.extractBeamData(beam);
+  };
+  
+  BeamProcessor.prototype.extractBeamData = function (beam)
+  {
+    this.beamNumber = BeamProcessor.getBeamNumber(beam);
+    this.beamType = BeamProcessor.getBeamType(beam);
   };
 
   BeamProcessor.getBeamNumber = function (beam)
