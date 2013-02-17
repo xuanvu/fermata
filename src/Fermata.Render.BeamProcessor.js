@@ -54,13 +54,15 @@
     return beam.number;
   };
   
-  BeamProcessor.prototype.getBeamType = function (beam)
+  BeamProcessor.getBeamType = function (beam)
   {
-    for (var beamType in BeamType)
+    var values = [BeamType.BEGIN, BeamType.CONTINUE, BeamType.END];
+    
+    for (var i = 0 ; i < values.length ; ++i)
     {
-      if (beam.content === BeamType[beamType])
+      if (values[i] === beam.content)
       {
-        return beamType;
+        return values[i];
       }
     }
     
