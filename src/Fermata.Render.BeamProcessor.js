@@ -93,7 +93,7 @@
 
   BeamProcessor.getBeamNumber = function (beam)
   {
-    return beam.number;
+    return beam.$number;
   };
   
   BeamProcessor.getBeamType = function (beam)
