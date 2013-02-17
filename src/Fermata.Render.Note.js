@@ -63,7 +63,10 @@
     // TODO MOVE
     // this.tieRenderer.render(note, vexNote, voice);
     // this.noteStorage.store(vexNote, voice, staff);
-    this.beamProcessor.addNote(note, vexNote);
+    if (BeamProcessor.hasBeam(note))
+    {
+      this.beamProcessor.addNote(note, vexNote);
+    }
     this.recordNote(vexNote, voice, staff);
 
 
