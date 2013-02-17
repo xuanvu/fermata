@@ -85,6 +85,64 @@ if (typeof require !== 'undefined') {
           }
           );
       });
+    });  
+   
+    describe("Fermata.Render.BeamProcessor", function () {
+      describe("#addNote", function (){
+        it("test of basic use", function (){
+          var $fermata = {
+            vexBeams: []
+          };
+          var beamProcessor = new BeamProcessor($fermata);
+          
+          // Given
+          var notes = [
+          {
+            beam: {
+              content: BeamType.BEGIN, 
+              number: 1
+            }
+          },{
+            beam: {
+              content: BeamType.CONTINUE, 
+              number: 1
+            }
+          },{
+            beam: {
+              content: BeamType.END, 
+              number: 1
+            }
+          }];
+          
+          var vexNotes = [
+          new Vex.Flow.StaveNote({
+            keys: ["c/4"], 
+            duration: "8"
+          }),
+          new Vex.Flow.StaveNote({
+            keys: ["d/4"], 
+            duration: "8"
+          }),
+          new Vex.Flow.StaveNote({
+            keys: ["g/4"], 
+            duration: "8"
+          }),
+          ];
+          
+          // When
+          for (var i = 0 ; i < notes.length ; ++i)
+          {
+            var note = notes[i];
+            var vexNote = vexNotes[i];
+            
+            beamProcessor.addNote(note, vexNote);
+          }
+          
+          // Then
+          assert.strictEqual($fermata.vexBeams.length, 1);
+          assert.ok($fermata.vexBeams[0] instanceof Vex.Flow.Beam);          
+        });
+      });
     });
   });
 }).call(this);
