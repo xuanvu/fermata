@@ -57,7 +57,7 @@
   Fermata.Render.prototype.renderMeasure = function (measure, measureIdx, partIdx)
   {
     this.cur = { measure: measure, measureIdx: measureIdx, part: this.parts.idx[partIdx], partIdx: partIdx };
-    measure.$fermata = { vexNotes: [], vexStaves: [], vexVoices: [] };
+    measure.$fermata = { vexNotes: [], vexStaves: [], vexVoices: [], vexBeam: [] };
 
     // Stave
     // this.renderMeasureAttributes(measure);
