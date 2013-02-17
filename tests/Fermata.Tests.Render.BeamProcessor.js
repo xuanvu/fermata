@@ -35,7 +35,7 @@ if (typeof require !== 'undefined') {
         beam.number = expected;
 
         // When
-        var actual = BeamProcessor.getBeamType(beam);
+        var actual = BeamProcessor.getBeamNumber(beam);
 
         // Then
         assert.strictEqual(actual, expected);
