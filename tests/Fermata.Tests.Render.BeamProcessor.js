@@ -31,8 +31,9 @@ if (typeof require !== 'undefined') {
         var expected = 3;
 
         // Given
-        var beam = {};
-        beam.$number = expected;
+        var beam = {
+          $number: expected
+        };
 
         // When
         var actual = BeamProcessor.getBeamNumber(beam);
