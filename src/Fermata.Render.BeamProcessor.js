@@ -24,17 +24,19 @@
   
   BeamProcessor.prototype.addNote = function (note, vexNote)
   {
+    this.vexNote = vexNote;
+    
     if (note.beam instanceof Array)
     {
-      this.processBeams(note.beam, vexNote);
+      this.processBeams(note.beam);
     }
     else
     {
-      this.processBeam(note.beam, vexNote);
+      this.processBeam(note.beam);
     }
   };
   
-  BeamProcessor.prototype.processBeams = function (beams, vexNote)
+  BeamProcessor.prototype.processBeams = function (beams)
   {
     for (var i = 0 ; i < beams.length ; ++i)
     {
@@ -44,7 +46,7 @@
     }
   };
   
-  BeamProcessor.prototype.processBeam = function (beam, vexNote)
+  BeamProcessor.prototype.processBeam = function (beam)
   {
     
   };
