@@ -49,6 +49,18 @@
   BeamProcessor.prototype.processBeam = function (beam)
   {
     this.extractBeamData(beam);
+    
+    if (this.beamType === BeamType.BEGIN)
+    {
+      this.beginBeam();
+    }
+  };
+  
+  BeamProcessor.prototype.beginBeam = function ()
+  {
+    this.beamNotes[this.beamNumber] = [];
+    
+    this.beamNotes[this.beamNumber].push(this.vexNote);
   };
   
   BeamProcessor.prototype.extractBeamData = function (beam)
