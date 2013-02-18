@@ -19,7 +19,7 @@
   
   BeamProcessor.hasBeam = function (note)
   {
-    return typeof(note.beam) != "undefined";
+    return typeof(note.beam) !== "undefined";
   };
   
   BeamProcessor.prototype.addNote = function (note, vexNote)
