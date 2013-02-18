@@ -153,7 +153,8 @@
       // console.log(measure.$fermata.vexVoices[i]);
       measure.$fermata.vexVoices[i].draw(this.ctx, measure.$fermata.vexStaves[i]);
     }
-    
+
+    this.drawBeam(measure);
 
   // TODO: clean & mv renderDirectionData
   // for (i = 0; i < this.renderDirectionData.length; i++) {
@@ -170,5 +171,15 @@
   //     this.renderDirectionData = [];
   //   }
   // }
-  }; 
+  };
+
+  Fermata.Drawer.prototype.drawBeam = function (measure)
+  {
+    for (var i = 0 ; i < measure.$fermata.vexBeams.length ; ++i) {
+      var vexBeam = measure.$fermata.vexBeams[i];
+      
+      vexBeam.setContext(this.ctx).draw();
+    }
+  };
+
 }).call(this);
