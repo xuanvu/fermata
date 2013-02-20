@@ -52,5 +52,45 @@ if (typeof require !== 'undefined') {
         assert.strictEqual(hasStem, false);
       });
     });
+
+    describe("#processNote", function (){
+      it("up", function (){
+        var stemProcessor = new StemProcessor();
+        
+        // Given
+        var note = {
+          stem: {
+            content: "up"
+          }
+        };
+        var vexArg = {};
+
+        // When
+        stemProcessor.processNote(note, vexArg);
+
+        // Then
+        assert.ok(typeof vexArg.stem_direction !== "undefined");
+        assert.equal(vexArg.stem_direction === 1);
+      });
+
+      it("down", function (){
+        var stemProcessor = new StemProcessor();
+        
+        // Given
+        var note = {
+          stem: {
+            content: "down"
+          }
+        };
+        var vexArg = {};
+
+        // When
+        stemProcessor.processNote(note, vexArg);
+
+        // Then
+        assert.ok(typeof vexArg.stem_direction !== "undefined");
+        assert.equal(vexArg.stem_direction === -1);
+      });
+    });
   });
 }).call(this);
