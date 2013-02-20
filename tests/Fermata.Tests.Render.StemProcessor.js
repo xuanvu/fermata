@@ -70,7 +70,7 @@ if (typeof require !== 'undefined') {
 
         // Then
         assert.ok(typeof vexArg.stem_direction !== "undefined");
-        assert.equal(vexArg.stem_direction === 1);
+        assert.strictEqual(vexArg.stem_direction, 1);
       });
 
       it("down", function (){
@@ -89,7 +89,7 @@ if (typeof require !== 'undefined') {
 
         // Then
         assert.ok(typeof vexArg.stem_direction !== "undefined");
-        assert.equal(vexArg.stem_direction === -1);
+        assert.strictEqual(vexArg.stem_direction, -1);
       });
     });
     
