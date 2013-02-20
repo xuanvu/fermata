@@ -11,6 +11,30 @@
   
   var StemProcessor = Fermata.Render.StemProcessor;
   
+  StemProcessor.prototype.processNote = function (note, vexArg)
+  {
+    var stemType = StemProcessor.getStemType(note.stem);
+    var vexStemValue = this.convertStemType(stemType);
+    this.recordValue(vexStemValue, vexArg);
+  };
+  
+  StemProcessor.prototype.convertStemType = function (stemType)
+  {
+    if (stemType === StemType.UP)
+    {
+      return 1;
+    }
+    else if (stemType === StemType.DOWN)
+    {
+      return -1;
+    }
+  };
+  
+  StemProcessor.prototype.recordValue = function (vexStemValue, vexArg)
+  {
+    vexArg.stem_direction = vexStemValue;
+  };
+  
   StemProcessor.hasStem = function (note)
   {
     return typeof(note.stem) !== "undefined";
