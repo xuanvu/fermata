@@ -92,5 +92,54 @@ if (typeof require !== 'undefined') {
         assert.equal(vexArg.stem_direction === -1);
       });
     });
+    
+    describe("#getStemType", function (){
+      var tryValue = function (expected)
+      {
+        // Given
+        var stem = {};
+        stem.content = expected;
+
+        // When
+        var actual = StemProcessor.getStemType(stem);
+
+        // Then
+        assert.strictEqual(actual, expected);
+      };
+      
+      it("down", function (){
+        tryValue(StemType.DOWN);
+      });
+
+      it("up", function (){
+        tryValue(StemType.UP);
+      });
+
+      it("none", function (){
+        tryValue(StemType.NONE);
+      });
+
+      it("double", function (){
+        tryValue(StemType.DOUBLE);
+      });
+
+      it("failure", function (){
+
+        // Given
+        var stem = {
+          content: "bad value"
+        };
+
+        // Then
+        assert.throws(
+          function() {
+            StemProcessor.getStemType(stem);
+          },
+          function(err) {
+            return (err instanceof Error) && /bad value/.test(err);
+          }
+          );
+      });
+    });
   });
 }).call(this);
