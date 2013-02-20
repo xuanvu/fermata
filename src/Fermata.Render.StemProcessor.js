@@ -20,6 +20,8 @@
   
   StemProcessor.prototype.convertStemType = function (stemType)
   {
+    //TODO: create dedicated file for the mapping
+    //TODO: create test for other values of StemType
     if (stemType === StemType.UP)
     {
       return 1;
