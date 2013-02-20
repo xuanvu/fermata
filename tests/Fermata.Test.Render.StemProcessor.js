@@ -25,5 +25,32 @@ if (typeof require !== 'undefined') {
         var stemProcessor = new StemProcessor();
       });
     });
+
+    describe("#hasStem", function (){
+      it("true", function (){
+        // Given
+        var note = {
+          stem: {}
+        };
+
+        // When
+        var hasStem = StemProcessor.hasStem(note);
+
+        // Then
+        assert.strictEqual(hasStem, true);
+      });
+
+      it("false", function (){
+        // Given
+        var note = {
+        };
+
+        // When
+        var hasStem = StemProcessor.hasStem(note);
+
+        // Then
+        assert.strictEqual(hasStem, false);
+      });
+    });
   });
 }).call(this);
