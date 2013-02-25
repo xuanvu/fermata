@@ -5,12 +5,17 @@
   {
     
   };
-  
+
   // includes
   var StemType = Fermata.Render.StemType;
-  
+
   var StemProcessor = Fermata.Render.StemProcessor;
-  
+
+  StemProcessor.prototype.needProcessing = function (note)
+  {
+    return StemProcessor.hasStem(note);
+  };
+
   StemProcessor.prototype.processNote = function (note, vexArg)
   {
     var stemType = StemProcessor.getStemType(note.stem);
