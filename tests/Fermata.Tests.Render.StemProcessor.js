@@ -141,5 +141,37 @@ if (typeof require !== 'undefined') {
           );
       });
     });
+
+    describe("#needProcessing", function (){
+      it("true", function (){
+        var stemProcessor = new StemProcessor();
+        
+        // Given
+        var note = {
+          stem: {
+          }
+        };
+
+        // When
+        var needProcessing = stemProcessor.needProcessing(note);
+
+        // Then
+        assert.ok(needProcessing);
+      });
+
+      it("false", function (){
+        var stemProcessor = new StemProcessor();
+        
+        // Given
+        var note = {
+        };
+
+        // When
+        var needProcessing = stemProcessor.needProcessing(note);
+
+        // Then
+        assert.ok(!needProcessing);
+      });
+    });
   });
 }).call(this);
