@@ -1,13 +1,52 @@
 (function () {
   "use strict";
-
+  
   Fermata.Drawer.prototype.drawAll = function () {
-    var i;
+    var i, j;
 
     // Todo: precalcul in render
     for (i = 0 ; i < this.parts.idx.length ; i++) {
       this.container.height += 100;
     }
+
+    // console.log(this.parts);
+
+    var maxWidth = new Array();
+    var maxNotes = new Array();
+    // size calculation, step 1: get max size for measure.number if already exist
+    // size calculation, step 2: get max note number for measure.number if already exist
+    for (j = 0 ; j < this.parts.idx.length ; j++) {
+      for (i = 0 ; i < this.parts.idx[j].measure.length ; ++i) {
+        // maxWidth[this.parts.idx[j].measure[i].$number] = Math.max(this.parts.idx[j].measure[i].$width, maxWidth[this.parts.idx[j].measure[i].$number]);
+        if (! isNaN(this.parts.idx[j].measure[i].$width))
+          if (typeof maxWidth[this.parts.idx[j].measure[i].$number] === "undefined" || this.parts.idx[j].measure[i].$width > maxWidth[this.parts.idx[j].measure[i].$number])
+            maxWidth[this.parts.idx[j].measure[i].$number] = this.parts.idx[j].measure[i].$width;
+
+        // maxNotes[this.parts.idx[j].measure[i].$number] = Math.max(this.parts.idx[j].measure[i].note.length, maxNotes[this.parts.idx[j].measure[i].$number]);
+        if (typeof maxNotes[this.parts.idx[j].measure[i].$number] === "undefined" || this.parts.idx[j].measure[i].note.length > maxNotes[this.parts.idx[j].measure[i].$number])
+          maxNotes[this.parts.idx[j].measure[i].$number] = this.parts.idx[j].measure[i].note.length;
+      }
+    }
+
+    // console.log("maxWidth:", maxWidth);
+
+    // size calculation, step 4: if maxSize[measure.number] doesn't exist, calculate it
+    for (i = 0 ; i < this.parts.idx[0].measure.length ; ++i) {
+      if (typeof maxWidth[this.parts.idx[0].measure[i].$number] === "undefined")
+        maxWidth[this.parts.idx[0].measure[i].$number] = (40 * maxNotes[this.parts.idx[0].measure[i].$number]);
+    }
+
+    // console.log("maxWidth:", maxWidth);
+
+    // size calculation, step 4: set defined size for each measure
+    for (j = 0 ; j < this.parts.idx.length ; j++) {
+      for (i = 0 ; i < this.parts.idx[j].measure.length ; ++i) {
+        this.parts.idx[j].measure[i].$width = maxWidth[this.parts.idx[j].measure[i].$number];
+      }
+    }
+
+    // console.log(this.parts);
+    console.log(this);
 
     for (i = 0 ; i < this.parts.idx.length ; i++) {
       this.staves[i] = [];
@@ -26,7 +65,7 @@
       line.setContext(this.ctx);
       line.draw();
     }
-    console.log(this.parts);
+//    console.log(this.parts);
   };
 
   Fermata.Drawer.prototype.drawPart = function (part, partIdx)
@@ -53,7 +92,7 @@
     // }
 
     // TODO widths of measures
-    var i;
+      var i;
     for (i = 0; i < measure.$fermata.attributes.staves; i++)
     {
       // if (this.staves[partIdx][i] === undefined) {
@@ -90,7 +129,7 @@
 
       if (measure.$fermata.barline !== undefined)
       {
-        console.log(measure.$fermata.barline);
+        // console.log(measure.$fermata.barline);
         for (var u = 0; u < measure.$fermata.barline.length; u++) {
           var _barline = measure.$fermata.barline[u];
           var type = 'normal';
