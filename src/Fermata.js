@@ -10,6 +10,14 @@
 if (typeof Fermata === "undefined")
 {
   window.Fermata = {};
+  if (this === module)
+  {
+    console.log("node");
+  }
+  else if (this === window)
+  {
+    console.log("browser");
+  }
 }
 //var Fermata = Fermata || {};
 Fermata.Vex = Vex;
