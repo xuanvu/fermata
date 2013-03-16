@@ -80,7 +80,7 @@
     var vexDuration = this.convertDuration(noteData[0]);
 
     // Stem
-    var stem = noteData[0].stem && noteData[0].stem.content;
+    var stem = noteData[0].stem;
     var auto_stem = false;
 
     if (stem === 'down') {
@@ -104,7 +104,7 @@
       dataPitch = this.extractPitch(noteData[i]);
       vexPitches.push(this.convertPitch(dataPitch));
     }
-    
+
     var vexNote = new Vex.Flow.StaveNote({
       keys: vexPitches,
       duration: vexDuration,
