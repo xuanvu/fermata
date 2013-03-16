@@ -9,12 +9,12 @@
 
 if (typeof Fermata === "undefined")
 {
-  window.Fermata = {};
-  if (this === module)
+  this.Fermata = {};
+  if (typeof module !== "undefined" && module === this)
   {
     console.log("node");
   }
-  else if (this === window)
+  else if (typeof window !== "undefined" && this === window)
   {
     console.log("browser");
   }

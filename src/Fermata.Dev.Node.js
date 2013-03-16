@@ -7,7 +7,15 @@ var vm = require('vm'),
     path = require('path');
 
 if (typeof _$jscoverage === 'undefined') {
-  _$jscoverage = {};
+  this._$jscoverage = {};
+  if (typeof module !== "undefined" && module === this)
+  {
+    console.log("node");
+  }
+  else if (typeof window !== "undefined" && this === window)
+  {
+    console.log("browser");
+  }
 }
 
 (function () {
