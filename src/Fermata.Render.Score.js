@@ -3,27 +3,9 @@
 
   Fermata.Render.prototype.renderAll = function () {
     this.renderScoreHeader(this.data.getScorePartWise());
-
-    // Measure
-    for (var i = 0 ; i < this.parts.idx.length ; i++) {
-      for (var j = 0 ; j < this.parts.idx[i].measure.length ; ++j) {
-        this.renderMeasure(j, i);
-      }
-    }
-
-    // Measure width
-    if (this.parts.idx.length > 0) {
-      for (var i = 0 ; i < this.parts.idx[0].measure.length ; i++) {
-        this.renderMeasureWidth(i);
-      }
-    }
-
-    // Staves
-    for (var i = 0 ; i < this.parts.idx.length ; i++) {
-      for (var j = 0 ; j < this.parts.idx[i].measure.length ; ++j) {
-        this.renderStaves(j, i);
-      }
-    }
+    this.renderMeasures();
+    this.renderMeasuresWidth();
+    this.renderAllStaves();
   };
 
   // Includes
@@ -31,20 +13,56 @@
 
   var _render = Fermata.Render.prototype;
   Fermata.Render.prototype.renderScoreHeaderProcess = [
-    { key: "attributes", type: _render.FuncTypes.$0n, func: /*_render.renderAttributes*/ null }, // really ? hmmm... no.
-    { key: "part-list", type: _render.FuncTypes.$1, func: _render.renderPartList },
-    { key: "work", type: _render.FuncTypes.$01, func: _render.renderPartList },
-    { key: "movement-number", type: _render.FuncTypes.$01, func: _render.renderHeaderMovNum },
-    { key: "movement-title", type: _render.FuncTypes.$01, func: _render.renderHeaderMovTitle },
-    { key: "identification", type: _render.FuncTypes.$01, func: _render.renderHeaderIdentifi },
-    { key: "defaults", type: _render.FuncTypes.$01, func: _render.renderHeaderdefaults },
-    { key: "credit", type: _render.FuncTypes.$0n, func: _render.renderHeaderCredit }
+    {
+      key: "attributes",
+      type: _render.FuncTypes.$0n,
+      func: /*_render.renderAttributes*/ null
+    }, // really ? hmmm... no.
+    {
+      key: "part-list",
+      type: _render.FuncTypes.$1,
+      func: _render.renderPartList
+    },
+    {
+      key: "work",
+      type: _render.FuncTypes.$01,
+      func: _render.renderPartList
+    },
+    {
+      key: "movement-number",
+      type: _render.FuncTypes.$01,
+      func: _render.renderHeaderMovNum
+    },
+    {
+      key: "movement-title",
+      type: _render.FuncTypes.$01,
+      func: _render.renderHeaderMovTitle
+    },
+    {
+      key: "identification",
+      type: _render.FuncTypes.$01,
+      func: _render.renderHeaderIdentifi
+    },
+    {
+      key: "defaults",
+      type: _render.FuncTypes.$01,
+      func: _render.renderHeaderdefaults
+    },
+    {
+      key: "credit",
+      type: _render.FuncTypes.$0n,
+      func: _render.renderHeaderCredit
+    }
   ];
 
   Fermata.Render.prototype.renderScoreHeader = function (scoreHeader)
-  {
-    this.exploreSubNodes({ object: scoreHeader, processes: this.renderScoreHeaderProcess, ctx: this });
-  };
+    {
+      this.exploreSubNodes({
+        object: scoreHeader,
+        processes: this.renderScoreHeaderProcess,
+        ctx: this
+      });
+    };
 
   Fermata.Render.prototype.renderPart = function (partIdx)
   {
@@ -58,43 +76,132 @@
     return;
   };
 
+  Fermata.Render.prototype.renderMeasures = function () {
+    for (var i = 0 ; i < this.parts.idx.length ; i++) {
+      for (var j = 0 ; j < this.parts.idx[i].measure.length ; ++j) {
+        this.renderMeasure(j, i);
+      }
+    }
+  };
+
   Fermata.Render.prototype.renderMeasureProcess = [
-    { key: "attributes", type: _render.FuncTypes.$1n, func: _render.renderAttributes },
-    { key: "note", type: _render.FuncTypes.$01, func: _render.renderNotes },
-    { key: "backup", type: _render.FuncTypes.$0n, func: _render.Renderbackup },
-    { key: "forward", type: _render.FuncTypes.$0n, func: null },
-    { key: "direction", type: _render.FuncTypes.$0n, func: _render.renderDirection },
-    { key: "harmony", type: _render.FuncTypes.$0n, func: _render.renderHarmony },
-    { key: "figured-bass", type: _render.FuncTypes.$0n, func: null },
-    { key: "print", type: _render.FuncTypes.$0n, func: _render.renderPrint },
-    { key: "sound", type: _render.FuncTypes.$0n, func: null },
-    { key: "barline", type: _render.FuncTypes.$0n, func: _render.renderBarline },
-    { key: "grouping", type: _render.FuncTypes.$0n, func: null },
-    { key: "link", type: _render.FuncTypes.$0n, func: null },
-    { key: "bookmark", type: _render.FuncTypes.$0n, func: null }
+    {
+      key: "attributes",
+      type: _render.FuncTypes.$1n,
+      func: _render.renderAttributes
+    },
+    {
+      key: "note",
+      type: _render.FuncTypes.$01,
+      func: _render.renderNotes
+    },
+    {
+      key: "backup",
+      type: _render.FuncTypes.$0n,
+      func: _render.Renderbackup
+    },
+    {
+      key: "forward",
+      type: _render.FuncTypes.$0n,
+      func: null
+    },
+    {
+      key: "direction",
+      type: _render.FuncTypes.$0n,
+      func: _render.renderDirection
+    },
+    {
+      key: "harmony",
+      type: _render.FuncTypes.$0n,
+      func: _render.renderHarmony
+    },
+    {
+      key: "figured-bass",
+      type: _render.FuncTypes.$0n,
+      func: null
+    },
+    {
+      key: "print",
+      type: _render.FuncTypes.$0n,
+      func: _render.renderPrint
+    },
+    {
+      key: "sound",
+      type: _render.FuncTypes.$0n,
+      func: null
+    },
+    {
+      key: "barline",
+      type: _render.FuncTypes.$0n,
+      func: _render.renderBarline
+    },
+    {
+      key: "grouping",
+      type: _render.FuncTypes.$0n,
+      func: null
+    },
+    {
+      key: "link",
+      type: _render.FuncTypes.$0n,
+      func: null
+    },
+    {
+      key: "bookmark",
+      type: _render.FuncTypes.$0n,
+      func: null
+    }
   ];
 
   Fermata.Render.prototype.renderMeasure = function (measureIdx, partIdx)
   {
-    this.cur = { measure: this.parts.idx[partIdx].measure[measureIdx], measureIdx: measureIdx,
-                 part: this.parts.idx[partIdx], partIdx: partIdx };
-    this.cur.measure.$fermata = { vexNotes: [], vexStaves: [], vexVoices: [], vexBeams: [] };
+    this.cur = {
+      measure: this.parts.idx[partIdx].measure[measureIdx],
+      measureIdx: measureIdx,
+      part: this.parts.idx[partIdx],
+      partIdx: partIdx
+    };
+    this.cur.measure.$fermata = {
+      vexNotes: [],
+      vexStaves: [],
+      vexVoices: [],
+      vexBeams: []
+    };
     this.beamProcessor = new BeamProcessor(this.cur.measure.$fermata);
 
     // Stave
     // this.renderMeasureAttributes(measure);
 
     // Measure content
-    this.exploreSubNodes({ object: this.cur.measure, processes: this.renderMeasureProcess, ctx: this });
-    // console.log(measure.$fermata);
+    this.exploreSubNodes({
+      object: this.cur.measure,
+      processes: this.renderMeasureProcess,
+      ctx: this
+    });
+  // console.log(measure.$fermata);
+  };
+
+  Fermata.Render.prototype.renderMeasuresWidth = function () {
+    if (this.parts.idx.length > 0) {
+      for (var i = 0 ; i < this.parts.idx[0].measure.length ; i++) {
+        this.renderMeasureWidth(i);
+      }
+    }
   };
 
   Fermata.Render.prototype.renderMeasureWidth = function (measureIdx) {
   };
 
+  Fermata.Render.prototype.renderAllStaves = function () {
+    for (var i = 0 ; i < this.parts.idx.length ; i++) {
+      for (var j = 0 ; j < this.parts.idx[i].measure.length ; ++j) {
+        this.renderStaves(j, i);
+      }
+    }
+  };
+
   Fermata.Render.prototype.renderStaves = function (measureIdx, partIdx) {
     var part = this.parts.idx[partIdx], measure = part.measure[measureIdx], $fermata = measure.$fermata,
-        $fermataLastMeasure = measureIdx === 0 ? null : part.measure[measureIdx - 1].$fermata;
+    $fermataLastMeasure = measureIdx === 0 ? null : part.measure[measureIdx - 1].$fermata;
 
     measure.$width = parseInt(measure.$width, 10);
     part.$fermata = part.$fermata || {};
@@ -145,45 +252,45 @@
           // Format and justify the notes to 500 pixels
           var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], /*measure.note.length * 50*/ measure.$width - $fermata.voiceWidth - 15);
           $fermata.vexVoices.push(voice);
-          // voice.draw(this.ctx, $fermata.vexStaves[staffIdx - 1]);
+        // voice.draw(this.ctx, $fermata.vexStaves[staffIdx - 1]);
         }
       }
     }
   };
 
-  // Fermata.Render.prototype.renderMeasureAttributes = function (measure)
-  // {
-  //   //TODO : do the rest
-  //   var number = measure.$number;
-  //   var implicit = false;
-  //   var nonControlling = false;
-  //   var width = 0; //TODO: default value unknown. We have to lnow which one it is
+// Fermata.Render.prototype.renderMeasureAttributes = function (measure)
+// {
+//   //TODO : do the rest
+//   var number = measure.$number;
+//   var implicit = false;
+//   var nonControlling = false;
+//   var width = 0; //TODO: default value unknown. We have to lnow which one it is
 
 
-  //   //TODO: refactor the verification
-  //   if (typeof(measure.implicit) !== "undefined") {
-  //     if (measure.implicit === "yes") {
-  //       implicit = true;
-  //     }
-  //     // else if (measure.implicit !== "no") {
-  //     //invalid value
-  //     //TODO: should we raise an exception ?
-  //     // }
-  //   }
+//   //TODO: refactor the verification
+//   if (typeof(measure.implicit) !== "undefined") {
+//     if (measure.implicit === "yes") {
+//       implicit = true;
+//     }
+//     // else if (measure.implicit !== "no") {
+//     //invalid value
+//     //TODO: should we raise an exception ?
+//     // }
+//   }
 
-  //   if (typeof(measure["non-controlling"]) !== "undefined") {
-  //     if (measure["non-controlling"] === "yes") {
-  //       nonControlling = true;
-  //     }
-  //     // else if (measure["non-controlling"] !== "no") {
-  //     //invalid value
-  //     //TODO: should we raise an exception ?
-  //     // }
-  //   }
+//   if (typeof(measure["non-controlling"]) !== "undefined") {
+//     if (measure["non-controlling"] === "yes") {
+//       nonControlling = true;
+//     }
+//     // else if (measure["non-controlling"] !== "no") {
+//     //invalid value
+//     //TODO: should we raise an exception ?
+//     // }
+//   }
 
-  //   if (typeof(measure.width) !== "undefined") {
-  //     width = measure.width; //TODO: check if the value is a number
-  //   }
-  // };
+//   if (typeof(measure.width) !== "undefined") {
+//     width = measure.width; //TODO: check if the value is a number
+//   }
+// };
 
 }).call(this);
