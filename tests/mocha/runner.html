@@ -8,6 +8,8 @@
     <script src="./lib/assert.js"></script>
     <script>mocha.setup('bdd')</script>
 
+    <script src="../../deps/raphael/raphael-min.js"></script>
+
     <!-- VexFlow Uncompiled Sources -->
     <script src="../../deps/vexflow/src/header.js"></script>
     <script src="../../deps/vexflow/src/vex.js"></script>
@@ -117,7 +119,8 @@
         <ul>
             <li>
                 <h2>Hello-World</h2>
-                <canvas class="hello-world" width="200px", height="100px"></canvas>
+                <!-- <canvas class="hello-world" width="200px", height="100px"></canvas> -->
+                <div id="hello-world" width="200px" height="100px"></div>
             </li>
         </ul>
     </div>

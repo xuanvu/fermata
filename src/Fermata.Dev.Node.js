@@ -115,7 +115,7 @@ if (typeof _$jscoverage === 'undefined') {
   });
 
   // VM
-  var context = vm.createContext({ require: require, console: console, _$jscoverage: _$jscoverage });
+  var context = vm.createContext({ module: module, require: require, console: console, _$jscoverage: _$jscoverage });
   vm.runInContext(concatenated, context);
 
   module.exports = context.Fermata;

@@ -17,7 +17,7 @@
 	Fermata.Mapping.Barline.MusicXmlToVexflow = {
 		'normal' : {'light-heavy' : 2},
 		'forward' : {'heavy-light' : 4, 'light-heavy': 4},
-		'backward' : {'heavy-light' : 5, 'light-heavy': 5},
+		'backward' : {'heavy-light' : 5, 'light-heavy': 5}
 	};
 
 	Fermata.Mapping.Barline.getVexflow = function (type, style)

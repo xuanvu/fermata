@@ -4,8 +4,25 @@
   Fermata.Render.prototype.renderAll = function () {
     this.renderScoreHeader(this.data.getScorePartWise());
 
+    // Measure
     for (var i = 0 ; i < this.parts.idx.length ; i++) {
-      this.renderPart(this.parts.idx[i], i);
+      for (var j = 0 ; j < this.parts.idx[i].measure.length ; ++j) {
+        this.renderMeasure(j, i);
+      }
+    }
+
+    // Measure width
+    if (this.parts.idx.length > 0) {
+      for (var i = 0 ; i < this.parts.idx[0].measure.length ; i++) {
+        this.renderMeasureWidth(i);
+      }
+    }
+
+    // Staves
+    for (var i = 0 ; i < this.parts.idx.length ; i++) {
+      for (var j = 0 ; j < this.parts.idx[i].measure.length ; ++j) {
+        this.renderStaves(j, i);
+      }
     }
   };
 
@@ -26,10 +43,10 @@
     this.exploreSubNodes({ object: scoreHeader, processes: this.renderScoreHeaderProcess, ctx: this });
   };
 
-  Fermata.Render.prototype.renderPart = function (part, partIdx)
+  Fermata.Render.prototype.renderPart = function (partIdx)
   {
-    for (var i = 0 ; i < part.measure.length ; ++i) {
-      this.renderMeasure(part.measure[i], i, partIdx);
+    for (var i = 0 ; i < this.parts.idx[partIdx].measure.length ; ++i) {
+      this.renderMeasure(i, partIdx);
     }
   };
   
@@ -54,43 +71,71 @@
     { key: "bookmark", type: _render.FuncTypes.$0n, func: null }
   ];
 
-  Fermata.Render.prototype.renderMeasure = function (measure, measureIdx, partIdx)
+  Fermata.Render.prototype.renderMeasure = function (measureIdx, partIdx)
   {
-    this.cur = { measure: measure, measureIdx: measureIdx, part: this.parts.idx[partIdx], partIdx: partIdx };
-    measure.$fermata = { vexNotes: [], vexStaves: [], vexVoices: [] };
+    this.cur = { measure: this.parts.idx[partIdx].measure[measureIdx], measureIdx: measureIdx,
+                 part: this.parts.idx[partIdx], partIdx: partIdx };
+    this.cur.measure.$fermata = { vexNotes: [], vexStaves: [], vexVoices: [] };
 
     // Stave
     // this.renderMeasureAttributes(measure);
 
     // Measure content
-    this.exploreSubNodes({ object: measure, processes: this.renderMeasureProcess, ctx: this });
-    // this.renderMeasureWidth();
-    this.renderStaves(measure, measureIdx, partIdx);
-
+    this.exploreSubNodes({ object: this.cur.measure, processes: this.renderMeasureProcess, ctx: this });
     // console.log(measure.$fermata);
   };
 
-  Fermata.Render.prototype.renderMeasureWidth = function () {
-    console.log(this.cur.measure);
+  Fermata.Render.prototype.renderMeasureWidth = function (measureIdx) {
+        var i, j;
+    var maxWidth = new Array();
+    var maxNotes = new Array();
+
+    // size calculation, step 1: get max size for measure.number if already exist
+    // size calculation, step 2: get max note number for measure.number if already exist
+    for (j = 0 ; j < this.parts.idx.length ; j++) {
+      for (i = 0 ; i < this.parts.idx[j].measure.length ; ++i) {
+        // maxWidth[this.parts.idx[j].measure[i].$number] = Math.max(this.parts.idx[j].measure[i].$width, maxWidth[this.parts.idx[j].measure[i].$number]);
+        if (! isNaN(this.parts.idx[j].measure[i].$width))
+          if (typeof maxWidth[this.parts.idx[j].measure[i].$number] === "undefined" || this.parts.idx[j].measure[i].$width > maxWidth[this.parts.idx[j].measure[i].$number])
+            maxWidth[this.parts.idx[j].measure[i].$number] = this.parts.idx[j].measure[i].$width;
+
+        // maxNotes[this.parts.idx[j].measure[i].$number] = Math.max(this.parts.idx[j].measure[i].note.length, maxNotes[this.parts.idx[j].measure[i].$number]);
+        if (typeof maxNotes[this.parts.idx[j].measure[i].$number] === "undefined" || this.parts.idx[j].measure[i].note.length > maxNotes[this.parts.idx[j].measure[i].$number])
+          maxNotes[this.parts.idx[j].measure[i].$number] = this.parts.idx[j].measure[i].note.length;
+      }
+    }
+
+    // size calculation, step 4: if maxSize[measure.number] doesn't exist, calculate it
+    for (i = 0 ; i < this.parts.idx[0].measure.length ; ++i) {
+      if (typeof maxWidth[this.parts.idx[0].measure[i].$number] === "undefined")
+        maxWidth[this.parts.idx[0].measure[i].$number] = (40 * maxNotes[this.parts.idx[0].measure[i].$number]);
+    }
+
+    // size calculation, step 4: set defined size for each measure
+    for (j = 0 ; j < this.parts.idx.length ; j++) {
+      for (i = 0 ; i < this.parts.idx[j].measure.length ; ++i) {
+        this.parts.idx[j].measure[i].$width = maxWidth[this.parts.idx[j].measure[i].$number];
+      }
+    }
   };
 
-  Fermata.Render.prototype.renderStaves = function (measure, measureIdx, partIdx) {
-    var $fermata = measure.$fermata,
-        $fermataLastMeasure = measureIdx === 0 ? null : this.cur.part.measure[measureIdx - 1].$fermata;
+  Fermata.Render.prototype.renderStaves = function (measureIdx, partIdx) {
+    var part = this.parts.idx[partIdx], measure = part.measure[measureIdx], $fermata = measure.$fermata,
+        $fermataLastMeasure = measureIdx === 0 ? null : part.measure[measureIdx - 1].$fermata;
 
     measure.$width = parseInt(measure.$width, 10);
-    this.cur.part.$fermata = this.cur.part.$fermata || {};
-    this.cur.part.$fermata.staveY = partIdx === 0 ? 0 : this.parts.idx[partIdx - 1].$fermata.nextStaveY + 100;
-    this.cur.part.$fermata.nextStaveY = this.cur.part.$fermata.staveY;
+    part.$fermata = part.$fermata || {};
+    part.$fermata.staveY = partIdx === 0 ? 0 : this.parts.idx[partIdx - 1].$fermata.nextStaveY + 100;
+    part.$fermata.nextStaveY = part.$fermata.staveY;
 
     for (var i = 0; i < $fermata.attributes.staves; i++) {
       if ($fermata.vexStaves[i] === undefined) {
         if (measureIdx === 0) {
-          $fermata.vexStaves[i] = new Vex.Flow.Stave(20, (this.cur.part.$fermata.nextStaveY += i * 100), /*measure.note.length * 50*/measure.$width);
+          $fermata.vexStaves[i] = new Vex.Flow.Stave(20, (part.$fermata.nextStaveY += i * 100), measure.$width);
         }
         else {
           $fermata.vexStaves[i] = new Vex.Flow.Stave($fermataLastMeasure.vexStaves[i].x + $fermataLastMeasure.vexStaves[i].width,
-            $fermataLastMeasure.vexStaves[i].y, /*measure.note.length * 50*/measure.$width);
+            $fermataLastMeasure.vexStaves[i].y, measure.$width);
         }
       }
 

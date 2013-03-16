@@ -24,7 +24,8 @@ Fermata.Tests.Utils.CreateCanvas = function(selector) {
   }
   else {
     var container = $(selector)[0];
-    container.getContext('2d').clear();
+    // container.getContext('2d').clear();
+    $(selector).empty();
     return container;
   }
 };

@@ -130,4 +130,22 @@ describe('Fermata.Data', function () {
       assert.equal(fermataData.getPart('Music').id, helloWorld['score-partwise']['part-list']['score-part'][0].$id);
     });
   });
+
+  describe('forEachPart()', function () {
+    var fermataData;
+    beforeEach(function () {
+      fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should call callback for each part', function (done) {
+      var remaining = fermataData.getParts().idx.length;
+
+      fermataData.forEachPart(function (part, i) {
+        assert.equal(part, fermataData.getParts().idx[i]);
+        if (--remaining <= 0) {
+          done();
+        }
+      });
+    });
+  });
 });
