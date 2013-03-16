@@ -7,5 +7,9 @@
  *
  */
 
-var Fermata = Fermata || {};
+if (typeof Fermata === "undefined")
+{
+  Fermata = {};
+}
+//var Fermata = Fermata || {};
 Fermata.Vex = Vex;
