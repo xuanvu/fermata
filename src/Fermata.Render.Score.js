@@ -85,37 +85,30 @@
     // console.log(measure.$fermata);
   };
 
-  Fermata.Render.prototype.renderMeasureWidth = function (measureIdx) {
-        var i, j;
+  Fermata.Render.prototype.renderMeasureWidth = function (columnId) {
     var maxWidth = new Array();
     var maxNotes = new Array();
 
     // size calculation, step 1: get max size for measure.number if already exist
     // size calculation, step 2: get max note number for measure.number if already exist
-    for (j = 0 ; j < this.parts.idx.length ; j++) {
-      for (i = 0 ; i < this.parts.idx[j].measure.length ; ++i) {
-        // maxWidth[this.parts.idx[j].measure[i].$number] = Math.max(this.parts.idx[j].measure[i].$width, maxWidth[this.parts.idx[j].measure[i].$number]);
-        if (! isNaN(this.parts.idx[j].measure[i].$width))
-          if (typeof maxWidth[this.parts.idx[j].measure[i].$number] === "undefined" || this.parts.idx[j].measure[i].$width > maxWidth[this.parts.idx[j].measure[i].$number])
-            maxWidth[this.parts.idx[j].measure[i].$number] = this.parts.idx[j].measure[i].$width;
+    for (var j = 0 ; j < this.parts.idx.length ; j++) {
+      if (! isNaN(this.parts.idx[j].measure[columnId].$width))
+        if (typeof maxWidth[this.parts.idx[j].measure[columnId].$number] === "undefined" || this.parts.idx[j].measure[columnId].$width > maxWidth[this.parts.idx[j].measure[columnId].$number])
+          maxWidth[this.parts.idx[j].measure[columnId].$number] = this.parts.idx[j].measure[columnId].$width;
 
-        // maxNotes[this.parts.idx[j].measure[i].$number] = Math.max(this.parts.idx[j].measure[i].note.length, maxNotes[this.parts.idx[j].measure[i].$number]);
-        if (typeof maxNotes[this.parts.idx[j].measure[i].$number] === "undefined" || this.parts.idx[j].measure[i].note.length > maxNotes[this.parts.idx[j].measure[i].$number])
-          maxNotes[this.parts.idx[j].measure[i].$number] = this.parts.idx[j].measure[i].note.length;
-      }
+      if (typeof maxNotes[this.parts.idx[j].measure[columnId].$number] === "undefined" || this.parts.idx[j].measure[columnId].note.length > maxNotes[this.parts.idx[j].measure[columnId].$number])
+        maxNotes[this.parts.idx[j].measure[columnId].$number] = this.parts.idx[j].measure[columnId].note.length;
     }
 
     // size calculation, step 4: if maxSize[measure.number] doesn't exist, calculate it
-    for (i = 0 ; i < this.parts.idx[0].measure.length ; ++i) {
-      if (typeof maxWidth[this.parts.idx[0].measure[i].$number] === "undefined")
-        maxWidth[this.parts.idx[0].measure[i].$number] = (40 * maxNotes[this.parts.idx[0].measure[i].$number]);
-    }
+    // TODO: replace "40" by note's width value + minimal gap. 
+    var noteWidth = 40;
+    if (typeof maxWidth[this.parts.idx[0].measure[columnId].$number] === "undefined")
+      maxWidth[this.parts.idx[0].measure[columnId].$number] = (noteWidth * maxNotes[this.parts.idx[0].measure[columnId].$number]);
 
     // size calculation, step 4: set defined size for each measure
-    for (j = 0 ; j < this.parts.idx.length ; j++) {
-      for (i = 0 ; i < this.parts.idx[j].measure.length ; ++i) {
-        this.parts.idx[j].measure[i].$width = maxWidth[this.parts.idx[j].measure[i].$number];
-      }
+    for (var j = 0 ; j < this.parts.idx.length ; j++) {
+      this.parts.idx[j].measure[columnId].$width = maxWidth[this.parts.idx[j].measure[columnId].$number];
     }
   };
 
