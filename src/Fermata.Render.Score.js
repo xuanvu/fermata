@@ -91,6 +91,7 @@
 
     // size calculation, step 1: get max size for measure.number if already exist
     // size calculation, step 2: get max note number for measure.number if already exist
+    // TODO: check note's voice attribute impact on measure width.
     for (var j = 0 ; j < this.parts.idx.length ; j++) {
       if (! isNaN(this.parts.idx[j].measure[columnId].$width))
         if (typeof maxWidth[this.parts.idx[j].measure[columnId].$number] === "undefined" || this.parts.idx[j].measure[columnId].$width > maxWidth[this.parts.idx[j].measure[columnId].$number])
