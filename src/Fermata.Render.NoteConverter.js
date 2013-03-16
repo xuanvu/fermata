@@ -6,18 +6,18 @@
   var SoundType = Fermata.Render.SoundType;
   var PitchPitched = Fermata.Render.PitchPitched;
   var PitchRest = Fermata.Render.PitchRest;
-  
+
   Fermata.Render.NoteConverter = function ()
   {};
-  
+
   var NoteConverter = Fermata.Render.NoteConverter;
-  
+
   NoteConverter.prototype.division = 0;
   NoteConverter.prototype.beats = 0;
   NoteConverter.prototype.beatType = 0;
   NoteConverter.prototype.clefName = "";
   NoteConverter.prototype.change = 0;
-  
+
   NoteConverter.prototype.convert = function (noteData, attributes)
   {
     if (typeof(attributes) !== "undefined") {
@@ -31,7 +31,7 @@
     this.clefName = Fermata.Mapping.Clef.getVexflow(attributes.clef[key - 1].sign);
     this.change = attributes.clef[key - 1].change;
     var noteType = Fermata.Render.getNoteType(noteData[0]);
-    
+
     if (noteType === NoteType.NORMAL) {
       return this.convertNormalNote(noteData);
     }
@@ -44,25 +44,25 @@
     this.beats = attributes.beat.beats;
     this.divisions = attributes.divisions;
   };
-  
+
   NoteConverter.prototype.fillAttributesDefault = function ()
   {
     this.beatType = 4;
     this.beats = 4;
     this.divisions = 1;
   };
-  
+
   NoteConverter.prototype.convertPitch = function (dataPitch)
   {
     var dataOctave = parseInt(dataPitch.getOctave(), 10) - parseInt(this.change, 10);
     var dataStep = dataPitch.getStep();
-    
+
     //TODO: extract on a mapping function instead of use toLowerCase
     var vexPitch = dataStep.toLowerCase() + '/' + dataOctave;
-    
+
     return vexPitch;
   };
-  
+
   NoteConverter.prototype.convertDuration = function (noteData)
   {
     // console.log(noteData.duration);
@@ -70,10 +70,10 @@
     // console.log(this.divisions);
     var actualDuration = dataDuration / this.divisions;
     var vexDuration = Math.round(this.beatType / actualDuration).toString();
-    
+
     return vexDuration;
   };
-  
+
   NoteConverter.prototype.convertNormalNote = function (noteData)
   {
     var dataPitch = this.extractPitch(noteData[0]);
