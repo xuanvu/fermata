@@ -9,7 +9,7 @@
 
 if (typeof Fermata === "undefined")
 {
-  Fermata = {};
+  windows.Fermata = {};
 }
 //var Fermata = Fermata || {};
 Fermata.Vex = Vex;
