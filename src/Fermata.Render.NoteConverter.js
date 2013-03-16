@@ -37,7 +37,7 @@
     }
     return null;
   };
-  
+
   NoteConverter.prototype.fillAttributes = function (attributes)
   {
     this.beatType = attributes.beat.type;
@@ -97,7 +97,7 @@
     if (dataPitch.getType() === SoundType.REST) {
       vexDuration += 'r';
     }
-    
+
     var vexPitches = [];
     for (var i = 0 ; i < noteData.length ; i++)
     {
@@ -112,14 +112,14 @@
       auto_stem : auto_stem,
       clef : this.clefName
     });
-    
+
     return vexNote;
   };
-  
+
   NoteConverter.prototype.extractPitch = function (noteData)
   {
     var soundType = SoundType.getSoundType(noteData);
-    
+
     if (soundType === SoundType.PITCH) {
       return new PitchPitched(noteData);
     }
@@ -130,5 +130,5 @@
       return null;
     }
   };
-  
+
 }).call(this);

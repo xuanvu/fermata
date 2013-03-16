@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  
+
   // Includes
   var BeamProcessor = Fermata.Render.BeamProcessor;
 
@@ -18,7 +18,7 @@
   {
     return (typeof(note[0].staff) !== 'undefined') ? note[0].staff : 1;
   };
-  
+
   Fermata.Render.prototype.recordNote = function (vexNote, voice, staff)
   {
     if (typeof(this.cur.measure.$fermata.vexNotes[staff]) === "undefined") {
@@ -40,7 +40,7 @@
   Fermata.Render.prototype.renderNotes = function (notes)
   {
     var i = 0;
-    
+
     while (i < notes.length)
     {
       var notesToRender = [];
@@ -60,7 +60,7 @@
     var staff = this.extractNoteStaff(note);
     var voice = this.extractNoteVoice(note);
     var noteConverter = new Fermata.Render.NoteConverter();
-    
+
     var vexNote = noteConverter.convert(note, this.cur.measure.$fermata.attributes);
 
     // TODO MOVE
@@ -77,7 +77,7 @@
    //console.log(this.renderNoteProcess[noteType].call(this, note));
   };
 
-  
+
   Fermata.Render.getNoteType = function (note)
   {
     if (typeof(note.grace) !== "undefined") {
@@ -90,7 +90,7 @@
       return Fermata.Render.NoteType.NORMAL;
     }
   };
-  
+
   // Unused ?
   Fermata.Render.prototype.renderFullNote = function (fullNote)
   {
@@ -114,16 +114,16 @@
         func: null//TODO: implement the function
       }
     ];
- 
+
     this.exploreSubNodes({ object: fullNote, processes: processes });
-    
+
     var chord = false;
     if (typeof(fullNote.chord) !== "undefined")
     {
       chord = true;
     }
   };
-  
+
   Fermata.Render.prototype.renderNoteCommon = function (note)
   {
     var _this = this;
@@ -136,27 +136,27 @@
         }//TODO: add the others elements
       }
     ];
-  
+
     this.exploreSubNodes({ object: note, processes: processes });
   };
-  
+
   Fermata.Render.prototype.renderPitch = function (pitch)
   {
     var alter = 0;
     var step = pitch.step;
     var octave = pitch.octave;
-    
+
     if (typeof(pitch.alter) !== "undefined")
     {
       alter = pitch.alter;
     }
   };
-  
+
   Fermata.Render.prototype.renderUnpitched = function (unpitched)
   {
     var displayStep = null;
     var displayOctave = null;
-    
+
     if (typeof(unpitched["display-step"]) !== "undefined")
     {
       displayStep = unpitched["display-step"];
@@ -166,13 +166,13 @@
       displayOctave = unpitched["display-octave"];
     }
   };
-  
+
   Fermata.Render.prototype.renderRest = function (rest)
   {
     var displayStep = null;
     var displayOctave = null;
     var measure = false;
-    
+
     if (typeof(rest["display-step"]) !== "undefined")
     {
       displayStep = rest["display-step"];
@@ -189,16 +189,16 @@
       }
     }
   };
-  
+
   Fermata.Render.prototype.renderTie = function (tie)
   {
   //TODO
   };
-    
+
   Fermata.Render.prototype.renderType = function (type)
   {
     var size = Fermata.Render.SymbolSize.FULL;
-    
+
     if (typeof(type.size) !== "undefined")
     {
       if (type.size === Fermata.Render.SymbolSize.CUE)
@@ -232,5 +232,5 @@
       }
     }
   };
-  
+
 }).call(this);

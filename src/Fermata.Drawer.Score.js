@@ -177,7 +177,7 @@
   {
     for (var i = 0 ; i < measure.$fermata.vexBeams.length ; ++i) {
       var vexBeam = measure.$fermata.vexBeams[i];
-      
+
       vexBeam.setContext(this.ctx).draw();
     }
   };

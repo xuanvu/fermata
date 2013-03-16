@@ -1,15 +1,15 @@
 (function () {
   "use strict";
-  
+
   Fermata.Render.SoundType =
     {
     PITCH: "pitch",
     UNPITCHED: "unpitched",
     REST: "rest"
   };
-  
+
   var SoundType = Fermata.Render.SoundType;
-  
+
   Fermata.Render.SoundType.getSoundType = function (noteData)
   {
     if (typeof(noteData.pitch) !== "undefined")
@@ -29,5 +29,5 @@
       return null;
     }
   };
-  
+
 }).call(this);

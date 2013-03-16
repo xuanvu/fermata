@@ -7,24 +7,24 @@
     this.data = noteData;
     this.clef = clef;
   };
-  
+
   var PitchRest = Fermata.Render.PitchRest;
-  
+
   //includes
   var Clef = Fermata.Mapping.Clef;
-  
+
   //TODO: use the mapping file
   PitchRest.ClefMapping = {
     "treble": 4,
     "alto": 4,
     "bass": 3
   };
-  
+
   PitchRest.prototype.getType = function ()
   {
     return Fermata.Render.SoundType.REST;
   };
-  
+
   PitchRest.prototype.getStep = function ()
   {
     if (typeof(this.data["display-step"]) !== "undefined")
@@ -36,12 +36,12 @@
       return Clef.getMusicXml(this.clef);
     }
   };
-  
+
   PitchRest.prototype.getAlter = function ()
   {
     return null;
   };
-  
+
   PitchRest.prototype.getOctave = function ()
   {
     if (typeof(this.data["display-octave"]) !== "undefined")
@@ -53,5 +53,5 @@
       return PitchRest.ClefMapping[this.clef];
     }
   };
-  
+
 }).call(this);

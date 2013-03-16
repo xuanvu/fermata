@@ -70,7 +70,7 @@
       this.renderMeasure(i, partIdx);
     }
   };
-  
+
   Fermata.Render.prototype.renderPrint = function (print)
   {
     return;
@@ -230,7 +230,7 @@
           var keySign = Fermata.Mapping.Clef.Sign.getVexflow($fermata.attributes.keys.fifths, $fermata.attributes.keys.mode);
           new Vex.Flow.KeySignature(keySign).addToStave($fermata.vexStaves[i]);
         }
-        
+
         $fermata.vexStaves[i].addTimeSignature($fermata.attributes.beat.beats + '/' + $fermata.attributes.beat.type);
         $fermata.voiceWidth += 25;
       }

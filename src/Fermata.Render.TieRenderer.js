@@ -1,20 +1,20 @@
 (function () {
   "use strict";
-  
+
   Fermata.Render.TieRenderer = function ()
   {
     this.init();
   };
-  
+
   var TieRenderer = Fermata.Render.TieRenderer;
-  
+
   TieRenderer.prototype.init = function ()
   {
     this.previousTieNotes = [];
     this.vexNote = null;
     this.voice = null;
   };
-  
+
   TieRenderer.prototype.render = function (note, vexNote, voice)
   {
     this.storeParams(note, vexNote, voice);
@@ -28,7 +28,7 @@
       this.saveTieNote();
     }
   };
-  
+
   TieRenderer.prototype.storeParams = function (vexNote, voice)
   {
     this.vexNote = vexNote;
@@ -53,7 +53,7 @@
       return false;
     }
   };
-  
+
   TieRenderer.prototype.isNoteTieStop = function (note)
   {
     if (this.isNoteTie(note))
