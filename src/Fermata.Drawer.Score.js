@@ -95,14 +95,14 @@
             type = _barline.repeat.direction;
           }
           switch (_barline.location) {
-            case 'right':
-              measure.$fermata.vexStaves[i].setEndBarType(Fermata.Mapping.Barline.getVexflow(type, _barline.barStyle));
-              break;
-            case 'left':
-              measure.$fermata.vexStaves[i].setBegBarType(Fermata.Mapping.Barline.getVexflow(type, _barline.barStyle));
-              break;
-            default:
-              break;
+          case 'right':
+            measure.$fermata.vexStaves[i].setEndBarType(Fermata.Mapping.Barline.getVexflow(type, _barline.barStyle));
+            break;
+          case 'left':
+            measure.$fermata.vexStaves[i].setBegBarType(Fermata.Mapping.Barline.getVexflow(type, _barline.barStyle));
+            break;
+          default:
+            break;
           }
         }
       }
