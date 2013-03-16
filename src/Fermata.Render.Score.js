@@ -79,6 +79,7 @@
     this.cur = { measure: this.parts.idx[partIdx].measure[measureIdx], measureIdx: measureIdx,
                  part: this.parts.idx[partIdx], partIdx: partIdx };
     this.cur.measure.$fermata = { vexNotes: [], vexStaves: [], vexVoices: [], vexBeams: [] };
+    this.beamProcessor = new BeamProcessor(this.cur.measure.$fermata);
 
     // Stave
     // this.renderMeasureAttributes(measure);
