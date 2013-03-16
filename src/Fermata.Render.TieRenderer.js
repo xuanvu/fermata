@@ -18,7 +18,7 @@
   TieRenderer.prototype.render = function (note, vexNote, voice)
   {
     this.storeParams(note, vexNote, voice);
-    
+
     if (this.isNoteTieStop(note))
     {
       this.drawTie();
