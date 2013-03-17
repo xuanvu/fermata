@@ -101,6 +101,7 @@
         if (typeof maxWidth === "undefined" || this.parts.idx[j].measure[columnId].$width > maxWidth)
           maxWidth = this.parts.idx[j].measure[columnId].$width;
 
+      // TODO: check harmony impact.
       var notePerVoice = new Array();
       for (var i = 0 ; i < this.parts.idx[j].measure[columnId].note.length ; i++) {
         if (typeof notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] === "undefined")
