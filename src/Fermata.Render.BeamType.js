@@ -1,8 +1,7 @@
 (function () {
   "use strict";
 
-  Fermata.Render.BeamType =
-  {
+  Fermata.Render.BeamType = {
     BEGIN: "begin",
     CONTINUE: "continue",
     END: "end"

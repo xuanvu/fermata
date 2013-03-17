@@ -14,7 +14,6 @@
 
   // includes
   var BeamType = Fermata.Render.BeamType;
-
   var BeamProcessor = Fermata.Render.BeamProcessor;
 
   BeamProcessor.hasBeam = function (note)
@@ -26,22 +25,18 @@
   {
     this.vexNote = vexNote;
 
-    if (note.beam instanceof Array)
-    {
+    if (note.beam instanceof Array) {
       this.processBeams(note.beam);
     }
-    else
-    {
+    else {
       this.processBeam(note.beam);
     }
   };
 
   BeamProcessor.prototype.processBeams = function (beams)
   {
-    for (var i = 0 ; i < beams.length ; ++i)
-    {
+    for (var i = 0 ; i < beams.length ; ++i) {
       var beam = beams[i];
-
       this.processBeam(beam);
     }
   };
@@ -50,16 +45,13 @@
   {
     this.extractBeamData(beam);
 
-    if (this.beamType === BeamType.BEGIN)
-    {
+    if (this.beamType === BeamType.BEGIN) {
       this.beginBeam();
     }
-    else if (this.beamType === BeamType.CONTINUE)
-    {
+    else if (this.beamType === BeamType.CONTINUE) {
       this.continueBeam();
     }
-    else
-    {
+    else {
       this.endBeam();
     }
   };
@@ -67,7 +59,6 @@
   BeamProcessor.prototype.beginBeam = function ()
   {
     this.beamNotes[this.beamNumber] = [];
-
     this.beamNotes[this.beamNumber].push(this.vexNote);
   };
 
@@ -100,10 +91,8 @@
   {
     var values = [BeamType.BEGIN, BeamType.CONTINUE, BeamType.END];
 
-    for (var i = 0 ; i < values.length ; ++i)
-    {
-      if (values[i] === beam.content)
-      {
+    for (var i = 0 ; i < values.length ; ++i) {
+      if (values[i] === beam.content) {
         return values[i];
       }
     }

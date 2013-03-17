@@ -44,21 +44,23 @@ if (typeof require !== 'undefined') {
   var createMeasure = function (notesData) {
     var notes = createNotes(notesData);
     var measure = {
-      attributes: [{
-        "divisions": "4",
-        "key": {
-          "fifths": "1",
-          "mode": "major"
-        },
-        "time": {
-          "beats": "2",
-          "beat-type": "4"
-        },
-        "clef": {
-          "sign": "G",
-          "line": "2"
+      attributes: [
+        {
+          "divisions": "4",
+          "key": {
+            "fifths": "1",
+            "mode": "major"
+          },
+          "time": {
+            "beats": "2",
+            "beat-type": "4"
+          },
+          "clef": {
+            "sign": "G",
+            "line": "2"
+          }
         }
-      }],
+      ],
       note: notes
     };
     
@@ -73,16 +75,13 @@ if (typeof require !== 'undefined') {
       var noteData = notesData[i];
       
       noteData.beam = {};
-      if (notes.length === 0)
-      {
+      if (notes.length === 0) {
         noteData.beam.content = BeamType.BEGIN;
       }
-      else if (notes.length === notesData.length - 1)
-      {
+      else if (notes.length === notesData.length - 1) {
         noteData.beam.content = BeamType.END;
       }
-      else
-      {
+      else {
         noteData.beam.content = BeamType.CONTINUE;
       }
       
@@ -100,31 +99,31 @@ if (typeof require !== 'undefined') {
       it("stem forced up", function (){
 
         var notesData = [
-        {
-          pitch: {
-            step: "E",
-            octave: "4"
-          },
-          stem: "up"
-        }, {
-          pitch: {
-            step: "F",
-            octave: "4"
-          },
-          stem: "up"
-        }, {
-          pitch: {
-            step: "A",
-            octave: "4"
-          },
-          stem: "up"
-        }, {
-          pitch: {
-            step: "B",
-            octave: "4"
-          },
-          stem: "up"
-        }
+          {
+            pitch: {
+              step: "E",
+              octave: "4"
+            },
+            stem: "up"
+          }, {
+            pitch: {
+              step: "F",
+              octave: "4"
+            },
+            stem: "up"
+          }, {
+            pitch: {
+              step: "A",
+              octave: "4"
+            },
+            stem: "up"
+          }, {
+            pitch: {
+              step: "B",
+              octave: "4"
+            },
+            stem: "up"
+          }
         ];
 
         renderMeasure(notesData);
@@ -133,31 +132,31 @@ if (typeof require !== 'undefined') {
       it("stem forced down", function (){
 
         var notesData = [
-        {
-          pitch: {
-            step: "E",
-            octave: "4"
-          },
-          stem: "down"
-        }, {
-          pitch: {
-            step: "F",
-            octave: "4"
-          },
-          stem: "down"
-        }, {
-          pitch: {
-            step: "A",
-            octave: "4"
-          },
-          stem: "down"
-        }, {
-          pitch: {
-            step: "B",
-            octave: "4"
-          },
-          stem: "down"
-        }
+          {
+            pitch: {
+              step: "E",
+              octave: "4"
+            },
+            stem: "down"
+          }, {
+            pitch: {
+              step: "F",
+              octave: "4"
+            },
+            stem: "down"
+          }, {
+            pitch: {
+              step: "A",
+              octave: "4"
+            },
+            stem: "down"
+          }, {
+            pitch: {
+              step: "B",
+              octave: "4"
+            },
+            stem: "down"
+          }
         ];
 
         renderMeasure(notesData);
@@ -166,27 +165,27 @@ if (typeof require !== 'undefined') {
       it("stem unspecified (close pitch)", function (){
 
         var notesData = [
-        {
-          pitch: {
-            step: "D",
-            octave: "4"
+          {
+            pitch: {
+              step: "D",
+              octave: "4"
+            }
+          }, {
+            pitch: {
+              step: "E",
+              octave: "4"
+            }
+          }, {
+            pitch: {
+              step: "F",
+              octave: "4"
+            }
+          }, {
+            pitch: {
+              step: "G",
+              octave: "4"
+            }
           }
-        }, {
-          pitch: {
-            step: "E",
-            octave: "4"
-          }
-        }, {
-          pitch: {
-            step: "F",
-            octave: "4"
-          }
-        }, {
-          pitch: {
-            step: "G",
-            octave: "4"
-          }
-        }
         ];
         
         renderMeasure(notesData);      
@@ -195,27 +194,27 @@ if (typeof require !== 'undefined') {
       it("stem unspecified (distant pitch)", function (){
 
         var notesData = [
-        {
-          pitch: {
-            step: "E",
-            octave: "4"
+          {
+            pitch: {
+              step: "E",
+              octave: "4"
+            }
+          }, {
+            pitch: {
+              step: "F",
+              octave: "4"
+            }
+          }, {
+            pitch: {
+              step: "A",
+              octave: "4"
+            }
+          }, {
+            pitch: {
+              step: "B",
+              octave: "4"
+            }
           }
-        }, {
-          pitch: {
-            step: "F",
-            octave: "4"
-          }
-        }, {
-          pitch: {
-            step: "A",
-            octave: "4"
-          }
-        }, {
-          pitch: {
-            step: "B",
-            octave: "4"
-          }
-        }
         ];
         
         assert.throws(function () {
@@ -228,31 +227,31 @@ if (typeof require !== 'undefined') {
       it("stem forced bad", function (){
 
         var notesData = [
-        {
-          pitch: {
-            step: "E",
-            octave: "4"
-          },
-          stem: "down"
-        }, {
-          pitch: {
-            step: "F",
-            octave: "4"
-          },
-          stem: "up"
-        }, {
-          pitch: {
-            step: "A",
-            octave: "4"
-          },
-          stem: "down"
-        }, {
-          pitch: {
-            step: "B",
-            octave: "4"
-          },
-          stem: "up"
-        }
+          {
+            pitch: {
+              step: "E",
+              octave: "4"
+            },
+            stem: "down"
+          }, {
+            pitch: {
+              step: "F",
+              octave: "4"
+            },
+            stem: "up"
+          }, {
+            pitch: {
+              step: "A",
+              octave: "4"
+            },
+            stem: "down"
+          }, {
+            pitch: {
+              step: "B",
+              octave: "4"
+            },
+            stem: "up"
+          }
         ];
         
         assert.throws(function () {
