@@ -89,50 +89,57 @@
     var maxWidth;
     var maxNotes = 0;
 
-    console.log("measure: ", columnId);
-
-    // size calculation, step 1: get max size for measure.number if already exist
-    // size calculation, step 2: get max note number for measure.number if already exist
     for (var j = 0 ; j < this.parts.idx.length ; j++) {
-
-      // console.log("line: ", j);
-
       if (! isNaN(this.parts.idx[j].measure[columnId].$width))
         if (typeof maxWidth === "undefined" || this.parts.idx[j].measure[columnId].$width > maxWidth)
           maxWidth = this.parts.idx[j].measure[columnId].$width;
 
-      // TODO: check harmony impact.
       var notePerVoice = new Array();
       for (var i = 0 ; i < this.parts.idx[j].measure[columnId].note.length ; i++) {
         if (typeof notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] === "undefined")
-          notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] = 1;
+          notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] = this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
         else
-          notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] += 1;
+          notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] += this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
       }
-
-      // console.log("notePerVoice: ", notePerVoice);
 
       for (var i = 0 ; i < notePerVoice.length ; i++) {
         if ( (! typeof notePerVoice[i] === "undefined") || notePerVoice[i] > maxNotes)
           maxNotes = notePerVoice[i];
       }
-
-      // console.log("maxNotes: ", maxNotes);
     }
 
-    // size calculation, step 4: if maxSize[measure.number] doesn't exist, calculate it
-    // TODO: replace "40" by note's width value + minimal gap.
-    var noteWidth = 40;
     if (typeof maxWidth === "undefined")
-      maxWidth = (noteWidth * maxNotes);
+      maxWidth = maxNotes + this.armWidth(columnId);
 
-    // size calculation, step 4: set defined size for each measure
     for (var j = 0 ; j < this.parts.idx.length ; j++) {
       this.parts.idx[j].measure[columnId].$width = maxWidth;
     }
-
-    // console.log("maxWidth: ", maxWidth);
   };
+
+  Fermata.Render.prototype.armWidth = function (columnId) {
+    // TODO: define clefWidth, signatureWidth and timeWidth.
+    var width = 0;
+    if (typeof this.parts.idx[0].measure[columnId].attributes != "undefined") {
+      if (typeof this.parts.idx[0].measure[columnId].attributes[0].clef != "undefined")
+        width += 40;//clefWidth;
+      if (typeof this.parts.idx[0].measure[columnId].attributes[0].key != "undefined")
+        width += 40;//signatureWidth
+      if (typeof this.parts.idx[0].measure[columnId].attributes[0].time != "undefined")
+        width += 40;//timeWidth
+    }
+    return width;
+  }
+
+  Fermata.Render.prototype.noteWidth = function (note) {
+    // TODO: consider vexflow note width + dot + alteration instead of return 40.
+    var width = 40;//noteWidth;
+    if (typeof note.accidental != "undefined")
+      width += 30;//accidentalWidth;
+    // TODO: what is dot?
+    // if (typeof note. != "undefined")
+    //   width += 30;//dotWidth;
+    return width;
+  }
 
   Fermata.Render.prototype.renderStaves = function (measureIdx, partIdx) {
     var part = this.parts.idx[partIdx], measure = part.measure[measureIdx], $fermata = measure.$fermata,
