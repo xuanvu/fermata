@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  
+
   Fermata.Render.SymbolSize =
   {
     FULL: "full",

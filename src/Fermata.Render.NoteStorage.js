@@ -1,32 +1,32 @@
 (function () {
   "use strict";
-  
+
   Fermata.Render.NoteStorage = function ()
   {
     this.init();
   };
-  
+
   var NoteStorage = Fermata.Render.NoteStorage;
-  
+
   NoteStorage.prototype.init = function ()
   {
     this.data = [];
     this.allNotes = [];
   };
-  
+
   NoteStorage.prototype.clear = function ()
   {
     this.data = [];
   };
-  
+
   NoteStorage.prototype.store = function (note, voice, staff)
   {
     this.checkCreateVoice(staff, voice);
-    
+
     this.data[staff][voice].push(note);
     this.allNotes.push(note);
   };
-  
+
   NoteStorage.prototype.getNotes = function (voice, staff)
   {
     if (!this.checkStaff(staff))
@@ -40,12 +40,12 @@
     }
     return this.data[staff][voice];
   };
-  
+
   NoteStorage.prototype.getAllNotes = function ()
   {
     return this.allNotes;
   };
-  
+
   NoteStorage.prototype.checkCreateVoice = function (staff, voice)
   {
     this.checkCreateStaff(staff);

@@ -1,6 +1,6 @@
 (function () {
 	"use strict";
-	
+
   Fermata.Utils = {};
   Fermata.Utils.Clone = function (obj) {
     var newObj = (Object.prototype.toString.call(obj) === '[object Array]') ? [] : {};

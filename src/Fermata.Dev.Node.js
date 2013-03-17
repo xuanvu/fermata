@@ -6,6 +6,7 @@ var vm = require('vm'),
     fs = require('fs'),
     path = require('path');
 
+/*global _$jscoverage:true */
 if (typeof _$jscoverage === 'undefined') {
   _$jscoverage = {};
 }
@@ -79,7 +80,10 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Data.js",
     "Fermata.Mapping.Clef.js",
     "Fermata.Mapping.Direction.js",
+    "Fermata.Mapping.Connector.js",
     "Fermata.Render.js",
+    "Fermata.Render.BeamType.js",
+    "Fermata.Render.BeamProcessor.js",
     "Fermata.Render.Call.js",
     "Fermata.Render.SymbolSize.js",
     "Fermata.Render.NoteStorage.js",

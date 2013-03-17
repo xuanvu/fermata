@@ -5,19 +5,19 @@
   {
     this.data = noteData;
   };
-  
+
   var PitchPitched = Fermata.Render.PitchPitched;
-  
+
   PitchPitched.prototype.getType = function ()
   {
     return Fermata.Render.SoundType.PITCH;
   };
-  
+
   PitchPitched.prototype.getStep = function ()
   {
     return this.data.pitch.step;
   };
-  
+
   PitchPitched.prototype.getAlter = function ()
   {
     if (typeof(this.data.pitch.alter) !== "undefined") {
@@ -27,10 +27,10 @@
       return null;
     }
   };
-  
+
   PitchPitched.prototype.getOctave = function ()
   {
     return this.data.pitch.octave;
   };
-  
+
 }).call(this);

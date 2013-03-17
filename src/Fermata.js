@@ -7,5 +7,6 @@
  *
  */
 
+/*global Fermata:true */
 var Fermata = Fermata || {};
 Fermata.Vex = Vex;

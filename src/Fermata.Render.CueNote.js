@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  
+
   Fermata.Render.prototype.renderCueNote = function (cueNote)
   {
     var obj = this;
@@ -12,9 +12,9 @@
       }
     ];
     this.exploreSubNodes({ object: cueNote, processes: processes });
-      
+
     this.renderFullNote(cueNote);
     var duration = cueNote.duration;
   };
-  
+
 }).call(this);
