@@ -6,6 +6,7 @@ var vm = require('vm'),
     fs = require('fs'),
     path = require('path');
 
+/*global _$jscoverage:true */
 if (typeof _$jscoverage === 'undefined') {
   _$jscoverage = {};
 }
