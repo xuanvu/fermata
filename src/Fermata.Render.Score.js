@@ -191,16 +191,17 @@
   Fermata.Render.prototype.renderMeasureWidth = function (columnId) {
     var maxWidth;
     var maxNotes = 0;
+    var i, j;
 
-    for (var j = 0 ; j < this.parts.idx.length ; j++) {
+    for (j = 0 ; j < this.parts.idx.length ; j++) {
       if (! isNaN(this.parts.idx[j].measure[columnId].$width)) {
         if (typeof maxWidth === "undefined" || this.parts.idx[j].measure[columnId].$width > maxWidth) {
           maxWidth = this.parts.idx[j].measure[columnId].$width;
         }
       }
 
-      var notePerVoice = new Array();
-      for (var i = 0 ; i < this.parts.idx[j].measure[columnId].note.length ; i++) {
+      var notePerVoice = [];
+      for (i = 0 ; i < this.parts.idx[j].measure[columnId].note.length ; i++) {
         if (typeof notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] === "undefined") {
           notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] = this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
         }
@@ -209,8 +210,8 @@
         }
       }
 
-      for (var i = 0 ; i < notePerVoice.length ; i++) {
-        if ( (! typeof notePerVoice[i] === "undefined") || notePerVoice[i] > maxNotes) {
+      for (i = 0 ; i < notePerVoice.length ; i++) {
+        if ( typeof notePerVoice[i] !== "undefined" || notePerVoice[i] > maxNotes) {
           maxNotes = notePerVoice[i];
         }
       }
@@ -220,7 +221,7 @@
       maxWidth = maxNotes + this.armWidth(columnId);
     }
 
-    for (var j = 0 ; j < this.parts.idx.length ; j++) {
+    for (j = 0 ; j < this.parts.idx.length ; j++) {
       this.parts.idx[j].measure[columnId].$width = maxWidth;
     }
   };
@@ -243,21 +244,21 @@
       }
     }
     return width;
-  }
+  };
 
   Fermata.Render.prototype.noteWidth = function (note) {
     // TODO: consider vexflow note width + dot + alteration instead of return 40.
     //noteWidth
     var width = 40;
-    if (typeof note.accidental != "undefined") {
+    if (typeof note.accidental !== "undefined") {
       //accidentalWidth
       width += 30;
     }
     // TODO: what is dot?
-    // if (typeof note. != "undefined")
+    // if (typeof note. !== "undefined")
     //   width += 30;//dotWidth;
     return width;
-  }
+  };
 
   Fermata.Render.prototype.renderAllStaves = function () {
     for (var i = 0 ; i < this.parts.idx.length ; i++) {
@@ -265,7 +266,7 @@
         this.renderStaves(j, i);
       }
     }
-  }
+  };
 
   Fermata.Render.prototype.renderStaves = function (measureIdx, partIdx) {
     var part = this.parts.idx[partIdx], measure = part.measure[measureIdx], $fermata = measure.$fermata,
