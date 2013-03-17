@@ -6,7 +6,7 @@
   Fermata.Drawer.prototype.drawAll = function () {
     // Todo: precalcul in render
     this.container.height += this.parts.idx.length * Fermata.Drawer.PART_HEIGHT;
-    
+
     for (var i = 0 ; i < this.parts.idx.length ; i++) {
       this.staves[i] = [];
       this.drawPart(this.parts.idx[i], i);
@@ -19,7 +19,7 @@
       var lastPartlastMeasure = this.parts.idx[this.parts.idx.length - 1].measure[this.parts.idx[this.parts.idx.length - 1].measure.length - 1];
       // var info = Fermata.Utils.FirstLast(this.staves);
       var line = new Vex.Flow.StaveConnector(this.parts.idx[0].measure[0].$fermata.vexStaves[0],
-        lastPartlastMeasure.$fermata.vexStaves[lastPartlastMeasure.$fermata.vexStaves.length - 1]);
+                                             lastPartlastMeasure.$fermata.vexStaves[lastPartlastMeasure.$fermata.vexStaves.length - 1]);
       line.setType(Vex.Flow.StaveConnector.type.SINGLE);
       line.setContext(this.ctx);
       line.draw();
@@ -50,7 +50,7 @@
     // }
 
     // TODO widths of measures
-      var i;
+    var i;
     for (i = 0; i < measure.$fermata.attributes.staves; i++)
     {
       // if (this.staves[partIdx][i] === undefined) {
@@ -87,7 +87,7 @@
 
       if (measure.$fermata.barline !== undefined)
       {
-        // console.log(measure.$fermata.barline);
+        console.log(measure.$fermata.barline);
         for (var u = 0; u < measure.$fermata.barline.length; u++) {
           var _barline = measure.$fermata.barline[u];
           var type = 'normal';
@@ -154,32 +154,21 @@
       measure.$fermata.vexVoices[i].draw(this.ctx, measure.$fermata.vexStaves[i]);
     }
 
-    this.drawBeam(measure);
 
-  // TODO: clean & mv renderDirectionData
-  // for (i = 0; i < this.renderDirectionData.length; i++) {
-  //   var data = this.renderDirectionData[i];
-  //   var tmpNote = {
-  //     first_note : this.getNote(data.noteAfter),
-  //     last_note : this.getNote(data.noteBefore)
-  //   };
-  //   var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data.type));
-  //   hp.setContext(this.ctx);
-  //   hp.setPosition(Fermata.Mapping.Direction.getVexflow(this.renderDirectionData.placement));
-  //   hp.draw();
-  //   if (i === this.renderDirectionData.length -1 ) {
-  //     this.renderDirectionData = [];
-  //   }
-  // }
+    // TODO: clean & mv renderDirectionData
+    // for (i = 0; i < this.renderDirectionData.length; i++) {
+    //   var data = this.renderDirectionData[i];
+    //   var tmpNote = {
+    //     first_note : this.getNote(data.noteAfter),
+    //     last_note : this.getNote(data.noteBefore)
+    //   };
+    //   var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data.type));
+    //   hp.setContext(this.ctx);
+    //   hp.setPosition(Fermata.Mapping.Direction.getVexflow(this.renderDirectionData.placement));
+    //   hp.draw();
+    //   if (i === this.renderDirectionData.length -1 ) {
+    //     this.renderDirectionData = [];
+    //   }
+    // }
   };
-
-  Fermata.Drawer.prototype.drawBeam = function (measure)
-  {
-    for (var i = 0 ; i < measure.$fermata.vexBeams.length ; ++i) {
-      var vexBeam = measure.$fermata.vexBeams[i];
-
-      vexBeam.setContext(this.ctx).draw();
-    }
-  };
-
 }).call(this);
