@@ -81,9 +81,9 @@ if (typeof require !== 'undefined') {
             BeamProcessor.getBeamType(beam);
           },
           function(err) {
-            return (err instanceof Error) && /bad value/.test(err);
+            return /bad value/.test(err);
           }
-          );
+        );
       });
     });  
    
@@ -115,15 +115,15 @@ if (typeof require !== 'undefined') {
           }];
           
           var vexNotes = [
-          new Vex.Flow.StaveNote({
+          new Fermata.Vex.Flow.StaveNote({
             keys: ["c/4"], 
             duration: "8"
           }),
-          new Vex.Flow.StaveNote({
+          new Fermata.Vex.Flow.StaveNote({
             keys: ["d/4"], 
             duration: "8"
           }),
-          new Vex.Flow.StaveNote({
+          new Fermata.Vex.Flow.StaveNote({
             keys: ["g/4"], 
             duration: "8"
           }),
@@ -140,7 +140,7 @@ if (typeof require !== 'undefined') {
           
           // Then
           assert.strictEqual($fermata.vexBeams.length, 1);
-          assert.ok($fermata.vexBeams[0] instanceof Vex.Flow.Beam);          
+          assert.ok($fermata.vexBeams[0] instanceof Fermata.Vex.Flow.Beam);          
         });
       });
     });

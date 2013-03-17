@@ -221,7 +221,7 @@ if (typeof require !== 'undefined') {
         assert.throws(function () {
           renderMeasure(notesData);
         },
-        Vex.RuntimeError
+        Fermata.Vex.RuntimeError
         );        
       });
       
@@ -258,7 +258,7 @@ if (typeof require !== 'undefined') {
         assert.throws(function () {
           renderMeasure(notesData);
         },
-        Vex.RuntimeError
+        Fermata.Vex.RuntimeError
         );        
       });      
     });
