@@ -193,26 +193,32 @@
     var maxNotes = 0;
 
     for (var j = 0 ; j < this.parts.idx.length ; j++) {
-      if (! isNaN(this.parts.idx[j].measure[columnId].$width))
-        if (typeof maxWidth === "undefined" || this.parts.idx[j].measure[columnId].$width > maxWidth)
+      if (! isNaN(this.parts.idx[j].measure[columnId].$width)) {
+        if (typeof maxWidth === "undefined" || this.parts.idx[j].measure[columnId].$width > maxWidth) {
           maxWidth = this.parts.idx[j].measure[columnId].$width;
+        }
+      }
 
       var notePerVoice = new Array();
       for (var i = 0 ; i < this.parts.idx[j].measure[columnId].note.length ; i++) {
-        if (typeof notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] === "undefined")
+        if (typeof notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] === "undefined") {
           notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] = this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
-        else
+        }
+        else {
           notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] += this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
+        }
       }
 
       for (var i = 0 ; i < notePerVoice.length ; i++) {
-        if ( (! typeof notePerVoice[i] === "undefined") || notePerVoice[i] > maxNotes)
+        if ( (! typeof notePerVoice[i] === "undefined") || notePerVoice[i] > maxNotes) {
           maxNotes = notePerVoice[i];
+        }
       }
     }
 
-    if (typeof maxWidth === "undefined")
+    if (typeof maxWidth === "undefined") {
       maxWidth = maxNotes + this.armWidth(columnId);
+    }
 
     for (var j = 0 ; j < this.parts.idx.length ; j++) {
       this.parts.idx[j].measure[columnId].$width = maxWidth;
@@ -222,22 +228,31 @@
   Fermata.Render.prototype.armWidth = function (columnId) {
     // TODO: define clefWidth, signatureWidth and timeWidth.
     var width = 0;
-    if (typeof this.parts.idx[0].measure[columnId].attributes != "undefined") {
-      if (typeof this.parts.idx[0].measure[columnId].attributes[0].clef != "undefined")
-        width += 40;//clefWidth;
-      if (typeof this.parts.idx[0].measure[columnId].attributes[0].key != "undefined")
-        width += 40;//signatureWidth
-      if (typeof this.parts.idx[0].measure[columnId].attributes[0].time != "undefined")
-        width += 40;//timeWidth
+    if (typeof this.parts.idx[0].measure[columnId].attributes !== "undefined") {
+      if (typeof this.parts.idx[0].measure[columnId].attributes[0].clef !== "undefined") {
+        //clefWidth
+        width += 40;
+      }
+      if (typeof this.parts.idx[0].measure[columnId].attributes[0].key !== "undefined") {
+        //signatureWidth
+        width += 40;
+      }
+      if (typeof this.parts.idx[0].measure[columnId].attributes[0].time !== "undefined") {
+        //timeWidth
+        width += 40;
+      }
     }
     return width;
   }
 
   Fermata.Render.prototype.noteWidth = function (note) {
     // TODO: consider vexflow note width + dot + alteration instead of return 40.
-    var width = 40;//noteWidth;
-    if (typeof note.accidental != "undefined")
-      width += 30;//accidentalWidth;
+    //noteWidth
+    var width = 40;
+    if (typeof note.accidental != "undefined") {
+      //accidentalWidth
+      width += 30;
+    }
     // TODO: what is dot?
     // if (typeof note. != "undefined")
     //   width += 30;//dotWidth;
