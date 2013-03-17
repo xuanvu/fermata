@@ -49,7 +49,7 @@
       this.renderMeasure(i, partIdx);
     }
   };
-  
+
   Fermata.Render.prototype.renderPrint = function (print)
   {
     return;
@@ -86,31 +86,51 @@
   };
 
   Fermata.Render.prototype.renderMeasureWidth = function (columnId) {
-    var maxWidth = new Array();
-    var maxNotes = new Array();
+    var maxWidth;
+    var maxNotes = 0;
+
+    console.log("measure: ", columnId);
 
     // size calculation, step 1: get max size for measure.number if already exist
     // size calculation, step 2: get max note number for measure.number if already exist
-    // TODO: check note's voice attribute impact on measure width.
     for (var j = 0 ; j < this.parts.idx.length ; j++) {
-      if (! isNaN(this.parts.idx[j].measure[columnId].$width))
-        if (typeof maxWidth[this.parts.idx[j].measure[columnId].$number] === "undefined" || this.parts.idx[j].measure[columnId].$width > maxWidth[this.parts.idx[j].measure[columnId].$number])
-          maxWidth[this.parts.idx[j].measure[columnId].$number] = this.parts.idx[j].measure[columnId].$width;
 
-      if (typeof maxNotes[this.parts.idx[j].measure[columnId].$number] === "undefined" || this.parts.idx[j].measure[columnId].note.length > maxNotes[this.parts.idx[j].measure[columnId].$number])
-        maxNotes[this.parts.idx[j].measure[columnId].$number] = this.parts.idx[j].measure[columnId].note.length;
+      // console.log("line: ", j);
+
+      if (! isNaN(this.parts.idx[j].measure[columnId].$width))
+        if (typeof maxWidth === "undefined" || this.parts.idx[j].measure[columnId].$width > maxWidth)
+          maxWidth = this.parts.idx[j].measure[columnId].$width;
+
+      var notePerVoice = new Array();
+      for (var i = 0 ; i < this.parts.idx[j].measure[columnId].note.length ; i++) {
+        if (typeof notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] === "undefined")
+          notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] = 1;
+        else
+          notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] += 1;
+      }
+
+      // console.log("notePerVoice: ", notePerVoice);
+
+      for (var i = 0 ; i < notePerVoice.length ; i++) {
+        if ( (! typeof notePerVoice[i] === "undefined") || notePerVoice[i] > maxNotes)
+          maxNotes = notePerVoice[i];
+      }
+
+      // console.log("maxNotes: ", maxNotes);
     }
 
     // size calculation, step 4: if maxSize[measure.number] doesn't exist, calculate it
-    // TODO: replace "40" by note's width value + minimal gap. 
+    // TODO: replace "40" by note's width value + minimal gap.
     var noteWidth = 40;
-    if (typeof maxWidth[this.parts.idx[0].measure[columnId].$number] === "undefined")
-      maxWidth[this.parts.idx[0].measure[columnId].$number] = (noteWidth * maxNotes[this.parts.idx[0].measure[columnId].$number]);
+    if (typeof maxWidth === "undefined")
+      maxWidth = (noteWidth * maxNotes);
 
     // size calculation, step 4: set defined size for each measure
     for (var j = 0 ; j < this.parts.idx.length ; j++) {
-      this.parts.idx[j].measure[columnId].$width = maxWidth[this.parts.idx[j].measure[columnId].$number];
+      this.parts.idx[j].measure[columnId].$width = maxWidth;
     }
+
+    // console.log("maxWidth: ", maxWidth);
   };
 
   Fermata.Render.prototype.renderStaves = function (measureIdx, partIdx) {
@@ -144,7 +164,7 @@
           var keySign = Fermata.Mapping.Clef.Sign.getVexflow($fermata.attributes.keys.fifths, $fermata.attributes.keys.mode);
           new Vex.Flow.KeySignature(keySign).addToStave($fermata.vexStaves[i]);
         }
-        
+
         $fermata.vexStaves[i].addTimeSignature($fermata.attributes.beat.beats + '/' + $fermata.attributes.beat.type);
         $fermata.voiceWidth += 25;
       }
