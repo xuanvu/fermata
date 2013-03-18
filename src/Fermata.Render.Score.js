@@ -211,7 +211,7 @@
       }
 
       for (i = 0 ; i < notePerVoice.length ; i++) {
-        if ( typeof notePerVoice[i] !== "undefined" || notePerVoice[i] > maxNotes) {
+        if (typeof notePerVoice[i] !== "undefined" && notePerVoice[i] > maxNotes) {
           maxNotes = notePerVoice[i];
         }
       }
