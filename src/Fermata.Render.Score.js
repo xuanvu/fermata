@@ -188,7 +188,76 @@
     }
   };
 
-  Fermata.Render.prototype.renderMeasureWidth = function (measureIdx) {
+  Fermata.Render.prototype.renderMeasureWidth = function (columnId) {
+    var maxWidth;
+    var maxNotes = 0;
+    var i, j;
+
+    for (j = 0 ; j < this.parts.idx.length ; j++) {
+      if (! isNaN(this.parts.idx[j].measure[columnId].$width)) {
+        if (typeof maxWidth === "undefined" || this.parts.idx[j].measure[columnId].$width > maxWidth) {
+          maxWidth = this.parts.idx[j].measure[columnId].$width;
+        }
+      }
+
+      var notePerVoice = [];
+      for (i = 0 ; i < this.parts.idx[j].measure[columnId].note.length ; i++) {
+        if (typeof notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] === "undefined") {
+          notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] = this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
+        }
+        else {
+          notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] += this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
+        }
+      }
+
+      for (i = 0 ; i < notePerVoice.length ; i++) {
+        if (typeof notePerVoice[i] !== "undefined" && notePerVoice[i] > maxNotes) {
+          maxNotes = notePerVoice[i];
+        }
+      }
+    }
+
+    if (typeof maxWidth === "undefined") {
+      maxWidth = maxNotes + this.armWidth(columnId);
+    }
+
+    for (j = 0 ; j < this.parts.idx.length ; j++) {
+      this.parts.idx[j].measure[columnId].$width = maxWidth;
+    }
+  };
+
+  Fermata.Render.prototype.armWidth = function (columnId) {
+    // TODO: define clefWidth, signatureWidth and timeWidth.
+    var width = 0;
+    if (typeof this.parts.idx[0].measure[columnId].attributes !== "undefined") {
+      if (typeof this.parts.idx[0].measure[columnId].attributes[0].clef !== "undefined") {
+        //clefWidth
+        width += 40;
+      }
+      if (typeof this.parts.idx[0].measure[columnId].attributes[0].key !== "undefined") {
+        //signatureWidth
+        width += 40;
+      }
+      if (typeof this.parts.idx[0].measure[columnId].attributes[0].time !== "undefined") {
+        //timeWidth
+        width += 40;
+      }
+    }
+    return width;
+  };
+
+  Fermata.Render.prototype.noteWidth = function (note) {
+    // TODO: consider vexflow note width + dot + alteration instead of return 40.
+    //noteWidth
+    var width = 40;
+    if (typeof note.accidental !== "undefined") {
+      //accidentalWidth
+      width += 30;
+    }
+    // TODO: what is dot?
+    // if (typeof note. !== "undefined")
+    //   width += 30;//dotWidth;
+    return width;
   };
 
   Fermata.Render.prototype.renderAllStaves = function () {
