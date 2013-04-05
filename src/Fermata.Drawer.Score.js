@@ -87,7 +87,7 @@
 
       if (measure.$fermata.barline !== undefined)
       {
-        console.log(measure.$fermata.barline);
+        // console.log(measure.$fermata.barline);
         for (var u = 0; u < measure.$fermata.barline.length; u++) {
           var _barline = measure.$fermata.barline[u];
           var type = 'normal';
