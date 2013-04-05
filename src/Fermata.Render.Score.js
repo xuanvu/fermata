@@ -189,13 +189,13 @@
   };
 
   Fermata.Render.prototype.renderMeasureWidth = function (columnId) {
-    var maxWidth;
+    var maxWidth = 0;
     var maxNotes = 0;
     var i, j;
 
     for (j = 0 ; j < this.parts.idx.length ; j++) {
       if (! isNaN(this.parts.idx[j].measure[columnId].$width)) {
-        if (typeof maxWidth === "undefined" || this.parts.idx[j].measure[columnId].$width > maxWidth) {
+        if (this.parts.idx[j].measure[columnId].$width > maxWidth) {
           maxWidth = this.parts.idx[j].measure[columnId].$width;
         }
       }
