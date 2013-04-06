@@ -109,7 +109,7 @@
     </div>
 
     <!-- test edit -->
-    Measure <input type="input" value="3" id="idMeasure" /><input type="button" id="addMeasure" value="addMeasure()" />
+    Add a measure at idx <input type="input" value="3" id="idMeasure" /><input type="button" id="addMeasure" value="addMeasure()" />
 
     <script>
         // Hello World
@@ -142,6 +142,7 @@
 
         // Test edition
         $('#addMeasure').click(function() {
+          $('#canvas-score > svg').empty();
           data.addMeasure($('#idMeasure').val());
           render.renderAll();
           drawer.drawAll();
