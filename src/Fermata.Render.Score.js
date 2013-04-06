@@ -219,6 +219,9 @@
 
     if (typeof maxWidth === "undefined") {
       maxWidth = maxNotes + this.armWidth(columnId);
+      if (maxWidth === 0) {
+        maxWidth = 40; //Dirty, will change very, very, very soon.
+      }
     }
 
     for (j = 0 ; j < this.parts.idx.length ; j++) {
