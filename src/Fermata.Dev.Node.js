@@ -78,6 +78,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.js",
     "Fermata.Utils.js",
     "Fermata.Data.js",
+    "Fermata.Data.Edit.js",
     "Fermata.Mapping.Clef.js",
     "Fermata.Mapping.Direction.js",
     "Fermata.Mapping.Connector.js",

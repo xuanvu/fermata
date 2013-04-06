@@ -2,8 +2,6 @@
   "use strict";
 
   Fermata.Data.prototype.addMeasure = function(idx, number) {
-    console.log(this);
-
     if (number === undefined) {
       number = 1;
     }
@@ -17,14 +15,12 @@
         part.measure.splice(idx, 0, {'$number': idx + number,'note':[]});
       }
 
-      if (idx + i > part.measure.length) {
+      if (idx + i >= part.measure.length) {
         part.measure[part.measure.length - 1].barline = {
           'bar-style': 'light-heavy',
           '$location': 'right'
         };
       }
-
-      console.log(part);
     });
   };
 
