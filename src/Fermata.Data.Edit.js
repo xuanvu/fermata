@@ -24,4 +24,16 @@
     });
   };
 
+  Fermata.Data.prototype.removeMeasure = function(idx, number) {
+    if (number === undefined) {
+      number = 1;
+    }
+
+    this.forEachPart(function(part) {
+      if (idx >= 0 && idx < part.measure.length) {
+        part.measure.splice(idx, number);
+      }
+    });
+  };
+
 }).call(this);

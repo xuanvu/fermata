@@ -56,4 +56,19 @@ describe('Fermata.Data.Edit', function () {
       assert.equal(part.measure[0].barline, undefined);
     });
   });
+
+  describe('removeMeasure()', function () {
+    var fermataData;
+    beforeEach(function () {
+      fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should add 42 measure at the end and remove 24 of them', function () {
+      var part = fermataData.getPart(0), length = part.measure.length;
+      fermataData.addMeasure(length, 42);
+      assert.equal(length + 42, part.measure.length);
+      fermataData.removeMeasure(10, 24);
+      assert.equal(length + 42 - 24, part.measure.length);
+    });
+  });
 });
