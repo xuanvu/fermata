@@ -16,7 +16,7 @@
 
   Fermata.Render.prototype.renderDirectionType = function (node) {
     // console.log(node);
-    if (node.wedge !== undefined && node.wedge.$type !== "stop" || node.wedge.$type === "word") {
+    if (typeof(node.wedge) !== "undefined" && (node.wedge.$type !== "stop" || node.wedge.$type === "word")) {
       var tmp = {
         placement: null,
         noteBefore: null,
@@ -36,7 +36,7 @@
   };
 
   Fermata.Render.prototype.renderDirectionAttribute = function (node) {
-    if (node.$placement !== 'undefined') {
+    if (typeof(node.$placement) !== 'undefined') {
       this.renderDirectionData[this.renderDirectionData.length - 1].placement = node.$placement;
     }
   };
