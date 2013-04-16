@@ -112,7 +112,7 @@
       measure.$fermata.vexStaves[i].draw();
 
       // Draw line in case of sytem
-      if (measure.$fermata.attributes.staves > 1 && measure.$fermata.barline === undefined)
+      if (measure.$fermata.attributes.staves > 1 /*&& measure.$fermata.barline === undefined*/) // <== Faudra m'expliquer ca.
       {
         var line = new Vex.Flow.StaveConnector(measure.$fermata.vexStaves[0], measure.$fermata.vexStaves[i]);
         line.setType(Vex.Flow.StaveConnector.type.SINGLE);
