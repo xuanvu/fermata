@@ -158,7 +158,7 @@
     this.drawBeam(measure);
 
     for (i = 0; i < measure.$fermata.direction.length; i++) {
-      data = measure.$fermata.direction;
+      var data = measure.$fermata.direction;
       if (data[i]['direction-type'].wedge.$type !== 'stop') {
         var renderOption = {
           height: 10,
@@ -166,11 +166,11 @@
           left_shift_px: 0,
           right_shift_px: 0
         };
-        console.log(data)
         var tmpNote = {
           first_note : _render.getNoteTest(Fermata.Drawer.prototype.getGoodPos(data[i].noteAfter, data[i].noteBefore, renderOption, true), measure),
           last_note : _render.getNoteTest(Fermata.Drawer.prototype.getGoodPos(data[i + 1].noteAfter, data[i + 1].noteBefore, renderOption, false), measure)
         };
+        
         if (tmpNote.first_note === tmpNote.last_note)
           renderOption.right_shift_px += 70;
 
@@ -184,7 +184,6 @@
   };
 
   Fermata.Drawer.prototype.getGoodPos =  function (noteOne, noteTwo, renderOption, first) {
-    console.log(noteOne, noteTwo);
     if (noteOne !== 0 && noteTwo !== 0 && noteOne !== noteTwo) {
       if (first) {
           // renderOption.left_shift_px -= 40;
