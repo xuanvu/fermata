@@ -170,10 +170,9 @@
           first_note : _render.getNoteTest(Fermata.Drawer.prototype.getGoodPos(data[i].noteAfter, data[i].noteBefore, renderOption, true), measure),
           last_note : _render.getNoteTest(Fermata.Drawer.prototype.getGoodPos(data[i + 1].noteAfter, data[i + 1].noteBefore, renderOption, false), measure)
         };
-        
-        if (tmpNote.first_note === tmpNote.last_note)
+        if (tmpNote.first_note === tmpNote.last_note) {
           renderOption.right_shift_px += 70;
-
+        }
         var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data[i]['direction-type'].wedge.$type));
         hp.setContext(this.ctx);
         hp.setPosition(Fermata.Mapping.Direction.getVexflow(data[i].placement));
@@ -194,8 +193,9 @@
         return noteTwo;
       }
     }
-    if (noteTwo === 0)
+    if (noteTwo === 0) {
       return noteOne;
+    }
     if (noteOne === 0) {
       return noteTwo;
     }
