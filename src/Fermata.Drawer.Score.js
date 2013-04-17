@@ -2,6 +2,7 @@
   "use strict";
 
   Fermata.Drawer.PART_HEIGHT = 100;
+  var _render = Fermata.Render.prototype;
 
   Fermata.Drawer.prototype.drawAll = function () {
     // Todo: precalcul in render
@@ -156,16 +157,48 @@
 
     this.drawBeam(measure);
 
-    for (i = 0; i < measure.$fermata.direction.length; i += 2) {
-    data = measure.direction;
-    var tmpNote = {
-      first_note : Fermata.Render.prototype.getNoteTest(data[i].noteAfter, measure),
-      last_note : Fermata.Render.prototype.getNoteTest(data[i + 1].noteBefore, measure)
-    };
-    var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data[i].type.wedge));
-    hp.setContext(this.ctx);
-    hp.setPosition(Fermata.Mapping.Direction.getVexflow(data[i].placement));
-    hp.draw();
+    for (i = 0; i < measure.$fermata.direction.length; i++) {
+      data = measure.$fermata.direction;
+      if (data[i]['direction-type'].wedge.$type !== 'stop') {
+        var renderOption = {
+          height: 10,
+          y_shift: 0,
+          left_shift_px: 0,
+          right_shift_px: 0
+        };
+        console.log(data)
+        var tmpNote = {
+          first_note : _render.getNoteTest(Fermata.Drawer.prototype.getGoodPos(data[i].noteAfter, data[i].noteBefore, renderOption, true), measure),
+          last_note : _render.getNoteTest(Fermata.Drawer.prototype.getGoodPos(data[i + 1].noteAfter, data[i + 1].noteBefore, renderOption, false), measure)
+        };
+        if (tmpNote.first_note === tmpNote.last_note)
+          renderOption.right_shift_px += 70;
+
+        var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data[i]['direction-type'].wedge.$type));
+        hp.setContext(this.ctx);
+        hp.setPosition(Fermata.Mapping.Direction.getVexflow(data[i].placement));
+        hp.setRenderOptions(renderOption);
+        hp.draw();
+      }
+    }
+  };
+
+  Fermata.Drawer.prototype.getGoodPos =  function (noteOne, noteTwo, renderOption, first) {
+    console.log(noteOne, noteTwo);
+    if (noteOne !== 0 && noteTwo !== 0 && noteOne !== noteTwo) {
+      if (first) {
+          // renderOption.left_shift_px -= 40;
+        return noteOne;
+      }
+      else {
+          // renderOption.right_shift_px += 40;
+        return noteTwo;
+      }
+    }
+    if (noteTwo === 0)
+      return noteOne;
+    if (noteOne === 0) {
+      return noteTwo;
     }
   };
 

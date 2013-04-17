@@ -243,7 +243,6 @@
             if (measure.$fermata.vexNotes[first].hasOwnProperty(second)) {
               for (var third = 0; third < measure.$fermata.vexNotes[first][second].length ; third++) {
                 if (pos === number) {
-                  console.log("tamere");
                   return measure.$fermata.vexNotes[first][second][third];
                 }
                 pos++;

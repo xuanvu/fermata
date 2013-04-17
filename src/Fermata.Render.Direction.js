@@ -62,7 +62,6 @@
     this.cur.measure.$fermata.direction.push(Fermata.Utils.Clone(_render.renderDirectionDefault));
     this.exploreSubNodes({ object: direction, processes: _render.renderDirectionProcess, ctx: this,
                            out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1] });
-    console.log(direction, this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]);
   };
 
 }).call(this);
