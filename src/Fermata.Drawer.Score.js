@@ -35,7 +35,7 @@
 
   Fermata.Drawer.prototype.drawMeasure = function (measure, measureIdx, partIdx)
   {
-    // console.log(measure, measureIdx);
+    //console.log(measure, measureIdx);
 
     // TODO: Need to store it ?
     // Use for (;;;)
@@ -156,21 +156,17 @@
 
     this.drawBeam(measure);
 
-  // TODO: clean & mv renderDirectionData
-  // for (i = 0; i < this.renderDirectionData.length; i++) {
-  //   var data = this.renderDirectionData[i];
-  //   var tmpNote = {
-  //     first_note : this.getNote(data.noteAfter),
-  //     last_note : this.getNote(data.noteBefore)
-  //   };
-  //   var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data.type));
-  //   hp.setContext(this.ctx);
-  //   hp.setPosition(Fermata.Mapping.Direction.getVexflow(this.renderDirectionData.placement));
-  //   hp.draw();
-  //   if (i === this.renderDirectionData.length -1 ) {
-  //     this.renderDirectionData = [];
-  //   }
-  // }
+    for (i = 0; i < measure.$fermata.direction.length; i += 2) {
+    data = measure.direction;
+    var tmpNote = {
+      first_note : Fermata.Render.prototype.getNoteTest(data[i].noteAfter, measure),
+      last_note : Fermata.Render.prototype.getNoteTest(data[i + 1].noteBefore, measure)
+    };
+    var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data[i].type.wedge));
+    hp.setContext(this.ctx);
+    hp.setPosition(Fermata.Mapping.Direction.getVexflow(data[i].placement));
+    hp.draw();
+    }
   };
 
   Fermata.Drawer.prototype.drawBeam = function (measure)

@@ -233,4 +233,26 @@
     }
   };
 
+  Fermata.Render.prototype.getNoteTest = function (number, measure)
+  {
+    var pos = 0;
+    while (true) {
+      for (var first in measure.$fermata.vexNotes) {
+        if (measure.$fermata.vexNotes.hasOwnProperty(first)) {
+          for (var second in measure.$fermata.vexNotes[first]) {
+            if (measure.$fermata.vexNotes[first].hasOwnProperty(second)) {
+              for (var third = 0; third < measure.$fermata.vexNotes[first][second].length ; third++) {
+                if (pos === number) {
+                  console.log("tamere");
+                  return measure.$fermata.vexNotes[first][second][third];
+                }
+                pos++;
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+
 }).call(this);
