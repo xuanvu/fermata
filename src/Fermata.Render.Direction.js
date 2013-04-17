@@ -2,12 +2,11 @@
   "use strict";
 
   Fermata.Render.prototype.renderDirectionDefault = {
-    placement: null,
+    $placement: null,
     noteBefore: null,
     noteAfter: null,
-    type: { 
-      wedge: null,
-      tmp: null
+    'direction-type': {
+      wedge: { $type: null }
     },
     offset: null,
     voice: 1,
@@ -16,13 +15,22 @@
 
   var _render =  Fermata.Render.prototype;
 
-  
+  Fermata.Render.prototype.renderDirectionTypeWedgeProcess = [
+    { key: '$type', type: _render.FuncTypes.$01, dataType: 'string', dataKey: '$type' }
+  ];
+
+  Fermata.Render.prototype.renderDirectionTypeWedge = function (node) {
+    this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeWedgeProcess, ctx: this,
+                           out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'].wedge });
+  };
+
   Fermata.Render.prototype.renderDirectionTypeProcess = [
-    { key: 'wedge', type: _render.FuncTypes.$1, dataType: 'string', dataKey: 'wedge' }
+    { key: 'wedge', type: _render.FuncTypes.$1, func: _render.renderDirectionTypeWedge }
   ];
 
   Fermata.Render.prototype.renderDirectionType = function (node) {
-    this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeProcess, ctx: this, out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1].type });
+    this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeProcess, ctx: this,
+                           out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'] });
   };
 
   Fermata.Render.prototype.renderDirectionProcess = [
@@ -30,9 +38,9 @@
     { key: "offset", type: Fermata.Render.prototype.FuncTypes.$01, dataType: 'int', dataKey: 'offset'},
     { key: "voice", type: _render.FuncTypes.$01, dataType: 'int', dataKey: 'voice' },
     { key: "staff", type: _render.FuncTypes.$1, dataType: 'int', dataKey: 'staff' },
-    { key: "placement", type: _render.FuncTypes.$1, dataType: 'string', dataKey: 'placement' },
-    { key: "noteBefore", type: _render.FuncTypes.$1, dataType: 'string', dataKey: 'noteBefore'},
-    { key: "noteAfter", type: _render.FuncTypes.$1, dataType: 'string', dataKey: 'noteAfter'}
+    { key: "$placement", type: _render.FuncTypes.$1, dataType: 'string', dataKey: '$placement' },
+    { key: "noteBefore", type: _render.FuncTypes.$1, dataType: 'int', dataKey: 'noteBefore'},
+    { key: "noteAfter", type: _render.FuncTypes.$1, dataType: 'int', dataKey: 'noteAfter'}
    /*{
       // Came from an Entity....
       key: "footnote",
@@ -52,8 +60,9 @@
       this.cur.measure.$fermata.direction = [];
     }
     this.cur.measure.$fermata.direction.push(Fermata.Utils.Clone(_render.renderDirectionDefault));
-    this.exploreSubNodes({ object: direction, processes: _render.renderDirectionProcess, ctx: this, out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1] });
-    console.log("lool");
+    this.exploreSubNodes({ object: direction, processes: _render.renderDirectionProcess, ctx: this,
+                           out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1] });
+    console.log(direction, this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]);
   };
 
 }).call(this);
