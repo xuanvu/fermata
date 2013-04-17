@@ -172,7 +172,7 @@
           };
           if (tmpNote.first_note === tmpNote.last_note) {
             renderOption.right_shift_px += 70;
-           }
+          }
           var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data[i]['direction-type'].wedge.$type));
           hp.setContext(this.ctx);
           hp.setPosition(Fermata.Mapping.Direction.getVexflow(data[i].placement));
