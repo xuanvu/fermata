@@ -12,7 +12,8 @@
       }
 
       for (var i = 0 ; i < number ; i++) {
-        part.measure.splice(idx, 0, {'$number': idx + number,'note':[]});
+        part.measure.splice(idx, 0, {'$number': idx + number,'note': [] });
+        this.fillWithRest(part.measure[idx]);
       }
 
       if (idx + i >= part.measure.length) {

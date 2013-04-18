@@ -69,6 +69,8 @@
     <script src="../src/Fermata.Utils.js"></script>
     <script src="../src/Fermata.Data.js"></script>
     <script src="../src/Fermata.Data.Edit.js"></script>
+    <script src="../src/Fermata.Data.Edit.Rest.js"></script>
+    <script src="../src/Fermata.Data.Edit.Note.js"></script>
     <script src="../src/Fermata.Mapping.Clef.js"></script>
     <script src="../src/Fermata.Mapping.Direction.js"></script>
     <script src="../src/Fermata.Mapping.Connector.js"></script>
@@ -110,6 +112,12 @@
 
     <!-- test edit -->
     Add / Remove <input type="input" value="1" id="nbMeasure" /> measure(s) at idx <input type="input" value="3" id="idMeasure" /><input type="button" id="addMeasure" value="addMeasure()" /><input type="button" id="removeMeasure" value="removeMeasure()" />
+    </p>
+    Remove Note - stave: <input type="input" value="1" id="rnStave" /> measure: <input type="input" value="1" id="rnMeasure" /> note: <input type="input" value="1" id="rnNote" /><input type="button" id="removeNote" value="removeNote()" />
+    </p>
+    Add Note - stave: <input type="input" value="1" id="anStave" /> measure: <input type="input" value="1" id="anMeasure" /> note: <input type="input" value="1" id="anNote" /> step: <input type="input" value="C" id="anStep" /> octave: <input type="input" value="4" id="anOctave" /> type { HALF: 0, QUARTER: 1, EIGHTH: 2 }: <input type="input" value="1" id="anType" /> voice: <input type="input" value="1" id="anVoice" /><input type="button" id="addNote" value="addNote()" />
+    </p>
+    Edit Note - stave: <input type="input" value="1" id="enStave" /> measure: <input type="input" value="1" id="enMeasure" /> note: <input type="input" value="1" id="enNote" /> step: <input type="input" value="C" id="enStep" /> octave: <input type="input" value="4" id="enOctave" /> type { HALF: 0, QUARTER: 1, EIGHTH: 2 }: <input type="input" value="1" id="enType" /> voice: <input type="input" value="1" id="enVoice" /><input type="button" id="editNote" value="editNote()" />
 
     <script>
         // Hello World
@@ -151,6 +159,30 @@
         $('#removeMeasure').click(function() {
           $('#canvas-score > svg').empty();
           data.removeMeasure($('#idMeasure').val(), $('#nbMeasure').val());
+          render.renderAll();
+          drawer.drawAll();
+        });
+
+        $('#removeNote').click(function() {
+          $('#canvas-score > svg').empty();
+          data.removeNote($('#rnStave').val(), $('#rnMeasure').val(), $('#rnNote').val());
+          <!-- render.renderMeasure(idMeasure) instead of: -->
+          render.renderAll();
+          drawer.drawAll();
+        });
+
+        $('#addNote').click(function() {
+          $('#canvas-score > svg').empty();
+          data.addNote($('#anStave').val(), $('#anMeasure').val(), $('#anNote').val(), $('#anStep').val(), $('#anOctave').val(), $('#anType').val(), $('#anVoice').val());
+          <!-- render.renderMeasure(idMeasure) instead of: -->
+          render.renderAll();
+          drawer.drawAll();
+        });
+
+        $('#editNote').click(function() {
+          $('#canvas-score > svg').empty();
+          data.editNote($('#enStave').val(), $('#enMeasure').val(), $('#enNote').val(), $('#enStep').val(), $('#enOctave').val(), $('#enType').val(), $('#enVoice').val());
+          <!-- render.renderMeasure(idMeasure) instead of: -->
           render.renderAll();
           drawer.drawAll();
         });
