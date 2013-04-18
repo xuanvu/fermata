@@ -159,6 +159,7 @@
     if (measure.$fermata.direction !== undefined) {
       for (i = 0; i < measure.$fermata.direction.length; i++) {
         var data = measure.$fermata.direction;
+
         if (data[i]['direction-type'].wedge.$type !== 'stop') {
           var renderOption = {
             height: 10,
@@ -179,6 +180,10 @@
           hp.setRenderOptions(renderOption);
           hp.draw();
         }
+       /* else if (data[i]['direction-type'].words.content !== null) {
+          var note = getNoteTest(data[i].noteAfter);
+            note.addAnnotation(0, Fermata.Drawer.prototype.AddNotation(data[i]['direction-type'].words.content, 1, 1));
+        }*/
       }
     }
   };
@@ -209,6 +214,11 @@
 
       vexBeam.setContext(this.ctx).draw();
     }
+  };
+
+  Fermata.Drawer.prototype.AddNotation = function (text, hJustifcation, vJustifcation) {
+    var ret = new Vex.Flow.Annotation(text).setFont("Arial", Vex.Flow.Test.Font.size).setJustification(hJustifcation).setVerticalJustification(vJustifcation);
+    return ret;
   };
 
 }).call(this);

@@ -6,7 +6,12 @@
     noteBefore: null,
     noteAfter: null,
     'direction-type': {
-      wedge: { $type: null }
+      wedge: { $type: null },
+      words: { content: null,
+               '$default-y': 0,
+               '$font-size': 0,
+               'font-weight': null
+              }
     },
     offset: null,
     voice: 1,
@@ -19,21 +24,28 @@
     { key: '$type', type: _render.FuncTypes.$01, dataType: 'string', dataKey: '$type' }
   ];
 
+  //TODO gestion des polices etc...
+  Fermata.Render.prototype.renderDirectionTypeWordProcess = [
+    {key: 'content', type: _render.FuncTypes.$1, dataType: 'string', dataKey: 'content' }
+  ]
+
   Fermata.Render.prototype.renderDirectionTypeWedge = function (node) {
     this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeWedgeProcess, ctx: this,
                            out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'].wedge });
   };
 
   Fermata.Render.prototype.renderDirectionTypeWord = function (node) {
-
+    this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeWordProcess, ctx: this,
+                           out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'].words });
   };
 
   Fermata.Render.prototype.renderDirectionTypeProcess = [
-    { key: 'wedge', type: _render.FuncTypes.$1, func: _render.renderDirectionTypeWedge }
-    { key: "words", type: _render.FuncTypes.$1n, func: _render.renderDirectionTypeWord },
+    { key: 'wedge', type: _render.FuncTypes.$01, func: _render.renderDirectionTypeWedge },
+    { key: "words", type: _render.FuncTypes.$01, func: _render.renderDirectionTypeWord }
   ];
 
   Fermata.Render.prototype.renderDirectionType = function (node) {
+    console.log("debug");
     this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeProcess, ctx: this,
                            out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'] });
   };
@@ -42,7 +54,7 @@
     { key: "direction-type", type: _render.FuncTypes.$1n, func: _render.renderDirectionType },
     { key: "offset", type: Fermata.Render.prototype.FuncTypes.$01, dataType: 'int', dataKey: 'offset'},
     { key: "voice", type: _render.FuncTypes.$01, dataType: 'int', dataKey: 'voice' },
-    { key: "staff", type: _render.FuncTypes.$1, dataType: 'int', dataKey: 'staff' },
+    { key: "staff", type: _render.FuncTypes.$01, dataType: 'int', dataKey: 'staff' },
     { key: "$placement", type: _render.FuncTypes.$1, dataType: 'string', dataKey: '$placement' },
     { key: "noteBefore", type: _render.FuncTypes.$1, dataType: 'int', dataKey: 'noteBefore'},
     { key: "noteAfter", type: _render.FuncTypes.$1, dataType: 'int', dataKey: 'noteAfter'}
