@@ -24,8 +24,13 @@
                            out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'].wedge });
   };
 
+  Fermata.Render.prototype.renderDirectionTypeWord = function (node) {
+
+  };
+
   Fermata.Render.prototype.renderDirectionTypeProcess = [
     { key: 'wedge', type: _render.FuncTypes.$1, func: _render.renderDirectionTypeWedge }
+    { key: "words", type: _render.FuncTypes.$1n, func: _render.renderDirectionTypeWord },
   ];
 
   Fermata.Render.prototype.renderDirectionType = function (node) {
@@ -75,11 +80,6 @@
     // },
     // {
     //   key: "segno",
-    //   type: Fermata.Render.prototype.FuncTypes.$1n,
-    //   func: null // TODO
-    // },
-    // {
-    //   key: "words",
     //   type: Fermata.Render.prototype.FuncTypes.$1n,
     //   func: null // TODO
     // },
