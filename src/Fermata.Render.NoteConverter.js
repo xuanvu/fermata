@@ -65,10 +65,11 @@
 
   NoteConverter.prototype.convertDuration = function (noteData)
   {
-    // console.log(noteData.duration);
+    // console.log("duration", noteData.duration);
     var dataDuration = noteData.duration;
-    // console.log(this.divisions);
+    // console.log("division", this.divisions);
     var actualDuration = dataDuration / this.divisions;
+    // console.log("Final duration",actualDuration);
     var vexDuration = Math.round(this.beatType / actualDuration).toString();
 
     return vexDuration;

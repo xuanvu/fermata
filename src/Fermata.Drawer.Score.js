@@ -36,7 +36,7 @@
 
   Fermata.Drawer.prototype.drawMeasure = function (measure, measureIdx, partIdx)
   {
-    //console.log(measure, measureIdx);
+    console.log(measure, measureIdx);
 
     // TODO: Need to store it ?
     // Use for (;;;)
