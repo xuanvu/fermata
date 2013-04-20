@@ -65,21 +65,16 @@
 
   NoteConverter.prototype.convertDuration = function (noteData)
   {
-    console.log("duration:" + noteData.duration);
     var dataDuration = noteData.duration;
-    console.log("division:" + this.divisions);
     var actualDuration = dataDuration / this.divisions;
-    console.log("actual duration:" + actualDuration);
-    var fullDuration = Math.ceil(this.beatType / actualDuration).toString();
-    var plainDuration = this.beatType / fullDuration;
-    console.log("fullDuration:"+ plainDuration);
-    var dotDuration = actualDuration - plainDuration;
+    var vexBaseDuration = Math.ceil(this.beatType / actualDuration);
+    var baseDuration = this.beatType / vexBaseDuration;
+    var dotDuration = actualDuration - baseDuration;
+
     var vexDuration = {
-      plainDuration: plainDuration,
+      vexBaseDuration: vexBaseDuration.toString(),
       dotDuration: dotDuration
     }
-    console.log("beaatType:" + this.beatType);
-    console.log("beat" + this.beats);
 
     return vexDuration;
   };
@@ -105,7 +100,7 @@
     }
 
     if (dataPitch.getType() === SoundType.REST) {
-      vexDuration.plainDuration += 'r';
+      vexDuration.vexBaseDuration += 'r';
     }
 
     var vexPitches = [];
@@ -117,7 +112,7 @@
 
     var vexNote = new Vex.Flow.StaveNote({
       keys: vexPitches,
-      duration: vexDuration.plainDuration,
+      duration: vexDuration.vexBaseDuration,
       stem_direction: stem,
       auto_stem : auto_stem,
       clef : this.clefName
