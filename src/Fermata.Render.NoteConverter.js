@@ -75,6 +75,10 @@
       vexBaseDuration: vexBaseDuration.toString(),
       dotDuration: dotDuration
     }
+    if (dotDuration > 0)
+    {
+      vexDuration.vexBaseDuration += "d";
+    }
 
     return vexDuration;
   };
