@@ -45,7 +45,6 @@
   ];
 
   Fermata.Render.prototype.renderDirectionType = function (node) {
-    console.log("debug");
     this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeProcess, ctx: this,
                            out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'] });
   };

@@ -89,7 +89,12 @@
     var vexDuration = this.convertDuration(noteData[0]);
 
     // Stem
-    var stem = noteData[0].stem;
+    if (typeof(noteData[0].stem) === 'object') {
+      var stem = noteData[0].stem.content;
+    }
+    else {
+      var stem = noteData[0].stem;
+    }
     var auto_stem = false;
 
     if (stem === 'down') {
