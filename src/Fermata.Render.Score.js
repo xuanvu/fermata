@@ -164,7 +164,8 @@
       vexNotes: [],
       vexStaves: [],
       vexVoices: [],
-      vexBeams: []
+      vexBeams: [],
+      vexHairpin: []
     };
     this.beamProcessor = new BeamProcessor(this.cur.measure.$fermata);
 
@@ -319,8 +320,6 @@
             beat_value: measure.$fermata.attributes.beat.type,
             resolution: Vex.Flow.RESOLUTION
           });
-          console.log(measureIdx);
-          console.log($fermata.vexNotes[staffIdx][voiceIdx]);
           voice.addTickables($fermata.vexNotes[staffIdx][voiceIdx]);
           // Add notes to voice
           // Format and justify the notes to 500 pixels
@@ -328,6 +327,38 @@
           $fermata.vexVoices.push(voice);
         // voice.draw(this.ctx, $fermata.vexStaves[staffIdx - 1]);
         }
+      }
+    }
+
+    if ($fermata.direction !== undefined) {
+      for (i = 0; i < $fermata.direction.length; i++) {
+        var data = $fermata.direction;
+
+        if (data[i]['direction-type'].wedge.$type !== 'stop') {
+          var renderOption = {
+            height: 10,
+            y_shift: 0,
+            left_shift_px: 0,
+            right_shift_px: 0
+          };
+          var tmpNote = {
+            first_note : _render.getNoteTest(Fermata.Drawer.prototype.getGoodPos(data[i].noteAfter, data[i].noteBefore, renderOption, true), measure),
+            last_note : _render.getNoteTest(Fermata.Drawer.prototype.getGoodPos(data[i + 1].noteAfter, data[i + 1].noteBefore, renderOption, false), measure)
+          };
+          if (tmpNote.first_note === tmpNote.last_note) {
+            renderOption.right_shift_px += 70;
+          }
+          var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data[i]['direction-type'].wedge.$type));
+          //hp.setContext(this.ctx);
+          hp.setPosition(Fermata.Mapping.Direction.getVexflow(data[i].placement));
+          hp.setRenderOptions(renderOption);
+          $fermata.vexHairpin.push(hp);
+          //hp.draw();
+        }
+       /* else if (data[i]['direction-type'].words.content !== null) {
+          var note = getNoteTest(data[i].noteAfter);
+            note.addAnnotation(0, Fermata.Drawer.prototype.AddNotation(data[i]['direction-type'].words.content, 1, 1));
+        }*/
       }
     }
   };

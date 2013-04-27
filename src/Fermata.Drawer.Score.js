@@ -36,7 +36,7 @@
 
   Fermata.Drawer.prototype.drawMeasure = function (measure, measureIdx, partIdx)
   {
-    console.log(measure, measureIdx);
+    // console.log(measure, measureIdx);
 
     // TODO: Need to store it ?
     // Use for (;;;)
@@ -155,37 +155,12 @@
       measure.$fermata.vexVoices[i].draw(this.ctx, measure.$fermata.vexStaves[i]);
     }
 
-    this.drawBeam(measure);
-    if (measure.$fermata.direction !== undefined) {
-      for (i = 0; i < measure.$fermata.direction.length; i++) {
-        var data = measure.$fermata.direction;
-
-        if (data[i]['direction-type'].wedge.$type !== 'stop') {
-          var renderOption = {
-            height: 10,
-            y_shift: 0,
-            left_shift_px: 0,
-            right_shift_px: 0
-          };
-          var tmpNote = {
-            first_note : _render.getNoteTest(Fermata.Drawer.prototype.getGoodPos(data[i].noteAfter, data[i].noteBefore, renderOption, true), measure),
-            last_note : _render.getNoteTest(Fermata.Drawer.prototype.getGoodPos(data[i + 1].noteAfter, data[i + 1].noteBefore, renderOption, false), measure)
-          };
-          if (tmpNote.first_note === tmpNote.last_note) {
-            renderOption.right_shift_px += 70;
-          }
-          var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data[i]['direction-type'].wedge.$type));
-          hp.setContext(this.ctx);
-          hp.setPosition(Fermata.Mapping.Direction.getVexflow(data[i].placement));
-          hp.setRenderOptions(renderOption);
-          hp.draw();
-        }
-       /* else if (data[i]['direction-type'].words.content !== null) {
-          var note = getNoteTest(data[i].noteAfter);
-            note.addAnnotation(0, Fermata.Drawer.prototype.AddNotation(data[i]['direction-type'].words.content, 1, 1));
-        }*/
-      }
+    for (i = 0 ; i < measure.$fermata.vexHairpin.length ; ++i) {
+      measure.$fermata.vexHairpin[i].setContext(this.ctx);
+      measure.$fermata.vexHairpin[i].draw();
     }
+
+    this.drawBeam(measure);
   };
 
   Fermata.Drawer.prototype.getGoodPos =  function (noteOne, noteTwo, renderOption, first) {
