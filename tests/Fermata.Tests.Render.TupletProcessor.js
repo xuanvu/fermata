@@ -143,9 +143,7 @@ if (typeof require !== 'undefined') {
         // Then
         assert.assertStrictEqual(result, tuplet);
       });
-    });
-    
-    describe("#getTuplet" , function () {
+
       it("test table", function () {      
         // Given
         var tuplet = {};
