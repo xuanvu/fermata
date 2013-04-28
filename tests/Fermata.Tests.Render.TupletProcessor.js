@@ -170,5 +170,21 @@ if (typeof require !== 'undefined') {
         assert.assertStrictEqual(result, tuplet);
       });
     });
+
+    describe("#getTimeModification" , function () {
+      it("test basic", function () {      
+        // Given
+        var timeModification = {};
+        var note = {
+          "time-modification": timeModification
+        };
+
+        // When
+        var result = TupletProcessor.getTimeModification(note);
+        
+        // Then
+        assert.assertStrictEqual(result, timeModification);
+      });
+    });
   });
 }).call(this);
