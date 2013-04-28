@@ -57,5 +57,31 @@ if (typeof require !== 'undefined') {
         assert.assertOk(!result);       
       })
     });
+    
+    describe("#hasTimeModification" , function () {
+      it("test true", function () {      
+        // Given
+        var note = {
+          "time-modification": {}
+        };
+        
+        // When
+        var result = TupletProcessor.hasTimeModification(note);
+        
+        // Then
+        assert.assertOk(result);
+      });
+      
+      it("test false", function () {
+        // Given
+        var note = {};
+        
+        // When
+        var result = TupletProcessor.hasTimeModification(note);
+        
+        // Then
+        assert.assertOk(!result);       
+      })
+    });
   });
 }).call(this);
