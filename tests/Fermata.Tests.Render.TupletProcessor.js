@@ -46,6 +46,29 @@ if (typeof require !== 'undefined') {
         assert.assertOk(result);
       });
       
+      it("test true - table", function () {      
+        // Given
+        var note = {
+          notation: [
+          {
+            tuplet: {}
+          },
+          {
+            tied: {}
+          },
+          {
+            glissando: {}
+          }
+          ]
+        };
+        
+        // When
+        var result = TupletProcessor.hasTuplet(note);
+        
+        // Then
+        assert.assertOk(result);
+      });
+      
       it("test false", function () {
         // Given
         var note = {};
@@ -56,6 +79,26 @@ if (typeof require !== 'undefined') {
         // Then
         assert.assertOk(!result);       
       })
+    });
+    
+    it("test false - table", function () {      
+      // Given
+      var note = {
+        notation: [
+        {
+          tied: {}
+        },
+        {
+          glissando: {}
+        }
+        ]
+      };
+        
+      // When
+      var result = TupletProcessor.hasTuplet(note);
+        
+      // Then
+      assert.assertOk(!result);
     });
     
     describe("#hasTimeModification" , function () {
