@@ -8,7 +8,7 @@ if (typeof require !== 'undefined') {
   var Fermata,
   fs = require('fs'),
   assert = require('assert');
-
+  
   // Use Scons build version or devel version (using node vm)
   if (fs.existsSync(__dirname + '/../build/fermata/fermata.node.js')) {
     Fermata = require('..');
@@ -16,7 +16,7 @@ if (typeof require !== 'undefined') {
   else {
     Fermata = require((process.env['FERMATA_COV'] ? '../src-cov' : '../src') + '/Fermata.Dev.Node.js');
   }
-
+  
   // Test utils
   Fermata.Tests = require('./Fermata.Tests.Utils.js').Tests;
 }
@@ -27,7 +27,8 @@ if (typeof require !== 'undefined') {
   describe("Fermata.Render.TupletProcessor", function () {
     describe("#constructor", function (){
       it("test of the constructor", function (){
-        var tupletProcessor = new TupletProcessor();
+        var $fermata = {};
+        var tupletProcessor = new TupletProcessor($fermata);
       });
     });
     describe("#hasTuplet" , function () {
@@ -93,10 +94,10 @@ if (typeof require !== 'undefined') {
         }
         ]
       };
-        
+      
       // When
       var result = TupletProcessor.hasTuplet(note);
-        
+      
       // Then
       assert.assertOk(!result);
     });
@@ -126,7 +127,7 @@ if (typeof require !== 'undefined') {
         assert.assertOk(!result);       
       })
     });
-
+    
     describe("#getTuplet" , function () {
       it("test basic", function () {      
         // Given
@@ -143,7 +144,7 @@ if (typeof require !== 'undefined') {
         // Then
         assert.assertStrictEqual(result, tuplet);
       });
-
+      
       it("test table", function () {      
         // Given
         var tuplet = {};
@@ -168,7 +169,7 @@ if (typeof require !== 'undefined') {
         assert.assertStrictEqual(result, tuplet);
       });
     });
-
+    
     describe("#getTimeModification" , function () {
       it("test basic", function () {      
         // Given
@@ -176,12 +177,76 @@ if (typeof require !== 'undefined') {
         var note = {
           "time-modification": timeModification
         };
-
+        
         // When
         var result = TupletProcessor.getTimeModification(note);
         
         // Then
         assert.assertStrictEqual(result, timeModification);
+      });
+    });
+    
+    describe("#addNote" , function () {
+      it("first note", function () {
+        var $fermata = {
+          vexTuplets: []
+        };
+        var tupletProcessor = new TupletProcessor($fermata);
+        
+        // Given
+        var notes = [
+        {
+          "time-modification": {
+            "actual-notes": "3",
+            "normal-notes": "2"
+          },
+          notations: {
+            tuplet: {
+              $type: "start",
+              $bracket: "no"
+            }
+          }
+        },
+        {
+          "time-modification": {
+            "actual-notes": "3",
+            "normal-notes": "2"
+          }
+        },
+        {
+          "time-modification": {
+            "actual-notes": "3",
+            "normal-notes": "2"
+          },
+          notations: {
+            tuplet: {
+              $type: "stop"
+            }
+          }
+        }
+        ];
+        
+        var vexNotes = [];
+        for (var i = 0 ; i < notes.length ; i++)
+        {
+          vexNotes.push(new Vex.Flow.StaveNote({
+            keys: ["a/4"], 
+            duration: "8"
+          }));
+        }
+        
+        // When
+        for (var i = 0 ; i < vexNotes.length ; i++)
+        {
+          var note = notes[i];
+          var vexNote = vexNotes[i];
+          
+          tupletProcessor.addNote(note, vexNote);
+        }
+        
+        // Then
+        assert.strictEqual($fermata.vexTuplets.length, 1);
+        assert.ok($fermata.vexTuplets[0] instanceof Fermata.Vex.Flow.Tuplet);     
       });
     });
   });
