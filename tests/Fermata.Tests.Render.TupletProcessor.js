@@ -126,5 +126,49 @@ if (typeof require !== 'undefined') {
         assert.assertOk(!result);       
       })
     });
+
+    describe("#getTuplet" , function () {
+      it("test basic", function () {      
+        // Given
+        var tuplet = {};
+        var note = {
+          notation: {
+            tuplet: tuplet
+          }
+        };
+        
+        // When
+        var result = TupletProcessor.getTuplet(note);
+        
+        // Then
+        assert.assertStrictEqual(result, tuplet);
+      });
+    });
+    
+    describe("#getTuplet" , function () {
+      it("test table", function () {      
+        // Given
+        var tuplet = {};
+        var note = {
+          notation: [
+          {
+            tuplet: tuplet
+          },
+          {
+            tied: {}
+          },
+          {
+            glissando: {}
+          }
+          ]
+        };
+        
+        // When
+        var result = TupletProcessor.getTuplet(note);
+        
+        // Then
+        assert.assertStrictEqual(result, tuplet);
+      });
+    });
   });
 }).call(this);
