@@ -30,5 +30,32 @@ if (typeof require !== 'undefined') {
         var tupletProcessor = new TupletProcessor();
       });
     });
+    describe("#hasTuplet" , function () {
+      it("test true", function () {      
+        // Given
+        var note = {
+          notation: {
+            beam: {}
+          }
+        };
+        
+        // When
+        var result = TupletProcessor.hasTuplet(note);
+        
+        // Then
+        assert.assertOk(result);
+      });
+      
+      it("test false", function () {
+        // Given
+        var note = {};
+        
+        // When
+        var result = TupletProcessor.hasTuplet(note);
+        
+        // Then
+        assert.assertOk(!result);       
+      })
+    });
   });
 }).call(this);
