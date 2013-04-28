@@ -35,7 +35,7 @@ if (typeof require !== 'undefined') {
         // Given
         var note = {
           notation: {
-            beam: {}
+            tuplet: {}
           }
         };
         
