@@ -315,29 +315,9 @@
       }
     }
 
-    for (var staffIdx = 1 ; staffIdx < $fermata.vexNotes.length ; staffIdx++) {
-      for (var voiceIdx in $fermata.vexNotes[staffIdx]) {
-        if ($fermata.vexNotes[staffIdx].hasOwnProperty(voiceIdx)) {
-          var voice = new Vex.Flow.Voice({
-            num_beats: measure.$fermata.attributes.beat.beats,
-            beat_value: measure.$fermata.attributes.beat.type,
-            resolution: Vex.Flow.RESOLUTION
-          });
-          voice.addTickables($fermata.vexNotes[staffIdx][voiceIdx]);
-          // Add notes to voice
-          // Format and justify the notes to 500 pixels
-          var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], /*measure.note.length * 50*/ measure.$width - $fermata.voiceWidth - 15);
-          $fermata.vexVoices.push(voice);
-        // voice.draw(this.ctx, $fermata.vexStaves[staffIdx - 1]);
-        }
-      }
-    }
-
     if ($fermata.direction !== undefined) {
       for (i = 0; i < $fermata.direction.length; i++) {
         var data = $fermata.direction;
-
-        console.log(data);
 
         if (data[i]['direction-type'].wedge.$type !== null && data[i]['direction-type'].wedge.$type !== 'stop') {
           var renderOption = {
@@ -360,7 +340,27 @@
         }
         else if (data[i]['direction-type'].words.content !== null) {
           var note = _render.getNoteTest(data[i].noteAfter, measure);
-            note.addAnnotation(0, Fermata.Drawer.prototype.AddNotation(data[i]['direction-type'].words.content, 1, 1));
+          note.addAnnotation(0, Fermata.Drawer.prototype.AddNotation(data[i]['direction-type'].words.content, 1, 1));
+        }
+      }
+    }
+
+    for (var staffIdx = 1 ; staffIdx < $fermata.vexNotes.length ; staffIdx++) {
+      for (var voiceIdx in $fermata.vexNotes[staffIdx]) {
+        if ($fermata.vexNotes[staffIdx].hasOwnProperty(voiceIdx)) {
+          var voice = new Vex.Flow.Voice({
+            num_beats: measure.$fermata.attributes.beat.beats,
+            beat_value: measure.$fermata.attributes.beat.type,
+            resolution: Vex.Flow.RESOLUTION
+          });
+          voice.addTickables($fermata.vexNotes[staffIdx][voiceIdx]);
+          // Add notes to voice
+          // Format and justify the notes to 500 pixels
+          var formatter = new Vex.Flow.Formatter();
+          formatter.joinVoices([voice]);
+          formatter.format([voice], /*measure.note.length * 50*/ measure.$width - $fermata.voiceWidth - 15);
+          $fermata.vexVoices.push(voice);
+        // voice.draw(this.ctx, $fermata.vexStaves[staffIdx - 1]);
         }
       }
     }

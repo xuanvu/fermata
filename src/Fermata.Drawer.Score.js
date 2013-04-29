@@ -150,8 +150,7 @@
     // }
 
     // console.log(measure.$fermata.vexVoices);
-    for (i = 0 ; i < measure.$fermata.vexVoices.length ; ++i) {
-      // console.log(measure.$fermata.vexVoices[i]);
+    for (i = 0 ; i < measure.$fermata.vexVoices.length ; i++) {
       measure.$fermata.vexVoices[i].draw(this.ctx, measure.$fermata.vexStaves[i]);
     }
 
@@ -203,7 +202,6 @@
 
   Fermata.Drawer.prototype.AddNotation = function (text, hJustifcation, vJustifcation) {
     var ret = new Vex.Flow.Annotation(text);
-    console.log(ret);
     // ret.setFont('Arial', Vex.Flow.Test.Font.size);
     ret.setJustification(hJustifcation);
     ret.setVerticalJustification(vJustifcation);
