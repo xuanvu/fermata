@@ -36,7 +36,7 @@ if (typeof require !== 'undefined') {
       it("test true", function () {
         // Given
         var note = {
-          notation: {
+          notations: {
             tuplet: {}
           }
         };
@@ -51,7 +51,7 @@ if (typeof require !== 'undefined') {
       it("test true - table", function () {      
         // Given
         var note = {
-          notation: [
+          notations: [
           {
             tuplet: {}
           },
@@ -85,7 +85,7 @@ if (typeof require !== 'undefined') {
       it("test false - table", function () {      
         // Given
         var note = {
-          notation: [
+          notations: [
           {
             tied: {}
           },
