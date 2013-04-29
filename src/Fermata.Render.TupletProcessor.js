@@ -28,8 +28,7 @@
     {
       for (var i = 0 ; i < note.notations.length ; i++)
       {
-        var notation = note.notations[i];
-            
+        var notation = note.notations[i];    
         if (typeof notation.tuplet !== "undefined")
         {
           return true;
@@ -123,7 +122,6 @@
   TupletProcessor.prototype.stopTuplet = function ()
   {
     this.vexNotes.push(this.currentVexNote);
-    
     var vexTuplet = new Vex.Flow.Tuplet(this.vexNotes, {beats_occupied: this.vexNotes.length / 3 * 2});
     this.$fermata.vexTuplets.push(vexTuplet);
 
