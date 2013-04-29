@@ -143,7 +143,7 @@
       auto_stem : auto_stem,
       clef : this.clefName
     });
-    
+
     if (vexDuration.dotDuration > 0)
     {
       vexNote.addDotToAll();

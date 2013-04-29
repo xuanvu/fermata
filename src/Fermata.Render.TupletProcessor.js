@@ -28,7 +28,7 @@
     {
       for (var i = 0 ; i < note.notations.length ; i++)
       {
-        var notation = note.notations[i];    
+        var notation = note.notations[i];
         if (typeof notation.tuplet !== "undefined")
         {
           return true;
