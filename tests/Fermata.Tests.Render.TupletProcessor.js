@@ -49,7 +49,13 @@ if (typeof require !== 'undefined') {
       });
       
       it("test true - table", function () {
-        console.log("[TEST_ARRAY]" + ([{}, {}, {}] instanceof Array));
+        var boulbi = [];
+        console.log("[TEST_ARRAY]" + (boulbi instanceof Array));
+        var bar = {foo:[]};
+        console.log("[EVIL ARRAY]" + (bar.foo instanceof Array));
+        var foo = bar.foo;
+        console.log("[MONSTER ARRAY]" + (foo instanceof Array));
+
         // Given
         var note = {
           notations: [
