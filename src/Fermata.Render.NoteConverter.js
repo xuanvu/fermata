@@ -6,6 +6,7 @@
   var SoundType = Fermata.Render.SoundType;
   var PitchPitched = Fermata.Render.PitchPitched;
   var PitchRest = Fermata.Render.PitchRest;
+  var TupletProcessor = Fermata.Render.TupletProcessor;
 
   Fermata.Render.NoteConverter = function ()
   {};
@@ -65,7 +66,7 @@
 
   NoteConverter.prototype.convertDuration = function (noteData)
   {
-    var dataDuration = noteData.duration;
+    var dataDuration = this.getDuration(noteData);
     var actualDuration = dataDuration / this.divisions;
     var vexBaseDuration = Math.ceil(this.beatType / actualDuration);
     var baseDuration = this.beatType / vexBaseDuration;
@@ -82,6 +83,21 @@
 
     return vexDuration;
   };
+
+  NoteConverter.prototype.getDuration = function (noteData) {
+    if (TupletProcessor.hasTimeModification(noteData))
+    {
+      var timeModification = TupletProcessor.getTimeModification(noteData);
+      var actualNotes = timeModification["actual-notes"];
+      var normalNotes = timeModification["normal-notes"];
+      
+      return noteData.duration * actualNotes / normalNotes;
+    }
+    else
+    {
+      return noteData.duration;
+    }
+  }
 
   NoteConverter.prototype.convertNormalNote = function (noteData)
   {
