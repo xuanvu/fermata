@@ -70,7 +70,7 @@
     {
       this.beamProcessor.addNote(note[0], vexNote);
     }
-    if (this.tupletProcessor.canProcess(note))
+    if (this.tupletProcessor.canProcess(note[0]))
     {
       this.tupletProcessor.addNote(note[0], vexNote);
     }
