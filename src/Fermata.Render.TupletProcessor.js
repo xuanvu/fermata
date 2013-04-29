@@ -70,6 +70,12 @@
     return note["time-modification"];
   };
 
+  TupletProcessor.prototype.canProcess = function (note) {
+    return TupletProcessor.hasTuplet(note) ||
+    (TupletProcessor.hasTimeModification(note) &&
+      this.hasRunningTuplet());
+  };
+
   TupletProcessor.prototype.addNote = function (note, vexNote) {
     this.currentVexNote = vexNote;
     
