@@ -48,10 +48,19 @@ if (typeof require !== 'undefined') {
         assert.ok(result);
       });
       
+      var arrayAssessor = function (boulbi, bar, foo, note) {
+        console.log("[TEST FUNC]" + (boulbi instanceof Array));
+        console.log("[EVIL FUNC]" + (bar.foo instanceof Array));
+        console.log("[MONSTER FUNC]" + (foo instanceof Array));
+        console.log("[DEVIL FUNC]" + (note.notations instanceof Array));
+      }
+      
       it("test true - table", function () {
         var boulbi = [];
         console.log("[TEST_ARRAY]" + (boulbi instanceof Array));
-        var bar = {foo:[]};
+        var bar = {
+          foo:[]
+        };
         console.log("[EVIL ARRAY]" + (bar.foo instanceof Array));
         var foo = bar.foo;
         console.log("[MONSTER ARRAY]" + (foo instanceof Array));
@@ -72,6 +81,7 @@ if (typeof require !== 'undefined') {
         };
         
         console.log("[DEVIL ARRAY]" + (note.notations instanceof Array));
+        arrayAssessor(boulbi, bar, foo, note);
         
         // When
         var result = TupletProcessor.hasTuplet(note);
