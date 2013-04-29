@@ -230,7 +230,7 @@ if (typeof require !== 'undefined') {
         var vexNotes = [];
         for (var i = 0 ; i < notes.length ; i++)
         {
-          vexNotes.push(new Vex.Flow.StaveNote({
+          vexNotes.push(new Fermata.Vex.Flow.StaveNote({
             keys: ["a/4"], 
             duration: "8"
           }));
