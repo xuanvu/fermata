@@ -10,6 +10,7 @@
 
   // Includes
   var BeamProcessor = Fermata.Render.BeamProcessor;
+  var TupletProcessor = Fermata.Render.TupletProcessor;
 
   var _render = Fermata.Render.prototype;
   Fermata.Render.prototype.renderScoreHeaderProcess = [
@@ -165,9 +166,11 @@
       vexStaves: [],
       vexVoices: [],
       vexBeams: [],
-      vexHairpin: []
+      vexHairpin: [],
+      vexTuplets: []
     };
     this.beamProcessor = new BeamProcessor(this.cur.measure.$fermata);
+    this.tupletProcessor = new TupletProcessor(this.cur.measure.$fermata);
 
     // Stave
     // this.renderMeasureAttributes(measure);

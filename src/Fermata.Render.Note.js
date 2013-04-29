@@ -70,6 +70,10 @@
     {
       this.beamProcessor.addNote(note[0], vexNote);
     }
+    if (this.tupletProcessor.canProcess(note))
+    {
+      this.tupletProcessor.addNote(note[0], vexNote);
+    }
     this.recordNote(vexNote, voice, staff);
 
 
