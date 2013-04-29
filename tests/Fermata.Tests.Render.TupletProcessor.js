@@ -134,7 +134,7 @@ if (typeof require !== 'undefined') {
         // Given
         var tuplet = {};
         var note = {
-          notation: {
+          notations: {
             tuplet: tuplet
           }
         };
@@ -150,7 +150,7 @@ if (typeof require !== 'undefined') {
         // Given
         var tuplet = {};
         var note = {
-          notation: [
+          notations: [
           {
             tuplet: tuplet
           },
