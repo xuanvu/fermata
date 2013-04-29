@@ -63,4 +63,8 @@
     }
   };
 
+  TupletProcessor.getTimeModification = function (note) {
+    return note["time-modification"];
+  };
+
 }).call(this);
