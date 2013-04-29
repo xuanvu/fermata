@@ -42,7 +42,7 @@
       return typeof note.notations.tuplet !== "undefined";
     }
   };
-  
+
   TupletProcessor.hasTimeModification = function (note) {
     return typeof note["time-modification"] !== "undefined";
   };
@@ -78,7 +78,7 @@
 
   TupletProcessor.prototype.addNote = function (note, vexNote) {
     this.currentVexNote = vexNote;
-    
+
     var tupletType = this.getTupletType(note);
     if (tupletType === TupletType.START) {
       this.startTuplet();
@@ -117,7 +117,7 @@
 
   TupletProcessor.prototype.continueTuplet = function ()
   {
-    this.vexNotes.push(this.currentVexNote);    
+    this.vexNotes.push(this.currentVexNote);
   };
 
   TupletProcessor.prototype.stopTuplet = function ()

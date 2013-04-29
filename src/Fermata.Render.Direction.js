@@ -27,7 +27,7 @@
   //TODO gestion des polices etc...
   Fermata.Render.prototype.renderDirectionTypeWordProcess = [
     {key: 'content', type: _render.FuncTypes.$1, dataType: 'string', dataKey: 'content' }
-  ]
+  ];
 
   Fermata.Render.prototype.renderDirectionTypeWedge = function (node) {
     this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeWedgeProcess, ctx: this,

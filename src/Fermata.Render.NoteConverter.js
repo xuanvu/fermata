@@ -75,7 +75,7 @@
     var vexDuration = {
       vexBaseDuration: vexBaseDuration.toString(),
       dotDuration: dotDuration
-    }
+    };
     if (dotDuration > 0)
     {
       vexDuration.vexBaseDuration += "d";
@@ -90,26 +90,27 @@
       var timeModification = TupletProcessor.getTimeModification(noteData);
       var actualNotes = timeModification["actual-notes"];
       var normalNotes = timeModification["normal-notes"];
-      
+
       return noteData.duration * actualNotes / normalNotes;
     }
     else
     {
       return noteData.duration;
     }
-  }
+  };
 
   NoteConverter.prototype.convertNormalNote = function (noteData)
   {
     var dataPitch = this.extractPitch(noteData[0]);
     var vexDuration = this.convertDuration(noteData[0]);
+    var stem = null;
 
     // Stem
     if (typeof(noteData[0].stem) === 'object') {
-      var stem = noteData[0].stem.content;
+      stem = noteData[0].stem.content;
     }
     else {
-      var stem = noteData[0].stem;
+      stem = noteData[0].stem;
     }
     var auto_stem = false;
 
