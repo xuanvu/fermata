@@ -24,7 +24,7 @@
     {
       return false;
     }
-    else if (note.notations instanceof [].constructor)
+    else if (note.notations instanceof Array)
     {
       for (var i = 0 ; i < note.notations.length ; i++)
       {
@@ -47,7 +47,7 @@
   };
 
   TupletProcessor.getTuplet = function (note) {
-    if (note.notations instanceof [].constructor)
+    if (note.notations instanceof Array)
     {
       for (var i = 0 ; i < note.notations.length ; i++)
       {
