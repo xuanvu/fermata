@@ -85,6 +85,8 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Render.js",
     "Fermata.Render.BeamType.js",
     "Fermata.Render.BeamProcessor.js",
+    "Fermata.Render.TupletType.js",
+    "Fermata.Render.TupletProcessor.js",
     "Fermata.Render.Call.js",
     "Fermata.Render.SymbolSize.js",
     "Fermata.Render.NoteStorage.js",
