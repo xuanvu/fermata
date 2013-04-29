@@ -27,7 +27,7 @@
     {
       return false;
     }
-    else if (note.notations instanceof Array)
+    else if (TupletProcessor.isArray(note.notations))
     {
       console.log("ARRAY !!!");
       for (var i = 0 ; i < note.notations.length ; i++)
@@ -55,7 +55,7 @@
   };
 
   TupletProcessor.getTuplet = function (note) {
-    if (note.notations instanceof Array)
+    if (TupletProcessor.isArray(note.notations))
     {
       for (var i = 0 ; i < note.notations.length ; i++)
       {
@@ -75,6 +75,10 @@
 
   TupletProcessor.getTimeModification = function (note) {
     return note["time-modification"];
+  };
+
+  TupletProcessor.isArray = function (obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
   };
 
   TupletProcessor.prototype.canProcess = function (note) {
@@ -130,7 +134,9 @@
   TupletProcessor.prototype.stopTuplet = function ()
   {
     this.vexNotes.push(this.currentVexNote);
-    var vexTuplet = new Vex.Flow.Tuplet(this.vexNotes, {beats_occupied: this.vexNotes.length / 3 * 2});
+    var vexTuplet = new Vex.Flow.Tuplet(this.vexNotes, {
+      beats_occupied: this.vexNotes.length / 3 * 2
+      });
     this.$fermata.vexTuplets.push(vexTuplet);
 
     this.vexNotes = [];
