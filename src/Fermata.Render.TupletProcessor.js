@@ -43,4 +43,24 @@
   TupletProcessor.hasTimeModification = function (note) {
     return typeof note["time-modification"] !== "undefined";
   };
+
+  TupletProcessor.getTuplet = function (note) {
+    if (note.notations instanceof [].constructor)
+    {
+      for (var i = 0 ; i < note.notations.length ; i++)
+      {
+        var notation = note.notations[i];
+
+        if (typeof notation.tuplet !== "undefined")
+        {
+          return notation.tuplet;
+        }
+      }
+    }
+    else
+    {
+      return note.notations.tuplet;
+    }
+  };
+
 }).call(this);
