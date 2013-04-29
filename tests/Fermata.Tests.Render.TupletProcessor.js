@@ -64,8 +64,6 @@ if (typeof require !== 'undefined') {
           ]
         };
 
-        arrayAssessor(boulbi, bar, foo, note);
-        
         // When
         var result = TupletProcessor.hasTuplet(note);
         
