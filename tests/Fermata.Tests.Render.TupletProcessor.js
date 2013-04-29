@@ -44,7 +44,7 @@ if (typeof require !== 'undefined') {
         var result = TupletProcessor.hasTuplet(note);
         
         // Then
-        assert.assertOk(result);
+        assert.ok(result);
       });
       
       it("test true - table", function () {      
@@ -67,7 +67,7 @@ if (typeof require !== 'undefined') {
         var result = TupletProcessor.hasTuplet(note);
         
         // Then
-        assert.assertOk(result);
+        assert.ok(result);
       });
       
       it("test false", function () {
@@ -78,7 +78,7 @@ if (typeof require !== 'undefined') {
         var result = TupletProcessor.hasTuplet(note);
         
         // Then
-        assert.assertOk(!result);       
+        assert.ok(!result);       
       })
     });
     
@@ -99,7 +99,7 @@ if (typeof require !== 'undefined') {
       var result = TupletProcessor.hasTuplet(note);
       
       // Then
-      assert.assertOk(!result);
+      assert.ok(!result);
     });
     
     describe("#hasTimeModification" , function () {
@@ -113,7 +113,7 @@ if (typeof require !== 'undefined') {
         var result = TupletProcessor.hasTimeModification(note);
         
         // Then
-        assert.assertOk(result);
+        assert.ok(result);
       });
       
       it("test false", function () {
@@ -124,7 +124,7 @@ if (typeof require !== 'undefined') {
         var result = TupletProcessor.hasTimeModification(note);
         
         // Then
-        assert.assertOk(!result);       
+        assert.ok(!result);       
       })
     });
     
