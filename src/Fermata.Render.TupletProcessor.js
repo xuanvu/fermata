@@ -7,14 +7,17 @@
 (function () {
   "use strict";
 
-  Fermata.Render.TupletProcessor = function ()
+  Fermata.Render.TupletProcessor = function ($fermata)
   {
-    
+    this.currentVexNote = null;
+    this.vexNotes = [];
+    this.$fermata = $fermata;
   };
 
   // includes
+  var TupletType = Fermata.Render.TupletType;
   var TupletProcessor = Fermata.Render.TupletProcessor;
-  
+
   TupletProcessor.hasTuplet = function (note)
   {
     if (typeof note.notations === "undefined")
@@ -65,6 +68,60 @@
 
   TupletProcessor.getTimeModification = function (note) {
     return note["time-modification"];
+  };
+
+  TupletProcessor.prototype.addNote = function (note, vexNote) {
+    this.currentVexNote = vexNote;
+    
+    var tupletType = this.getTupletType(note);
+    if (tupletType === TupletType.START) {
+      this.startTuplet();
+    } else if (tupletType === TupletType.CONTINUE) {
+      this.continueTuplet();
+    } else if (tupletType === TupletType.STOP) {
+      this.stopTuplet();
+    }
+  };
+
+  TupletProcessor.prototype.getTupletType = function (note) {
+    if (TupletProcessor.hasTuplet(note))
+    {
+      var tuplet = TupletProcessor.getTuplet(note);
+      if (tuplet.$type === TupletType.START) {
+        return TupletType.START;
+      } else if (tuplet.$type === TupletType.STOP) {
+        return TupletType.STOP;
+      }
+    }
+    else if (TupletProcessor.hasTimeModification(note) &&
+      this.hasRunningTuplet())
+      {
+      return TupletType.CONTINUE;
+    }
+  };
+
+  TupletProcessor.prototype.hasRunningTuplet = function () {
+    return this.vexNotes.length > 0;
+  };
+
+  TupletProcessor.prototype.startTuplet = function ()
+  {
+    this.vexNotes.push(this.currentVexNote);
+  };
+
+  TupletProcessor.prototype.continueTuplet = function ()
+  {
+    this.vexNotes.push(this.currentVexNote);    
+  };
+
+  TupletProcessor.prototype.stopTuplet = function ()
+  {
+    this.vexNotes.push(this.currentVexNote);
+    
+    var vexTuplet = new Vex.Flow.Tuplet(this.vexNotes);
+    this.$fermata.vexTuplets.push(vexTuplet);
+
+    this.vexNotes = [];
   };
 
 }).call(this);
