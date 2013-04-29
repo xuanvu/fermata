@@ -45,6 +45,7 @@
       console.log("isArray: " + (note.notations instanceof Array));
       console.log("note.notations  type: " + (Object.prototype.toString.call(note.notations)));
       console.log("noArray. tuplet: " + (typeof note.notations.tuplet !== "undefined"));
+      console.log("dafuck: " + ([] instanceof Array));
       return typeof note.notations.tuplet !== "undefined";
     }
   };
