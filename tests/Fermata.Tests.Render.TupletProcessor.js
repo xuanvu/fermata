@@ -31,8 +31,9 @@ if (typeof require !== 'undefined') {
         var tupletProcessor = new TupletProcessor($fermata);
       });
     });
+    
     describe("#hasTuplet" , function () {
-      it("test true", function () {      
+      it("test true", function () {
         // Given
         var note = {
           notation: {
@@ -79,27 +80,27 @@ if (typeof require !== 'undefined') {
         
         // Then
         assert.ok(!result);       
-      })
-    });
-    
-    it("test false - table", function () {      
-      // Given
-      var note = {
-        notation: [
-        {
-          tied: {}
-        },
-        {
-          glissando: {}
-        }
-        ]
-      };
-      
-      // When
-      var result = TupletProcessor.hasTuplet(note);
-      
-      // Then
-      assert.ok(!result);
+      });
+
+      it("test false - table", function () {      
+        // Given
+        var note = {
+          notation: [
+          {
+            tied: {}
+          },
+          {
+            glissando: {}
+          }
+          ]
+        };
+
+        // When
+        var result = TupletProcessor.hasTuplet(note);
+
+        // Then
+        assert.ok(!result);
+      });
     });
     
     describe("#hasTimeModification" , function () {
