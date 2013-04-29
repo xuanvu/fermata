@@ -202,7 +202,11 @@
   };
 
   Fermata.Drawer.prototype.AddNotation = function (text, hJustifcation, vJustifcation) {
-    var ret = new Vex.Flow.Annotation(text).setFont("Arial", Vex.Flow.Test.Font.size).setJustification(hJustifcation).setVerticalJustification(vJustifcation);
+    var ret = new Vex.Flow.Annotation(text);
+    console.log(ret);
+    // ret.setFont('Arial', Vex.Flow.Test.Font.size);
+    ret.setJustification(hJustifcation);
+    ret.setVerticalJustification(vJustifcation);
     return ret;
   };
 

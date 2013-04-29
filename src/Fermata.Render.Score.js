@@ -337,7 +337,9 @@
       for (i = 0; i < $fermata.direction.length; i++) {
         var data = $fermata.direction;
 
-        if (data[i]['direction-type'].wedge.$type !== 'stop') {
+        console.log(data);
+
+        if (data[i]['direction-type'].wedge.$type !== null && data[i]['direction-type'].wedge.$type !== 'stop') {
           var renderOption = {
             height: 10,
             y_shift: 0,
@@ -352,16 +354,14 @@
             renderOption.right_shift_px += 70;
           }
           var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data[i]['direction-type'].wedge.$type));
-          //hp.setContext(this.ctx);
           hp.setPosition(Fermata.Mapping.Direction.getVexflow(data[i].placement));
           hp.setRenderOptions(renderOption);
           $fermata.vexHairpin.push(hp);
-          //hp.draw();
         }
-       /* else if (data[i]['direction-type'].words.content !== null) {
-          var note = getNoteTest(data[i].noteAfter);
+        else if (data[i]['direction-type'].words.content !== null) {
+          var note = _render.getNoteTest(data[i].noteAfter, measure);
             note.addAnnotation(0, Fermata.Drawer.prototype.AddNotation(data[i]['direction-type'].words.content, 1, 1));
-        }*/
+        }
       }
     }
   };
