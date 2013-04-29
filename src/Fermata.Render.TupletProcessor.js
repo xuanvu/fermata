@@ -20,12 +20,16 @@
 
   TupletProcessor.hasTuplet = function (note)
   {
+    console.log("note: " + note);
+    console.log("notations: " + (typeof note.notations === "undefined"));
+
     if (typeof note.notations === "undefined")
     {
       return false;
     }
     else if (note.notations instanceof Array)
     {
+      console.log("ARRAY !!!");
       for (var i = 0 ; i < note.notations.length ; i++)
       {
         var notation = note.notations[i];
@@ -38,6 +42,7 @@
     }
     else
     {
+      console.log("noArray. tuplet: " + (typeof note.notations.tuplet !== "undefined"));
       return typeof note.notations.tuplet !== "undefined";
     }
   };
