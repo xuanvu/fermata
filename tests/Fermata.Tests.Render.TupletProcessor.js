@@ -79,7 +79,7 @@ if (typeof require !== 'undefined') {
         var result = TupletProcessor.hasTuplet(note);
         
         // Then
-        assert.ok(!result);       
+        assert.ok(!result);
       });
 
       it("test false - table", function () {      

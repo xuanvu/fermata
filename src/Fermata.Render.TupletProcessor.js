@@ -39,4 +39,8 @@
       return typeof note.notations.tuplet !== "undefined";
     }
   };
+  
+  TupletProcessor.hasTimeModification = function (note) {
+    return typeof note["time-modification"] !== "undefined";
+  };
 }).call(this);
