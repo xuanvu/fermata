@@ -161,6 +161,7 @@
     }
 
     this.drawBeam(measure);
+    this.drawTuplet(measure);
   };
 
   Fermata.Drawer.prototype.getGoodPos =  function (noteOne, noteTwo, renderOption, first) {
@@ -188,6 +189,15 @@
       var vexBeam = measure.$fermata.vexBeams[i];
 
       vexBeam.setContext(this.ctx).draw();
+    }
+  };
+
+  Fermata.Drawer.prototype.drawTuplet = function (measure)
+  {
+    for (var i = 0 ; i < measure.$fermata.vexTuplets.length ; ++i) {
+      var vexTuplet = measure.$fermata.vexTuplets[i];
+
+      vexTuplet.setContext(this.ctx).draw();
     }
   };
 
