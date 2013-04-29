@@ -71,6 +71,8 @@ if (typeof require !== 'undefined') {
           ]
         };
         
+        console.log("[DEVIL ARRAY]" + (note.notations instanceof Array));
+        
         // When
         var result = TupletProcessor.hasTuplet(note);
         
