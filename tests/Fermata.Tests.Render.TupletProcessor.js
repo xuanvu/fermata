@@ -143,7 +143,7 @@ if (typeof require !== 'undefined') {
         var result = TupletProcessor.getTuplet(note);
         
         // Then
-        assert.assertStrictEqual(result, tuplet);
+        assert.strictEqual(result, tuplet);
       });
       
       it("test table", function () {      
@@ -167,7 +167,7 @@ if (typeof require !== 'undefined') {
         var result = TupletProcessor.getTuplet(note);
         
         // Then
-        assert.assertStrictEqual(result, tuplet);
+        assert.strictEqual(result, tuplet);
       });
     });
     
@@ -183,7 +183,7 @@ if (typeof require !== 'undefined') {
         var result = TupletProcessor.getTimeModification(note);
         
         // Then
-        assert.assertStrictEqual(result, timeModification);
+        assert.strictEqual(result, timeModification);
       });
     });
     
