@@ -124,7 +124,7 @@
   {
     this.vexNotes.push(this.currentVexNote);
     
-    var vexTuplet = new Vex.Flow.Tuplet(this.vexNotes);
+    var vexTuplet = new Vex.Flow.Tuplet(this.vexNotes, {beats_occupied: this.vexNotes.length / 3 * 2});
     this.$fermata.vexTuplets.push(vexTuplet);
 
     this.vexNotes = [];
