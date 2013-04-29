@@ -48,7 +48,8 @@ if (typeof require !== 'undefined') {
         assert.ok(result);
       });
       
-      it("test true - table", function () {      
+      it("test true - table", function () {
+        console.log("[TEST_ARRAY]" + ([] instanceof Array));
         // Given
         var note = {
           notations: [
