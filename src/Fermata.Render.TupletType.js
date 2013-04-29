@@ -2,9 +2,9 @@
   "use strict";
 
   Fermata.Render.TupletType = {
-    BEGIN: "begin",
+    START: "start",
     CONTINUE: "continue",
-    END: "end"
+    STOP: "stop"
   };
 
 }).call(this);
