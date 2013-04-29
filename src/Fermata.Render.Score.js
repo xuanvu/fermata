@@ -333,8 +333,9 @@
           if (tmpNote.first_note === tmpNote.last_note) {
             renderOption.right_shift_px += 70;
           }
+          console.log(data[i].placement);
           var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data[i]['direction-type'].wedge.$type));
-          hp.setPosition(Fermata.Mapping.Direction.getVexflow(data[i].placement));
+          hp.setPosition(Fermata.Mapping.Direction.getVexflow(data[i]['$placement']));
           hp.setRenderOptions(renderOption);
           $fermata.vexHairpin.push(hp);
         }
