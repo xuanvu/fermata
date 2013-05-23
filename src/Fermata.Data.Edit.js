@@ -12,7 +12,7 @@
       }
 
       for (var i = 0 ; i < number ; i++) {
-        part.measure.splice(idx, 0, {'$number': idx + number,'note': [] });
+        part.measure.splice(idx, 0, {'$number': idx + number, 'note': [] });
         Fermata.Data.prototype.fillWithRest(part, idx);
       }
 
@@ -24,6 +24,17 @@
       }
     });
   };
+  
+  Fermata.Data.prototype.moveMeasure = function(idxFrom, idxDest) {
+    this.forEachPart(function(part) {
+      if (idxDest > idxFrom) {
+        idxDest++;
+      }
+      var measure = part.measure[idxFrom];
+      part.measure.splice(idxFrom, 1);
+      part.measure.splice(idxDest, 0, measure);
+    }); 
+  }
 
   Fermata.Data.prototype.removeMeasure = function(idx, number) {
     if (number === undefined) {
