@@ -28,7 +28,7 @@
   Fermata.Data.prototype.moveMeasure = function(idxFrom, idxDest) {
     this.forEachPart(function(part) {
       if (idxDest > idxFrom) {
-        idxDest++;
+        idxDest--;
       }
       var measure = part.measure[idxFrom];
       part.measure.splice(idxFrom, 1);
