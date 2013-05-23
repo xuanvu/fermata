@@ -113,6 +113,8 @@
     <!-- test edit -->
     Add / Remove <input type="input" value="1" id="nbMeasure" /> measure(s) at idx <input type="input" value="3" id="idMeasure" /><input type="button" id="addMeasure" value="addMeasure()" /><input type="button" id="removeMeasure" value="removeMeasure()" />
     </p>
+    Move measure <input type="number" value="1" id="measudeIdxFrom"/>  to idx <input type="number" value="1" id="measudeIdxDest" /><input type="button" id="moveMeasure" />
+    <br/>
     Remove Note - stave: <input type="input" value="1" id="rnStave" /> measure: <input type="input" value="1" id="rnMeasure" /> note: <input type="input" value="1" id="rnNote" /><input type="button" id="removeNote" value="removeNote()" />
     </p>
     Add Note - stave: <input type="input" value="1" id="anStave" /> measure: <input type="input" value="1" id="anMeasure" /> note: <input type="input" value="1" id="anNote" /> step: <input type="input" value="C" id="anStep" /> octave: <input type="input" value="4" id="anOctave" /> type { HALF: 0, QUARTER: 1, EIGHTH: 2 }: <input type="input" value="1" id="anType" /> voice: <input type="input" value="1" id="anVoice" /><input type="button" id="addNote" value="addNote()" />
@@ -162,6 +164,13 @@
           render.renderAll();
           drawer.drawAll();
         });
+        
+    $('#moveMeasure').click(function() {
+          $('#canvas-score > svg').empty();
+          data.moveMeasure($('#measudeIdxFrom').val(), $('#measudeIdxDest').val());
+          render.renderAll();
+          drawer.drawAll();
+        });        
 
         $('#removeNote').click(function() {
           $('#canvas-score > svg').empty();
