@@ -26,10 +26,10 @@
   };
   
   Fermata.Data.prototype.moveMeasure = function(idxFrom, idxDest) {
+    if (idxDest > idxFrom) {
+      idxDest--;
+    }
     this.forEachPart(function(part) {
-      if (idxDest > idxFrom) {
-        idxDest--;
-      }
       var measure = part.measure[idxFrom];
       part.measure.splice(idxFrom, 1);
       part.measure.splice(idxDest, 0, measure);
