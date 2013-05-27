@@ -6,6 +6,7 @@
   var SoundType = Fermata.Render.SoundType;
   var PitchPitched = Fermata.Render.PitchPitched;
   var PitchRest = Fermata.Render.PitchRest;
+  var PitchEncapsulator = Fermata.Render.PitchEncapsulator;
 
   Fermata.Render.NoteConverter = function ()
   {};
@@ -79,7 +80,7 @@
 
   NoteConverter.prototype.convertNormalNote = function (noteData)
   {
-    var dataPitch = this.extractPitch(noteData[0]);
+    var dataPitch = PitchEncapsulator.encapsulate(noteData[0], this.clefName);
     var vexDuration = this.convertDuration(noteData[0]);
 
     // Stem
@@ -104,7 +105,7 @@
     var vexPitches = [];
     for (var i = 0 ; i < noteData.length ; i++)
     {
-      dataPitch = this.extractPitch(noteData[i]);
+      dataPitch = PitchEncapsulator.encapsulate(noteData[i], this.clefName);
       vexPitches.push(this.convertPitch(dataPitch));
     }
 
