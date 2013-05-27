@@ -93,6 +93,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Render.PitchPitched.js",
     "Fermata.Render.PitchRest.js",
     "Fermata.Render.PitchUnpitched.js",
+    "Fermata.Render.PitchEncapsulator.js",
     "Fermata.Render.NoteConverter.js",
     "Fermata.Render.TieRenderer.js",
     "Fermata.Render.GraceNote.js",
