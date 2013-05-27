@@ -11,7 +11,7 @@
   
   var PitchEncapsulator = Fermata.Render.PitchEncapsulator
   
-  PitchEncapsulator.encapsulate = function (noteData)
+  PitchEncapsulator.encapsulate = function (noteData, clefName)
   {
     var soundType = SoundType.getSoundType(noteData);
 
@@ -19,7 +19,7 @@
       return new PitchPitched(noteData);
     }
     else if (soundType === SoundType.REST) {
-      return new PitchRest(noteData, this.clefName);
+      return new PitchRest(noteData, clefName);
     }
     else {
       return null;
