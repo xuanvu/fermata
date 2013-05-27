@@ -4,8 +4,6 @@
   //includes
   var NoteType = Fermata.Render.NoteType;
   var SoundType = Fermata.Render.SoundType;
-  var PitchPitched = Fermata.Render.PitchPitched;
-  var PitchRest = Fermata.Render.PitchRest;
   var PitchEncapsulator = Fermata.Render.PitchEncapsulator;
 
   Fermata.Render.NoteConverter = function ()
@@ -118,21 +116,6 @@
     });
 
     return vexNote;
-  };
-
-  NoteConverter.prototype.extractPitch = function (noteData)
-  {
-    var soundType = SoundType.getSoundType(noteData);
-
-    if (soundType === SoundType.PITCH) {
-      return new PitchPitched(noteData);
-    }
-    else if (soundType === SoundType.REST) {
-      return new PitchRest(noteData, this.clefName);
-    }
-    else {
-      return null;
-    }
   };
 
 }).call(this);
