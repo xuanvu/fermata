@@ -1,5 +1,13 @@
 (function () {
   "use strict";
+  
+  Fermata.Data.prototype.updateMeasureNumber = function () {
+    this.forEachPart(function (part) {
+      for (var i = 0 ; i < part.measure.length ; i++) {
+        part.measure[i].$number = (i + 1).toString();
+      }
+    });
+  }
 
   Fermata.Data.prototype.addMeasure = function(idx, number) {
     if (number === undefined) {
