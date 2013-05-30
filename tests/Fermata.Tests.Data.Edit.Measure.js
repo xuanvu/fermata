@@ -23,26 +23,35 @@ if (typeof require !== 'undefined') {
   var testMeasures = [];
   
   var checkMeasureNumbers = function (measures) {
-    
-  }
+    for (var i = 0 ; i < measures.length ; i++) {
+      assert.equal(measures.$number, i + 1);
+    }
+  };
   
+  var checkAttributes = function (measures, expectedMeasures) {
+    for (var i = 0 ; i < measures.length ; i++) {
+      assert.deepEqual(measures[i].attributes, expectedMeasures[i].attributes);
+    }
+  };
   
-   
+  var checkLength = function (measures, expectedMeasures) {
+    assert.strictEqual(measures.length, expectedMeasures.length);
+  };
+
   describe("Fermata.Edit.Measure", function () {
     describe("#addMeasure", function (){
       it("add at the begining of the measure", function (){
         // Given
         var measures = Utils.Clone(testMeasures);
-        var resultMeasures = [];
+        var expectedMeasures = [];
         var idx = 0;
         
         // When
         
         // Then
-        
-        
-        
-          
+        checkMeasureNumbers(measures);
+        checkLength(measures, expectedMeasures);
+        checkAttributes(measures, expectedMeasures);
         });
     });
   });
