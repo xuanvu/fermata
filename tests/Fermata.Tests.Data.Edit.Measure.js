@@ -17,10 +17,31 @@ if (typeof require !== 'undefined') {
 
 (function(){
   var Data = Fermata.Data;
+  var Utils = Fermata.Utils;
+  
+  // Tests data
+  var testMeasures = [];
+  
+  var checkMeasureNumbers = function (measures) {
+    
+  }
+  
+  
    
   describe("Fermata.Edit.Measure", function () {
     describe("#addMeasure", function (){
       it("add at the begining of the measure", function (){
+        // Given
+        var measures = Utils.Clone(testMeasures);
+        var resultMeasures = [];
+        var idx = 0;
+        
+        // When
+        
+        // Then
+        
+        
+        
           
         });
     });
