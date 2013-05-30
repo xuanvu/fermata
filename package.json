@@ -4,7 +4,8 @@
   "description": "MusicXML engraving javascript library using vexflow",
   "dependencies": {
     "jsdom": ">= 0.3.4",
-    "canvas": ">= 1.0.0"
+    "canvas": ">= 1.0.0",
+    "jsondiffpatch": "latest"
   },
   "devDependencies" : {
     "jshint": "latest",
