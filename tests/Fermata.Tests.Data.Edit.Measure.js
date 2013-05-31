@@ -69,7 +69,7 @@ if (typeof require !== 'undefined') {
         // Then
         checkMeasureNumbers(measures);
         checkLength(measures, expectedMeasures);
-        checkAttributes(measures, expectedMeasures);
+        checkAttributes(measures, expectedAttributes);
       });
     });
   });
