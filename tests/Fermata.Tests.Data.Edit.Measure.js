@@ -68,7 +68,7 @@ if (typeof require !== 'undefined') {
         
         // Then
         checkMeasureNumbers(measures);
-        checkLength(measures, expectedMeasures);
+        assert.equal(measures.length, testMeasures.length + 1);
         checkAttributes(measures, expectedAttributes);
       });
     });
