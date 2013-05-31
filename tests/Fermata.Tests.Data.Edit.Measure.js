@@ -28,9 +28,9 @@ if (typeof require !== 'undefined') {
     }
   };
   
-  var checkAttributes = function (measures, expectedMeasures) {
+  var checkAttributes = function (measures, expectedAttributes) {
     for (var i = 0 ; i < measures.length ; i++) {
-      assert.deepEqual(measures[i].attributes, expectedMeasures[i].attributes);
+      assert.deepEqual(measures[i].attributes, expectedAttributes[i]);
     }
   };
 
