@@ -33,10 +33,6 @@ if (typeof require !== 'undefined') {
       assert.deepEqual(measures[i].attributes, expectedMeasures[i].attributes);
     }
   };
-  
-  var checkLength = function (measures, expectedMeasures) {
-    assert.strictEqual(measures.length, expectedMeasures.length);
-  };
 
   describe("Fermata.Edit.Measure", function () {
     describe("#addMeasure", function (){
