@@ -19,7 +19,7 @@ if (typeof require !== 'undefined') {
   var Data = Fermata.Data;
   var Utils = Fermata.Utils;
   
-  var initPitchedNote = function (octave, step) {
+  var initPitchedNote = function (step, octave) {
     return {
       pitch: {
         step: step,
@@ -28,7 +28,7 @@ if (typeof require !== 'undefined') {
     };
   };
 
-  var initRestNote = function (octave, step) {
+  var initRestNote = function (step, octave) {
     return {
       rest: {
         "display-step": step,
@@ -57,6 +57,21 @@ if (typeof require !== 'undefined') {
         // Then
         assert.equal(pitchedNote.pitch.step, "D");
         assert.equal(pitchedNote.pitch.octave, 4);        
+      });
+
+      it("increment rest note", function () {
+        var underTest = null;
+        
+        // Given 
+        var restNote = initRestNote("C", 4);
+        var pitchChange = 1;
+        
+        // When
+        underTest.changePitch(pitchChange);
+        
+        // Then
+        assert.equal(pitchedNote.rest["display-step"], "D");
+        assert.equal(pitchedNote.rest["display-octave"], 4);
       });
     });
   });
