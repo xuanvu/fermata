@@ -68,6 +68,29 @@ if (typeof require !== 'undefined') {
         assert.equal(pitchedNote.rest["display-step"], "D");
         assert.equal(pitchedNote.rest["display-octave"], 4);
       });
+      
+      it("octave jump on pitched notes", function () {
+        var underTest = null;
+        
+        // Given 
+        var pitchedNotes = [];
+        for (var i = 0 ; i < 9 ; i++) {
+          pitchedNotes.push(initPitchedNote("G", i));
+        }
+        var pitchChange = 1;
+        
+        // When
+        underTest.changePitch(pitchChange);
+        
+        // Then
+        for (var j = 0 ; j < pitchedNotes.length ; j++) {
+          var pitchedNote = pitchedNotes[j];
+          
+          assert.equal(pitchedNote.pitch.step, "A");
+          assert.equal(pitchedNote.pitch.octave, j + 1);
+        }
+
+      });      
     });
   });
 }).call(this);
