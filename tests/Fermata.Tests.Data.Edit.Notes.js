@@ -28,6 +28,15 @@ if (typeof require !== 'undefined') {
     };
   };
 
+  var initRestNote = function (octave, step) {
+    return {
+      rest: {
+        "display-step": step,
+        "display-octave": octave
+      }
+    };
+  };
+
   describe("Fermata.Edit.Note", function () {
     describe("#changePitch", function (){
       it("increment pitched note", function () {
