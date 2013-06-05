@@ -43,12 +43,7 @@ if (typeof require !== 'undefined') {
         var underTest = null;
         
         // Given 
-        var pitchedNote = {
-          pitch: {
-            step: "C",
-            octave: 4
-          }
-        };
+        var pitchedNote = initPitchedNote("C", 4);
         var pitchChange = 1;
         
         // When
