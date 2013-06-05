@@ -18,6 +18,15 @@ if (typeof require !== 'undefined') {
 (function(){
   var Data = Fermata.Data;
   var Utils = Fermata.Utils;
+  
+  var initPitchedNote = function (octave, step) {
+    return {
+      pitch: {
+        step: step,
+        octave: octave
+      }
+    };
+  };
 
   describe("Fermata.Edit.Note", function () {
     describe("#changePitch", function (){
