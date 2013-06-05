@@ -21,7 +21,7 @@ if (typeof require !== 'undefined') {
 
   describe("Fermata.Edit.Note", function () {
     describe("#changePitch", function (){
-      it("incerate pitched note", function () {
+      it("increment pitched note", function () {
         var underTest = null;
         
         // Given 
