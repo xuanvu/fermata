@@ -19,7 +19,7 @@ if (typeof require !== 'undefined') {
   var Data = Fermata.Data;
   var Utils = Fermata.Utils;
   
-  var initPitchedNote = function (step, octave) {
+  var initNote = function (step, octave) {
     return {
       pitch: {
         step: step,
@@ -34,7 +34,7 @@ if (typeof require !== 'undefined') {
         var underTest = null;
 
         // Given 
-        var pitchedNote = initPitchedNote("C", 4);
+        var pitchedNote = initNote("C", 4);
         var newStep = "A";
 
         // When
@@ -50,7 +50,7 @@ if (typeof require !== 'undefined') {
         var underTest = null;
         
         // Given 
-        var pitchedNote = initPitchedNote("C", 4);
+        var pitchedNote = initNote("C", 4);
         var newOctave = 2;
 
         // When
@@ -66,7 +66,7 @@ if (typeof require !== 'undefined') {
         var underTest = null;
         
         // Given 
-        var pitchedNote = initPitchedNote("C", 4);
+        var pitchedNote = initNote("C", 4);
         var pitchChange = 1;
         
         // When
@@ -81,7 +81,7 @@ if (typeof require !== 'undefined') {
         var underTest = null;
         
         // Given 
-        var pitchedNote = initPitchedNote("C", 4);
+        var pitchedNote = initNote("C", 4);
         var pitchChange = -1;
         
         // When
@@ -98,7 +98,7 @@ if (typeof require !== 'undefined') {
         // Given 
         var pitchedNotes = [];
         for (var i = 0 ; i < 9 ; i++) {
-          pitchedNotes.push(initPitchedNote("G", i));
+          pitchedNotes.push(initNote("G", i));
         }
         var pitchChange = 1;
         
@@ -120,7 +120,7 @@ if (typeof require !== 'undefined') {
         // Given 
         var pitchedNotes = [];
         for (var i = 0 ; i < 9 ; i++) {
-          pitchedNotes.push(initPitchedNote("A", i + 1));
+          pitchedNotes.push(initNote("A", i + 1));
         }
         var pitchChange = -1;
         
