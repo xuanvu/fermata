@@ -16,4 +16,32 @@ if (typeof require !== 'undefined') {
 }
 
 (function(){
-  }).call(this);
+
+  var initNote = function (step, octave) {
+    return {
+      rest: {
+        "display-step": step,
+        "display-octave": octave
+      }
+    };
+  };
+
+  describe("Fermata.Data.PitchRest", function () {
+    describe("#changePitch", function () {
+      it("basic increment", function () {
+        var underTest = null;
+        
+        // Given 
+        var restNote = initNote("C", 4);
+        var pitchChange = 1;
+
+        // When
+        underTest.changePitch(pitchChange);
+
+        // Then
+        assert.equal(pitchedNote.rest["display-step"], "D");
+        assert.equal(pitchedNote.rest["display-octave"], 4);
+      });
+    });
+  });
+}).call(this);
