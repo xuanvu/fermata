@@ -41,16 +41,32 @@ if (typeof require !== 'undefined') {
     describe("#setStep", function () {
       it("normal value", function () {
         var underTest = null;
-        
+
         // Given 
         var pitchedNote = initPitchedNote("C", 4);
         var newStep = "A";
-        
+
         // When
         underTest.setStep(newStep);
-        
+
         // Then
         assert.equal(pitchedNote.pitch.step, newStep);       
+      });
+    });
+
+    describe("#setStep", function () {
+      it("normal value", function () {
+        var underTest = null;
+        
+        // Given 
+        var pitchedNote = initPitchedNote("C", 4);
+        var newOctave = 2;
+
+        // When
+        underTest.setOctave(newOctave);
+
+        // Then
+        assert.equal(pitchedNote.pitch.octave, newOctave);       
       });
     });
 
