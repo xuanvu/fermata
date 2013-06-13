@@ -33,4 +33,9 @@
     return this.data.pitch.octave;
   };
 
+  PitchPitched.prototype.setStep = function (step)
+  {
+    this.data.pitch.step = step;
+  };
+
 }).call(this);
