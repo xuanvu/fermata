@@ -30,10 +30,9 @@ if (typeof require !== 'undefined') {
   describe("Fermata.Data.PitchPitched", function () {
     describe("#setStep", function () {
       it("normal value", function () {
-        var pitch = null;
-
         // Given 
         var note = initNote("C", 4);
+        var pitch = new PitchPitched(note);
         var newStep = "A";
 
         // When
@@ -45,11 +44,10 @@ if (typeof require !== 'undefined') {
     });
 
     describe("#setOctave", function () {
-      it("normal value", function () {
-        var pitch = null;
-        
+      it("normal value", function () {        
         // Given 
         var note = initNote("C", 4);
+        var pitch = new PitchPitched(note);
         var newOctave = 2;
 
         // When
@@ -62,10 +60,9 @@ if (typeof require !== 'undefined') {
 
     describe("#changePitch", function (){
       it("basic increment", function () {
-        var pitch = null;
-        
         // Given 
         var note = initNote("C", 4);
+        var pitch = new PitchPitched(note);
         var pitchChange = 1;
         
         // When
@@ -77,10 +74,9 @@ if (typeof require !== 'undefined') {
       });
       
       it("basic decrement", function () {
-        var pitch = null;
-        
         // Given 
         var note = initNote("C", 4);
+        var pitch = new PitchPitched(note);
         var pitchChange = -1;
         
         // When
