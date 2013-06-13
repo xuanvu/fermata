@@ -69,7 +69,7 @@ if (typeof require !== 'undefined') {
         assert.equal(pitchedNote.rest["display-octave"], 4);
       });
       
-      it("octave jump on pitched notes", function () {
+      it("octave up jump on pitched notes", function () {
         var underTest = null;
         
         // Given 
