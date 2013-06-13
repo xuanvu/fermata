@@ -30,108 +30,108 @@ if (typeof require !== 'undefined') {
   describe("Fermata.Data.PitchPitched", function () {
     describe("#setStep", function () {
       it("normal value", function () {
-        var underTest = null;
+        var pitch = null;
 
         // Given 
-        var pitchedNote = initNote("C", 4);
+        var note = initNote("C", 4);
         var newStep = "A";
 
         // When
-        underTest.setStep(newStep);
+        pitch.setStep(newStep);
 
         // Then
-        assert.equal(pitchedNote.pitch.step, newStep);       
+        assert.equal(note.pitch.step, newStep);       
       });
     });
 
     describe("#setOctave", function () {
       it("normal value", function () {
-        var underTest = null;
+        var pitch = null;
         
         // Given 
-        var pitchedNote = initNote("C", 4);
+        var note = initNote("C", 4);
         var newOctave = 2;
 
         // When
-        underTest.setOctave(newOctave);
+        pitch.setOctave(newOctave);
 
         // Then
-        assert.equal(pitchedNote.pitch.octave, newOctave);       
+        assert.equal(note.pitch.octave, newOctave);       
       });
     });
 
     describe("#changePitch", function (){
       it("basic increment", function () {
-        var underTest = null;
+        var pitch = null;
         
         // Given 
-        var pitchedNote = initNote("C", 4);
+        var note = initNote("C", 4);
         var pitchChange = 1;
         
         // When
-        underTest.changePitch(pitchChange);
+        pitch.changePitch(pitchChange);
         
         // Then
-        assert.equal(pitchedNote.pitch.step, "D");
-        assert.equal(pitchedNote.pitch.octave, 4);        
+        assert.equal(note.pitch.step, "D");
+        assert.equal(note.pitch.octave, 4);        
       });
       
       it("basic decrement", function () {
-        var underTest = null;
+        var pitch = null;
         
         // Given 
-        var pitchedNote = initNote("C", 4);
+        var note = initNote("C", 4);
         var pitchChange = -1;
         
         // When
-        underTest.changePitch(pitchChange);
+        pitch.changePitch(pitchChange);
         
         // Then
-        assert.equal(pitchedNote.pitch.step, "B");
-        assert.equal(pitchedNote.pitch.octave, 4);        
+        assert.equal(note.pitch.step, "B");
+        assert.equal(note.pitch.octave, 4);        
       });
 
       it("octave jump up", function () {
-        var underTest = null;
+        var pitch = null;
         
         // Given 
-        var pitchedNotes = [];
+        var notes = [];
         for (var i = 0 ; i < 9 ; i++) {
-          pitchedNotes.push(initNote("G", i));
+          notes.push(initNote("G", i));
         }
         var pitchChange = 1;
         
         // When
-        underTest.changePitch(pitchChange);
+        pitch.changePitch(pitchChange);
         
         // Then
-        for (var j = 0 ; j < pitchedNotes.length ; j++) {
-          var pitchedNote = pitchedNotes[j];
+        for (var j = 0 ; j < notes.length ; j++) {
+          var note = notes[j];
           
-          assert.equal(pitchedNote.pitch.step, "A");
-          assert.equal(pitchedNote.pitch.octave, j + 1);
+          assert.equal(note.pitch.step, "A");
+          assert.equal(note.pitch.octave, j + 1);
         }
       });
 
       it("octave jump down", function () {
-        var underTest = null;
+        var pitch = null;
         
         // Given 
-        var pitchedNotes = [];
+        var notes = [];
         for (var i = 0 ; i < 9 ; i++) {
-          pitchedNotes.push(initNote("A", i + 1));
+          notes.push(initNote("A", i + 1));
         }
         var pitchChange = -1;
         
         // When
-        underTest.changePitch(pitchChange);
+        pitch.changePitch(pitchChange);
         
         // Then
-        for (var j = 0 ; j < pitchedNotes.length ; j++) {
-          var pitchedNote = pitchedNotes[j];
+        for (var j = 0 ; j < notes.length ; j++) {
+          var note = notes[j];
           
-          assert.equal(pitchedNote.pitch.step, "G");
-          assert.equal(pitchedNote.pitch.octave, j);
+          assert.equal(note.pitch.step, "G");
+          assert.equal(note.pitch.octave, j);
         }
       });
     });
