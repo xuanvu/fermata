@@ -90,9 +90,10 @@ if (typeof require !== 'undefined') {
       it("octave jump up", function () {
         var pitch = null;
         
-        // Given 
+        // Given
+        var i = 0;
         var notes = [];
-        for (var i = 0 ; i < 9 ; i++) {
+        for (i = 0 ; i < 9 ; i++) {
           notes.push(initNote("G", i));
         }
         var pitchChange = 1;
@@ -101,11 +102,11 @@ if (typeof require !== 'undefined') {
         pitch.changePitch(pitchChange);
         
         // Then
-        for (var j = 0 ; j < notes.length ; j++) {
-          var note = notes[j];
+        for (i = 0 ; i < notes.length ; i++) {
+          var note = notes[i];
           
           assert.equal(note.pitch.step, "A");
-          assert.equal(note.pitch.octave, j + 1);
+          assert.equal(note.pitch.octave, i + 1);
         }
       });
 
@@ -113,8 +114,9 @@ if (typeof require !== 'undefined') {
         var pitch = null;
         
         // Given 
+        var i = 0;
         var notes = [];
-        for (var i = 0 ; i < 9 ; i++) {
+        for (i = 0 ; i < 9 ; i++) {
           notes.push(initNote("A", i + 1));
         }
         var pitchChange = -1;
@@ -123,11 +125,11 @@ if (typeof require !== 'undefined') {
         pitch.changePitch(pitchChange);
         
         // Then
-        for (var j = 0 ; j < notes.length ; j++) {
-          var note = notes[j];
+        for (i = 0 ; i < notes.length ; i++) {
+          var note = notes[i];
           
           assert.equal(note.pitch.step, "G");
-          assert.equal(note.pitch.octave, j);
+          assert.equal(note.pitch.octave, i);
         }
       });
     });
