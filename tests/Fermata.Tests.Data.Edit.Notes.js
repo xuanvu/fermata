@@ -38,6 +38,22 @@ if (typeof require !== 'undefined') {
   };
 
   describe("Fermata.Edit.Note", function () {
+    describe("#setStep", function () {
+      it("normal value", function () {
+        var underTest = null;
+        
+        // Given 
+        var pitchedNote = initPitchedNote("C", 4);
+        var newStep = "A";
+        
+        // When
+        underTest.setStep(newStep);
+        
+        // Then
+        assert.equal(pitchedNote.pitch.step, newStep);       
+      });
+    });
+
     describe("#changePitch", function (){
       it("increment pitched note", function () {
         var underTest = null;
