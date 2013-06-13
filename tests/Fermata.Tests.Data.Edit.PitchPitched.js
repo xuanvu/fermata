@@ -28,7 +28,7 @@ if (typeof require !== 'undefined') {
     };
   };
 
-  describe("Fermata.Edit.Note", function () {
+  describe("Fermata.Data.PitchPitched", function () {
     describe("#setStep", function () {
       it("normal value", function () {
         var underTest = null;
@@ -45,7 +45,7 @@ if (typeof require !== 'undefined') {
       });
     });
 
-    describe("#setStep", function () {
+    describe("#setOctave", function () {
       it("normal value", function () {
         var underTest = null;
         
@@ -62,7 +62,7 @@ if (typeof require !== 'undefined') {
     });
 
     describe("#changePitch", function (){
-      it("increment pitched note", function () {
+      it("basic increment", function () {
         var underTest = null;
         
         // Given 
@@ -77,7 +77,7 @@ if (typeof require !== 'undefined') {
         assert.equal(pitchedNote.pitch.octave, 4);        
       });
       
-      it("decrement pitched note", function () {
+      it("basic decrement", function () {
         var underTest = null;
         
         // Given 
@@ -92,7 +92,7 @@ if (typeof require !== 'undefined') {
         assert.equal(pitchedNote.pitch.octave, 4);        
       });
 
-      it("octave up jump on pitched notes", function () {
+      it("octave jump up", function () {
         var underTest = null;
         
         // Given 
@@ -114,7 +114,7 @@ if (typeof require !== 'undefined') {
         }
       });
 
-      it("octave down jump on pitched notes", function () {
+      it("octave jump down", function () {
         var underTest = null;
         
         // Given 
