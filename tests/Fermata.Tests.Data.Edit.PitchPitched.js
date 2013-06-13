@@ -88,8 +88,6 @@ if (typeof require !== 'undefined') {
       });
 
       it("octave jump up", function () {
-        var pitch = null;
-        
         // Given
         var i = 0;
         var notes = [];
@@ -97,10 +95,13 @@ if (typeof require !== 'undefined') {
           notes.push(initNote("G", i));
         }
         var pitchChange = 1;
-        
+
         // When
-        pitch.changePitch(pitchChange);
-        
+        for (i = 0 ; i < notes.length ; i++) {
+          var pitch = new PitchPitched(notes[i]);
+          pitch.changePitch(pitchChange);
+        }
+
         // Then
         for (i = 0 ; i < notes.length ; i++) {
           var note = notes[i];
@@ -111,8 +112,6 @@ if (typeof require !== 'undefined') {
       });
 
       it("octave jump down", function () {
-        var pitch = null;
-        
         // Given 
         var i = 0;
         var notes = [];
@@ -120,10 +119,13 @@ if (typeof require !== 'undefined') {
           notes.push(initNote("A", i + 1));
         }
         var pitchChange = -1;
-        
+
         // When
-        pitch.changePitch(pitchChange);
-        
+        for (i = 0 ; i < notes.length ; i++) {
+          var pitch = new PitchPitched(notes[i]);
+          pitch.changePitch(pitchChange);
+        }
+
         // Then
         for (i = 0 ; i < notes.length ; i++) {
           var note = notes[i];
