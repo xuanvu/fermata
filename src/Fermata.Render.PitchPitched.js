@@ -38,4 +38,9 @@
     this.data.pitch.step = step;
   };
 
+  PitchPitched.prototype.setOctave = function (octave)
+  {
+    this.data.pitch.octave = octave;
+  };
+
 }).call(this);
