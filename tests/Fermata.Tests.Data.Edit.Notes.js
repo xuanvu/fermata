@@ -69,6 +69,21 @@ if (typeof require !== 'undefined') {
         assert.equal(pitchedNote.rest["display-octave"], 4);
       });
       
+      it("decrement pitched note", function () {
+        var underTest = null;
+        
+        // Given 
+        var pitchedNote = initPitchedNote("C", 4);
+        var pitchChange = -1;
+        
+        // When
+        underTest.changePitch(pitchChange);
+        
+        // Then
+        assert.equal(pitchedNote.pitch.step, "B");
+        assert.equal(pitchedNote.pitch.octave, 4);        
+      });
+
       it("octave up jump on pitched notes", function () {
         var underTest = null;
         
