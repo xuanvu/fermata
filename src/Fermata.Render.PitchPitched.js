@@ -69,7 +69,7 @@
     }
     
     return clearStep;
-  }
+  };
 
   PitchPitched.prototype.changePitch = function (shiftVal)
   {
