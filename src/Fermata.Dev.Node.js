@@ -77,6 +77,13 @@ if (typeof _$jscoverage === 'undefined') {
   fermata_sources = [
     "Fermata.js",
     "Fermata.Utils.js",
+    "Fermata.Error.js",
+    "Fermata.Error.PitchRangeError.js",
+    "Fermata.Error.OctaveRangeError.js",
+    "Fermata.Error.StepRangeError.js",
+    "Fermata.Values.js",
+    "Fermata.Values.Octave.js",
+    "Fermata.Values.Step.js",
     "Fermata.Data.js",
     "Fermata.Data.Edit.js",
     "Fermata.Mapping.Clef.js",
