@@ -7,7 +7,7 @@ Fermata.Values.Step = {};
   Step.values = ["A", "B", "C", "D", "E", "F", "G"];
   Step.idx = {};
   Step.check = function (step) {
-    return (!step in Step.idx);
+    return step in Step.idx;
   };
 
   var fillIdx = function (values, idx) {
