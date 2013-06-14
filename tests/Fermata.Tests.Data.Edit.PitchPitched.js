@@ -17,7 +17,10 @@ if (typeof require !== 'undefined') {
 
 (function(){
   var PitchPitched = Fermata.Render.PitchPitched;
-  
+  var StepRangeError = Fermata.Error.StepRangeError;
+  var OctaveRangeError = Fermata.Error.OctaveRangeError;
+  var PitchRangeError = Fermata.Error.PitchRangeError;
+
   var initNote = function (step, octave) {
     return {
       pitch: {
@@ -41,6 +44,23 @@ if (typeof require !== 'undefined') {
         // Then
         assert.equal(note.pitch.step, newStep);       
       });
+
+      it("bad value", function () {
+        // Given 
+        var oldStep = "G";
+        var note = initNote(oldStep, 4);
+        var pitch = new PitchPitched(note);
+        var newStep = "L";
+
+        // When
+        assert.throws(function () {
+          pitch.setStep(newStep);
+        }, 
+        StepRangeError);
+
+        // Then
+        assert.equal(note.pitch.step, oldStep);
+      });
     });
 
     describe("#setOctave", function () {
@@ -55,6 +75,57 @@ if (typeof require !== 'undefined') {
 
         // Then
         assert.equal(note.pitch.octave, newOctave);       
+      });
+
+      it("bad value (too low)", function () {        
+        // Given
+        var oldOctave = 4;
+        var note = initNote("C", oldOctave);
+        var pitch = new PitchPitched(note);
+        var newOctave = -4;
+
+        // When
+        assert.throws(function () {
+          pitch.setOctave(newOctave);
+        }, 
+        OctaveRangeError);
+
+        // Then
+        assert.equal(note.pitch.octave, oldOctave);       
+      });
+
+      it("bad value (too high)", function () {        
+        // Given
+        var oldOctave = 4;
+        var note = initNote("C", oldOctave);
+        var pitch = new PitchPitched(note);
+        var newOctave = 10;
+
+        // When
+        assert.throws(function () {
+          pitch.setOctave(newOctave);
+        }, 
+        OctaveRangeError);
+
+        // Then
+        assert.equal(note.pitch.octave, oldOctave);       
+      });
+
+      it("bad value (float value)", function () {        
+        // Given
+        var oldOctave = 4;
+        var note = initNote("C", oldOctave);
+        var pitch = new PitchPitched(note);
+        var newOctave = 4.3;
+
+        // When
+        assert.throws(function () {
+          pitch.setOctave(newOctave);
+        }, 
+        OctaveRangeError);
+
+        // Then
+        assert.equal(note.pitch.octave, oldOctave);       
       });
     });
 
@@ -161,6 +232,44 @@ if (typeof require !== 'undefined') {
         // Then
         assert.equal(note.pitch.step, "D");
         assert.equal(note.pitch.octave, 1);
+      });
+
+      it("move too low", function () {
+        // Given 
+        var oldStep = "A";
+        var oldOctave = 0;
+        var note = initNote(oldStep, oldOctave);
+        var pitch = new PitchPitched(note);
+        var pitchChange = -1;
+
+        // When
+        assert.throws(function () {
+          pitch.changePitch(pitchChange);
+        }, 
+        PitchRangeError);
+
+        // Then
+        assert.equal(note.pitch.step, oldStep);
+        assert.equal(note.pitch.octave, oldOctave);
+      });
+
+      it("move too high", function () {
+        // Given 
+        var oldStep = "G";
+        var oldOctave = 9;
+        var note = initNote(oldStep, oldOctave);
+        var pitch = new PitchPitched(note);
+        var pitchChange = 1;
+
+        // When
+        assert.throws(function () {
+          pitch.changePitch(pitchChange);
+        }, 
+        PitchRangeError);
+
+        // Then
+        assert.equal(note.pitch.step, oldStep);
+        assert.equal(note.pitch.octave, oldOctave);
       });
     });
   });
