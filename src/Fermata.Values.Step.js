@@ -1,7 +1,7 @@
+(function () {
+  "use strict";
 
-Fermata.Values.Step = {};
-
-(function(){
+  Fermata.Values.Step = {};
   var Step = Fermata.Values.Step;
 
   Step.values = ["A", "B", "C", "D", "E", "F", "G"];
@@ -11,12 +11,12 @@ Fermata.Values.Step = {};
   };
 
   var fillIdx = function (values, idx) {
-    for (var i = 0 ; i < values.length ; i++) {
+    for (var i = 0; i < values.length; i++) {
       var value = values[i];
-      
+
       idx[value] = i;
     }
-  }
+  };
 
   fillIdx(Step.values, Step.idx);
 }).call(this);
