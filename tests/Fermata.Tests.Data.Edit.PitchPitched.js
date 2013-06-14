@@ -134,6 +134,34 @@ if (typeof require !== 'undefined') {
           assert.equal(note.pitch.octave, i);
         }
       });
+
+      it("double octave jump up", function () {
+        // Given 
+        var note = initNote("C", 3);
+        var pitch = new PitchPitched(note);
+        var pitchChange = 13;
+
+        // When
+        pitch.changePitch(pitchChange);
+
+        // Then
+        assert.equal(note.pitch.step, "B");
+        assert.equal(note.pitch.octave, 5);
+      });
+
+      it("double octave jump down", function () {
+        // Given 
+        var note = initNote("C", 3);
+        var pitch = new PitchPitched(note);
+        var pitchChange = -13;
+
+        // When
+        pitch.changePitch(pitchChange);
+
+        // Then
+        assert.equal(note.pitch.step, "D");
+        assert.equal(note.pitch.octave, 1);
+      });
     });
   });
 }).call(this);
