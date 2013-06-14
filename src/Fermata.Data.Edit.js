@@ -7,29 +7,7 @@
         part.measure[i].$number = (i + 1).toString();
       }
     });
-  }
-  
-  var makeAttributDiffRec = function (attr1, attr2, diffPlus, diffLess) {
-    for (var key in attr1) {
-      if (key in attr2) {
-        
-      } else {
-        diffPlus[key] = attr1[key];
-      }
-    }
-    
-    for (var key in attr2) {
-      if (!(key in attr1)) {
-        diffLess[key] = attr2[key];
-      }
-    }
-  }
-  
-  var makeAttributeDiff = function (attr1, attr2) {
-    var diffPlus = {};
-    var diffLess = {};
-    makeAttributDiffRec(attr1, attr2, diffPlus, diffLess);
-  }
+  };
 
   Fermata.Data.prototype.addMeasure = function(idx, number) {
     if (number === undefined) {
