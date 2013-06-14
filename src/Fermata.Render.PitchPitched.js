@@ -2,6 +2,10 @@
   "use strict";
 
   var Step = Fermata.Values.Step;
+  var Octave = Fermata.Values.Octave;
+  var PitchRangeError = Fermata.Error.PitchRangeError;
+  var StepRangeError = Fermata.Error.StepRangeError;
+  var OctaveRangeError = Fermata.Error.OctaveRangeError;
 
   Fermata.Render.PitchPitched = function (noteData)
   {
@@ -37,11 +41,19 @@
 
   PitchPitched.prototype.setStep = function (step)
   {
+    if (!Step.check(step)) {
+      throw new StepRangeError(step);
+    }
+
     this.data.pitch.step = step;
   };
 
   PitchPitched.prototype.setOctave = function (octave)
   {
+    if (!Octave.check(octave)) {
+      throw new OctaveRangeError(octave);
+    }
+
     this.data.pitch.octave = octave;
   };
 
@@ -66,6 +78,10 @@
     var octaveShift = calcOctaveShift(shiftedStep);
     var newOctave = this.getOctave() + octaveShift;
     var newStep = calcClearStep(shiftedStep);
+
+    if (!Octave.check(newOctave)) {
+      throw new PitchRangeError();
+    }
 
     this.setOctave(newOctave);
     this.setStep(Step.values[newStep]);
