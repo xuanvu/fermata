@@ -14,7 +14,7 @@
 
     var processes = [
       {
-        val: this.PedalType.0nT,
+        val: this.PedalType["0nT"],
         func: function () {
           this.renderStartPedal();
         }
