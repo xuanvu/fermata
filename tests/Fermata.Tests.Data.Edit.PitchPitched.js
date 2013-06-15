@@ -1,25 +1,27 @@
 if (typeof require !== 'undefined') {
   var Fermata,
-  fs = require('fs'),
-  assert = require('assert');
+          fs = require('fs'),
+          assert = require('assert');
 
   // Use Scons build version or devel version (using node vm)
   if (fs.existsSync(__dirname + '/../build/fermata/fermata.node.js')) {
     Fermata = require('..');
   }
   else {
-    Fermata = require((process.env['FERMATA_COV'] ? '../src-cov' : '../src') + '/Fermata.Dev.Node.js');
+    Fermata = require((process.env['FERMATA_COV'] ? '../src-cov' : '../src') +
+            '/Fermata.Dev.Node.js');
   }
 
   // Test utils
   Fermata.Tests = require('./Fermata.Tests.Utils.js').Tests;
 }
 
-(function(){
+(function () {
   var PitchPitched = Fermata.Data.PitchPitched;
   var StepRangeError = Fermata.Error.StepRangeError;
   var OctaveRangeError = Fermata.Error.OctaveRangeError;
   var PitchRangeError = Fermata.Error.PitchRangeError;
+  var SoundType = Fermata.Values.SoundType;
 
   var initNote = function (step, octave) {
     return {
@@ -42,7 +44,7 @@ if (typeof require !== 'undefined') {
         pitch.setStep(newStep);
 
         // Then
-        assert.equal(note.pitch.step, newStep);       
+        assert.equal(note.pitch.step, newStep);
       });
 
       it("bad value", function () {
@@ -55,8 +57,8 @@ if (typeof require !== 'undefined') {
         // When
         assert.throws(function () {
           pitch.setStep(newStep);
-        }, 
-        StepRangeError);
+        },
+                StepRangeError);
 
         // Then
         assert.equal(note.pitch.step, oldStep);
@@ -64,7 +66,7 @@ if (typeof require !== 'undefined') {
     });
 
     describe("#setOctave", function () {
-      it("normal value", function () {        
+      it("normal value", function () {
         // Given 
         var note = initNote("C", 4);
         var pitch = new PitchPitched(note);
@@ -74,10 +76,10 @@ if (typeof require !== 'undefined') {
         pitch.setOctave(newOctave);
 
         // Then
-        assert.equal(note.pitch.octave, newOctave);       
+        assert.equal(note.pitch.octave, newOctave);
       });
 
-      it("bad value (too low)", function () {        
+      it("bad value (too low)", function () {
         // Given
         var oldOctave = 4;
         var note = initNote("C", oldOctave);
@@ -87,14 +89,14 @@ if (typeof require !== 'undefined') {
         // When
         assert.throws(function () {
           pitch.setOctave(newOctave);
-        }, 
-        OctaveRangeError);
+        },
+                OctaveRangeError);
 
         // Then
-        assert.equal(note.pitch.octave, oldOctave);       
+        assert.equal(note.pitch.octave, oldOctave);
       });
 
-      it("bad value (too high)", function () {        
+      it("bad value (too high)", function () {
         // Given
         var oldOctave = 4;
         var note = initNote("C", oldOctave);
@@ -104,14 +106,14 @@ if (typeof require !== 'undefined') {
         // When
         assert.throws(function () {
           pitch.setOctave(newOctave);
-        }, 
-        OctaveRangeError);
+        },
+                OctaveRangeError);
 
         // Then
-        assert.equal(note.pitch.octave, oldOctave);       
+        assert.equal(note.pitch.octave, oldOctave);
       });
 
-      it("bad value (float value)", function () {        
+      it("bad value (float value)", function () {
         // Given
         var oldOctave = 4;
         var note = initNote("C", oldOctave);
@@ -121,62 +123,62 @@ if (typeof require !== 'undefined') {
         // When
         assert.throws(function () {
           pitch.setOctave(newOctave);
-        }, 
-        OctaveRangeError);
+        },
+                OctaveRangeError);
 
         // Then
-        assert.equal(note.pitch.octave, oldOctave);       
+        assert.equal(note.pitch.octave, oldOctave);
       });
     });
 
-    describe("#changePitch", function (){
+    describe("#changePitch", function () {
       it("basic increment", function () {
         // Given 
         var note = initNote("C", 4);
         var pitch = new PitchPitched(note);
         var pitchChange = 1;
-        
+
         // When
         pitch.changePitch(pitchChange);
-        
+
         // Then
         assert.equal(note.pitch.step, "D");
-        assert.equal(note.pitch.octave, 4);        
+        assert.equal(note.pitch.octave, 4);
       });
-      
+
       it("basic decrement", function () {
         // Given 
         var note = initNote("C", 4);
         var pitch = new PitchPitched(note);
         var pitchChange = -1;
-        
+
         // When
         pitch.changePitch(pitchChange);
-        
+
         // Then
         assert.equal(note.pitch.step, "B");
-        assert.equal(note.pitch.octave, 4);        
+        assert.equal(note.pitch.octave, 4);
       });
 
       it("octave jump up", function () {
         // Given
         var i = 0;
         var notes = [];
-        for (i = 0 ; i < 9 ; i++) {
+        for (i = 0; i < 9; i++) {
           notes.push(initNote("G", i));
         }
         var pitchChange = 1;
 
         // When
-        for (i = 0 ; i < notes.length ; i++) {
+        for (i = 0; i < notes.length; i++) {
           var pitch = new PitchPitched(notes[i]);
           pitch.changePitch(pitchChange);
         }
 
         // Then
-        for (i = 0 ; i < notes.length ; i++) {
+        for (i = 0; i < notes.length; i++) {
           var note = notes[i];
-          
+
           assert.equal(note.pitch.step, "A");
           assert.equal(note.pitch.octave, i + 1);
         }
@@ -186,21 +188,21 @@ if (typeof require !== 'undefined') {
         // Given 
         var i = 0;
         var notes = [];
-        for (i = 0 ; i < 9 ; i++) {
+        for (i = 0; i < 9; i++) {
           notes.push(initNote("A", i + 1));
         }
         var pitchChange = -1;
 
         // When
-        for (i = 0 ; i < notes.length ; i++) {
+        for (i = 0; i < notes.length; i++) {
           var pitch = new PitchPitched(notes[i]);
           pitch.changePitch(pitchChange);
         }
 
         // Then
-        for (i = 0 ; i < notes.length ; i++) {
+        for (i = 0; i < notes.length; i++) {
           var note = notes[i];
-          
+
           assert.equal(note.pitch.step, "G");
           assert.equal(note.pitch.octave, i);
         }
@@ -245,8 +247,8 @@ if (typeof require !== 'undefined') {
         // When
         assert.throws(function () {
           pitch.changePitch(pitchChange);
-        }, 
-        PitchRangeError);
+        },
+                PitchRangeError);
 
         // Then
         assert.equal(note.pitch.step, oldStep);
@@ -264,8 +266,8 @@ if (typeof require !== 'undefined') {
         // When
         assert.throws(function () {
           pitch.changePitch(pitchChange);
-        }, 
-        PitchRangeError);
+        },
+                PitchRangeError);
 
         // Then
         assert.equal(note.pitch.step, oldStep);
