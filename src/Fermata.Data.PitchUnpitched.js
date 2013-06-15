@@ -1,6 +1,8 @@
 (function () {
   "use strict";
 
+  var SoundType = Fermata.Values.SoundType.UNPITCHED;
+
   Fermata.Data.PitchUnpitched = function (noteData)
   {
     this.data = noteData;
@@ -10,7 +12,7 @@
 
   PitchUnpitched.prototype.getType = function ()
   {
-    return Fermata.Values.SoundType.UNPITCHED;
+    return SoundType.UNPITCHED;
   };
 
   PitchUnpitched.prototype.getStep = function ()
