@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var PitchEncapsulator = Fermata.Render.PitchEncapsulator;
+  var PitchEncapsulator = Fermata.Data.PitchEncapsulator;
   var SoundType = Fermata.Values.SoundType;
   var NotImplementedError = Fermata.Error.NotImplementedError;
 

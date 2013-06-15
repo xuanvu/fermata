@@ -6,9 +6,9 @@
   var PitchPitched = Fermata.Data.PitchPitched;
   var PitchRest = Fermata.Data.PitchRest;
 
-  Fermata.Render.PitchEncapsulator = {};
+  Fermata.Data.PitchEncapsulator = {};
 
-  var PitchEncapsulator = Fermata.Render.PitchEncapsulator;
+  var PitchEncapsulator = Fermata.Data.PitchEncapsulator;
 
   PitchEncapsulator.encapsulate = function (noteData, clefName)
   {
