@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var SoundType = Fermata.Values.SoundType.UNPITCHED;
+  var SoundType = Fermata.Values.SoundType;
 
   Fermata.Data.PitchUnpitched = function (noteData)
   {

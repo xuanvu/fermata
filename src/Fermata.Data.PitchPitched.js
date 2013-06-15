@@ -6,7 +6,7 @@
   var PitchRangeError = Fermata.Error.PitchRangeError;
   var StepRangeError = Fermata.Error.StepRangeError;
   var OctaveRangeError = Fermata.Error.OctaveRangeError;
-  var SoundType = Fermata.Values.SoundType.PITCH;
+  var SoundType = Fermata.Values.SoundType;
 
   Fermata.Data.PitchPitched = function (noteData)
   {
