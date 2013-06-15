@@ -1,6 +1,8 @@
 (function () {
   "use strict";
 
+  //includes
+  var Clef = Fermata.Mapping.Clef;
   var SoundType = Fermata.Values.SoundType;
 
   //TODO better constructor (check args)
@@ -11,9 +13,6 @@
   };
 
   var PitchRest = Fermata.Data.PitchRest;
-
-  //includes
-  var Clef = Fermata.Mapping.Clef;
 
   //TODO: use the mapping file
   PitchRest.ClefMapping = {
