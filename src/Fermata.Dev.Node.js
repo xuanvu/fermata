@@ -78,6 +78,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.js",
     "Fermata.Utils.js",
     "Fermata.Error.js",
+    "Fermata.Error.NotImplementedError.js",
     "Fermata.Error.PitchRangeError.js",
     "Fermata.Error.OctaveRangeError.js",
     "Fermata.Error.StepRangeError.js",
