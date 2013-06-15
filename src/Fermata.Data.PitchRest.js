@@ -2,13 +2,13 @@
   "use strict";
 
   //TODO better constructor (check args)
-  Fermata.Render.PitchRest = function (noteData, clef)
+  Fermata.Data.PitchRest = function (noteData, clef)
   {
     this.data = noteData;
     this.clef = clef;
   };
 
-  var PitchRest = Fermata.Render.PitchRest;
+  var PitchRest = Fermata.Data.PitchRest;
 
   //includes
   var Clef = Fermata.Mapping.Clef;

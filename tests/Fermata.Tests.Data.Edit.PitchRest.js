@@ -17,7 +17,7 @@ if (typeof require !== 'undefined') {
 
 (function(){
 
-  var PitchRest = Fermata.Render.PitchRest;
+  var PitchRest = Fermata.Data.PitchRest;
 
   var initNote = function (step, octave) {
     return {
