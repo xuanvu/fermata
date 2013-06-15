@@ -1,8 +1,7 @@
 (function () {
   "use strict";
 
-  Fermata.Values.SoundType =
-    {
+  Fermata.Values.SoundType = {
     PITCH: "pitch",
     UNPITCHED: "unpitched",
     REST: "rest"
