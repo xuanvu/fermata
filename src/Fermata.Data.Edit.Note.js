@@ -145,7 +145,7 @@
     }
   };
 
-  Fermata.Data.Prototype.fetchNote = function (staveIdx, measureIdx, noteIdx) {
+  Fermata.Data.prototype.fetchNote = function (staveIdx, measureIdx, noteIdx) {
     var part = this.getPart(staveIdx, Fermata.Data.cacheParts.IDX);
     var measure = part.measure[measureIdx];
     var note = measure.note[noteIdx];
