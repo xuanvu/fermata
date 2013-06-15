@@ -33,6 +33,20 @@ if (typeof require !== 'undefined') {
   };
 
   describe("Fermata.Data.PitchPitched", function () {
+    describe("#getType", function () {
+      it("getType", function () {
+        // Given 
+        var note = initNote("C", 4);
+        var pitch = new PitchPitched(note);
+
+        // When
+        var type = pitch.getType();
+
+        // Then
+        assert.strictEqual(type, SoundType.PITCH);
+      });
+    });
+
     describe("#setStep", function () {
       it("normal value", function () {
         // Given 
