@@ -73,6 +73,7 @@
     <script src="../src/Fermata.Values.js"></script>
     <script src="../src/Fermata.Values.Octave.js"></script>
     <script src="../src/Fermata.Values.Step.js"></script>
+    <script src="../src/Fermata.Values.SoundType.js"></script>
     <script src="../src/Fermata.Error.js"></script>
     <script src="../src/Fermata.Error.NotImplementedError.js"></script>
     <script src="../src/Fermata.Error.PitchRangeError.js"></script>
@@ -93,7 +94,6 @@
     <script src="../src/Fermata.Render.SymbolSize.js"></script>
     <script src="../src/Fermata.Render.NoteStorage.js"></script>
     <script src="../src/Fermata.Render.NoteType.js"></script>
-    <script src="../src/Fermata.Render.SoundType.js"></script>
     <script src="../src/Fermata.Render.PitchPitched.js"></script>
     <script src="../src/Fermata.Render.PitchRest.js"></script>
     <script src="../src/Fermata.Render.PitchUnpitched.js"></script>
@@ -132,7 +132,22 @@
     Add Note - stave: <input type="input" value="1" id="anStave" /> measure: <input type="input" value="1" id="anMeasure" /> note: <input type="input" value="1" id="anNote" /> step: <input type="input" value="C" id="anStep" /> octave: <input type="input" value="4" id="anOctave" /> type { HALF: 0, QUARTER: 1, EIGHTH: 2 }: <input type="input" value="1" id="anType" /> voice: <input type="input" value="1" id="anVoice" /><input type="button" id="addNote" value="addNote()" />
     </p>
     Edit Note - stave: <input type="input" value="1" id="enStave" /> measure: <input type="input" value="1" id="enMeasure" /> note: <input type="input" value="1" id="enNote" /> step: <input type="input" value="C" id="enStep" /> octave: <input type="input" value="4" id="enOctave" /> type { HALF: 0, QUARTER: 1, EIGHTH: 2 }: <input type="input" value="1" id="enType" /> voice: <input type="input" value="1" id="enVoice" /><input type="button" id="editNote" value="editNote()" />
+    <fieldset>
+      <legend>change pitch</legend>
+      <label for="cpStave">stave</label>
+      <input type="number" value="0" id="cpStave"/>
+      
+      <label for="cpMeasure">measure</label>
+      <input type="number" value="0" id="cpMeasure"/> 
 
+      <label for="cpNote">note</label>
+      <input type="number" value="0" id="cpNote"/>
+
+      <label for="cpValue">value</label>
+      <input type="number" value="0" id="cpValue"/>
+      
+      <input type="button" value="changePitch()" id="changePitch"/>
+    </fieldset>
     <script>
         // Hello World
         //var score = {"score-partwise":{"$version":"3.0","part-list":{"score-part":[{"$id":"P1","part-name":"Music"}]},"part":[{"$id":"P1","measure":[{"$number":"1","attributes":[{"divisions":"1","key":{"fifths":"0"},"time":{"beats":"4","beat-type":"4"},"clef":{"sign":"G","line":"2"}}],"note":[{"pitch":{"step":"C","octave":"4"},"duration":"4","type":"whole"}]}]}]}};
@@ -204,6 +219,14 @@
           $('#canvas-score > svg').empty();
           data.editNote($('#enStave').val(), $('#enMeasure').val(), $('#enNote').val(), $('#enStep').val(), $('#enOctave').val(), $('#enType').val(), $('#enVoice').val());
           <!-- render.renderMeasure(idMeasure) instead of: -->
+          render.renderAll();
+          drawer.drawAll();
+        });
+        
+        $('#changePith').click(function () {
+          console.log("lol");
+          $('#canvas-score > svg').empty();
+          data.changePitch($('#cpStave').val(), $('#cpMeasure').val(), $('#cpNote').val(), $('#cpValue').val());
           render.renderAll();
           drawer.drawAll();
         });
