@@ -6,6 +6,7 @@
   var PitchRangeError = Fermata.Error.PitchRangeError;
   var StepRangeError = Fermata.Error.StepRangeError;
   var OctaveRangeError = Fermata.Error.OctaveRangeError;
+  var SoundType = Fermata.Values.SoundType.PITCH;
 
   Fermata.Data.PitchPitched = function (noteData)
   {
@@ -16,7 +17,7 @@
 
   PitchPitched.prototype.getType = function ()
   {
-    return Fermata.Values.SoundType.PITCH;
+    return SoundType.PITCH;
   };
 
   PitchPitched.prototype.getStep = function ()
