@@ -10,7 +10,7 @@
 
   var SoundType = Fermata.Values.SoundType;
 
-  Fermata.Values.SoundType.getSoundType = function (noteData)
+  SoundType.getSoundType = function (noteData)
   {
     if (typeof(noteData.pitch) !== "undefined")
     {
