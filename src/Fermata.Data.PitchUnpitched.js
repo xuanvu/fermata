@@ -1,12 +1,12 @@
 (function () {
   "use strict";
 
-  Fermata.Render.PitchUnpitched = function (noteData)
+  Fermata.Data.PitchUnpitched = function (noteData)
   {
     this.data = noteData;
   };
 
-  var PitchUnpitched = Fermata.Render.PitchUnpitched;
+  var PitchUnpitched = Fermata.Data.PitchUnpitched;
 
   PitchUnpitched.prototype.getType = function ()
   {
