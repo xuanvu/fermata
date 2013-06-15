@@ -1,6 +1,8 @@
 (function () {
   "use strict";
 
+  var SoundType = Fermata.Values.SoundType;
+
   //TODO better constructor (check args)
   Fermata.Data.PitchRest = function (noteData, clef)
   {
@@ -22,7 +24,7 @@
 
   PitchRest.prototype.getType = function ()
   {
-    return Fermata.Values.SoundType.REST;
+    return SoundType.REST;
   };
 
   PitchRest.prototype.getStep = function ()
