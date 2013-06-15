@@ -223,10 +223,9 @@
           drawer.drawAll();
         });
         
-        $('#changePith').click(function () {
-          console.log("lol");
+        $('#changePitch').click(function () {
           $('#canvas-score > svg').empty();
-          data.changePitch($('#cpStave').val(), $('#cpMeasure').val(), $('#cpNote').val(), $('#cpValue').val());
+          data.changeNotePitch($('#cpStave').val(), $('#cpMeasure').val(), $('#cpNote').val(), $('#cpValue').val());
           render.renderAll();
           drawer.drawAll();
         });
