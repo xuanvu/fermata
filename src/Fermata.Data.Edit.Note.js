@@ -133,15 +133,23 @@
     }
   };
 
-  Fermata.Data.prototype.changeNotePitch = function () {
-    var note = null;
+  Fermata.Data.prototype.changeNotePitch = function (staveIdx, measureIdx, noteIdx, value) {
+    var note = this.fetchNote(staveIdx, measureIdx, noteIdx);
     var pitch = PitchEncapsulator.encapsulate(note, null);
 
     if (pitch.getType() === SoundType.PITCH) {
-      pitch.changePitch();
+      pitch.changePitch(value);
     } else {
       var errorMsg = "pitch change is not supported on this type of note";
       throw new NotImplementedError(errorMsg);
     }
+  };
+
+  Fermata.Data.Prototype.fetchNote = function (staveIdx, measureIdx, noteIdx) {
+    var part = this.getPart(staveIdx, Fermata.Data.cacheParts.IDX);
+    var measure = part.measure[measureIdx];
+    var note = measure.note[noteIdx];
+
+    return note;
   };
 }).call(this);
