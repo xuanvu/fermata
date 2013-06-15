@@ -2,7 +2,7 @@
   "use strict";
 
   var PitchEncapsulator = Fermata.Render.PitchEncapsulator;
-  var SoundType = Fermata.Render.SoundType;
+  var SoundType = Fermata.Values.SoundType;
   var NotImplementedError = Fermata.Error.NotImplementedError;
 
   // TODO: Fill with other values.

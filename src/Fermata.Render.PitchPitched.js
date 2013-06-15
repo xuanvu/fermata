@@ -16,7 +16,7 @@
 
   PitchPitched.prototype.getType = function ()
   {
-    return Fermata.Render.SoundType.PITCH;
+    return Fermata.Values.SoundType.PITCH;
   };
 
   PitchPitched.prototype.getStep = function ()

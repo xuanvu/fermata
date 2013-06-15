@@ -10,7 +10,7 @@
 
   PitchUnpitched.prototype.getType = function ()
   {
-    return Fermata.Render.SoundType.UNPITCHED;
+    return Fermata.Values.SoundType.UNPITCHED;
   };
 
   PitchUnpitched.prototype.getStep = function ()

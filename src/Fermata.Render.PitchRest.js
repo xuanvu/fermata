@@ -22,7 +22,7 @@
 
   PitchRest.prototype.getType = function ()
   {
-    return Fermata.Render.SoundType.REST;
+    return Fermata.Values.SoundType.REST;
   };
 
   PitchRest.prototype.getStep = function ()

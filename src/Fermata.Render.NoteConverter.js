@@ -3,7 +3,7 @@
 
   //includes
   var NoteType = Fermata.Render.NoteType;
-  var SoundType = Fermata.Render.SoundType;
+  var SoundType = Fermata.Values.SoundType;
   var PitchEncapsulator = Fermata.Render.PitchEncapsulator;
 
   Fermata.Render.NoteConverter = function ()
