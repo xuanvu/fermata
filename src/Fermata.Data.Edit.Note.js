@@ -1,6 +1,10 @@
 (function () {
   "use strict";
 
+  var PitchEncapsulator = Fermata.Render.PitchEncapsulator;
+  var SoundType = Fermata.Render.SoundType;
+  var NotImplementedError = Fermata.Error.NotImplementedError;
+
   // TODO: Fill with other values.
   var ValueLast = {
     HALF: 0,
@@ -129,4 +133,15 @@
     }
   };
 
+  Fermata.Data.prototype.changeNotePitch = function () {
+    var note = null;
+    var pitch = PitchEncapsulator.encapsulate(note, null);
+
+    if (pitch.getType() === SoundType.PITCH) {
+      pitch.changePitch();
+    } else {
+      var errorMsg = "pitch change is not supported on this type of note";
+      throw new NotImplementedError(errorMsg);
+    }
+  };
 }).call(this);
