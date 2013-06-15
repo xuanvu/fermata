@@ -7,12 +7,12 @@
   var StepRangeError = Fermata.Error.StepRangeError;
   var OctaveRangeError = Fermata.Error.OctaveRangeError;
 
-  Fermata.Render.PitchPitched = function (noteData)
+  Fermata.Data.PitchPitched = function (noteData)
   {
     this.data = noteData;
   };
 
-  var PitchPitched = Fermata.Render.PitchPitched;
+  var PitchPitched = Fermata.Data.PitchPitched;
 
   PitchPitched.prototype.getType = function ()
   {

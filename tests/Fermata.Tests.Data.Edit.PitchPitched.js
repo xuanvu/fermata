@@ -16,7 +16,7 @@ if (typeof require !== 'undefined') {
 }
 
 (function(){
-  var PitchPitched = Fermata.Render.PitchPitched;
+  var PitchPitched = Fermata.Data.PitchPitched;
   var StepRangeError = Fermata.Error.StepRangeError;
   var OctaveRangeError = Fermata.Error.OctaveRangeError;
   var PitchRangeError = Fermata.Error.PitchRangeError;

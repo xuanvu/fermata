@@ -3,7 +3,7 @@
 
   // Includes
   var SoundType = Fermata.Values.SoundType;
-  var PitchPitched = Fermata.Render.PitchPitched;
+  var PitchPitched = Fermata.Data.PitchPitched;
   var PitchRest = Fermata.Render.PitchRest;
 
   Fermata.Render.PitchEncapsulator = {};
