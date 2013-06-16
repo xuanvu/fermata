@@ -95,6 +95,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Data.PitchUnpitched.js",
     "Fermata.Data.PitchEncapsulator.js",
     "Fermata.Data.Edit.js",
+    "Fermata.Data.Edit.Rest.js",
     "Fermata.Render.js",
     "Fermata.Render.BeamType.js",
     "Fermata.Render.BeamProcessor.js",
