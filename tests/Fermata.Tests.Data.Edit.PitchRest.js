@@ -19,6 +19,7 @@ if (typeof require !== 'undefined') {
 (function () {
 
   var PitchRest = Fermata.Data.PitchRest;
+  var SoundType = Fermata.Values.SoundType;
 
   var initNote = function (step, octave) {
     return {
@@ -30,6 +31,20 @@ if (typeof require !== 'undefined') {
   };
 
   describe("Fermata.Data.PitchRest", function () {
+   describe("#getType", function () {
+      it("getType", function () {
+        // Given 
+        var note = initNote("C", 4);
+        var pitch = new PitchRest(note);
+
+        // When
+        var type = pitch.getType();
+
+        // Then
+        assert.strictEqual(type, SoundType.REST);
+      });
+    });
+
     describe("#changePitch", function () {
       it("basic increment", function () {
         var underTest = null;
