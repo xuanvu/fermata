@@ -47,14 +47,13 @@ if (typeof require !== 'undefined') {
 
     describe("#changePitch", function () {
       it("basic increment", function () {
-        var underTest = null;
-
         // Given 
-        var restNote = initNote("C", 4);
+        var note = initNote("C", 4);
+        var pitch = new PitchRest(note);
         var pitchChange = 1;
 
         // When
-        underTest.changePitch(pitchChange);
+        pitch.changePitch(pitchChange);
 
         // Then
         assert.equal(pitchedNote.rest["display-step"], "D");
