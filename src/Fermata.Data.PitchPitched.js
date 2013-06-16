@@ -75,9 +75,9 @@
   PitchPitched.prototype.changePitch = function (shiftVal)
   {
     var stepIdx = Step.idx[this.getStep()];
-    var shiftedStep = stepIdx + parseInt(shiftVal);
+    var shiftedStep = stepIdx + parseInt(shiftVal, 10);
     var octaveShift = calcOctaveShift(shiftedStep);
-    var newOctave = parseInt(this.getOctave()) + octaveShift;
+    var newOctave = parseInt(this.getOctave(), 10) + octaveShift;
     var newStep = calcClearStep(shiftedStep);
 
     if (!Octave.check(newOctave)) {
