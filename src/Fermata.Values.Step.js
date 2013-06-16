@@ -4,7 +4,7 @@
   Fermata.Values.Step = {};
   var Step = Fermata.Values.Step;
 
-  Step.values = ["A", "B", "C", "D", "E", "F", "G"];
+  Step.values = ["C", "D", "E", "F", "G", "A", "B"];
   Step.idx = {};
   Step.check = function (step) {
     return step in Step.idx;
