@@ -44,21 +44,5 @@ if (typeof require !== 'undefined') {
         assert.strictEqual(type, SoundType.REST);
       });
     });
-
-    describe("#changePitch", function () {
-      it("basic increment", function () {
-        // Given 
-        var note = initNote("C", 4);
-        var pitch = new PitchRest(note);
-        var pitchChange = 1;
-
-        // When
-        pitch.changePitch(pitchChange);
-
-        // Then
-        assert.equal(pitchedNote.rest["display-step"], "D");
-        assert.equal(pitchedNote.rest["display-octave"], 4);
-      });
-    });
   });
 }).call(this);
