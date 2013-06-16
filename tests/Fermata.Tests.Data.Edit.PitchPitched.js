@@ -287,6 +287,54 @@ if (typeof require !== 'undefined') {
         assert.equal(note.pitch.step, oldStep);
         assert.equal(note.pitch.octave, oldOctave);
       });
+
+      it("octave string value", function () {
+        // Given 
+        var oldStep = "E";
+        var oldOctave = "4";
+        var note = initNote(oldStep, oldOctave);
+        var pitch = new PitchPitched(note);
+        var pitchChange = 1;
+
+        // When
+        pitch.changePitch(pitchChange);
+
+        // Then
+        assert.equal(note.pitch.step, "F");
+        assert.equal(note.pitch.octave, oldOctave);
+      });
+
+      it("change string value", function () {
+        // Given 
+        var oldStep = "E";
+        var oldOctave = 4;
+        var note = initNote(oldStep, oldOctave);
+        var pitch = new PitchPitched(note);
+        var pitchChange = "1";
+
+        // When
+        pitch.changePitch(pitchChange);
+
+        // Then
+        assert.equal(note.pitch.step, "F");
+        assert.equal(note.pitch.octave, oldOctave);
+      });
+
+      it("change and octave string values", function () {
+        // Given 
+        var oldStep = "E";
+        var oldOctave = "4";
+        var note = initNote(oldStep, oldOctave);
+        var pitch = new PitchPitched(note);
+        var pitchChange = "1";
+
+        // When
+        pitch.changePitch(pitchChange);
+
+        // Then
+        assert.equal(note.pitch.step, "F");
+        assert.equal(note.pitch.octave, oldOctave);
+      });
     });
   });
 }).call(this);
