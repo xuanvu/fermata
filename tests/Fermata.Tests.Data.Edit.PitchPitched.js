@@ -250,6 +250,34 @@ if (typeof require !== 'undefined') {
         assert.equal(note.pitch.octave, 1);
       });
 
+      it("go to lowest value", function () {
+        // Given 
+        var note = initNote("F", 1);
+        var pitch = new PitchPitched(note);
+        var pitchChange = -10;
+
+        // When
+        pitch.changePitch(pitchChange);
+
+        // Then
+        assert.equal(note.pitch.step, "B");
+        assert.equal(note.pitch.octave, 0);
+      });
+
+      it("go to highest value", function () {
+        // Given 
+        var note = initNote("F", 8);
+        var pitch = new PitchPitched(note);
+        var pitchChange = 10;
+
+        // When
+        pitch.changePitch(pitchChange);
+
+        // Then
+        assert.equal(note.pitch.step, "B");
+        assert.equal(note.pitch.octave, 9);
+      });
+
       it("move too low", function () {
         // Given 
         var oldStep = "C";
