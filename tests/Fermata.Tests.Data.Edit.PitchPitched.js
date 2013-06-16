@@ -260,7 +260,7 @@ if (typeof require !== 'undefined') {
         pitch.changePitch(pitchChange);
 
         // Then
-        assert.equal(note.pitch.step, "B");
+        assert.equal(note.pitch.step, "C");
         assert.equal(note.pitch.octave, 0);
       });
 
