@@ -7,3 +7,4 @@ npm-debug.log
 build
 tests/mocha/coverage.html
 /nbproject/
+.ht*
