@@ -1,16 +1,15 @@
 (function () {
   "use strict";
 
-
   // Includes
-  var SoundType = Fermata.Render.SoundType;
-  var PitchPitched = Fermata.Render.PitchPitched;
-  var PitchRest = Fermata.Render.PitchRest;
-  
-  Fermata.Render.PitchEncapsulator = {};
-  
-  var PitchEncapsulator = Fermata.Render.PitchEncapsulator
-  
+  var SoundType = Fermata.Values.SoundType;
+  var PitchPitched = Fermata.Data.PitchPitched;
+  var PitchRest = Fermata.Data.PitchRest;
+
+  Fermata.Data.PitchEncapsulator = {};
+
+  var PitchEncapsulator = Fermata.Data.PitchEncapsulator;
+
   PitchEncapsulator.encapsulate = function (noteData, clefName)
   {
     var soundType = SoundType.getSoundType(noteData);

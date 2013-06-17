@@ -1,16 +1,18 @@
 (function () {
   "use strict";
 
-  Fermata.Render.PitchUnpitched = function (noteData)
+  var SoundType = Fermata.Values.SoundType;
+
+  Fermata.Data.PitchUnpitched = function (noteData)
   {
     this.data = noteData;
   };
 
-  var PitchUnpitched = Fermata.Render.PitchUnpitched;
+  var PitchUnpitched = Fermata.Data.PitchUnpitched;
 
   PitchUnpitched.prototype.getType = function ()
   {
-    return Fermata.Render.SoundType.UNPITCHED;
+    return SoundType.UNPITCHED;
   };
 
   PitchUnpitched.prototype.getStep = function ()
