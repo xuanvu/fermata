@@ -61,7 +61,7 @@
 
   Fermata.Data.prototype.getOctave = function (val) {
     val = (val > 0) ? Math.floor(val) : Math.ceil(val);
-    octave = 4
+    octave = 4;
     for (i = val; i < 0; i++) {
       octave /= 2;
     }
