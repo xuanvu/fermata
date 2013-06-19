@@ -56,12 +56,12 @@
     }
     if (val === 3 || val === -0.5) {
       return "B";
-    } 
+    }
   };
 
   Fermata.Data.prototype.getOctave = function (val) {
     val = (val > 0) ? Math.floor(val) : Math.ceil(val);
-    var octave = 4
+    var octave = 4;
     octave += val;
     // for (i = val; i < 0; i++) {
     //   octave /= 2;
@@ -83,7 +83,7 @@
       step = this.getStep(pitch % p_octave);
     }
     var octave = this.getOctave(pitch / p_octave);
-    return { 'octave': octave, 'step': step};
+    return {'octave': octave, 'step': step};
   };
 
   Fermata.Data.prototype.getValue = function (type) {
