@@ -4,6 +4,7 @@
   var PitchEncapsulator = Fermata.Data.PitchEncapsulator;
   var SoundType = Fermata.Values.SoundType;
   var NotImplementedError = Fermata.Error.NotImplementedError;
+  var Step = Fermata.Values.Step;
 
   // TODO: Fill with other values.
   var ValueLast = {
@@ -33,6 +34,19 @@
     // "up" and "down" are defined by the number of voices in the stave
     // TODO: return something else than "up" (voice calculation?)
     return "up";
+  };
+
+  var calcOriginStep= function (sign, line) {
+    line *= 2;
+    line %= Step.values.length;
+    var signIdx = Step.idx[sign];
+    var originIdx = signIdx - line;
+    if (signIdx < 0) {
+      signIdx += Step.values.length;
+    }
+    var origin = Step.values[originIdx];
+    
+    return origin;
   };
 
   Fermata.Data.prototype.getStep = function (val) {
