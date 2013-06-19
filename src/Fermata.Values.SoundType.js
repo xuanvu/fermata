@@ -1,16 +1,15 @@
 (function () {
   "use strict";
 
-  Fermata.Render.SoundType =
-    {
+  Fermata.Values.SoundType = {
     PITCH: "pitch",
     UNPITCHED: "unpitched",
     REST: "rest"
   };
 
-  var SoundType = Fermata.Render.SoundType;
+  var SoundType = Fermata.Values.SoundType;
 
-  Fermata.Render.SoundType.getSoundType = function (noteData)
+  SoundType.getSoundType = function (noteData)
   {
     if (typeof(noteData.pitch) !== "undefined")
     {

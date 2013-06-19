@@ -1,17 +1,18 @@
 (function () {
   "use strict";
 
+  //includes
+  var Clef = Fermata.Mapping.Clef;
+  var SoundType = Fermata.Values.SoundType;
+
   //TODO better constructor (check args)
-  Fermata.Render.PitchRest = function (noteData, clef)
+  Fermata.Data.PitchRest = function (noteData, clef)
   {
     this.data = noteData;
     this.clef = clef;
   };
 
-  var PitchRest = Fermata.Render.PitchRest;
-
-  //includes
-  var Clef = Fermata.Mapping.Clef;
+  var PitchRest = Fermata.Data.PitchRest;
 
   //TODO: use the mapping file
   PitchRest.ClefMapping = {
@@ -22,7 +23,7 @@
 
   PitchRest.prototype.getType = function ()
   {
-    return Fermata.Render.SoundType.REST;
+    return SoundType.REST;
   };
 
   PitchRest.prototype.getStep = function ()

@@ -3,10 +3,15 @@
 
   //includes
   var NoteType = Fermata.Render.NoteType;
+<<<<<<< HEAD
   var SoundType = Fermata.Render.SoundType;
   var PitchPitched = Fermata.Render.PitchPitched;
   var PitchRest = Fermata.Render.PitchRest;
   var TupletProcessor = Fermata.Render.TupletProcessor;
+=======
+  var SoundType = Fermata.Values.SoundType;
+  var PitchEncapsulator = Fermata.Data.PitchEncapsulator;
+>>>>>>> edit
 
   Fermata.Render.NoteConverter = function ()
   {};
@@ -28,7 +33,10 @@
       this.fillAttributesDefault();
     }
 
+    console.log(noteData);
     var key = (typeof(noteData[0].staff) === 'undefined') ? 1 : noteData[0].staff;
+    console.log(key);
+    console.log(attributes);
     this.clefName = Fermata.Mapping.Clef.getVexflow(attributes.clef[key - 1].sign);
     this.change = attributes.clef[key - 1].change;
     var noteType = Fermata.Render.getNoteType(noteData[0]);
@@ -101,7 +109,7 @@
 
   NoteConverter.prototype.convertNormalNote = function (noteData)
   {
-    var dataPitch = this.extractPitch(noteData[0]);
+    var dataPitch = PitchEncapsulator.encapsulate(noteData[0], this.clefName);
     var vexDuration = this.convertDuration(noteData[0]);
     var stem = null;
 
@@ -132,7 +140,7 @@
     var vexPitches = [];
     for (var i = 0 ; i < noteData.length ; i++)
     {
-      dataPitch = this.extractPitch(noteData[i]);
+      dataPitch = PitchEncapsulator.encapsulate(noteData[i], this.clefName);
       vexPitches.push(this.convertPitch(dataPitch));
     }
 
@@ -150,21 +158,6 @@
     }
 
     return vexNote;
-  };
-
-  NoteConverter.prototype.extractPitch = function (noteData)
-  {
-    var soundType = SoundType.getSoundType(noteData);
-
-    if (soundType === SoundType.PITCH) {
-      return new PitchPitched(noteData);
-    }
-    else if (soundType === SoundType.REST) {
-      return new PitchRest(noteData, this.clefName);
-    }
-    else {
-      return null;
-    }
   };
 
 }).call(this);
