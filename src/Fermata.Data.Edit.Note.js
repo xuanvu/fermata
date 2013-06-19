@@ -7,9 +7,9 @@
 
   // TODO: Fill with other values.
   var ValueLast = {
-    HALF: 0,
-    QUARTER: 1,
-    EIGHTH: 2
+    HALF:       "0",
+    QUARTER:    "1",
+    EIGHTH:     "2"
   };
 
   Fermata.Data.prototype.getDuration = function (type) {
@@ -61,27 +61,28 @@
 
   Fermata.Data.prototype.getOctave = function (val) {
     val = (val > 0) ? Math.floor(val) : Math.ceil(val);
-    octave = 4
-    for (i = val; i < 0; i++) {
-      octave /= 2;
-    }
-    for (i = val; i > 0; i--) {
-      octave *= 2;
-    }
+    var octave = 4
+    octave += val;
+    // for (i = val; i < 0; i++) {
+    //   octave /= 2;
+    // }
+    // for (i = val; i > 0; i--) {
+    //   octave *= 2;
+    // }
     return octave;
   };
 
   Fermata.Data.prototype.getPitch = function (pitch) {
-    p_octave = 3.5;
-    n_octave = -p_octave;
-    step = "L";
+    var p_octave = 3.5;
+    var n_octave = -p_octave;
+    var step = "L";
     if (pitch < 0) {
       step = this.getStep(pitch % n_octave);
     }
     else {
       step = this.getStep(pitch % p_octave);
     }
-    octave = this.getOctave(pitch / p_octave);
+    var octave = this.getOctave(pitch / p_octave);
     return { 'octave': octave, 'step': step};
   };
 
@@ -162,15 +163,17 @@
         if (idxM >= 0 && idxM < part.measure.length &&
                 idxN >= 0 && idxN < part.measure[idxM].note.length) {
           var note = part.measure[idxM].note[idxN];
-          if (pitch !== undefined) {
-            note.pitch = this.getPitch(pitch);
-          }
-          if (type !== undefined) {
-            note.type = this.getValue(type);
-          }
-          if (voice !== undefined) {
-            note.voice = voice;
-            note.stem = this.getQueue(voice);
+          if (note.rest !== undefined) {
+            if (pitch !== undefined) {
+              note.pitch = this.getPitch(pitch);
+            }
+            if (type !== undefined) {
+              note.type = this.getValue(type);
+            }
+            if (voice !== undefined) {
+              note.voice = voice;
+              note.stem = this.getQueue(voice);
+            }
           }
         }
       }
