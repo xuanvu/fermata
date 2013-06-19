@@ -3,15 +3,9 @@
 
   //includes
   var NoteType = Fermata.Render.NoteType;
-<<<<<<< HEAD
   var SoundType = Fermata.Render.SoundType;
-  var PitchPitched = Fermata.Render.PitchPitched;
-  var PitchRest = Fermata.Render.PitchRest;
   var TupletProcessor = Fermata.Render.TupletProcessor;
-=======
-  var SoundType = Fermata.Values.SoundType;
   var PitchEncapsulator = Fermata.Data.PitchEncapsulator;
->>>>>>> edit
 
   Fermata.Render.NoteConverter = function ()
   {};
