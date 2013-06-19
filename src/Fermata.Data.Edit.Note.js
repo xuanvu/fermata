@@ -23,8 +23,9 @@
       return 2;
     }
     else {
-      // TODO: Return biggest or smallest possible value?
-      return 1;
+      console.log(type);
+      var errorMsg = "this duration is not supported yet.";
+      throw new NotImplementedError(errorMsg);
     }
   };
 
@@ -32,6 +33,56 @@
     // "up" and "down" are defined by the number of voices in the stave
     // TODO: return something else than "up" (voice calculation?)
     return "up";
+  };
+
+  Fermata.Data.prototype.getStep = function (val) {
+    if (val === 0) {
+      return "C";
+    }
+    if (val === 0.5 || val === -3) {
+      return "D";
+    }
+    if (val === 1 || val === -2.5) {
+      return "E";
+    }
+    if (val === 1.5 || val === -2) {
+      return "F";
+    }
+    if (val === 2 || val === -1.5) {
+      return "G";
+    }
+    if (val === 2.5 || val === -1) {
+      return "A";
+    }
+    if (val === 3 || val === -0.5) {
+      return "B";
+    } 
+  };
+
+  Fermata.Data.prototype.getOctave = function (val) {
+    val = (val > 0) ? Math.floor(val) : Math.ceil(val);
+    octave = 4
+    for (i = val; i < 0; i++) {
+      octave /= 2;
+    }
+    for (i = val; i > 0; i--) {
+      octave *= 2;
+    }
+    return octave;
+  };
+
+  Fermata.Data.prototype.getPitch = function (pitch) {
+    p_octave = 3.5;
+    n_octave = -p_octave;
+    step = "L";
+    if (pitch < 0) {
+      step = this.getStep(pitch % n_octave);
+    }
+    else {
+      step = this.getStep(pitch % p_octave);
+    }
+    octave = this.getOctave(pitch / p_octave);
+    return { 'octave': octave, 'step': step};
   };
 
   Fermata.Data.prototype.getValue = function (type) {
@@ -51,13 +102,12 @@
   };
 
   Fermata.Data.prototype.addNote = function (idxS, idxM, idxN,
-          step, octave, type, voice) {
+          pitch, type, voice) {
     // TODO: handle salt (flat, sharp, etc.)
     if (!(idxS === undefined ||
             idxM === undefined ||
             idxN === undefined ||
-            octave === undefined ||
-            step === undefined ||
+            pitch === undefined ||
             type === undefined)) {
       if (voice === undefined) {
         voice = 1;
@@ -67,10 +117,7 @@
         if (idxM >= 0 && idxM < part.measure.length) {
           var note = {
             'duration': this.getDuration(type),
-            'pitch': {
-              'octave': octave,
-              'step': step
-            },
+            'pitch': this.getPitch(pitch),
             'stem': this.getQueue(voice),
             'type': this.getValue(type),
             'voice': voice
@@ -106,7 +153,7 @@
   };
 
   Fermata.Data.prototype.editNote = function (idxS, idxM, idxN,
-          step, octave, type, voice) {
+          pitch, octave, type, voice) {
     if (!(idxS === undefined ||
             idxM === undefined ||
             idxN === undefined)) {
@@ -115,11 +162,8 @@
         if (idxM >= 0 && idxM < part.measure.length &&
                 idxN >= 0 && idxN < part.measure[idxM].note.length) {
           var note = part.measure[idxM].note[idxN];
-          if (step !== undefined) {
-            note.pitch.step = step;
-          }
-          if (octave !== undefined) {
-            note.pitch.octave = octave;
+          if (pitch !== undefined) {
+            note.pitch = this.getPitch(pitch);
           }
           if (type !== undefined) {
             note.type = this.getValue(type);

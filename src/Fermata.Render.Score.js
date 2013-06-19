@@ -318,7 +318,9 @@
             num_beats: measure.$fermata.attributes.beat.beats,
             beat_value: measure.$fermata.attributes.beat.type,
             resolution: Vex.Flow.RESOLUTION
+            
           });
+          voice.setStrict(false);
           voice.addTickables($fermata.vexNotes[staffIdx][voiceIdx]);
           // Add notes to voice
           // Format and justify the notes to 500 pixels

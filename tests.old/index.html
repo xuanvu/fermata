@@ -129,9 +129,9 @@
     <br/>
     Remove Note - stave: <input type="input" value="1" id="rnStave" /> measure: <input type="input" value="1" id="rnMeasure" /> note: <input type="input" value="1" id="rnNote" /><input type="button" id="removeNote" value="removeNote()" />
     </p>
-    Add Note - stave: <input type="input" value="1" id="anStave" /> measure: <input type="input" value="1" id="anMeasure" /> note: <input type="input" value="1" id="anNote" /> step: <input type="input" value="C" id="anStep" /> octave: <input type="input" value="4" id="anOctave" /> type { HALF: 0, QUARTER: 1, EIGHTH: 2 }: <input type="input" value="1" id="anType" /> voice: <input type="input" value="1" id="anVoice" /><input type="button" id="addNote" value="addNote()" />
+    Add Note - stave: <input type="input" value="1" id="anStave" /> measure: <input type="input" value="1" id="anMeasure" /> note: <input type="input" value="1" id="anNote" /> pitch: <input type="input" value="0" id="anPitch" /> type { HALF: 0, QUARTER: 1, EIGHTH: 2 }: <input type="input" value="1" id="anType" /> voice: <input type="input" value="1" id="anVoice" /><input type="button" id="addNote" value="addNote()" />
     </p>
-    Edit Note - stave: <input type="input" value="1" id="enStave" /> measure: <input type="input" value="1" id="enMeasure" /> note: <input type="input" value="1" id="enNote" /> step: <input type="input" value="C" id="enStep" /> octave: <input type="input" value="4" id="enOctave" /> type { HALF: 0, QUARTER: 1, EIGHTH: 2 }: <input type="input" value="1" id="enType" /> voice: <input type="input" value="1" id="enVoice" /><input type="button" id="editNote" value="editNote()" />
+    Edit Note - stave: <input type="input" value="1" id="enStave" /> measure: <input type="input" value="1" id="enMeasure" /> note: <input type="input" value="1" id="enNote" /> pitch: <input type="input" value="0" id="enPitch" /> type { HALF: 0, QUARTER: 1, EIGHTH: 2 }: <input type="input" value="1" id="enType" /> voice: <input type="input" value="1" id="enVoice" /><input type="button" id="editNote" value="editNote()" />
     <fieldset>
       <legend>change pitch</legend>
       <label for="cpStave">stave</label>
@@ -192,7 +192,7 @@
           drawer.drawAll();
         });
         
-    $('#moveMeasure').click(function() {
+        $('#moveMeasure').click(function() {
           $('#canvas-score > svg').empty();
           data.moveMeasure($('#measudeIdxFrom').val(), $('#measudeIdxDest').val());
           render.renderAll();
@@ -209,7 +209,7 @@
 
         $('#addNote').click(function() {
           $('#canvas-score > svg').empty();
-          data.addNote($('#anStave').val(), $('#anMeasure').val(), $('#anNote').val(), $('#anStep').val(), $('#anOctave').val(), $('#anType').val(), $('#anVoice').val());
+          data.addNote($('#anStave').val(), $('#anMeasure').val(), $('#anNote').val(), $('#anPitch').val(), $('#anType').val(), $('#anVoice').val());
           <!-- render.renderMeasure(idMeasure) instead of: -->
           render.renderAll();
           drawer.drawAll();
@@ -217,7 +217,7 @@
 
         $('#editNote').click(function() {
           $('#canvas-score > svg').empty();
-          data.editNote($('#enStave').val(), $('#enMeasure').val(), $('#enNote').val(), $('#enStep').val(), $('#enOctave').val(), $('#enType').val(), $('#enVoice').val());
+          data.editNote($('#enStave').val(), $('#enMeasure').val(), $('#enNote').val(), $('#enPitch').val(), $('#enType').val(), $('#enVoice').val());
           <!-- render.renderMeasure(idMeasure) instead of: -->
           render.renderAll();
           drawer.drawAll();
