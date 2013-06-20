@@ -16,7 +16,7 @@
       return "eighth";
     }
     else {
-      var errorMsg = "error: can't access the number of stave, or beat in part. throw exception."
+      var errorMsg = "error: can't access the number of stave, or beat in part. throw exception.";
       throw new NotImplementedError(errorMsg);
     }
   };
