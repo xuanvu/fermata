@@ -27,10 +27,10 @@
       this.fillAttributesDefault();
     }
 
-    console.log(noteData);
+    // console.log(noteData);
     var key = (typeof(noteData[0].staff) === 'undefined') ? 1 : noteData[0].staff;
-    console.log(key);
-    console.log(attributes);
+    // console.log(key);
+    // console.log(attributes);
     this.clefName = Fermata.Mapping.Clef.getVexflow(attributes.clef[key - 1].sign);
     this.change = attributes.clef[key - 1].change;
     var noteType = Fermata.Render.getNoteType(noteData[0]);
