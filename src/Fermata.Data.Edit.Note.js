@@ -75,19 +75,6 @@
     }
   };
 
-  Fermata.Data.prototype.getOctave = function (val) {
-    val = (val > 0) ? Math.floor(val) : Math.ceil(val);
-    var octave = 4;
-    octave += val;
-    // for (i = val; i < 0; i++) {
-    //   octave /= 2;
-    // }
-    // for (i = val; i > 0; i--) {
-    //   octave *= 2;
-    // }
-    return octave;
-  };
-
   Fermata.Data.prototype.getPitch = function (pitch, sign, line) {
     var valueCorrection = calcValueCorrection(sign, line);
     pitch = parseInt(pitch, 10);
@@ -101,7 +88,7 @@
     else {
       step = this.getStep(pitch % p_octave);
     }
-    var octave = this.getOctave(pitch / p_octave);
+    var octave = 4 + Math.floor(pitch / p_octave);
     return {'octave': octave, 'step': step};
   };
 
