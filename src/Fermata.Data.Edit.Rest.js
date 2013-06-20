@@ -1,6 +1,8 @@
 (function () {
   "use strict";
 
+  var NotImplementedError = Fermata.Error.NotImplementedError;
+
   Fermata.Data.prototype.getTypeFromDuration = function (beats, duration) {
     // TODO: study beats impact on type (well, impact is already known but has to be studied deeper).
     // TODO: put all stuff about duration in the same file, factorize. (and handle more cases)
@@ -14,8 +16,8 @@
       return "eighth";
     }
     else {
-      // TODO: throw error? Send smallest or biggest possible value?
-      return "";
+      var errorMsg = "error: can't access the number of stave, or beat in part. throw exception."
+      throw new NotImplementedError(errorMsg);
     }
   };
 

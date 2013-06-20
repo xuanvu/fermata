@@ -177,7 +177,7 @@
         if (idxM >= 0 && idxM < part.measure.length &&
                 idxN >= 0 && idxN < part.measure[idxM].note.length) {
           var note = part.measure[idxM].note[idxN];
-          if (note.rest !== undefined) {
+          if (note.rest === undefined) {
             if (pitch !== undefined) {
               note.pitch = this.getPitch(pitch);
             }
