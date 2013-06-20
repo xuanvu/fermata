@@ -168,7 +168,7 @@
   };
 
   Fermata.Data.prototype.editNote = function (idxS, idxM, idxN,
-          pitch, octave, type, voice) {
+          pitch, type, voice) {
     if (!(idxS === undefined ||
             idxM === undefined ||
             idxN === undefined)) {
