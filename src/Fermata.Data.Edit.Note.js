@@ -37,8 +37,8 @@
 
   var distanceFromG = {
     "G": 0,
-    "C": Step.idx["G"] - Step.idx["C"],
-    "F": Step.idx["G"] - Step.idx["F"] + Step.values.length
+    "C": Step.idx.G - Step.idx.C,
+    "F": Step.idx.G - Step.idx.F + Step.values.length
   };
 
   var calcValueCorrection = function (sign, line) {
