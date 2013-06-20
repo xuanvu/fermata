@@ -209,7 +209,7 @@
           notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] += this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
         }
       }
-
+      
       for (i = 0 ; i < notePerVoice.length ; i++) {
         if (typeof notePerVoice[i] !== "undefined" && notePerVoice[i] > maxNotes) {
           maxNotes = notePerVoice[i];
@@ -217,7 +217,7 @@
       }
     }
 
-    if (typeof maxWidth === "undefined") {
+    if (typeof maxWidth === "undefined" || maxWidth < maxNotes + this.armWidth(columnId)) {
       maxWidth = maxNotes + this.armWidth(columnId);
       if (maxWidth === 0) {
         maxWidth = 40; //Dirty, will change very, very, very soon.
