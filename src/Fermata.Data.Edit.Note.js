@@ -23,7 +23,6 @@
       return 2;
     }
     else {
-      console.log(type);
       var errorMsg = "this duration is not supported yet.";
       throw new NotImplementedError(errorMsg);
     }
