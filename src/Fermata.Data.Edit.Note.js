@@ -35,6 +35,12 @@
     return "up";
   };
 
+  var distanceFromG = {
+    "G": 0,
+    "C": Step.idx["G"] - Step.idx["C"],
+    "F": Step.idx["G"] - Step.idx["F"] + Step.values.length
+  };
+
   var calcValueCorrection = function (sign, line) {
     var clefStepIdx = Step.idx[sign];
 
@@ -42,7 +48,7 @@
     var gSign = "G";
     var refGStepFromOrigin = refGLine * 2;
 
-    var signShift = Step.idx[gSign] - clefStepIdx;
+    var signShift = distanceFromG[sign];
     var clefStepFromOrigin = line * 2;
     var actualGStepFromOrigin = clefStepFromOrigin + signShift;
     var stepCorrection = refGStepFromOrigin - actualGStepFromOrigin;
