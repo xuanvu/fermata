@@ -52,7 +52,8 @@
     }
     if (nstave === 0 || beat === undefined) {
       var errorMsg = "error: can't access the number of stave, or beat in part. throw exception.";
-      throw new NotImplementedError(errorMsg);
+      //TODO: fix this !!!
+      // throw new NotImplementedError(errorMsg);
     }
     for (i = 0; i < nstave; i++) {
       var duration = beat.beats * beat.type;
