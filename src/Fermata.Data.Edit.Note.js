@@ -37,8 +37,8 @@
 
   var distanceFromG = {
     "G": 0,
-    "C": Step.idx["G"] - Step.idx["C"],
-    "F": Step.idx["G"] - Step.idx["F"] + Step.values.length
+    "C": Step.idx.G - Step.idx.C,
+    "F": Step.idx.G - Step.idx.F + Step.values.length
   };
 
   var calcValueCorrection = function (sign, line) {
@@ -168,7 +168,7 @@
   };
 
   Fermata.Data.prototype.editNote = function (idxS, idxM, idxN,
-          pitch, octave, type, voice) {
+          pitch, type, voice) {
     if (!(idxS === undefined ||
             idxM === undefined ||
             idxN === undefined)) {
@@ -176,10 +176,12 @@
       if (part !== undefined) {
         if (idxM >= 0 && idxM < part.measure.length &&
                 idxN >= 0 && idxN < part.measure[idxM].note.length) {
-          var note = part.measure[idxM].note[idxN];
-          if (note.rest === undefined) {
+          var measure = part.measure[idxM];
+          var note = measure.note[idxN];
+          var clef = measure.$fermata.attributes.clef[0];
+          //if (note.rest === undefined) {
             if (pitch !== undefined) {
-              note.pitch = this.getPitch(pitch);
+              note.pitch = this.getPitch(pitch, clef.sign, clef.line);
             }
             if (type !== undefined) {
               note.type = this.getValue(type);
@@ -188,7 +190,7 @@
               note.voice = voice;
               note.stem = this.getQueue(voice);
             }
-          }
+          //}
         }
       }
     }
