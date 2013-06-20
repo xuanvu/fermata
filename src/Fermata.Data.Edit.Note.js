@@ -49,19 +49,28 @@
     return origin;
   };
 
-  var calcAbsoluteVal = function (val) {
-    return (val * 2) + 6;
-  };
-
-  Fermata.Data.prototype.getStep = function (val, sign, line) {
-    var absoluteVal = calcAbsoluteVal(val);
-    var scaleOrigin = "D";
-    var absoluteStepIdx = absoluteVal + Step.idx[scaleOrigin];
-    absoluteStepIdx += calcOriginStep(sign, line);
-    absoluteStepIdx %= Step.values.length;
-    var step = Step.values[val];
-    
-    return step;
+  Fermata.Data.prototype.getStep = function (val) {
+    if (val === 0) {
+      return "C";
+    }
+    if (val === 0.5 || val === -3) {
+      return "D";
+    }
+    if (val === 1 || val === -2.5) {
+      return "E";
+    }
+    if (val === 1.5 || val === -2) {
+      return "F";
+    }
+    if (val === 2 || val === -1.5) {
+      return "G";
+    }
+    if (val === 2.5 || val === -1) {
+      return "A";
+    }
+    if (val === 3 || val === -0.5) {
+      return "B";
+    }
   };
 
   Fermata.Data.prototype.getOctave = function (val) {
