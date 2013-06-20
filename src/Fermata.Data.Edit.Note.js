@@ -89,7 +89,9 @@
     return octave;
   };
 
-  Fermata.Data.prototype.getPitch = function (pitch) {
+  Fermata.Data.prototype.getPitch = function (pitch, sign, line) {
+    var valueCorrection = calcValueCorrection(sign, line);
+    pitch += valueCorrection;
     var p_octave = 3.5;
     var n_octave = -p_octave;
     var step = "L";
