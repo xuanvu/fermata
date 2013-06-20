@@ -176,10 +176,12 @@
       if (part !== undefined) {
         if (idxM >= 0 && idxM < part.measure.length &&
                 idxN >= 0 && idxN < part.measure[idxM].note.length) {
-          var note = part.measure[idxM].note[idxN];
+          var measure = part.measure[idxM];
+          var note = measure.note[idxN];
+          var clef = measure.$fermata.attributes.clef[0];
           if (note.rest !== undefined) {
             if (pitch !== undefined) {
-              note.pitch = this.getPitch(pitch);
+              note.pitch = this.getPitch(pitch, clef.sign, clef.line);
             }
             if (type !== undefined) {
               note.type = this.getValue(type);
