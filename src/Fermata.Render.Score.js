@@ -10,6 +10,7 @@
 
   // Includes
   var BeamProcessor = Fermata.Render.BeamProcessor;
+  var TupletProcessor = Fermata.Render.TupletProcessor;
 
   var _render = Fermata.Render.prototype;
   Fermata.Render.prototype.renderScoreHeaderProcess = [
@@ -164,9 +165,12 @@
       vexNotes: [],
       vexStaves: [],
       vexVoices: [],
-      vexBeams: []
+      vexBeams: [],
+      vexHairpin: [],
+      vexTuplets: []
     };
     this.beamProcessor = new BeamProcessor(this.cur.measure.$fermata);
+    this.tupletProcessor = new TupletProcessor(this.cur.measure.$fermata);
 
     // Stave
     // this.renderMeasureAttributes(measure);
@@ -217,7 +221,7 @@
       }
     }
 
-    if (typeof maxWidth === "undefined" || maxWidth < maxNotes + this.armWidth(columnId)) {
+    if (typeof maxWidth === "undefined") {
       maxWidth = maxNotes + this.armWidth(columnId);
       if (maxWidth === 0) {
         maxWidth = 40; //Dirty, will change very, very, very soon.
@@ -311,6 +315,37 @@
       }
     }
 
+    if ($fermata.direction !== undefined) {
+      for (i = 0; i < $fermata.direction.length; i++) {
+        var data = $fermata.direction;
+
+        if (data[i]['direction-type'].wedge.$type !== null && data[i]['direction-type'].wedge.$type !== 'stop') {
+          var renderOption = {
+            height: 10,
+            y_shift: 0,
+            left_shift_px: 0,
+            right_shift_px: 0
+          };
+          var tmpNote = {
+            first_note : _render.getNoteTest(Fermata.Drawer.prototype.getGoodPos(data[i].noteAfter, data[i].noteBefore, renderOption, true), measure),
+            last_note : _render.getNoteTest(Fermata.Drawer.prototype.getGoodPos(data[i + 1].noteAfter, data[i + 1].noteBefore, renderOption, false), measure)
+          };
+          if (tmpNote.first_note === tmpNote.last_note) {
+            renderOption.right_shift_px += 70;
+          }
+          console.log(data[i].placement);
+          var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data[i]['direction-type'].wedge.$type));
+          hp.setPosition(Fermata.Mapping.Direction.getVexflow(data[i].$placement));
+          hp.setRenderOptions(renderOption);
+          $fermata.vexHairpin.push(hp);
+        }
+        else if (data[i]['direction-type'].words.content !== null) {
+          var note = _render.getNoteTest(data[i].noteAfter, measure);
+          note.addAnnotation(0, Fermata.Drawer.prototype.AddNotation(data[i]['direction-type'].words.content, 1, 1));
+        }
+      }
+    }
+
     for (var staffIdx = 1 ; staffIdx < $fermata.vexNotes.length ; staffIdx++) {
       for (var voiceIdx in $fermata.vexNotes[staffIdx]) {
         if ($fermata.vexNotes[staffIdx].hasOwnProperty(voiceIdx)) {
@@ -324,7 +359,9 @@
           voice.addTickables($fermata.vexNotes[staffIdx][voiceIdx]);
           // Add notes to voice
           // Format and justify the notes to 500 pixels
-          var formatter = new Vex.Flow.Formatter().joinVoices([voice]).format([voice], /*measure.note.length * 50*/ measure.$width - $fermata.voiceWidth - 15);
+          var formatter = new Vex.Flow.Formatter();
+          formatter.joinVoices([voice]);
+          formatter.format([voice], /*measure.note.length * 50*/ measure.$width - $fermata.voiceWidth - 15);
           $fermata.vexVoices.push(voice);
         // voice.draw(this.ctx, $fermata.vexStaves[staffIdx - 1]);
         }

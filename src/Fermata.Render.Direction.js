@@ -1,184 +1,63 @@
 (function () {
   "use strict";
 
-  Fermata.Render.prototype.renderDirection = function (direction)
-  {
-    this.exploreSubNodes({ object: direction, processes: this.renderDirectionProcess, ctx: this });
-    this.renderDirectionAttribute(direction);
-    if (this.renderDirectionData[this.renderDirectionData.length - 1].type !== null &&
-        this.renderDirectionData[this.renderDirectionData.length - 1].noteAfter === null) {
-      this.renderDirectionData[this.renderDirectionData.length - 1].noteAfter = direction.noteAfter;
-    }
-    else {
-      this.renderDirectionData[this.renderDirectionData.length - 1].noteBefore = direction.noteBefore;
-    }
+  Fermata.Render.prototype.renderDirectionDefault = {
+    $placement: null,
+    noteBefore: null,
+    noteAfter: null,
+    'direction-type': {
+      wedge: { $type: null },
+      words: { content: null,
+               '$default-y': 0,
+               '$font-size': 0,
+               'font-weight': null
+              }
+    },
+    offset: null,
+    voice: 1,
+    staff: 1
   };
 
-  Fermata.Render.prototype.renderDirectionType = function (node) {
-    // console.log(node);
-    if (node.wedge !== undefined && node.wedge.$type !== "stop" || node.wedge.$type === "word") {
-      var tmp = {
-        placement: null,
-        noteBefore: null,
-        noteAfter: null,
-        type: null,
-        offset: null,
-        voice: 1,
-        staff: 1
-      };
-      this.renderDirectionData.push(Fermata.Utils.Clone(tmp));
-      this.renderDirectionData[this.renderDirectionData.length - 1].type = node.wedge.$type;
-    }
-  };
+  var _render =  Fermata.Render.prototype;
 
-  Fermata.Render.prototype.renderDirectionOffset = function (node) {
-    this.renderDirectionData.offset = node;
-  };
-
-  Fermata.Render.prototype.renderDirectionAttribute = function (node) {
-    if (node.$placement !== 'undefined') {
-      this.renderDirectionData[this.renderDirectionData.length - 1].placement = node.$placement;
-    }
-  };
-
-  Fermata.Render.prototype.renderDirectionVoice = function (node)
-  {
-    this.renderDirectionData[this.renderDirectionData.length - 1].voice = node;
-  };
-
-  Fermata.Render.prototype.renderDirectionStaff = function (staff)
-  {
-    this.renderDirectionData[this.renderDirectionData.length - 1].staff = staff;
-  };
-
-  Fermata.Render.prototype.renderDirectionData = [];
-
-
-  Fermata.Render.prototype.renderDirectionTypeProcess = [
-    {
-      key: "rehearsal",
-      type: Fermata.Render.prototype.FuncTypes.$1n,
-      func: null // TODO
-    },
-    {
-      key: "segno",
-      type: Fermata.Render.prototype.FuncTypes.$1n,
-      func: null // TODO
-    },
-    {
-      key: "words",
-      type: Fermata.Render.prototype.FuncTypes.$1n,
-      func: null // TODO
-    },
-    {
-      key: "coda",
-      type: Fermata.Render.prototype.FuncTypes.$1n,
-      func: null // TODO
-    },
-    {
-      key: "wedge",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "dynamics",
-      type: Fermata.Render.prototype.FuncTypes.$1n,
-      func: null // TODO
-    },
-    {
-      key: "dashes",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "bracket",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "pedal",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "metronome",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "octave-shift",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "harp-pedals",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "damp",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "damp-all",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "eyeglasses",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "scordatura",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "image",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "principal-voice",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "accordion-registration",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "string-mute",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    },
-    {
-      key: "percussion",
-      type: Fermata.Render.prototype.FuncTypes.$1n,
-      func: null // TODO
-    },
-    {
-      key: "other-direction",
-      type: Fermata.Render.prototype.FuncTypes.$1,
-      func: null // TODO
-    }
+  Fermata.Render.prototype.renderDirectionTypeWedgeProcess = [
+    { key: '$type', type: _render.FuncTypes.$01, dataType: 'string', dataKey: '$type' }
   ];
 
+  //TODO gestion des polices etc...
+  Fermata.Render.prototype.renderDirectionTypeWordProcess = [
+    {key: 'content', type: _render.FuncTypes.$1, dataType: 'string', dataKey: 'content' }
+  ];
+
+  Fermata.Render.prototype.renderDirectionTypeWedge = function (node) {
+    this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeWedgeProcess, ctx: this,
+                           out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'].wedge });
+  };
+
+  Fermata.Render.prototype.renderDirectionTypeWord = function (node) {
+    this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeWordProcess, ctx: this,
+                           out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'].words });
+  };
+
+  Fermata.Render.prototype.renderDirectionTypeProcess = [
+    { key: 'wedge', type: _render.FuncTypes.$01, func: _render.renderDirectionTypeWedge },
+    { key: "words", type: _render.FuncTypes.$01, func: _render.renderDirectionTypeWord }
+  ];
+
+  Fermata.Render.prototype.renderDirectionType = function (node) {
+    this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeProcess, ctx: this,
+                           out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'] });
+  };
+
   Fermata.Render.prototype.renderDirectionProcess = [
-    {
-      key: "direction-type",
-      type: Fermata.Render.prototype.FuncTypes.$1n,
-      func: Fermata.Render.prototype.renderDirectionType
-    },
-    {
-      key: "offset",
-      type: Fermata.Render.prototype.FuncTypes.$01,
-      func: Fermata.Render.prototype.renderDirectionOffset
-    },
-    /*{
+    { key: "direction-type", type: _render.FuncTypes.$1n, func: _render.renderDirectionType },
+    { key: "offset", type: Fermata.Render.prototype.FuncTypes.$01, dataType: 'int', dataKey: 'offset'},
+    { key: "voice", type: _render.FuncTypes.$01, dataType: 'int', dataKey: 'voice' },
+    { key: "staff", type: _render.FuncTypes.$01, dataType: 'int', dataKey: 'staff' },
+    { key: "$placement", type: _render.FuncTypes.$1, dataType: 'string', dataKey: '$placement' },
+    { key: "noteBefore", type: _render.FuncTypes.$1, dataType: 'int', dataKey: 'noteBefore'},
+    { key: "noteAfter", type: _render.FuncTypes.$1, dataType: 'int', dataKey: 'noteAfter'}
+   /*{
       // Came from an Entity....
       key: "footnote",
       type: Fermata.Render.prototype.FuncTypes.$01,
@@ -189,22 +68,120 @@
       type: Fermata.Render.prototype.FuncTypes.$01,
       func: null// TO-DO TONTON
     },*/
-    {
-      key: "voice",
-      type: Fermata.Render.prototype.FuncTypes.$01,
-      func: Fermata.Render.prototype.renderDirectionVoice
-    },
-      // End of Entity
-    {
-      key: "staff",
-      type: Fermata.Render.prototype.FuncTypes.$01,
-      func: Fermata.Render.prototype.renderDirectionStaff
-    }
-    /*{
-      key: "offset",
-      type: Fermata.Render.prototype.FuncTypes.$01,
-      func: null
-    }*/
   ];
 
+  Fermata.Render.prototype.renderDirection = function (direction)
+  {
+    if (this.cur.measure.$fermata.direction === undefined) {
+      this.cur.measure.$fermata.direction = [];
+    }
+    this.cur.measure.$fermata.direction.push(Fermata.Utils.Clone(_render.renderDirectionDefault));
+    this.exploreSubNodes({ object: direction, processes: _render.renderDirectionProcess, ctx: this,
+                           out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1] });
+  };
+
 }).call(this);
+
+// Ne pas enlever je vais pas le Farmer 10 fois !!!!!! TODO
+
+// {
+    //   key: "rehearsal",
+    //   type: Fermata.Render.prototype.FuncTypes.$1n,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "segno",
+    //   type: Fermata.Render.prototype.FuncTypes.$1n,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "coda",
+    //   type: Fermata.Render.prototype.FuncTypes.$1n,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "dynamics",
+    //   type: Fermata.Render.prototype.FuncTypes.$1n,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "dashes",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "bracket",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "pedal",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "metronome",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "octave-shift",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "harp-pedals",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "damp",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "damp-all",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "eyeglasses",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "scordatura",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "image",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "principal-voice",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "accordion-registration",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "string-mute",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "percussion",
+    //   type: Fermata.Render.prototype.FuncTypes.$1n,
+    //   func: null // TODO
+    // },
+    // {
+    //   key: "other-direction",
+    //   type: Fermata.Render.prototype.FuncTypes.$1,
+    //   func: null // TODO
+    // }
+

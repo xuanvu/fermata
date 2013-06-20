@@ -2,6 +2,7 @@
   "use strict";
 
   Fermata.Drawer.PART_HEIGHT = 100;
+  var _render = Fermata.Render.prototype;
 
   Fermata.Drawer.prototype.drawAll = function () {
     // Todo: precalcul in render
@@ -112,7 +113,7 @@
       measure.$fermata.vexStaves[i].draw();
 
       // Draw line in case of sytem
-      if (measure.$fermata.attributes.staves > 1 && measure.$fermata.barline === undefined)
+      if (measure.$fermata.attributes.staves > 1 /*&& measure.$fermata.barline === undefined*/) // <== Faudra m'expliquer ca.
       {
         var line = new Vex.Flow.StaveConnector(measure.$fermata.vexStaves[0], measure.$fermata.vexStaves[i]);
         line.setType(Vex.Flow.StaveConnector.type.SINGLE);
@@ -149,28 +150,36 @@
     // }
 
     // console.log(measure.$fermata.vexVoices);
-    for (i = 0 ; i < measure.$fermata.vexVoices.length ; ++i) {
-      // console.log(measure.$fermata.vexVoices[i]);
+    for (i = 0 ; i < measure.$fermata.vexVoices.length ; i++) {
       measure.$fermata.vexVoices[i].draw(this.ctx, measure.$fermata.vexStaves[i]);
     }
 
-    this.drawBeam(measure);
+    for (i = 0 ; i < measure.$fermata.vexHairpin.length ; ++i) {
+      measure.$fermata.vexHairpin[i].setContext(this.ctx);
+      measure.$fermata.vexHairpin[i].draw();
+    }
 
-  // TODO: clean & mv renderDirectionData
-  // for (i = 0; i < this.renderDirectionData.length; i++) {
-  //   var data = this.renderDirectionData[i];
-  //   var tmpNote = {
-  //     first_note : this.getNote(data.noteAfter),
-  //     last_note : this.getNote(data.noteBefore)
-  //   };
-  //   var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data.type));
-  //   hp.setContext(this.ctx);
-  //   hp.setPosition(Fermata.Mapping.Direction.getVexflow(this.renderDirectionData.placement));
-  //   hp.draw();
-  //   if (i === this.renderDirectionData.length -1 ) {
-  //     this.renderDirectionData = [];
-  //   }
-  // }
+    this.drawBeam(measure);
+    this.drawTuplet(measure);
+  };
+
+  Fermata.Drawer.prototype.getGoodPos =  function (noteOne, noteTwo, renderOption, first) {
+    if (noteOne !== 0 && noteTwo !== 0 && noteOne !== noteTwo) {
+      if (first) {
+          // renderOption.left_shift_px -= 40;
+        return noteOne;
+      }
+      else {
+          // renderOption.right_shift_px += 40;
+        return noteTwo;
+      }
+    }
+    if (noteTwo === 0) {
+      return noteOne;
+    }
+    if (noteOne === 0) {
+      return noteTwo;
+    }
   };
 
   Fermata.Drawer.prototype.drawBeam = function (measure)
@@ -180,6 +189,23 @@
 
       vexBeam.setContext(this.ctx).draw();
     }
+  };
+
+  Fermata.Drawer.prototype.drawTuplet = function (measure)
+  {
+    for (var i = 0 ; i < measure.$fermata.vexTuplets.length ; ++i) {
+      var vexTuplet = measure.$fermata.vexTuplets[i];
+
+      vexTuplet.setContext(this.ctx).draw();
+    }
+  };
+
+  Fermata.Drawer.prototype.AddNotation = function (text, hJustifcation, vJustifcation) {
+    var ret = new Vex.Flow.Annotation(text);
+    // ret.setFont('Arial', Vex.Flow.Test.Font.size);
+    ret.setJustification(hJustifcation);
+    ret.setVerticalJustification(vJustifcation);
+    return ret;
   };
 
 }).call(this);

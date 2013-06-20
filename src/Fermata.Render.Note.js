@@ -70,6 +70,10 @@
     {
       this.beamProcessor.addNote(note[0], vexNote);
     }
+    if (this.tupletProcessor.canProcess(note[0]))
+    {
+      this.tupletProcessor.addNote(note[0], vexNote);
+    }
     this.recordNote(vexNote, voice, staff);
 
 
@@ -223,6 +227,49 @@
               for (var third = 0; third < this.cur.measure.$fermata.vexNotes[first][second].length ; third++) {
                 if (pos === number) {
                   return this.cur.measure.$fermata.vexNotes[first][second][third];
+                }
+                pos++;
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+
+  Fermata.Render.prototype.getNoteTest = function (number, measure)
+  {
+    var pos = 0;
+    while (true) {
+      for (var first in measure.$fermata.vexNotes) {
+        if (measure.$fermata.vexNotes.hasOwnProperty(first)) {
+          for (var second in measure.$fermata.vexNotes[first]) {
+            if (measure.$fermata.vexNotes[first].hasOwnProperty(second)) {
+              for (var third = 0; third < measure.$fermata.vexNotes[first][second].length ; third++) {
+                if (pos === number) {
+                  return measure.$fermata.vexNotes[first][second][third];
+                }
+                pos++;
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+
+  Fermata.Render.prototype.setNoteTest = function (number, measure, VexNote)
+  {
+    var pos = 0;
+    while (true) {
+      for (var first in measure.$fermata.vexNotes) {
+        if (measure.$fermata.vexNotes.hasOwnProperty(first)) {
+          for (var second in measure.$fermata.vexNotes[first]) {
+            if (measure.$fermata.vexNotes[first].hasOwnProperty(second)) {
+              for (var third = 0; third < measure.$fermata.vexNotes[first][second].length ; third++) {
+                if (pos === number) {
+                  measure.$fermata.vexNotes[first][second][third] = VexNote;
+                  return;
                 }
                 pos++;
               }

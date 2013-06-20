@@ -4,6 +4,7 @@
   //includes
   var NoteType = Fermata.Render.NoteType;
   var SoundType = Fermata.Values.SoundType;
+  var TupletProcessor = Fermata.Render.TupletProcessor;
   var PitchEncapsulator = Fermata.Data.PitchEncapsulator;
 
   Fermata.Render.NoteConverter = function ()
@@ -26,10 +27,10 @@
       this.fillAttributesDefault();
     }
 
-    console.log(noteData);
+    // console.log(noteData);
     var key = (typeof(noteData[0].staff) === 'undefined') ? 1 : noteData[0].staff;
-    console.log(key);
-    console.log(attributes);
+    // console.log(key);
+    // console.log(attributes);
     this.clefName = Fermata.Mapping.Clef.getVexflow(attributes.clef[key - 1].sign);
     this.change = attributes.clef[key - 1].change;
     var noteType = Fermata.Render.getNoteType(noteData[0]);
@@ -67,22 +68,52 @@
 
   NoteConverter.prototype.convertDuration = function (noteData)
   {
-    // console.log(noteData.duration);
-    var dataDuration = noteData.duration;
-    // console.log(this.divisions);
+    var dataDuration = this.getDuration(noteData);
     var actualDuration = dataDuration / this.divisions;
-    var vexDuration = Math.round(this.beatType / actualDuration).toString();
+    var vexBaseDuration = Math.ceil(this.beatType / actualDuration);
+    var baseDuration = this.beatType / vexBaseDuration;
+    var dotDuration = actualDuration - baseDuration;
+
+    var vexDuration = {
+      vexBaseDuration: vexBaseDuration.toString(),
+      dotDuration: dotDuration
+    };
+    if (dotDuration > 0)
+    {
+      vexDuration.vexBaseDuration += "d";
+    }
 
     return vexDuration;
+  };
+
+  NoteConverter.prototype.getDuration = function (noteData) {
+    if (TupletProcessor.hasTimeModification(noteData))
+    {
+      var timeModification = TupletProcessor.getTimeModification(noteData);
+      var actualNotes = timeModification["actual-notes"];
+      var normalNotes = timeModification["normal-notes"];
+
+      return noteData.duration * actualNotes / normalNotes;
+    }
+    else
+    {
+      return noteData.duration;
+    }
   };
 
   NoteConverter.prototype.convertNormalNote = function (noteData)
   {
     var dataPitch = PitchEncapsulator.encapsulate(noteData[0], this.clefName);
     var vexDuration = this.convertDuration(noteData[0]);
+    var stem = null;
 
     // Stem
-    var stem = noteData[0].stem;
+    if (typeof(noteData[0].stem) === 'object') {
+      stem = noteData[0].stem.content;
+    }
+    else {
+      stem = noteData[0].stem;
+    }
     var auto_stem = false;
 
     if (stem === 'down') {
@@ -97,7 +128,7 @@
     }
 
     if (dataPitch.getType() === SoundType.REST) {
-      vexDuration += 'r';
+      vexDuration.vexBaseDuration += 'r';
     }
 
     var vexPitches = [];
@@ -109,11 +140,16 @@
 
     var vexNote = new Vex.Flow.StaveNote({
       keys: vexPitches,
-      duration: vexDuration,
+      duration: vexDuration.vexBaseDuration,
       stem_direction: stem,
       auto_stem : auto_stem,
       clef : this.clefName
     });
+
+    if (vexDuration.dotDuration > 0)
+    {
+      vexNote.addDotToAll();
+    }
 
     return vexNote;
   };
