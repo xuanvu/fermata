@@ -134,6 +134,7 @@
       var part = this.getPart(idxS, Fermata.Data.cacheParts.IDX);
       if (part !== undefined) {
         if (idxM >= 0 && idxM < part.measure.length) {
+          var measure = part.measure[idxM];
           var note = {
             'duration': this.getDuration(type),
             'pitch': this.getPitch(pitch),
@@ -141,8 +142,8 @@
             'type': this.getValue(type),
             'voice': voice
           };
-          if (idxN < 0 || idxN > part.measure[idxM].note.length) {
-            idxN = part.measure[idxM].note.length;
+          if (idxN < 0 || idxN > measure.note.length) {
+            idxN = measure.note.length;
           }
           part.measure[idxM].note.splice(idxN, 0, note);
         }
