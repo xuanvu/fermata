@@ -4,6 +4,7 @@
   var PitchEncapsulator = Fermata.Data.PitchEncapsulator;
   var SoundType = Fermata.Values.SoundType;
   var NotImplementedError = Fermata.Error.NotImplementedError;
+  var Step = Fermata.Values.Step;
 
   // TODO: Fill with other values.
   var ValueLast = {
@@ -34,6 +35,22 @@
     return "up";
   };
 
+  var calcValueCorrection = function (sign, line) {
+    var clefStepIdx = Step.idx[sign];
+
+    var refGLine = 4;
+    var gSign = "G";
+    var refGStepFromOrigin = refGLine * 2;
+
+    var signShift = Step.idx[gSign] - clefStepIdx;
+    var clefStepFromOrigin = line * 2;
+    var actualGStepFromOrigin = clefStepFromOrigin + signShift;
+    var stepCorrection = actualGStepFromOrigin - refGStepFromOrigin;
+    var valueCorrection = stepCorrection / 2;
+
+    return valueCorrection;
+  };
+
   Fermata.Data.prototype.getStep = function (val) {
     if (val === 0) {
       return "C";
@@ -55,12 +72,12 @@
     }
     if (val === 3 || val === -0.5) {
       return "B";
-    } 
+    }
   };
 
   Fermata.Data.prototype.getOctave = function (val) {
     val = (val > 0) ? Math.floor(val) : Math.ceil(val);
-    var octave = 4
+    var octave = 4;
     octave += val;
     // for (i = val; i < 0; i++) {
     //   octave /= 2;
@@ -71,7 +88,9 @@
     return octave;
   };
 
-  Fermata.Data.prototype.getPitch = function (pitch) {
+  Fermata.Data.prototype.getPitch = function (pitch, sign, line) {
+    var valueCorrection = calcValueCorrection(sign, line);
+    pitch += valueCorrection;
     var p_octave = 3.5;
     var n_octave = -p_octave;
     var step = "L";
@@ -82,7 +101,7 @@
       step = this.getStep(pitch % p_octave);
     }
     var octave = this.getOctave(pitch / p_octave);
-    return { 'octave': octave, 'step': step};
+    return {'octave': octave, 'step': step};
   };
 
   Fermata.Data.prototype.getValue = function (type) {
