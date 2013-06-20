@@ -36,17 +36,20 @@
     return "up";
   };
 
-  var calcOriginStep= function (sign, line) {
-    line *= 2;
-    line %= Step.values.length;
-    var signIdx = Step.idx[sign];
-    var originIdx = signIdx - line;
-    if (signIdx < 0) {
-      signIdx += Step.values.length;
-    }
-    var origin = Step.values[originIdx];
-    
-    return origin;
+  var calcValueCorrection = function (sign, line) {
+    var clefStepIdx = Step.idx[sign];
+
+    var refGLine = 4;
+    var gSign = "G";
+    var refGStepFromOrigin = refGLine * 2;
+
+    var signShift = Step.idx[gSign] - clefStepIdx;
+    var clefStepFromOrigin = line * 2;
+    var actualGStepFromOrigin = clefStepFromOrigin + signShift;
+    var stepCorrection = actualGStepFromOrigin - refGStepFromOrigin;
+    var valueCorrection = stepCorrection / 2;
+
+    return valueCorrection;
   };
 
   Fermata.Data.prototype.getStep = function (val) {
