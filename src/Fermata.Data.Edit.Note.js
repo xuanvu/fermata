@@ -179,7 +179,7 @@
           var measure = part.measure[idxM];
           var note = measure.note[idxN];
           var clef = measure.$fermata.attributes.clef[0];
-          //if (note.rest === undefined) {
+          if (note.rest === undefined) {
             if (pitch !== undefined) {
               note.pitch = this.getPitch(pitch, clef.sign, clef.line);
             }
@@ -190,7 +190,7 @@
               note.voice = voice;
               note.stem = this.getQueue(voice);
             }
-          //}
+          }
         }
       }
     }
