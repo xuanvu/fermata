@@ -130,8 +130,9 @@
         if (idxM >= 0 && idxM < part.measure.length) {
           var measure = part.measure[idxM];
           var clef = measure.$fermata.attributes.clef[0];
+          var divisions = measure.$fermata.attributes.divisions;
           var note = {
-            'duration': this.getDuration(type),
+            'duration': this.getDuration(type) * divisions,
             'pitch': this.getPitch(pitch, clef.sign, clef.line),
             'stem': this.getQueue(voice),
             'type': this.getValue(type),
