@@ -38,14 +38,14 @@
   var calcValueCorrection = function (sign, line) {
     var clefStepIdx = Step.idx[sign];
 
-    var refGLine = 4;
+    var refGLine = 2;
     var gSign = "G";
     var refGStepFromOrigin = refGLine * 2;
 
     var signShift = Step.idx[gSign] - clefStepIdx;
     var clefStepFromOrigin = line * 2;
     var actualGStepFromOrigin = clefStepFromOrigin + signShift;
-    var stepCorrection = actualGStepFromOrigin - refGStepFromOrigin;
+    var stepCorrection = refGStepFromOrigin - actualGStepFromOrigin;
     var valueCorrection = stepCorrection / 2;
 
     return valueCorrection;
@@ -90,6 +90,7 @@
 
   Fermata.Data.prototype.getPitch = function (pitch, sign, line) {
     var valueCorrection = calcValueCorrection(sign, line);
+    pitch = parseInt(pitch, 10);
     pitch += valueCorrection;
     var p_octave = 3.5;
     var n_octave = -p_octave;
@@ -135,9 +136,10 @@
       if (part !== undefined) {
         if (idxM >= 0 && idxM < part.measure.length) {
           var measure = part.measure[idxM];
+          var clef = measure.$fermata.attributes.clef[0];
           var note = {
             'duration': this.getDuration(type),
-            'pitch': this.getPitch(pitch),
+            'pitch': this.getPitch(pitch, clef.sign, clef.line),
             'stem': this.getQueue(voice),
             'type': this.getValue(type),
             'voice': voice
