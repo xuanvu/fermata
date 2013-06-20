@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>Fermata</title>
-    
+
     <!-- JsonDiffPatch.js -->
     <script src="../node_modules/jsondiffpatch/jsondiffpatch.min.js"></script>
 
@@ -87,7 +87,7 @@
     <script src="../src/Fermata.Data.PitchPitched.js"></script>
     <script src="../src/Fermata.Data.PitchRest.js"></script>
     <script src="../src/Fermata.Data.PitchUnpitched.js"></script>
-    <script src="../src/Fermata.Data.PitchEncapsulator.js"></script>    
+    <script src="../src/Fermata.Data.PitchEncapsulator.js"></script>
     <script src="../src/Fermata.Data.Edit.js"></script>
     <script src="../src/Fermata.Data.Edit.Rest.js"></script>
     <script src="../src/Fermata.Data.Edit.Note.js"></script>
@@ -129,29 +129,103 @@
     </div>
 
     <!-- test edit -->
-    Add / Remove <input type="input" value="1" id="nbMeasure" /> measure(s) at idx <input type="input" value="3" id="idMeasure" /><input type="button" id="addMeasure" value="addMeasure()" /><input type="button" id="removeMeasure" value="removeMeasure()" />
-    </p>
-    Move measure <input type="number" value="1" id="measudeIdxFrom"/>  to idx <input type="number" value="1" id="measudeIdxDest" /><input type="button" id="moveMeasure" value="moveMeasure()" />
-    <br/>
-    Remove Note - stave: <input type="input" value="1" id="rnStave" /> measure: <input type="input" value="1" id="rnMeasure" /> note: <input type="input" value="1" id="rnNote" /><input type="button" id="removeNote" value="removeNote()" />
-    </p>
-    Add Note - stave: <input type="input" value="1" id="anStave" /> measure: <input type="input" value="1" id="anMeasure" /> note: <input type="input" value="1" id="anNote" /> step: <input type="input" value="C" id="anStep" /> octave: <input type="input" value="4" id="anOctave" /> type { HALF: 0, QUARTER: 1, EIGHTH: 2 }: <input type="input" value="1" id="anType" /> voice: <input type="input" value="1" id="anVoice" /><input type="button" id="addNote" value="addNote()" />
-    </p>
-    Edit Note - stave: <input type="input" value="1" id="enStave" /> measure: <input type="input" value="1" id="enMeasure" /> note: <input type="input" value="1" id="enNote" /> step: <input type="input" value="C" id="enStep" /> octave: <input type="input" value="4" id="enOctave" /> type { HALF: 0, QUARTER: 1, EIGHTH: 2 }: <input type="input" value="1" id="enType" /> voice: <input type="input" value="1" id="enVoice" /><input type="button" id="editNote" value="editNote()" />
+    <fieldset>
+      <legend>add  / remove measure</legend>
+      <label for="nbMeasure">nbr</label>
+      <input type="number" value="1" id="nbMeasure" />
+
+      <label for="idMeasure">idx</label>
+      <input type="number" value="3" id="idMeasure" />
+
+      <input type="button" id="addMeasure" value="addMeasure()" />
+      <input type="button" id="removeMeasure" value="removeMeasure()" />
+    </fieldset>
+
+    <fieldset>
+      <legend>move measure</legend>
+      <label for="measudeIdxFrom">from</label>
+      <input type="number" value="1" id="measudeIdxFrom"/>
+
+      <label for="measudeIdxDest">to</label>
+      <input type="number" value="1" id="measudeIdxDest" />
+
+      <input type="button" id="moveMeasure" value="moveMeasure()" />
+    </fieldset>
+
+    <fieldset>
+      <legend>remove note</legend>
+      <label for="rnStave">stave</label>
+      <input type="input" value="1" id="rnStave" />
+
+      <label for="rnMeasure">measure</label>
+      <input type="input" value="1" id="rnMeasure" />
+
+      <label for="rnNote">note</label>
+      <input type="input" value="1" id="rnNote" />
+
+      <input type="button" id="removeNote" value="removeNote()" />
+    </fieldset>
+
+    <fieldset>
+      <legend>add note</legend>
+      <label for="anStave">stave</label>
+      <input type="input" value="1" id="anStave" />
+
+      <label for="anMeasure">measure</label>
+      <input type="input" value="1" id="anMeasure" />
+
+      <label for="anNote">note</label>
+      <input type="input" value="1" id="anNote" />
+
+      <label for="anPitch">pitch</label>
+      <input type="input" value="0" id="anPitch" />
+
+      <label for="anType">type { HALF: 0, QUARTER: 1, EIGHTH: 2 }</label>
+      <input type="input" value="1" id="anType" />
+
+      <label for="anVoice">voice</label>
+      <input type="input" value="1" id="anVoice" />
+
+      <input type="button" id="addNote" value="addNote()" />
+    </fieldset>
+
+    <fieldset>
+      <legend>edit note</legend>
+      <label for="enStave">stave</label>
+      <input type="input" value="1" id="enStave" />
+
+      <label for="enMeasure">measure</label>
+      <input type="input" value="1" id="enMeasure" />
+
+      <label for="enNote">note</label>
+      <input type="input" value="1" id="enNote" />
+
+      <label for="enPitch">pitch</label>
+      <input type="input" value="0" id="enPitch" />
+
+      <label for="enType">type { HALF: 0, QUARTER: 1, EIGHTH: 2 }</label>
+      <input type="input" value="1" id="enType" />
+
+      <label for="enVoice">voice</label>
+      <input type="input" value="1" id="enVoice" />
+
+      <input type="button" id="editNote" value="editNote()" />
+    </fieldset>
+
     <fieldset>
       <legend>change pitch</legend>
       <label for="cpStave">stave</label>
       <input type="number" value="0" id="cpStave"/>
-      
+
       <label for="cpMeasure">measure</label>
-      <input type="number" value="0" id="cpMeasure"/> 
+      <input type="number" value="0" id="cpMeasure"/>
 
       <label for="cpNote">note</label>
       <input type="number" value="0" id="cpNote"/>
 
       <label for="cpValue">value</label>
       <input type="number" value="0" id="cpValue"/>
-      
+
       <input type="button" value="changePitch()" id="changePitch"/>
     </fieldset>
     <script>
@@ -203,13 +277,13 @@
           render.renderAll();
           drawer.drawAll();
         });
-        
-    $('#moveMeasure').click(function() {
+
+        $('#moveMeasure').click(function() {
           $('#canvas-score > svg').empty();
           data.moveMeasure($('#measudeIdxFrom').val(), $('#measudeIdxDest').val());
           render.renderAll();
           drawer.drawAll();
-        });        
+        });
 
         $('#removeNote').click(function() {
           $('#canvas-score > svg').empty();
@@ -221,7 +295,7 @@
 
         $('#addNote').click(function() {
           $('#canvas-score > svg').empty();
-          data.addNote($('#anStave').val(), $('#anMeasure').val(), $('#anNote').val(), $('#anStep').val(), $('#anOctave').val(), $('#anType').val(), $('#anVoice').val());
+          data.addNote($('#anStave').val(), $('#anMeasure').val(), $('#anNote').val(), $('#anPitch').val(), $('#anType').val(), $('#anVoice').val());
           <!-- render.renderMeasure(idMeasure) instead of: -->
           render.renderAll();
           drawer.drawAll();
@@ -229,12 +303,12 @@
 
         $('#editNote').click(function() {
           $('#canvas-score > svg').empty();
-          data.editNote($('#enStave').val(), $('#enMeasure').val(), $('#enNote').val(), $('#enStep').val(), $('#enOctave').val(), $('#enType').val(), $('#enVoice').val());
+          data.editNote($('#enStave').val(), $('#enMeasure').val(), $('#enNote').val(), $('#enPitch').val(), $('#enType').val(), $('#enVoice').val());
           <!-- render.renderMeasure(idMeasure) instead of: -->
           render.renderAll();
           drawer.drawAll();
         });
-        
+
         $('#changePitch').click(function () {
           $('#canvas-score > svg').empty();
           data.changeNotePitch($('#cpStave').val(), $('#cpMeasure').val(), $('#cpNote').val(), $('#cpValue').val());

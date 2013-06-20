@@ -4,12 +4,13 @@
   var PitchEncapsulator = Fermata.Data.PitchEncapsulator;
   var SoundType = Fermata.Values.SoundType;
   var NotImplementedError = Fermata.Error.NotImplementedError;
+  var Step = Fermata.Values.Step;
 
   // TODO: Fill with other values.
   var ValueLast = {
-    HALF: 0,
-    QUARTER: 1,
-    EIGHTH: 2
+    HALF:       "0",
+    QUARTER:    "1",
+    EIGHTH:     "2"
   };
 
   Fermata.Data.prototype.getDuration = function (type) {
@@ -23,8 +24,8 @@
       return 2;
     }
     else {
-      // TODO: Return biggest or smallest possible value?
-      return 1;
+      var errorMsg = "this duration is not supported yet.";
+      throw new NotImplementedError(errorMsg);
     }
   };
 
@@ -32,6 +33,69 @@
     // "up" and "down" are defined by the number of voices in the stave
     // TODO: return something else than "up" (voice calculation?)
     return "up";
+  };
+
+  var distanceFromG = {
+    "G": 0,
+    "C": Step.idx.G - Step.idx.C,
+    "F": Step.idx.G - Step.idx.F + Step.values.length
+  };
+
+  var calcValueCorrection = function (sign, line) {
+    var clefStepIdx = Step.idx[sign];
+
+    var refGLine = 2;
+    var gSign = "G";
+    var refGStepFromOrigin = refGLine * 2;
+
+    var signShift = distanceFromG[sign];
+    var clefStepFromOrigin = line * 2;
+    var actualGStepFromOrigin = clefStepFromOrigin + signShift;
+    var stepCorrection = refGStepFromOrigin - actualGStepFromOrigin;
+    var valueCorrection = stepCorrection / 2;
+
+    return valueCorrection;
+  };
+
+  Fermata.Data.prototype.getStep = function (val) {
+    if (val === 0) {
+      return "C";
+    }
+    if (val === 0.5 || val === -3) {
+      return "D";
+    }
+    if (val === 1 || val === -2.5) {
+      return "E";
+    }
+    if (val === 1.5 || val === -2) {
+      return "F";
+    }
+    if (val === 2 || val === -1.5) {
+      return "G";
+    }
+    if (val === 2.5 || val === -1) {
+      return "A";
+    }
+    if (val === 3 || val === -0.5) {
+      return "B";
+    }
+  };
+
+  Fermata.Data.prototype.getPitch = function (pitch, sign, line) {
+    var valueCorrection = calcValueCorrection(sign, line);
+    pitch = parseInt(pitch, 10);
+    pitch += valueCorrection;
+    var p_octave = 3.5;
+    var n_octave = -p_octave;
+    var step = "L";
+    if (pitch < 0) {
+      step = this.getStep(pitch % n_octave);
+    }
+    else {
+      step = this.getStep(pitch % p_octave);
+    }
+    var octave = 4 + Math.floor(pitch / p_octave);
+    return {'octave': octave, 'step': step};
   };
 
   Fermata.Data.prototype.getValue = function (type) {
@@ -51,13 +115,12 @@
   };
 
   Fermata.Data.prototype.addNote = function (idxS, idxM, idxN,
-          step, octave, type, voice) {
+          pitch, type, voice) {
     // TODO: handle salt (flat, sharp, etc.)
     if (!(idxS === undefined ||
             idxM === undefined ||
             idxN === undefined ||
-            octave === undefined ||
-            step === undefined ||
+            pitch === undefined ||
             type === undefined)) {
       if (voice === undefined) {
         voice = 1;
@@ -65,18 +128,17 @@
       var part = this.getPart(idxS, Fermata.Data.cacheParts.IDX);
       if (part !== undefined) {
         if (idxM >= 0 && idxM < part.measure.length) {
+          var measure = part.measure[idxM];
+          var clef = measure.$fermata.attributes.clef[0];
           var note = {
             'duration': this.getDuration(type),
-            'pitch': {
-              'octave': octave,
-              'step': step
-            },
+            'pitch': this.getPitch(pitch, clef.sign, clef.line),
             'stem': this.getQueue(voice),
             'type': this.getValue(type),
             'voice': voice
           };
-          if (idxN < 0 || idxN > part.measure[idxM].note.length) {
-            idxN = part.measure[idxM].note.length;
+          if (idxN < 0 || idxN > measure.note.length) {
+            idxN = measure.note.length;
           }
           part.measure[idxM].note.splice(idxN, 0, note);
         }
@@ -106,7 +168,7 @@
   };
 
   Fermata.Data.prototype.editNote = function (idxS, idxM, idxN,
-          step, octave, type, voice) {
+          pitch, type, voice) {
     if (!(idxS === undefined ||
             idxM === undefined ||
             idxN === undefined)) {
@@ -114,19 +176,20 @@
       if (part !== undefined) {
         if (idxM >= 0 && idxM < part.measure.length &&
                 idxN >= 0 && idxN < part.measure[idxM].note.length) {
-          var note = part.measure[idxM].note[idxN];
-          if (step !== undefined) {
-            note.pitch.step = step;
-          }
-          if (octave !== undefined) {
-            note.pitch.octave = octave;
-          }
-          if (type !== undefined) {
-            note.type = this.getValue(type);
-          }
-          if (voice !== undefined) {
-            note.voice = voice;
-            note.stem = this.getQueue(voice);
+          var measure = part.measure[idxM];
+          var note = measure.note[idxN];
+          var clef = measure.$fermata.attributes.clef[0];
+          if (note.rest === undefined) {
+            if (pitch !== undefined) {
+              note.pitch = this.getPitch(pitch, clef.sign, clef.line);
+            }
+            if (type !== undefined) {
+              note.type = this.getValue(type);
+            }
+            if (voice !== undefined) {
+              note.voice = voice;
+              note.stem = this.getQueue(voice);
+            }
           }
         }
       }
