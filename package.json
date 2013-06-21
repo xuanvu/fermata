@@ -12,7 +12,8 @@
     "mocha": "latest"
   },
   "scripts": {
-    "prod-postinstall": "scons build/fermata/fermata.node.js"
+    "prod-postinstall": "scons build/fermata/fermata.node.js",
+    "test": "node_modules/.bin/mocha --reporter spec tests --globals glyphTypeProperties"
   },
   "main": "./build/fermata/fermata.node.js"
 }
