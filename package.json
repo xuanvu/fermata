@@ -1,5 +1,5 @@
 {
-  "name": "Fermata",
+  "name": "flat-fermata",
   "version": "0.0.1",
   "description": "MusicXML engraving javascript library using vexflow",
   "dependencies": {
