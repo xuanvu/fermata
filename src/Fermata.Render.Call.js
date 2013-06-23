@@ -33,13 +33,13 @@
     }
 
     // Execute processes
-    for (var i = 0 ; i < p.processes.length ; i++)
+    for (var i = 0; i < p.processes.length; i++)
     {
       var process = p.processes[i];
 
       var _arguments = [];
       if (arguments.length > 1) {
-        for (var j = 1 ; j < arguments.length ; j++) {
+        for (var j = 1; j < arguments.length; j++) {
           _arguments.push(arguments[j]);
         }
       }
@@ -47,8 +47,11 @@
       // Helpers
       if (typeof(process.dataType) !== 'undefined') {
         if (typeof(process._key) === 'undefined') {
-          if (typeof(process.dataKey) === 'undefined' || process.dataKey === 'CamelCase') {
-            process._key = process.key.replace(/-([a-z])/g, function (c) { return c[1].toUpperCase(); });
+          if (typeof(process.dataKey) === 'undefined' || process.dataKey ===
+                  'CamelCase') {
+            process._key = process.key.replace(/-([a-z])/g, function (c) {
+              return c[1].toUpperCase();
+            });
           }
           else if (typeof(process.dataKey) === 'string') {
             process._key = process.dataKey;
@@ -59,35 +62,38 @@
         }
 
         switch (process.dataType) {
-        case 'string':
-          process.func = function (str) { p.out[process._key] = typeof(p.object[process.key]) === 'string' ? p.object[process.key] : ''; };
-          break;
-        case 'int':
-          process.func = function (str) {
-            if (typeof(p.object[process.key]) === 'number') {
-              p.out[process._key] = p.object[process.key];
-            }
-            else if (typeof(p.object[process.key]) === 'string') {
-              p.out[process._key] = parseInt(p.object[process.key], 10);
-            }
-            else {
-              p.out[process._key] = 0;
-            }
-          };
-          break;
-        case 'bool':
-          process.func = function (str) {
-            if (typeof(p.object) === 'boolean') {
-              p.out[process._key] = p.object[process.key];
-            }
-            else if (p.object === 'yes') {
-              p.out[process._key] = true;
-            }
-            else {
-              p.out[process._key] = false;
-            }
-          };
-          break;
+          case 'string':
+            process.func = function (str) {
+              p.out[process._key] = typeof(p.object[process.key]) ===
+                      'string' ? p.object[process.key] : '';
+            };
+            break;
+          case 'int':
+            process.func = function (str) {
+              if (typeof(p.object[process.key]) === 'number') {
+                p.out[process._key] = p.object[process.key];
+              }
+              else if (typeof(p.object[process.key]) === 'string') {
+                p.out[process._key] = parseInt(p.object[process.key], 10);
+              }
+              else {
+                p.out[process._key] = 0;
+              }
+            };
+            break;
+          case 'bool':
+            process.func = function (str) {
+              if (typeof(p.object) === 'boolean') {
+                p.out[process._key] = p.object[process.key];
+              }
+              else if (p.object === 'yes') {
+                p.out[process._key] = true;
+              }
+              else {
+                p.out[process._key] = false;
+              }
+            };
+            break;
         }
       }
 
@@ -128,9 +134,9 @@
       func.apply(_this, _arguments);
     }
     else {
-      for (var i = 0 ; i < child.length ; i++) {
+      for (var i = 0; i < child.length; i++) {
         var _argumentsOne = [child[i], i];
-        for (var j = 0 ; j < _arguments.length ; j++) {
+        for (var j = 0; j < _arguments.length; j++) {
           _argumentsOne.push(_arguments[j]);
         }
 
