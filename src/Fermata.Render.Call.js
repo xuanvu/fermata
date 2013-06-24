@@ -66,7 +66,6 @@
         }
         parseDataType(p, process);
       }
-      //jshint +loopfunc
 
       // if (typeof(process.func) !== 'function') {
       //   console.warn('Fermata.Render.Call: No function defined for process', process);
