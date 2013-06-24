@@ -8,6 +8,12 @@
     $1: 'default'
   };
 
+
+
+  var camelCaseHandler = function (c) {
+    return c[1].toUpperCase();
+  };
+
   /**
    * object is the node of interest
    * processes is an array of objects:
@@ -49,9 +55,7 @@
         if (typeof(process._key) === 'undefined') {
           if (typeof(process.dataKey) === 'undefined' || process.dataKey ===
                   'CamelCase') {
-            process._key = process.key.replace(/-([a-z])/g, function (c) {
-              return c[1].toUpperCase();
-            });
+            process._key = process.key.replace(/-([a-z])/g, camelCaseHandler);
           }
           else if (typeof(process.dataKey) === 'string') {
             process._key = process.dataKey;
@@ -60,42 +64,9 @@
             process._key = process.key;
           }
         }
-
-        switch (process.dataType) {
-          case 'string':
-            process.func = function (str) {
-              p.out[process._key] = typeof(p.object[process.key]) ===
-                      'string' ? p.object[process.key] : '';
-            };
-            break;
-          case 'int':
-            process.func = function (str) {
-              if (typeof(p.object[process.key]) === 'number') {
-                p.out[process._key] = p.object[process.key];
-              }
-              else if (typeof(p.object[process.key]) === 'string') {
-                p.out[process._key] = parseInt(p.object[process.key], 10);
-              }
-              else {
-                p.out[process._key] = 0;
-              }
-            };
-            break;
-          case 'bool':
-            process.func = function (str) {
-              if (typeof(p.object) === 'boolean') {
-                p.out[process._key] = p.object[process.key];
-              }
-              else if (p.object === 'yes') {
-                p.out[process._key] = true;
-              }
-              else {
-                p.out[process._key] = false;
-              }
-            };
-            break;
-        }
+        parseDataType(p, process);
       }
+      //jshint +loopfunc
 
       // if (typeof(process.func) !== 'function') {
       //   console.warn('Fermata.Render.Call: No function defined for process', process);
@@ -124,6 +95,43 @@
         _arguments.unshift(p.object[process.key]);
         process.func.apply(p.ctx, _arguments);
       }
+    }
+  };
+
+  var parseDataType = function (parameter, process) {
+    switch (process.dataType) {
+      case 'string':
+        process.func = function (str) {
+          parameter.out[process._key] = typeof(parameter.object[process.key]) ===
+                  'string' ? parameter.object[process.key] : '';
+        };
+        break;
+      case 'int':
+        process.func = function (str) {
+          if (typeof(parameter.object[process.key]) === 'number') {
+            parameter.out[process._key] = parameter.object[process.key];
+          }
+          else if (typeof(parameter.object[process.key]) === 'string') {
+            parameter.out[process._key] = parseInt(parameter.object[process.key], 10);
+          }
+          else {
+            parameter.out[process._key] = 0;
+          }
+        };
+        break;
+      case 'bool':
+        process.func = function (str) {
+          if (typeof(parameter.object) === 'boolean') {
+            parameter.out[process._key] = parameter.object[process.key];
+          }
+          else if (parameter.object === 'yes') {
+            parameter.out[process._key] = true;
+          }
+          else {
+            parameter.out[process._key] = false;
+          }
+        };
+        break;
     }
   };
 
