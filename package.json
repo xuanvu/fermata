@@ -12,7 +12,7 @@
     "mocha": "latest"
   },
   "scripts": {
-    "preinstall": "mkdir deps ; cd deps && git clone git://github.com/FlatIO/vexflow.git",
+    "preinstall": "mkdir deps 2> /dev/null ; cd deps && git clone git://github.com/FlatIO/vexflow.git",
     "postinstall": "scons build/fermata/fermata.node.js",
     "test": "node_modules/.bin/mocha --reporter spec tests --globals glyphTypeProperties"
   },
