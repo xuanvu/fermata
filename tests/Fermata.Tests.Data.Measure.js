@@ -19,6 +19,9 @@ if (typeof require !== 'undefined') {
 (function () {
 
   var Measure = Fermata.Data.Measure;
+  var BeatTypeValueError = Fermata.Error.BeatTypeValueError;
+  var BeatsValueError = Fermata.Error.BeatsValueError;
+
 
   describe("Fermata.Data.Measure", function () {
     describe("#initBeat", function () {
@@ -35,6 +38,76 @@ if (typeof require !== 'undefined') {
         // Then
         assert.strictEqual(data.attributes.time.beats, beats);
         assert.strictEqual(data.attributes.time["beat-type"], beatType);
+      });
+
+      it("bad beats value: string", function () {
+        // Given 
+        var beats = "badValue";
+        var beatType = 4;
+        var data = {};
+        var measure = new Measure(data);
+
+        // Then
+        assert.throws(function () {
+          measure.initBeat(beats, beatType);
+        },
+                BeatsValueError);
+      });
+
+      it("bad beats value: negative", function () {
+        // Given 
+        var beats = -5;
+        var beatType = 4;
+        var data = {};
+        var measure = new Measure(data);
+
+        // Then
+        assert.throws(function () {
+          measure.initBeat(beats, beatType);
+        },
+                BeatsValueError);
+      });
+
+      it("bad beats value: null", function () {
+        // Given 
+        var beats = 0;
+        var beatType = 4;
+        var data = {};
+        var measure = new Measure(data);
+
+        // Then
+        assert.throws(function () {
+          measure.initBeat(beats, beatType);
+        },
+                BeatsValueError);
+      });
+
+      it("bad beats value: float", function () {
+        // Given 
+        var beats = 1.8;
+        var beatType = 4;
+        var data = {};
+        var measure = new Measure(data);
+
+        // Then
+        assert.throws(function () {
+          measure.initBeat(beats, beatType);
+        },
+                BeatsValueError);
+      });
+
+      it("bad beat-type value: non power of 2", function () {
+        // Given 
+        var beats = 4;
+        var beatType = 5;
+        var data = {};
+        var measure = new Measure(data);
+
+        // Then
+        assert.throws(function () {
+          measure.initBeat(beats, beatType);
+        },
+                BeatTypeValueError);
       });
     });
   });
