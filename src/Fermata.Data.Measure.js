@@ -14,6 +14,14 @@
 
   Measure.prototype.initBeat = function (beats, beatType) {
     validateBeat(beats, beatType);
+
+    if (typeof this.data.attributes === "undefined") {
+      this.data.attributes = {};
+    }
+    if (typeof this.data.attributes.time === "undefined") {
+      this.data.attributes.time = {};
+    }
+
     this.data.attributes.time.beats = beats;
     this.data.attributes.time["beat-type"] = beatType;
   };
