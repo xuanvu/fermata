@@ -7,10 +7,17 @@
   Fermata.Data.Measure = function (measureData)
   {
     this.data = measureData;
-    this.attributes = measureData.$fermata.attributes;
+    if (this.isRendered()) {
+      this.attributes = measureData.$fermata.attributes;
+    }
   };
 
   var Measure = Fermata.Data.Measure;
+
+  Measure.prototype.isRendered = function () {
+    return typeof this.data.$fermata !== "undefined" &&
+            typeof this.data.$fermata.attributes !== "undefined";
+  };
 
   Measure.prototype.initBeat = function (beats, beatType) {
     validateBeat(beats, beatType);
