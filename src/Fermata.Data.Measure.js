@@ -34,7 +34,7 @@
   };
 
   Measure.prototype.getAuthorizedDuration = function () {
-    var quarterBeatType = wholeDivisionToQuarterCoeff(this.getBeatsType());
+    var quarterBeatType = wholeDivisionToQuarterCoeff(this.getBeatType());
     var divisionsBeatType = quarterBeatType * this.getDivisions();
     var authorizedDuration = divisionsBeatType * this.getBeats();
 
