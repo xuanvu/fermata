@@ -33,6 +33,14 @@
     this.data.attributes.time.beats = beats;
     this.data.attributes.time["beat-type"] = beatType;
   };
+  
+  Measure.prototype.setBeat = function (beats, beatType) {
+    validateBeat(beats, beatType);
+    this.attributes.time.beats = beats;
+    this.attributes.time["beat-type"] = beatType;
+    this.adjustDivisions();
+    this.adjustNotesDuration();
+  };
 
   Measure.prototype.adjustDivisions = function () {
     var beatTypeDivisions = this.getBeatTypeDivisions();
