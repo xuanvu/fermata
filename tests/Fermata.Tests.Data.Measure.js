@@ -97,7 +97,7 @@ if (typeof require !== 'undefined') {
   describe("Fermata.Data.Measure", function () {
     describe("#initBeat", function () {
       it("basic value", function () {
-// Given 
+        // Given 
         var beats = 4;
         var beatType = 4;
         var data = {};
@@ -112,7 +112,7 @@ if (typeof require !== 'undefined') {
       });
 
       it("bad beats value: string", function () {
-// Given 
+        // Given 
         var beats = "badValue";
         var beatType = 4;
         var data = {};
@@ -126,7 +126,7 @@ if (typeof require !== 'undefined') {
       });
 
       it("bad beats value: negative", function () {
-// Given 
+        // Given 
         var beats = -5;
         var beatType = 4;
         var data = {};
@@ -140,7 +140,7 @@ if (typeof require !== 'undefined') {
       });
 
       it("bad beats value: null", function () {
-// Given 
+        // Given 
         var beats = 0;
         var beatType = 4;
         var data = {};
@@ -154,7 +154,7 @@ if (typeof require !== 'undefined') {
       });
 
       it("bad beats value: float", function () {
-// Given 
+        // Given 
         var beats = 1.8;
         var beatType = 4;
         var data = {};
@@ -168,7 +168,7 @@ if (typeof require !== 'undefined') {
       });
 
       it("bad beat-type value: non power of 2", function () {
-// Given 
+        // Given 
         var beats = 4;
         var beatType = 5;
         var data = {};
