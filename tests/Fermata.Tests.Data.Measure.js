@@ -66,7 +66,8 @@ if (typeof require !== 'undefined') {
   };
 
   var createRestNote = function () {
-    return {duration: 1,
+    return {
+      duration: 1,
       rest: {}
     };
   };
