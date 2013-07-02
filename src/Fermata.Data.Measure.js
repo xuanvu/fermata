@@ -76,10 +76,10 @@
     if (this.isRendered()) {
       return this.attributes.time["beat-type"];
     } else {
-      return this.data.time["beat-type"];
+      return this.data.attributes.time["beat-type"];
     }
   };
-  
+
   Measure.prototype.getDivision = function () {
     if (this.isRendered()) {
       return this.attributes.division;
