@@ -59,5 +59,13 @@
   var isInteger = function (value) {
     return parseInt(value, 10) === parseFloat(value) && !isNaN(value);
   };
+  
+  Measure.prototype.getBeatType = function () {
+    if (this.isRendered()) {
+      return this.attributes.time["beat-type"];
+    } else {
+      return this.data.time["beat-type"];
+    }
+  };
 
 }).call(this);
