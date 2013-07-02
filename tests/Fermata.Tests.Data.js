@@ -160,8 +160,8 @@ describe('Fermata.Data', function () {
       var beat = 4;
 
       fermataData.setBeat(measure_idx, beat);
-      for (var i = 0, len = helloWorld['score-partwise'].part.length; i < len; i++) {
-        assert.equal(beat, helloWorld['score-partwise'].part[i].measure[measure_idx].attribute[0].time.beats);
+      for (var i = 0, len = fermataData.score['score-partwise'].part.length; i < len; i++) {
+        assert.equal(beat, fermataData.score['score-partwise'].part[i].measure[measure_idx].attributes[0].time.beats);
       }
     });
   });
@@ -177,8 +177,8 @@ describe('Fermata.Data', function () {
       var beatType = 3;
 
       fermataData.setBeatType(measure_idx, beatType);
-      for (var i = 0, len = helloWorld['score-partwise'].part.length; i < len; i++) {
-        assert.equal(beatType, helloWorld['score-partwise'].part[i].measure[measure_idx].attribute[0].time['beat-type']);
+      for (var i = 0, len = fermataData.score['score-partwise'].part.length; i < len; i++) {
+        assert.equal(beatType, fermataData.score['score-partwise'].part[i].measure[measure_idx].attributes[0].time['beat-type']);
       }
     });
   });
@@ -194,8 +194,8 @@ describe('Fermata.Data', function () {
       var fifths = 0;
 
       fermataData.setFifths(measure_idx, fifths);
-      for (var i = 0, len = helloWorld['score-partwise'].part.length; i < len; i++) {
-        assert.equal(fifths, helloWorld['score-partwise'].part[i].measure[measure_idx].attribute[0].key.fifths);
+      for (var i = 0, len = fermataData.score['score-partwise'].part.length; i < len; i++) {
+        assert.equal(fifths, fermataData.score['score-partwise'].part[i].measure[measure_idx].attributes[0].key.fifths);
       }
     });
   });
@@ -210,7 +210,7 @@ describe('Fermata.Data', function () {
       var title = 'Test title';
 
       fermataData.setTitle(title);
-      assert.equal(title, helloWorld['score-partwise']['movement-title']);
+      assert.equal(title, fermataData.score['score-partwise']['movement-title']);
     });
   });
 });
