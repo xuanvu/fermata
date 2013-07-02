@@ -161,7 +161,7 @@ describe('Fermata.Data', function () {
 
       fermataData.setBeat(measure_idx, beat);
       for (var i = 0, len = helloWorld['score-partwise'].part.length; i < len; i++) {
-        assert.equal(beat, helloWorld['score-partwise'].part[i].measures[measure_idx].attribute[0].time.beats);
+        assert.equal(beat, helloWorld['score-partwise'].part[i].measure[measure_idx].attribute[0].time.beats);
       }
     })
   });
@@ -176,9 +176,9 @@ describe('Fermata.Data', function () {
       var measure_idx = 0;
       var beatType = 3;
 
-      fermataData.setBeat(measure_idx, beatType);
+      fermataData.setBeatType(measure_idx, beatType);
       for (var i = 0, len = helloWorld['score-partwise'].part.length; i < len; i++) {
-        assert.equal(beatType, helloWorld['score-partwise'].part[i].measures[measure_idx].attribute[0].time['beat-type']);
+        assert.equal(beatType, helloWorld['score-partwise'].part[i].measure[measure_idx].attribute[0].time['beat-type']);
       }
     })
   });
@@ -193,9 +193,9 @@ describe('Fermata.Data', function () {
       var measure_idx = 0;
       var fifths = 0;
 
-      fermataData.setBeat(measure_idx, fifths);
+      fermataData.setFifths(measure_idx, fifths);
       for (var i = 0, len = helloWorld['score-partwise'].part.length; i < len; i++) {
-        assert.equal(fifths, helloWorld['score-partwise'].part[i].measures[measure_idx].attribute[0].key.fifths);
+        assert.equal(fifths, helloWorld['score-partwise'].part[i].measure[measure_idx].attribute[0].key.fifths);
       }
     })
   });
