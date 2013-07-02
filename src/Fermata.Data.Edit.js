@@ -1,7 +1,7 @@
 (function () {
   "use strict";
   
-  Fermata.Data.prototype.addPart = function (instruments, id) {
+  Fermata.Data.prototype.addPart = function (instrument, id) {
     if (id === undefined || id === null) {
       if (this.score['score-partwise']['part-list']['score-part'] === undefined) {
         id = 'P1';
@@ -11,8 +11,8 @@
     }
     var new_part_info = {
       '$id': id, 
-      'part-name': instruments[0].instrument, 
-      'score-instrument': {'instrument-name': instruments[0].instrument}
+      'part-name': instrument['instrument-name'], 
+      'score-instrument': {'instrument-name': instrument['instrument-name']}
     };
     var new_part = {
       '$id': id,

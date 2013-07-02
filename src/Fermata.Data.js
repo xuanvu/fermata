@@ -1,26 +1,13 @@
 (function () {
   "use strict";
 
-  Fermata.Data = function (score, title, beats, beatType, fifths) {
+  Fermata.Data = function (score) {
     this.score = Fermata.Utils.Clone(score) || {};
     this.scoreCache = { part: null }; // derivated score object for faster access
 
     // Init new score
     if (this.score['score-partwise'] === undefined) {
-      this.score['score-partwise'] = {
-        '$version': '3.0', 
-        'part-list': {'score-part': null}, 
-        'part': [{
-          '$id': 'P1',
-          'measure': [{
-            'number': '1',
-            'attributes': [{
-              'key': {'fifths': fifths + ''},
-              'time': {'beats': beats + '', 'beat-type': beatType + ''}
-            }]
-          }]
-        }]
-      };
+      this.score['score-partwise'] = {'$version': '3.0', 'part-list': {'score-part': null}};
     }
   };
 
