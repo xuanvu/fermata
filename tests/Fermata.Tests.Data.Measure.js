@@ -241,6 +241,97 @@ if (typeof require !== 'undefined') {
       });
     });
 
+    describe("#getDivisions", function () {
+      it("non rendered", function () {
+        // Given 
+        var expectedDivisions = 1;
+        var data = getTestData(2, 2);
+        delete data.$fermata;
+        var measure = new Measure(data);
+
+        // When
+        var divisions = measure.getDivisions();
+
+        // Then
+        assert.equal(divisions, expectedDivisions);
+      });
+
+      it("rendered", function () {
+        // Given 
+        var expectedDivisions = 2;
+        var data = getTestData(2, 2);
+        var measure = new Measure(data);
+        data.$fermata.attributes.divisions = expectedDivisions;
+
+        // When
+        var divisions = measure.getDivisions();
+
+        // Then
+        assert.equal(divisions, expectedDivisions);
+      });
+    });
+
+    describe("#getBeatType", function () {
+      it("non rendered", function () {
+        // Given 
+        var expectedBeatType = 4;
+        var data = getTestData(2, 2);
+        delete data.$fermata;
+        var measure = new Measure(data);
+
+        // When
+        var beatType = measure.getBeatType();
+
+        // Then
+        assert.equal(beatType, expectedBeatType);
+      });
+
+      it("rendered", function () {
+        // Given 
+        var expectedBeatType = 5;
+        var data = getTestData(2, 2);
+        var measure = new Measure(data);
+        data.$fermata.attributes.time["beat-type"] = expectedBeatType;
+
+        // When
+        var beatType = measure.getBeatType();
+
+        // Then
+        assert.equal(beatType, expectedBeatType);
+      });
+    });
+    
+    describe("#getBeats", function () {
+      it("non rendered", function () {
+        // Given 
+        var expectedBeats = 4;
+        var data = getTestData(2, 2);
+        delete data.$fermata;
+        var measure = new Measure(data);
+        
+
+        // When
+        var beats = measure.getBeats();
+
+        // Then
+        assert.equal(beats, expectedBeats);
+      });
+
+      it("rendered", function () {
+         // Given 
+        var expectedBeats = 5;
+        var data = getTestData(2, 2);
+        var measure = new Measure(data);
+        data.$fermata.attributes.time.beats = expectedBeats;
+
+        // When
+        var beats = measure.getBeats();
+
+        // Then
+        assert.equal(beats, expectedBeats);
+      });
+    });
+
     describe("#getAuthorizedDuration", function () {
       it("basic case", function () {
         // Given 
