@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  Fermata.Data = function (score, title, beats, beatType, fifths, instruments) {
+  Fermata.Data = function (score, title, beats, beatType, fifths) {
     this.score = Fermata.Utils.Clone(score) || {};
     this.scoreCache = { part: null }; // derivated score object for faster access
 
@@ -10,16 +10,16 @@
       this.score['score-partwise'] = {
         '$version': '3.0', 
         'part-list': {'score-part': null}, 
-        'part': [
+        'part': [{
           '$id': 'P1',
-          'measure': [
+          'measure': [{
             'number': '1',
             'attributes': [{
               'key': {'fifths': fifths + ''},
               'time': {'beats': beats + '', 'beat-type': beatType + ''}
             }]
-          ]
-        ]
+          }]
+        }]
       };
     }
   };
@@ -89,14 +89,20 @@
         callback(this.scoreCache.part.idx[i], i);
       }
     },
-    setBeat: function (part_id, beat) {
-      this.score['score-partwise']['part'][part_id]['measure'][0]['attributes'][0]['time']['beats'] = beat + '';
+    setBeat: function (measure_idx, beat) {
+      for (var i = 0, len = this.score['score-partwise'].part.length; i < len; i++) {
+        this.score['score-partwise'].part[i].measure[measure_idx].attributes[0].time.beats = beat + '';
+      }
     },
-    setBeatType: function (part_id, beatType) {
-      this.score['score-partwise']['part'][part_id]['measure'][0]['attributes'][0]['time']['beat-type'] = beatType + '';
+    setBeatType: function (measure_idx, beatType) {
+      for (var i = 0, len = this.score['score-partwise'].part.length; i < len; i++) {
+        this.score['score-partwise'].part[i].measure[measure_idx].attributes[0].time['beat-type'] = beatType + '';
+      }
     },
-    setFifths: function (part_id, fifths) {
-      this.score['score-partwise']['part'][part_id]['measure'][0]['attributes'][0]['key']['fifths'] = fifths + '';
+    setFifths: function (measure_idx, fifths) {
+      for (var i = 0, len = this.score['score-partwise'].part.length; i < len; i++) {
+        this.score['score-partwise'].part[i].measure[measure_idx].attributes[0].key.fifths = fifths + '';
+      }
     },
     setTitle: function (title) {
       this.score['score-partwise']['movement-title'] = title + '';
