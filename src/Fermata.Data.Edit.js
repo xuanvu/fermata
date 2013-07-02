@@ -1,6 +1,28 @@
 (function () {
   "use strict";
   
+  Fermata.Data.prototype.addPart = function (instruments, id) {
+    if (id === undefined || id === null) {
+      if (this.score['score-partwise']['part-list']['score-part'] === undefined) {
+        id = 'P1';
+      } else {
+        id = 'P' + this.score['score-partwise']['part-list']['score-part'].length;
+      }
+    }
+    var new_part_info = {
+      '$id': id, 
+      'part-name': instruments[0].instrument, 
+      'score-instrument': {'instrument-name': instruments[0].instrument}
+    };
+    var new_part = {
+      '$id': id,
+      'measure': null
+    };
+
+    this.score['score-partwise']['part-list'].push(new_part_info);
+    this.score['score-partwise'].part.push(new_part);
+  };
+
   Fermata.Data.prototype.updateMeasureNumber = function () {
     this.forEachPart(function (part) {
       for (var i = 0 ; i < part.measure.length ; i++) {
