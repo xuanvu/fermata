@@ -33,6 +33,18 @@
     this.data.attributes.time["beat-type"] = beatType;
   };
 
+  Measure.prototype.getAuthorizedDuration = function () {
+    var quarterBeatType = wholeDivisionToQuarterCoeff(this.getBeatsType());
+    var divisionsBeatType = quarterBeatType * this.getDivisions();
+    var authorizedDuration = divisionsBeatType * this.getBeats();
+
+    return authorizedDuration;
+  };
+
+  var wholeDivisionToQuarterCoeff = function (wholeDivision) {
+    return 4 / wholeDivision;
+  };
+
   var validateBeat = function (beats, beatType) {
     if (!checkBeats(beats)) {
       throw new BeatsValueError(beats);
@@ -59,7 +71,7 @@
   var isInteger = function (value) {
     return parseInt(value, 10) === parseFloat(value) && !isNaN(value);
   };
-  
+
   Measure.prototype.getBeatType = function () {
     if (this.isRendered()) {
       return this.attributes.time["beat-type"];
