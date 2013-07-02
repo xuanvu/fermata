@@ -182,6 +182,65 @@ if (typeof require !== 'undefined') {
       });
     });
 
+    describe("#setBeat", function () {
+      it("increase beats", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        var beats = 5;
+        var measure = new Measure(data);
+        var expectedNotes = ["p", "p", "r", "r", "r"];
+
+        // When
+        measure.setBeat(beats, measure.getBeatType());
+
+        // Then
+        var notes = notesToCharTab(data);
+        assert.deepEqual(notes, expectedNotes);
+        assert.equal(measure.getBeats(), beats);
+        assert.ok(measure.isCompliant());
+      });
+
+      it("decrease beats - still compliant", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        var beats = 3;
+        var measure = new Measure(data);
+        var expectedNotes = ["p", "p", "r"];
+
+        // When
+        measure.setBeat(beats, measure.getBeatType());
+
+        // Then
+        var notes = notesToCharTab(data);
+        assert.deepEqual(notes, expectedNotes);
+        assert.equal(measure.getBeats(), beats);
+        assert.ok(measure.isCompliant());
+      });
+
+      it("decrease beats - not compliant", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        var beats = 1;
+        var measure = new Measure(data);
+        var expectedNotes = ["p", "p"];
+
+        // When
+        measure.setBeat(beats, measure.getBeatType());
+
+        // Then
+        var notes = notesToCharTab(data);
+        assert.deepEqual(notes, expectedNotes);
+        assert.equal(measure.getBeats(), beats);
+        assert.strictEqual(measure.isCompliant(), false);
+      });
+    });
+
     describe("#getDivisions", function () {
       it("non rendered", function () {
         // Given 
