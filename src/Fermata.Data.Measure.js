@@ -90,9 +90,9 @@
 
   Measure.prototype.getDivisions = function () {
     if (this.isRendered()) {
-      return this.attributes.division;
+      return this.attributes.divisions;
     } else {
-      return this.data.attributes.divisiona;
+      return this.data.attributes.divisions;
     }
   };
 
