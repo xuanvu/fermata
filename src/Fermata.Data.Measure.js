@@ -33,6 +33,24 @@
     this.data.attributes.time["beat-type"] = beatType;
   };
 
+  Measure.prototype.adjustDivisions = function () {
+    var beatTypeDivisions = this.getBeatTypeDivisions();
+    var currentDivisions = this.getDivisions();
+    var newDivisions = lcm(beatTypeDivisions, currentDivisions);
+    if (newDivisions !== currentDivisions) {
+      this.multiplyDivisions(newDivisions / currentDivisions);
+    }
+  };
+
+  Measure.prototype.getBeatTypeDivisions = function () {
+    var quarterBeatType = wholeDivisionToQuarterCoeff(this.getBeatType());
+    if (quarterBeatType >= 1) {
+      return 1;
+    } else {
+      return 1 / quarterBeatType;
+    }
+  };
+
   Measure.prototype.getAuthorizedDuration = function () {
     var quarterBeatType = wholeDivisionToQuarterCoeff(this.getBeatType());
     var divisionsBeatType = quarterBeatType * this.getDivisions();
