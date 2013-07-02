@@ -300,7 +300,7 @@ if (typeof require !== 'undefined') {
         assert.equal(beatType, expectedBeatType);
       });
     });
-    
+
     describe("#getBeats", function () {
       it("non rendered", function () {
         // Given 
@@ -308,7 +308,7 @@ if (typeof require !== 'undefined') {
         var data = getTestData(2, 2);
         delete data.$fermata;
         var measure = new Measure(data);
-        
+
 
         // When
         var beats = measure.getBeats();
@@ -318,7 +318,7 @@ if (typeof require !== 'undefined') {
       });
 
       it("rendered", function () {
-         // Given 
+        // Given 
         var expectedBeats = 5;
         var data = getTestData(2, 2);
         var measure = new Measure(data);
