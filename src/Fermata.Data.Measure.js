@@ -80,7 +80,7 @@
     }
   };
 
-  Measure.prototype.getDivision = function () {
+  Measure.prototype.getDivisions = function () {
     if (this.isRendered()) {
       return this.attributes.division;
     } else {
