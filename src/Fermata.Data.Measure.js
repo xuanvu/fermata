@@ -42,6 +42,16 @@
     }
   };
 
+  Measure.prototype.multiplyDivisions = function (value) {
+    var divisions = this.getDivisions();
+    divisions *= value;
+    this.setDivisions(divisions);
+    for (var i = 0; i < this.data.note.length; i++) {
+      var note = this.data.note[i];
+      note.duration *= value;
+    }
+  };
+
   Measure.prototype.getBeatTypeDivisions = function () {
     var quarterBeatType = wholeDivisionToQuarterCoeff(this.getBeatType());
     if (quarterBeatType >= 1) {
@@ -124,6 +134,14 @@
       return this.attributes.divisions;
     } else {
       return this.data.attributes.divisions;
+    }
+  };
+  
+  Measure.prototype.setDivisions = function (divisions) {
+    if (this.isRendered()) {
+      this.attributes.divisions = divisions;
+    } else {
+      this.data.attributes.divisions = divisions;
     }
   };
 

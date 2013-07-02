@@ -212,6 +212,26 @@ if (typeof require !== 'undefined') {
       });
     });
 
+    describe("#multiplyDivisions", function () {
+      it("normalCase", function () {
+        // Given 
+        var expectedDivisions = 4;
+        var expectedDuration = 4;
+        var data = getTestData(2, 2);
+        var measure = new Measure(data);
+
+        // When
+        measure.multiplyDivisions(4);
+
+        // Then
+        assert.equal(measure.getDivisions(), expectedDivisions);
+        for (var i = 0 ; i < data.note.length ; i++) {
+          var note = data.note[i];
+          assert.equal(note.duration, expectedDuration);
+        }
+      });
+    });
+
     describe("#getBeatType", function () {
       it("non rendered", function () {
         // Given 
