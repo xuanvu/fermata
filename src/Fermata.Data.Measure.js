@@ -19,6 +19,10 @@
     return typeof this.data.$fermata !== "undefined" &&
             typeof this.data.$fermata.attributes !== "undefined";
   };
+  
+  Measure.prototype.isCompliant = function () {
+    return this.getAuthorizedDuration() === this.getActualDuration();
+  };
 
   Measure.prototype.initBeat = function (beats, beatType) {
     validateBeat(beats, beatType);
