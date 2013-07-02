@@ -44,23 +44,31 @@ if (typeof require !== 'undefined') {
     };
     var i = 0;
     for (i = 0; i < nbNote; i++) {
-      var note = {
-        duration: 1,
-        pitch: {
-          sign: "C",
-          line: 4
-        }
-      };
+      var note = createPitchNote();
       measure.note.push(note);
     }
     for (i = 0; i < nbRest; i++) {
-      var rest = {duration: 1,
-        rest: {}
-      };
-      measure.note.push(note);
+      var rest = createRestNote();
+      measure.note.push(rest);
     }
 
     return measure;
+  };
+
+  var createPitchNote = function () {
+    return {
+      duration: 1,
+      pitch: {
+        sign: "C",
+        line: 4
+      }
+    };
+  };
+
+  var createRestNote = function () {
+    return {duration: 1,
+      rest: {}
+    };
   };
 
   var measureToCharTab = function (measure) {
@@ -229,6 +237,37 @@ if (typeof require !== 'undefined') {
         assert.deepEqual(notes, expectedNotes);
         assert.equal(measure.getBeats(), beats);
         assert.strictEqual(measure.isCompliant(), false);
+      });
+    });
+
+    describe("#getAuthorizedDuration", function () {
+      it("basic case", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        var measure = new Measure(data);
+
+        // When
+        var authorizedDuration = measure.getAuthorizedDuration();
+
+        // Then
+        assert.equal(authorizedDuration, 4);
+      });
+
+      it("non compliant", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        data.note.push(createPitchNote());
+        var measure = new Measure(data);
+
+        // When
+        var authorizedDuration = measure.getAuthorizedDuration();
+
+        // Then
+        assert.equal(authorizedDuration, 4);
       });
     });
   });
