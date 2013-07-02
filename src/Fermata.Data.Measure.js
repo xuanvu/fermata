@@ -88,25 +88,26 @@
 
   Measure.prototype.adjustNotesDuration = function () {
     var authorizedDuration = this.getAuthorizedDuration();
-    var actualDuration = this.getAuthorizedDuration();
+    var actualDuration = this.getActualDuration();
 
     if (authorizedDuration > actualDuration) {
-      this.removeExcedendDivisionsInRest(authorizedDuration - actualDuration);
-    } else if (actualDuration < authorizedDuration) {
-      this.fillMissingDivisionsWithRest(actualDuration - authorizedDuration);
+      this.fillMissingDivisionsWithRest(authorizedDuration - actualDuration);
+    } else if (authorizedDuration < actualDuration) {
+      this.removeExcedentDivisionsInRest(actualDuration - authorizedDuration);
     }
   };
 
   Measure.prototype.removeExcedentDivisionsInRest = function (divisionsToRemove) {
     var i = this.data.note.length - 1;
     while (i > 0 && isRest(this.data.note[i]) && divisionsToRemove > 0) {
-      var note = this.data.note;
+      var note = this.data.note[i];
       if (divisionsToRemove < note.duration) {
         note.duration = divisionsToRemove;
       } else {
         this.data.note.pop();
       }
       divisionsToRemove -= note.duration;
+      i--;
     }
   };
 
