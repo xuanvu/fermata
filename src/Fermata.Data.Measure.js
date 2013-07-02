@@ -42,6 +42,18 @@
     }
   };
 
+  var lcm = function (a, b) {
+    var num1 = a > b ? a : b;
+    var num2 = a > b ? b : a;
+
+    for (var i = 1; i < num2; i++) {
+      if ((num1 * i) % num2 === 0) {
+        return num1 * i;
+      }
+    }
+    return num2;
+  };
+
   Measure.prototype.multiplyDivisions = function (value) {
     var divisions = this.getDivisions();
     divisions *= value;
@@ -136,7 +148,7 @@
       return this.data.attributes.divisions;
     }
   };
-  
+
   Measure.prototype.setDivisions = function (divisions) {
     if (this.isRendered()) {
       this.attributes.divisions = divisions;
