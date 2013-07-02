@@ -184,7 +184,7 @@ if (typeof require !== 'undefined') {
         var expectedNotes = ["p", "p", "r", "r", "r"];
 
         // When
-        measure.setBeats(beats, measure.getBeatType());
+        measure.setBeat(beats, measure.getBeatType());
 
         // Then
         var notes = notesToCharTab(data);
@@ -203,7 +203,7 @@ if (typeof require !== 'undefined') {
         var expectedNotes = ["p", "p", "r"];
 
         // When
-        measure.setBeats(beats, measure.getBeatType());
+        measure.setBeat(beats, measure.getBeatType());
 
         // Then
         var notes = notesToCharTab(data);
@@ -222,7 +222,7 @@ if (typeof require !== 'undefined') {
         var expectedNotes = ["p", "p"];
 
         // When
-        measure.setBeats(beats, measure.getBeatType());
+        measure.setBeat(beats, measure.getBeatType());
 
         // Then
         var notes = notesToCharTab(data);
