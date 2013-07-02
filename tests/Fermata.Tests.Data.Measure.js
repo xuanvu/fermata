@@ -196,7 +196,7 @@ if (typeof require !== 'undefined') {
         measure.setBeat(beats, measure.getBeatType());
 
         // Then
-        var notes = notesToCharTab(data);
+        var notes = measureToCharTab(data);
         assert.deepEqual(notes, expectedNotes);
         assert.equal(measure.getBeats(), beats);
         assert.ok(measure.isCompliant());
@@ -215,7 +215,7 @@ if (typeof require !== 'undefined') {
         measure.setBeat(beats, measure.getBeatType());
 
         // Then
-        var notes = notesToCharTab(data);
+        var notes = measureToCharTab(data);
         assert.deepEqual(notes, expectedNotes);
         assert.equal(measure.getBeats(), beats);
         assert.ok(measure.isCompliant());
@@ -234,7 +234,7 @@ if (typeof require !== 'undefined') {
         measure.setBeat(beats, measure.getBeatType());
 
         // Then
-        var notes = notesToCharTab(data);
+        var notes = measureToCharTab(data);
         assert.deepEqual(notes, expectedNotes);
         assert.equal(measure.getBeats(), beats);
         assert.strictEqual(measure.isCompliant(), false);
