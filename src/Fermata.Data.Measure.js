@@ -19,7 +19,7 @@
     return typeof this.data.$fermata !== "undefined" &&
             typeof this.data.$fermata.attributes !== "undefined";
   };
-  
+
   Measure.prototype.isCompliant = function () {
     return this.getAuthorizedDuration() === this.getActualDuration();
   };
@@ -37,7 +37,7 @@
     this.data.attributes.time.beats = beats;
     this.data.attributes.time["beat-type"] = beatType;
   };
-  
+
   Measure.prototype.setBeat = function (beats, beatType) {
     validateBeat(beats, beatType);
     this.attributes.time.beats = beats;
