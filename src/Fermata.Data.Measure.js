@@ -79,5 +79,13 @@
       return this.data.time["beat-type"];
     }
   };
+  
+  Measure.prototype.getDivision = function () {
+    if (this.isRendered()) {
+      return this.attributes.division;
+    } else {
+      return this.data.attributes.divisiona;
+    }
+  };
 
 }).call(this);
