@@ -2,10 +2,10 @@
   "use strict";
   
   Fermata.Data.prototype.addPart = function (instrument, id) {
-    this.score['score-partwise']['part-list'] = [];
-    this.score['score-partwise'].part = [];
     if (id === undefined || id === null) {
       if (this.score['score-partwise']['part-list']['score-part'] === undefined) {
+        this.score['score-partwise']['part-list']['score-part'] = [];
+        this.score['score-partwise'].part = [];
         id = 'P1';
       } else {
         id = 'P' + this.score['score-partwise']['part-list']['score-part'].length + 1;
@@ -20,7 +20,7 @@
       '$id': id,
       'measure': null
     };
-    this.score['score-partwise']['part-list'].push(new_part_info);
+    this.score['score-partwise']['part-list']['score-part'].push(new_part_info);
     this.score['score-partwise'].part.push(new_part);
   };
 
