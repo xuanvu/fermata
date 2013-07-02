@@ -163,7 +163,7 @@ describe('Fermata.Data', function () {
       for (var i = 0, len = helloWorld['score-partwise'].part.length; i < len; i++) {
         assert.equal(beat, helloWorld['score-partwise'].part[i].measure[measure_idx].attribute[0].time.beats);
       }
-    })
+    });
   });
 
   describe('setBeatType()', function () {
@@ -180,7 +180,7 @@ describe('Fermata.Data', function () {
       for (var i = 0, len = helloWorld['score-partwise'].part.length; i < len; i++) {
         assert.equal(beatType, helloWorld['score-partwise'].part[i].measure[measure_idx].attribute[0].time['beat-type']);
       }
-    })
+    });
   });
 
   describe('setFifths()', function () {
@@ -197,7 +197,7 @@ describe('Fermata.Data', function () {
       for (var i = 0, len = helloWorld['score-partwise'].part.length; i < len; i++) {
         assert.equal(fifths, helloWorld['score-partwise'].part[i].measure[measure_idx].attribute[0].key.fifths);
       }
-    })
+    });
   });
 
   describe('setTitle()', function () {
