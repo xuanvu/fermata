@@ -362,5 +362,36 @@ if (typeof require !== 'undefined') {
         assert.equal(authorizedDuration, 4);
       });
     });
+
+    describe("#getActualDuration", function () {
+      it("basic case", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        var measure = new Measure(data);
+
+        // When
+        var actualDuration = measure.getActualDuration();
+
+        // Then
+        assert.equal(actualDuration, 4);
+      });
+
+      it("non compliant", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        data.note.push(createPitchNote());
+        var measure = new Measure(data);
+
+        // When
+        var actualDuration = measure.getActualDuration();
+
+        // Then
+        assert.equal(actualDuration, 5);
+      });
+    });
   });
 }).call(this);
