@@ -80,6 +80,14 @@
     }
   };
 
+  Measure.prototype.getBeats = function () {
+    if (this.isRendered()) {
+      return this.attributes.time.beats;
+    } else {
+      return this.data.attributes.time.beats;
+    }
+  };
+
   Measure.prototype.getDivisions = function () {
     if (this.isRendered()) {
       return this.attributes.division;
