@@ -45,6 +45,19 @@
     return 4 / wholeDivision;
   };
 
+  Measure.prototype.getActualDuration = function () {
+    var actualDuration = 0;
+    for (var i = 0; i < this.data.note.length; i++) {
+      var note = this.data.note[i];
+      var noteDuration = note.duration;
+      var noteDivisions = noteDuration * this.getDivisions();
+
+      actualDuration += noteDivisions;
+    }
+
+    return actualDuration;
+  };
+
   var validateBeat = function (beats, beatType) {
     if (!checkBeats(beats)) {
       throw new BeatsValueError(beats);
