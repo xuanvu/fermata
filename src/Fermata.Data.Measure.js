@@ -3,6 +3,7 @@
 
   var BeatsValueError = Fermata.Error.BeatsValueError;
   var BeatTypeValueError = Fermata.Error.BeatTypeValueError;
+  var SoundType = Fermata.Values.SoundType;
 
   Fermata.Data.Measure = function (measureData)
   {
@@ -71,6 +72,55 @@
     } else {
       return 1 / quarterBeatType;
     }
+  };
+
+  Measure.prototype.adjustNotesDuration = function () {
+    var authorizedDuration = this.getAuthorizedDuration();
+    var actualDuration = this.getAuthorizedDuration();
+
+    if (authorizedDuration > actualDuration) {
+      this.removeExcedendDivisionsInRest(authorizedDuration - actualDuration);
+    } else if (actualDuration < authorizedDuration) {
+      this.fillMissingDivisionsWithRest(actualDuration - authorizedDuration);
+    }
+  };
+
+  Measure.prototype.removeExcedentDivisionsInRest = function (divisionsToRemove) {
+    var i = this.data.note.length - 1;
+    while (i > 0 && isRest(this.data.note[i]) && divisionsToRemove > 0) {
+      var note = this.data.note;
+      if (divisionsToRemove < note.duration) {
+        note.duration = divisionsToRemove;
+      } else {
+        this.data.note.pop();
+      }
+      divisionsToRemove -= note.duration;
+    }
+  };
+
+  var isRest = function (note) {
+    return SoundType.getSoundType(note) === SoundType.REST;
+  };
+
+  Measure.prototype.fillMissingDivisionsWithRest = function (divisionsToAdd) {
+    var beatTypeDivisions = this.getBeatTypeDivisions();
+    while (divisionsToAdd > 0) {
+      var note = createRest();
+      if (divisionsToAdd < beatTypeDivisions) {
+        note.duration = divisionsToAdd;
+      } else {
+        note.duration = beatTypeDivisions;
+      }
+      divisionsToAdd -= note.duration;
+      this.data.note.push(note);
+    }
+  };
+
+  var createRest = function () {
+    return {
+      duration: 1,
+      rest: {}
+    };
   };
 
   Measure.prototype.getAuthorizedDuration = function () {
