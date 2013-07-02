@@ -148,4 +148,69 @@ describe('Fermata.Data', function () {
       });
     });
   });
+
+  describe('setBeat()', function () {
+    var fermataData;
+    beforeEach(function () {
+      fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should set the beat of each part with the one passed at the measure passed', function () {
+      var measure_idx = 0;
+      var beat = 4;
+
+      fermataData.setBeat(measure_idx, beat);
+      for (var i = 0, len = helloWorld['score-partwise'].part.length; i < len; i++) {
+        assert.equal(beat, helloWorld['score-partwise'].part[i].measure[measure_idx].attribute[0].time.beats);
+      }
+    })
+  });
+
+  describe('setBeatType()', function () {
+    var fermataData;
+    beforeEach(function () {
+      fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should set the beat type of each part with the one passed at the measure passed', function () {
+      var measure_idx = 0;
+      var beatType = 3;
+
+      fermataData.setBeat(measure_idx, beatType);
+      for (var i = 0, len = helloWorld['score-partwise'].part.length; i < len; i++) {
+        assert.equal(beatType, helloWorld['score-partwise'].part[i].measure[measure_idx].attribute[0].time['beat-type']);
+      }
+    })
+  });
+
+  describe('setFifths()', function () {
+    var fermataData;
+    beforeEach(function () {
+      fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should set the fifths of each part with the one passed at the measure passed', function () {
+      var measure_idx = 0;
+      var fifths = 0;
+
+      fermataData.setBeat(measure_idx, fifths);
+      for (var i = 0, len = helloWorld['score-partwise'].part.length; i < len; i++) {
+        assert.equal(fifths, helloWorld['score-partwise'].part[i].measure[measure_idx].attribute[0].key.fifths);
+      }
+    })
+  });
+
+  describe('setTitle()', function () {
+    var fermataData;
+    beforeEach(function () {
+      fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should set the title of the score', function () {
+      var title = 'Test title';
+
+      fermataData.setTitle(title);
+      assert.equal(title, helloWorld['score-partwise']['movement-title']);
+    });
+  });
 });
