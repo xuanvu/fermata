@@ -62,13 +62,26 @@ describe('Fermata.Data.Edit', function () {
 
   describe('addMeasure()', function () {
     var fermataData;
+    var fermataEmptyData;
     beforeEach(function () {
       fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should add 1 measure in an empty part', function () {
+      var part;
+
+      fermataEmptyData = new Fermata.Data();
+      fermataEmptyData.addPart({'instrument-name': 'Piano'});
+      part = fermataData.getPart(0);
+      fermataEmptyData.addMeasure(0);
+      console.log(fermataEmptyData.score['score-partwise'].part[0].measure);
+      assert.equal(1, part.measure.length);
     });
 
     it('should add 1 measure at the end', function () {
       var part = fermataData.getPart(0), length = part.measure.length;
       fermataData.addMeasure(length);
+      console.log(fermataData.score['score-partwise'].part[0].measure);
       assert.equal(length + 1, part.measure.length);
     });
 
