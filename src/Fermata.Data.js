@@ -75,6 +75,24 @@
       for (var i = 0 ; i < this.scoreCache.part.idx.length ; i++) {
         callback(this.scoreCache.part.idx[i], i);
       }
+    },
+    setBeat: function (measure_idx, beat) {
+      for (var i = 0, len = this.score['score-partwise'].part.length; i < len; i++) {
+        this.score['score-partwise'].part[i].measure[measure_idx].attributes[0].time.beats = beat + '';
+      }
+    },
+    setBeatType: function (measure_idx, beatType) {
+      for (var i = 0, len = this.score['score-partwise'].part.length; i < len; i++) {
+        this.score['score-partwise'].part[i].measure[measure_idx].attributes[0].time['beat-type'] = beatType + '';
+      }
+    },
+    setFifths: function (measure_idx, fifths) {
+      for (var i = 0, len = this.score['score-partwise'].part.length; i < len; i++) {
+        this.score['score-partwise'].part[i].measure[measure_idx].attributes[0].key.fifths = fifths + '';
+      }
+    },
+    setTitle: function (title) {
+      this.score['score-partwise']['movement-title'] = title + '';
     }
   };
 

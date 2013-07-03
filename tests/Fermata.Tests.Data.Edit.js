@@ -24,6 +24,31 @@ describe('Fermata.Data.Edit', function () {
     });
   });
 
+  describe('addPart()', function () {
+    var fermataData;
+    beforeEach(function () {
+      fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should add 1 part with a piano instrument and the default id', function () {
+      var instrument = {'instrument-name': 'Piano'};
+      var len;
+      if (fermataData.score['score-partwise']['part-list']['score-part'] === undefined || fermataData.score['score-partwise']['part-list']['score-part'] === null) {
+        len = 0;
+      } else {
+        len = fermataData.score['score-partwise']['part-list']['score-part'].length;
+      };
+      
+      fermataData.addPart(instrument);
+      
+      assert.equal(len + 1, fermataData.score['score-partwise']['part-list']['score-part'].length);
+      assert.equal('P' + len + 1, fermataData.score['score-partwise']['part-list']['score-part'][len]['$id']);
+      assert.equal('P' + len + 1, fermataData.score['score-partwise']['part'][len]['$id']);
+      assert.equal(instrument['instrument-name'], fermataData.score['score-partwise']['part-list']['score-part'][len]['part-name']);
+      assert.equal(instrument['instrument-name'], fermataData.score['score-partwise']['part-list']['score-part'][len]['score-instrument']['instrument-name']);
+    });
+  });
+
   describe('addMeasure()', function () {
     var fermataData;
     beforeEach(function () {
