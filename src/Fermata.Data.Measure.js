@@ -154,9 +154,8 @@
     for (var i = 0; i < this.data.note.length; i++) {
       var note = this.data.note[i];
       var noteDuration = note.duration;
-      var noteDivisions = noteDuration * this.getDivisions();
 
-      actualDuration += noteDivisions;
+      actualDuration += noteDuration;
     }
 
     return actualDuration;
