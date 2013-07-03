@@ -62,8 +62,19 @@ describe('Fermata.Data.Edit', function () {
 
   describe('addMeasure()', function () {
     var fermataData;
+    var fermataEmptyData;
     beforeEach(function () {
       fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should add 1 measure in an empty part', function () {
+      var part;
+
+      fermataEmptyData = new Fermata.Data();
+      fermataEmptyData.addPart({'instrument-name': 'Piano'});
+      part = fermataData.getPart(0);
+      fermataEmptyData.addMeasure(0);
+      assert.equal(1, part.measure.length);
     });
 
     it('should add 1 measure at the end', function () {
