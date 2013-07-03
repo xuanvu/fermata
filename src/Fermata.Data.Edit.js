@@ -39,7 +39,6 @@
     }
 
     this.forEachPart(function (part) {
-      console.log(part.measure);
       if (!part.hasOwnProperty('measure') || part.measure === null || part.measure === undefined) {
         part.measure = [];
       }
@@ -59,8 +58,6 @@
           '$location': 'right'
         };
       }
-
-      console.log(part.measure);
     });
   };
   
