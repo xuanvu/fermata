@@ -239,6 +239,31 @@ if (typeof require !== 'undefined') {
         assert.equal(measure.getBeats(), beats);
         assert.strictEqual(measure.isCompliant(), false);
       });
+
+      it("decrease beats with beatType increased- compliant", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        var beats = 7;
+        var beatType = 8;
+        var measure = new Measure(data);
+        var expectedNotes = ["p", "p", "r", "r"];
+
+        // When
+        measure.setBeat(beats, beatType);
+
+        // Then
+        var notes = measureToCharTab(data);
+        var firstNote = data.note[0];
+        var lastNote = data.note[data.note.length - 1];
+        assert.deepEqual(notes, expectedNotes);
+        assert.equal(measure.getBeats(), beats);
+        assert.strictEqual(measure.isCompliant(), true);
+        assert.equal(measure.getDivisions(), 2);
+        assert.equal(firstNote.duration, 2);
+        assert.equal(lastNote.duration, 1);
+      });
     });
 
     describe("#getDivisions", function () {
