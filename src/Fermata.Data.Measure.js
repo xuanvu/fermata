@@ -4,6 +4,7 @@
   var BeatsValueError = Fermata.Error.BeatsValueError;
   var BeatTypeValueError = Fermata.Error.BeatTypeValueError;
   var SoundType = Fermata.Values.SoundType;
+  var Utils = Fermata.Utils;
 
   Fermata.Data.Measure = function (measureData)
   {
@@ -217,6 +218,12 @@
       this.attributes.divisions = divisions;
     } else {
       this.data.attributes.divisions = divisions;
+    }
+  };
+
+  Measure.prototype.updateAttributes = function () {
+    if (this.isRendered()) {
+      this.data.attributes = Utils.Clone(this.attributes);
     }
   };
 

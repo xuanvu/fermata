@@ -413,5 +413,23 @@ if (typeof require !== 'undefined') {
         assert.equal(actualDuration, 5);
       });
     });
+
+    describe("#updateAttributes", function () {
+      it("basic case", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        var measure = new Measure(data);
+
+        // When
+        measure.setBeat(7, 8);
+        measure.multiplyDivisions(3);
+        measure.updateAttributes();
+
+        // Then
+        assert.deepEqual(measure.data.attributes, measure.attributes);
+      });
+    });
   });
 }).call(this);
