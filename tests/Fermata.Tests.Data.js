@@ -148,4 +148,69 @@ describe('Fermata.Data', function () {
       });
     });
   });
+
+  describe('setBeat()', function () {
+    var fermataData;
+    beforeEach(function () {
+      fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should set the beat of each part with the one passed at the measure passed', function () {
+      var measure_idx = 0;
+      var beat = 4;
+
+      fermataData.setBeat(measure_idx, beat);
+      for (var i = 0, len = fermataData.score['score-partwise'].part.length; i < len; i++) {
+        assert.equal(beat, fermataData.score['score-partwise'].part[i].measure[measure_idx].attributes[0].time.beats);
+      }
+    });
+  });
+
+  describe('setBeatType()', function () {
+    var fermataData;
+    beforeEach(function () {
+      fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should set the beat type of each part with the one passed at the measure passed', function () {
+      var measure_idx = 0;
+      var beatType = 3;
+
+      fermataData.setBeatType(measure_idx, beatType);
+      for (var i = 0, len = fermataData.score['score-partwise'].part.length; i < len; i++) {
+        assert.equal(beatType, fermataData.score['score-partwise'].part[i].measure[measure_idx].attributes[0].time['beat-type']);
+      }
+    });
+  });
+
+  describe('setFifths()', function () {
+    var fermataData;
+    beforeEach(function () {
+      fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should set the fifths of each part with the one passed at the measure passed', function () {
+      var measure_idx = 0;
+      var fifths = 0;
+
+      fermataData.setFifths(measure_idx, fifths);
+      for (var i = 0, len = fermataData.score['score-partwise'].part.length; i < len; i++) {
+        assert.equal(fifths, fermataData.score['score-partwise'].part[i].measure[measure_idx].attributes[0].key.fifths);
+      }
+    });
+  });
+
+  describe('setTitle()', function () {
+    var fermataData;
+    beforeEach(function () {
+      fermataData = new Fermata.Data(helloWorld);
+    });
+
+    it('should set the title of the score', function () {
+      var title = 'Test title';
+
+      fermataData.setTitle(title);
+      assert.equal(title, fermataData.score['score-partwise']['movement-title']);
+    });
+  });
 });
