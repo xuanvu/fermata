@@ -25,25 +25,36 @@ describe('Fermata.Data.Edit', function () {
   });
 
   describe('addPart()', function () {
-    var fermataData;
+    var fermataData = new Fermata.Data();
+    var instrument = {'instrument-name': 'Piano'};
+    var len;
+    var next_len;
+    var _score = fermataData.score['score-partwise'];
+
     beforeEach(function () {
-      fermataData = new Fermata.Data(helloWorld);
+      if (_score.hasOwnProperty('part-list') && _score['part-list'].hasOwnProperty('score-part') && _score['part-list']['score-part'] !== null) {
+        len = fermataData.score['score-partwise']['part-list']['score-part'].length;
+      } else {
+        len = 0;
+      };
+      next_len = len + 1;
+    });
+
+    it('should add 1 part to an empty score', function () {
+      fermataData.addPart(instrument);
+
+      assert.equal(next_len, fermataData.score['score-partwise']['part-list']['score-part'].length);
+      assert.equal('P' + next_len, fermataData.score['score-partwise']['part-list']['score-part'][len]['$id']);
+      assert.equal('P' + next_len, fermataData.score['score-partwise']['part'][len]['$id']);
+      assert.equal(instrument['instrument-name'], fermataData.score['score-partwise']['part-list']['score-part'][len]['part-name']);
+      assert.equal(instrument['instrument-name'], fermataData.score['score-partwise']['part-list']['score-part'][len]['score-instrument']['instrument-name']);
     });
 
     it('should add 1 part with a piano instrument and the default id', function () {
-      var instrument = {'instrument-name': 'Piano'};
-      var len;
-      if (fermataData.score['score-partwise']['part-list']['score-part'] === undefined || fermataData.score['score-partwise']['part-list']['score-part'] === null) {
-        len = 0;
-      } else {
-        len = fermataData.score['score-partwise']['part-list']['score-part'].length;
-      };
-      
       fermataData.addPart(instrument);
-      
-      assert.equal(len + 1, fermataData.score['score-partwise']['part-list']['score-part'].length);
-      assert.equal('P' + len + 1, fermataData.score['score-partwise']['part-list']['score-part'][len]['$id']);
-      assert.equal('P' + len + 1, fermataData.score['score-partwise']['part'][len]['$id']);
+      assert.equal(next_len, fermataData.score['score-partwise']['part-list']['score-part'].length);
+      assert.equal('P' + next_len, fermataData.score['score-partwise']['part-list']['score-part'][len]['$id']);
+      assert.equal('P' + next_len, fermataData.score['score-partwise']['part'][len]['$id']);
       assert.equal(instrument['instrument-name'], fermataData.score['score-partwise']['part-list']['score-part'][len]['part-name']);
       assert.equal(instrument['instrument-name'], fermataData.score['score-partwise']['part-list']['score-part'][len]['score-instrument']['instrument-name']);
     });
