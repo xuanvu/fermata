@@ -60,7 +60,7 @@
     var num1 = a > b ? a : b;
     var num2 = a > b ? b : a;
 
-    for (var i = 1; i < num2; i++) {
+    for (var i = 1; i <= num2; i++) {
       if ((num1 * i) % num2 === 0) {
         return num1 * i;
       }
