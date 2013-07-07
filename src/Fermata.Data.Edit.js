@@ -19,7 +19,7 @@
     };
     var new_part = {
       '$id': id,
-      'measure': null
+      'measure': []
     };
     this.score['score-partwise']['part-list']['score-part'].push(new_part_info);
     this.score['score-partwise'].part.push(new_part);
