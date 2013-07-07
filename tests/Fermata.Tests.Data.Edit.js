@@ -74,7 +74,7 @@ describe('Fermata.Data.Edit', function () {
       fermataEmptyData.addPart({'instrument-name': 'Piano'});
       part = fermataData.getPart(0);
       fermataEmptyData.addMeasure(0);
-      assert.equal(1, part.measure.length);
+      assert.equal(1, fermataEmptyData.score['score-partwise'].part[0].measure.length);
     });
 
     it('should add 1 measure at the end', function () {
