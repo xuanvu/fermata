@@ -18,7 +18,7 @@
     staves: 1,
     "part-symbol": {
       "top-staff": 1,
-      bottomStaff: 2,
+      "bottom-staff": 2,
       symbol: 'brace'
     }
   };
@@ -85,7 +85,7 @@
       this.cur.measure.$fermata.attributes["part-symbol"]["top-staff"] = node['top-staff'];
     }
     if (node['bottom-staff']) {
-      this.cur.measure.$fermata.attributes["part-symbol"].bottomStaff = node['bottom-staff'];
+      this.cur.measure.$fermata.attributes["part-symbol"]["bottom-staff"] = node['bottom-staff'];
     }
   };
 
