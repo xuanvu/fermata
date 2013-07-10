@@ -5,8 +5,10 @@
 
   Fermata.Utils.AttributeDiff.UpdateBeatType = function () {
     this.diffPath = ["time", "beat-type"];
-    this.changePaths = [this.diffPath,
-      ["time", "beats"]];
+    this.changePaths = [
+      this.diffPath,
+      ["time", "beats"]
+    ];
   };
 
   var UpdateBeatType = Fermata.Utils.AttributeDiff.UpdateBeatType;
