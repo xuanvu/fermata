@@ -11,8 +11,8 @@
   };
 
   UpdateBase.prototype.pathExists = function (obj) {
-    for (var i = 0; i < this.changePath.length; i++) {
-      var pathElement = this.changePath[i];
+    for (var i = 0; i < this.diffPath.length; i++) {
+      var pathElement = this.diffPath[i];
       if (typeof obj[pathElement] !== "undefined") {
         obj = obj[pathElement];
       } else {

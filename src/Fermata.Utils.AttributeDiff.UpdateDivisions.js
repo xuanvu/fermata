@@ -4,8 +4,8 @@
   var UpdateBase = Fermata.Utils.AttributeDiff.UpdateBase;
 
   Fermata.Utils.AttributeDiff.UpdateDivisions = function () {
-    this.changePath = ["divisions"];
-    this.updatePaths = [this.changePath];
+    this.diffPath = ["divisions"];
+    this.updatePaths = [this.diffPath];
   };
 
   var UpdateDivisions = Fermata.Utils.AttributeDiff.UpdateDivisions;
