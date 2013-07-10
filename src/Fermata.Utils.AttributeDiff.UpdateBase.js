@@ -28,45 +28,45 @@
   };
 
   UpdateBase.prototype.createPathsIfNotExists = function (result) {
-    for (var i = 0; i < this.updatePaths.length; i++) {
-      var updatePath = this.updatePaths[i];
+    for (var i = 0; i < this.changePaths.length; i++) {
+      var changePath = this.changePaths[i];
 
-      this.createPathIfNotExists(result, updatePath);
+      this.createPathIfNotExists(result, changePath);
     }
   };
 
-  UpdateBase.prototype.createPathIfNotExists = function (result, updatePath) {
+  UpdateBase.prototype.createPathIfNotExists = function (result, changePath) {
     var i = 0;
 
-    while (i < updatePath.length - 1 && !this.exists(result, updatePath, i)) {
-      var pathElem = updatePath[i];
+    while (i < changePath.length - 1 && !this.exists(result, changePath, i)) {
+      var pathElem = changePath[i];
       result[pathElem] = {};
       result = result[pathElem];
       i++;
     }
   };
 
-  UpdateBase.prototype.exists = function (result, updatePath, i) {
-    var pathElem = updatePath[i];
+  UpdateBase.prototype.exists = function (result, changePath, i) {
+    var pathElem = changePath[i];
     return typeof result[pathElem] !== "undefined";
   };
 
   UpdateBase.prototype.updatePaths = function (attr2, result) {
-    for (var i = 0; i < this.updatePaths.length; i++) {
-      var updatePath = this.updatePaths[i];
+    for (var i = 0; i < this.changePaths.length; i++) {
+      var changePath = this.changePaths[i];
 
-      this.update(attr2, result, updatePath);
+      this.update(attr2, result, changePath);
     }
   };
 
-  UpdateBase.prototype.update = function (attr2, result, updatePath) {
-    for (var i = 0; i < updatePath.length - 1; i++) {
-      var pathElem = updatePath[i];
+  UpdateBase.prototype.update = function (attr2, result, changePath) {
+    for (var i = 0; i < changePath.length - 1; i++) {
+      var pathElem = changePath[i];
       attr2 = attr2[pathElem];
       result = result[pathElem];
     }
 
-    var pathElem = updatePath[i];
+    var pathElem = changePath[i];
     result[pathElem] = attr2[pathElem];
   };
 
