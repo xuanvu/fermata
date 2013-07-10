@@ -28,36 +28,35 @@ if (typeof require !== 'undefined') {
   };
 
   describe("Learning test - jsondiffpatch", function () {
-    it("basic usage", function () {
+    it("divisions", function () {
       // Given 
+      var divisions1 = 1;
+      var divisions2 = 2;
+
       var attribute1 = {
-        divisions: 1,
+        divisions: divisions1,
         time: {
           beats: 4,
           "beat-type": 4
         }
       };
       var attribute2 = {
-        divisions: 1,
+        divisions: divisions2,
         time: {
-          beats: 3,
-          "beat-type": 8
+          beats: 4,
+          "beat-type": 4
         }
       };
-      var destAttribute = {};
-      var expectedAttribute = {
-        time: {
-          beats: 3,
-          "beat-type": 8
-        }
+
+      var expectedDelta = {
+        divisions: [divisions1, divisions2]
       };
 
       // When
       var delta = jsondiffpatch.diff(attribute1, attribute2);
-      jsondiffpatch.patch(destAttribute, delta);
 
       // Then
-      assert.deepEqual(destAttribute, expectedAttribute);
+      assert.deepEqual(delta, expectedDelta);
     });
   });
 }).call(this);
