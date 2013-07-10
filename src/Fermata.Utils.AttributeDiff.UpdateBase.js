@@ -44,7 +44,7 @@
   };
 
   UpdateBase.prototype.update = function (attr2, result) {
-    for (var i = 0; i < path.length - 1; i++) {
+    for (var i = 0; i < this.path.length - 1; i++) {
       var pathElem = this.path[i];
       attr2 = attr2[pathElem];
       result = result[pathElem];
