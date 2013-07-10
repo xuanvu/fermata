@@ -68,6 +68,26 @@ if (typeof require !== 'undefined') {
         // Then
         assert.deepEqual(delta, expectedDelta);
       });
+
+      it("beatType", function () {
+        // Given 
+        var beatType1 = defaultBeats;
+        var beatType2 = 2;
+        var attributes1 = createAttributes();
+        var attributes2 = createAttributes();
+        attributes2.time["beat-type"] = beatType2;
+        var expectedDelta = {
+          time: {
+            "beat-type": [beatType1, beatType2]
+          }
+        };
+
+        // When
+        var delta = jsondiffpatch.diff(attributes1, attributes2);
+
+        // Then
+        assert.deepEqual(delta, expectedDelta);
+      });
     });
   });
 }).call(this);
