@@ -11,7 +11,7 @@
     },
     time: {
       beats: null,
-      type: null,
+      "beat-type": null,
       interchangeable: null
     },
     clef: [],
@@ -45,7 +45,7 @@
 
   Fermata.Render.prototype.AttributesTimeProcess = [
     {key: 'beats', type: _render.FuncTypes.$1, dataType: 'int'},
-    {key: 'beat-type', type: _render.FuncTypes.$1, dataType: 'int', dataKey: 'type'}
+    {key: 'beat-type', type: _render.FuncTypes.$1, dataType: 'int', dataKey: 'beat-type'}
   ];
 
   Fermata.Render.prototype.AttributesTime = function (node, i, attribut)
