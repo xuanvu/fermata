@@ -307,7 +307,7 @@
           new Vex.Flow.KeySignature(keySign).addToStave($fermata.vexStaves[i]);
         }
 
-        $fermata.vexStaves[i].addTimeSignature($fermata.attributes.beat.beats + '/' + $fermata.attributes.beat.type);
+        $fermata.vexStaves[i].addTimeSignature($fermata.attributes.time.beats + '/' + $fermata.attributes.time.type);
         $fermata.voiceWidth += 25;
       }
       else {
@@ -350,8 +350,8 @@
       for (var voiceIdx in $fermata.vexNotes[staffIdx]) {
         if ($fermata.vexNotes[staffIdx].hasOwnProperty(voiceIdx)) {
           var voice = new Vex.Flow.Voice({
-            num_beats: measure.$fermata.attributes.beat.beats,
-            beat_value: measure.$fermata.attributes.beat.type,
+            num_beats: measure.$fermata.attributes.time.beats,
+            beat_value: measure.$fermata.attributes.time.type,
             resolution: Vex.Flow.RESOLUTION
             
           });

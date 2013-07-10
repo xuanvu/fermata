@@ -9,7 +9,7 @@
       fifths: null,
       mode: null
     },
-    beat: {
+    time: {
       beats: null,
       type: null,
       interchangeable: null
@@ -51,7 +51,7 @@
   Fermata.Render.prototype.AttributesTime = function (node, i, attribut)
   {
     this.exploreSubNodes({object: node, processes: _render.AttributesTimeProcess,
-      ctx: this, out: this.cur.measure.$fermata.attributes.beat});
+      ctx: this, out: this.cur.measure.$fermata.attributes.time});
   };
 
   Fermata.Render.prototype.AttributesKeysTraditionalProcess = [
