@@ -79,6 +79,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Utils.js",
     "Fermata.Utils.AttributeDiff.js",
     "Fermata.Utils.AttributeDiff.UpdateBase.js",
+    "Fermata.Utils.AttributeDiff.UpdateBeats.js",
     "Fermata.Utils.AttributeDiff.UpdateDivisions.js",
     "Fermata.Error.js",
     "Fermata.Error.BeatsValueError.js",
