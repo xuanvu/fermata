@@ -17,6 +17,20 @@ if (typeof require !== 'undefined') {
 }
 
 (function () {
+  
+  var defaultDivisions = 1;
+  var defaultBeats = 4;
+  var defaultBeatType = 4;
+
+  var createAttributes = function () {
+    return {
+      divisions: defaultDivisions,
+      time: {
+        beats: defaultBeats,
+        "beat-type": defaultBeatType
+      }
+    };
+  };
 
   describe("Learning test - jsondiffpatch", function () {
     describe("#diff", function () {
