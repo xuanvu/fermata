@@ -7,7 +7,7 @@
   var UpdateBase = Fermata.Utils.AttributeDiff.UpdateBase;
 
   UpdateBase.prototype.canProcess = function (delta) {
-    return this.changePathExists(delta);
+    return this.pathExists(delta);
   };
 
   UpdateBase.prototype.pathExists = function (obj) {
