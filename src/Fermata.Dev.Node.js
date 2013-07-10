@@ -5,6 +5,7 @@
 var vm = require('vm'),
     fs = require('fs'),
     path = require('path');
+    jsondiffpatch = require('jsondiffpatch');
 
 /*global _$jscoverage:true */
 if (typeof _$jscoverage === 'undefined') {
