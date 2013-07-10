@@ -60,13 +60,14 @@
   };
 
   UpdateBase.prototype.update = function (attr2, result, changePath) {
+    var pathElem = "";
     for (var i = 0; i < changePath.length - 1; i++) {
-      var pathElem = changePath[i];
+      pathElem = changePath[i];
       attr2 = attr2[pathElem];
       result = result[pathElem];
     }
 
-    var pathElem = changePath[i];
+    pathElem = changePath[i];
     result[pathElem] = attr2[pathElem];
   };
 

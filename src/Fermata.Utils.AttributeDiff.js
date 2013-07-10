@@ -18,7 +18,7 @@
   var attributesProcessors = [
     new UpdateBeatType(),
     new UpdateBeats(),
-    new UpdateDivisions
+    new UpdateDivisions()
   ];
 
   AttributeDiff.prototype.fillResult = function () {
