@@ -38,7 +38,7 @@
   UpdateBase.prototype.createPathIfNotExists = function (result, updatePath) {
     var i = 0;
 
-    while (i < updatePath.length - 1 && !this.exists(result, i)) {
+    while (i < updatePath.length - 1 && !this.exists(result, updatePath, i)) {
       var pathElem = updatePath[i];
       result[pathElem] = {};
       result = result[pathElem];
