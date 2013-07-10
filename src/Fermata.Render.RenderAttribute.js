@@ -16,7 +16,7 @@
     },
     clef: [],
     staves: 1,
-    partSymbol: {
+    "part-symbol": {
       topStaff: 1,
       bottomStaff: 2,
       symbol: 'brace'
@@ -79,13 +79,13 @@
   // TODO: tests
   Fermata.Render.prototype.AttributesSymbol = function (node)
   {
-    this.cur.measure.$fermata.attributes.partSymbol.symbol = typeof(node) ===
+    this.cur.measure.$fermata.attributes["part-symbol"].symbol = typeof(node) ===
             'string' ? node : node.$t;
     if (node['top-staff']) {
-      this.cur.measure.$fermata.attributes.partSymbol.topStaff = node['top-staff'];
+      this.cur.measure.$fermata.attributes["part-symbol"].topStaff = node['top-staff'];
     }
     if (node['bottom-staff']) {
-      this.cur.measure.$fermata.attributes.partSymbol.bottomStaff = node['bottom-staff'];
+      this.cur.measure.$fermata.attributes["part-symbol"].bottomStaff = node['bottom-staff'];
     }
   };
 
