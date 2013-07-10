@@ -77,6 +77,8 @@ if (typeof _$jscoverage === 'undefined') {
   fermata_sources = [
     "Fermata.js",
     "Fermata.Utils.js",
+    "Fermata.Utils.AttributeDiff.js",
+    "Fermata.Utils.AttributeDiff.UpdateDivisions.js",
     "Fermata.Error.js",
     "Fermata.Error.BeatsValueError.js",
     "Fermata.Error.BeatTypeValueError.js",
