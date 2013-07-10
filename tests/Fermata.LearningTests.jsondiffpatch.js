@@ -36,23 +36,11 @@ if (typeof require !== 'undefined') {
     describe("#diff", function () {
       it("divisions", function () {
         // Given 
-        var divisions1 = 1;
+        var divisions1 = defaultDivisions;
         var divisions2 = 2;
-
-        var attribute1 = {
-          divisions: divisions1,
-          time: {
-            beats: 4,
-            "beat-type": 4
-          }
-        };
-        var attribute2 = {
-          divisions: divisions2,
-          time: {
-            beats: 4,
-            "beat-type": 4
-          }
-        };
+        var attributes1 = createAttributes();
+        var attributes2 = createAttributes();
+        attributes2.divisions = divisions2;
 
         var expectedDelta = {
           divisions: [divisions1, divisions2]
