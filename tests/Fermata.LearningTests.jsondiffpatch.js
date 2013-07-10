@@ -43,7 +43,7 @@ if (typeof require !== 'undefined') {
         };
 
         // When
-        var delta = jsondiffpatch.diff(attribute1, attribute2);
+        var delta = jsondiffpatch.diff(attributes1, attributes2);
 
         // Then
         assert.deepEqual(delta, expectedDelta);
