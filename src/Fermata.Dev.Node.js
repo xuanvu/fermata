@@ -82,6 +82,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Utils.AttributeDiff.UpdateBeatType.js",
     "Fermata.Utils.AttributeDiff.UpdateBeats.js",
     "Fermata.Utils.AttributeDiff.UpdateDivisions.js",
+    "Fermata.Utils.AttributeDiff.processorList.js",
     "Fermata.Error.js",
     "Fermata.Error.BeatsValueError.js",
     "Fermata.Error.BeatTypeValueError.js",
