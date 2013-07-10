@@ -17,7 +17,7 @@
     clef: [],
     staves: 1,
     "part-symbol": {
-      topStaff: 1,
+      "top-staff": 1,
       bottomStaff: 2,
       symbol: 'brace'
     }
@@ -82,7 +82,7 @@
     this.cur.measure.$fermata.attributes["part-symbol"].symbol = typeof(node) ===
             'string' ? node : node.$t;
     if (node['top-staff']) {
-      this.cur.measure.$fermata.attributes["part-symbol"].topStaff = node['top-staff'];
+      this.cur.measure.$fermata.attributes["part-symbol"]["top-staff"] = node['top-staff'];
     }
     if (node['bottom-staff']) {
       this.cur.measure.$fermata.attributes["part-symbol"].bottomStaff = node['bottom-staff'];
