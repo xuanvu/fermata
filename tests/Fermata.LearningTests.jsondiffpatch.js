@@ -18,15 +18,6 @@ if (typeof require !== 'undefined') {
 
 (function () {
 
-  var initNote = function (step, octave) {
-    return {
-      pitch: {
-        step: step,
-        octave: octave
-      }
-    };
-  };
-
   describe("Learning test - jsondiffpatch", function () {
     describe("#diff", function () {
       it("divisions", function () {
