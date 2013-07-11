@@ -2,7 +2,7 @@
   "use strict";
 
   Fermata.Utils.Call = {};
-  
+
   var Call = Fermata.Utils.Call;
 
   Call.FuncTypes = {
@@ -11,8 +11,6 @@
     $01: '?',
     $1: 'default'
   };
-
-
 
   var camelCaseHandler = function (c) {
     return c[1].toUpperCase();
