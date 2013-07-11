@@ -86,20 +86,6 @@
     Call.exploreSubNodes(p, destAttr);
   };
 
-  var attributesProcess = [
-    {key: 'divisions', type: Call.FuncTypes.$01, dataType: 'int'},
-    {key: 'key', type: Call.FuncTypes.$0n, func: attributesKeys},
-    {key: 'time', type: Call.FuncTypes.$0n, func: attributesTime},
-    {key: 'staves', type: Call.FuncTypes.$01, dataType: 'int'},
-    {key: 'part-symbol', type: Call.FuncTypes.$01, func: attributesSymbol},
-    {key: 'instruments', type: Call.FuncTypes.$01, dataType: 'string'},
-    {key: 'clef', type: Call.FuncTypes.$0n, func: attributesClef},
-    {key: 'staff-details', type: Call.FuncTypes.$0n, func: null},
-    {key: 'transpose', type: Call.FuncTypes.$0n, func: null},
-    {key: 'directive', type: Call.FuncTypes.$0n, func: null},
-    {key: 'dirmeasure-styleective', type: Call.FuncTypes.$0n, func: null}
-  ];
-
   var attributesKeys = function (node, i, attributes)
   {
     var processes = typeof(node.fifths) !== 'undefined' ?
@@ -112,20 +98,6 @@
     Call.exploreSubNodes(p);
   };
 
-  var attributesKeysTraditionalProcess = [
-    {key: 'cancel', type: Call.FuncTypes.$01, func: null},
-    {key: 'fifths', type: Call.FuncTypes.$1, dataType: 'int'},
-    {key: 'mode', type: Call.FuncTypes.$01, dataType: 'string'},
-    {key: 'key-octave', type: Call.FuncTypes.$0n, func: null}
-  ];
-
-  var attributesKeysNonTraditionalProcess = [
-    {key: "key-step", type: Call.FuncTypes.$1, func: null},
-    {key: "key-alter", type: Call.FuncTypes.$1, func: null},
-    {key: "key-accidental", type: Call.FuncTypes.$01, func: null},
-    {key: 'key-octave', type: Call.FuncTypes.$0n, func: null}
-  ];
-
   var attributesTime = function (node, i, attributes)
   {
     var p = {
@@ -136,11 +108,6 @@
     };
     Call.exploreSubNodes(p);
   };
-
-  var attributesTimeProcess = [
-    {key: 'beats', type: Call.FuncTypes.$1, dataType: 'int'},
-    {key: 'beat-type', type: Call.FuncTypes.$1, dataType: 'int', dataKey: 'beat-type'}
-  ];
 
   var attributesSymbol = function (node, attributes)
   {
@@ -172,6 +139,39 @@
     Call.exploreSubNodes(p);
     attributes.clef.push(clef);
   };
+
+  var attributesProcess = [
+    {key: 'divisions', type: Call.FuncTypes.$01, dataType: 'int'},
+    {key: 'key', type: Call.FuncTypes.$0n, func: attributesKeys},
+    {key: 'time', type: Call.FuncTypes.$0n, func: attributesTime},
+    {key: 'staves', type: Call.FuncTypes.$01, dataType: 'int'},
+    {key: 'part-symbol', type: Call.FuncTypes.$01, func: attributesSymbol},
+    {key: 'instruments', type: Call.FuncTypes.$01, dataType: 'string'},
+    {key: 'clef', type: Call.FuncTypes.$0n, func: attributesClef},
+    {key: 'staff-details', type: Call.FuncTypes.$0n, func: null},
+    {key: 'transpose', type: Call.FuncTypes.$0n, func: null},
+    {key: 'directive', type: Call.FuncTypes.$0n, func: null},
+    {key: 'dirmeasure-styleective', type: Call.FuncTypes.$0n, func: null}
+  ];
+
+  var attributesKeysTraditionalProcess = [
+    {key: 'cancel', type: Call.FuncTypes.$01, func: null},
+    {key: 'fifths', type: Call.FuncTypes.$1, dataType: 'int'},
+    {key: 'mode', type: Call.FuncTypes.$01, dataType: 'string'},
+    {key: 'key-octave', type: Call.FuncTypes.$0n, func: null}
+  ];
+
+  var attributesKeysNonTraditionalProcess = [
+    {key: "key-step", type: Call.FuncTypes.$1, func: null},
+    {key: "key-alter", type: Call.FuncTypes.$1, func: null},
+    {key: "key-accidental", type: Call.FuncTypes.$01, func: null},
+    {key: 'key-octave', type: Call.FuncTypes.$0n, func: null}
+  ];
+
+  var attributesTimeProcess = [
+    {key: 'beats', type: Call.FuncTypes.$1, dataType: 'int'},
+    {key: 'beat-type', type: Call.FuncTypes.$1, dataType: 'int', dataKey: 'beat-type'}
+  ];
 
   var attributesClefProcess = [
     {key: 'sign', type: Call.FuncTypes.$1, dataType: 'string'},
