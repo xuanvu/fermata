@@ -98,19 +98,23 @@
         callback(this.scoreCache.part.idx[i], i);
       }
     },
-    setBeat: function (measure_idx, beat) {
-      for (var i = 0, len = this.score['score-partwise'].part.length; i <
-              len; i++) {
-        this.score['score-partwise'].part[i].measure[measure_idx].attributes[0].time.beats = beat +
-                '';
-      }
+    setBeat: function (measure_idx, beats) {
+      this.forEachPart(function (part) {
+        for (var i = 0; i < part.measure.length; i++) {
+          var measureData = part.measure[i];
+          var measure = new Fermata.Data.Measure(measureData);
+          measure.setBeat(beats, measure.getBeatType());
+        }
+      });
     },
     setBeatType: function (measure_idx, beatType) {
-      for (var i = 0, len = this.score['score-partwise'].part.length; i <
-              len; i++) {
-        this.score['score-partwise'].part[i].measure[measure_idx].attributes[0].time['beat-type'] = beatType +
-                '';
-      }
+      this.forEachPart(function (part) {
+        for (var i = 0; i < part.measure.length; i++) {
+          var measureData = part.measure[i];
+          var measure = new Fermata.Data.Measure(measureData);
+          measure.setBeat(measure.getBeats(), beatType);
+        }
+      });
     },
     setFifths: function (measure_idx, fifths) {
       for (var i = 0, len = this.score['score-partwise'].part.length; i <
