@@ -45,8 +45,8 @@ if (typeof require !== 'undefined') {
   var createMeasure = function (notesData) {
     var notes = createNotes(notesData);
     var measure = {
-      attributes: [
-        {
+      $fermata: {
+        attributes: {
           "divisions": "4",
           "key": {
             "fifths": "1",
@@ -61,7 +61,7 @@ if (typeof require !== 'undefined') {
             "line": "2"
           }
         }
-      ],
+      },
       note: notes
     };
 
