@@ -41,6 +41,13 @@
         this.scoreCache.part.id[cur.$id].measure = cur.measure;
       }
 
+      // Reconstruct attributes
+      for (i = 0; i < this.scoreCache.part.idx.length; i++) {
+        var part = this.scoreCache.part.idx[i];
+        var measures = part.measure;
+        this.reconstructAttributes(measures);
+      }
+
       return this.scoreCache.part;
     },
     // Getters

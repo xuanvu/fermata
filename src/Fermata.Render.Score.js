@@ -89,11 +89,6 @@
 
   Fermata.Render.prototype.renderMeasureProcess = [
     {
-      key: "attributes",
-      type: Call.FuncTypes.$1n,
-      func: _render.renderAttributes
-    },
-    {
       key: "note",
       type: Call.FuncTypes.$01,
       func: _render.renderNotes
@@ -163,14 +158,14 @@
       part: this.parts.idx[partIdx],
       partIdx: partIdx
     };
-    this.cur.measure.$fermata = {
-      vexNotes: [],
-      vexStaves: [],
-      vexVoices: [],
-      vexBeams: [],
-      vexHairpin: [],
-      vexTuplets: []
-    };
+    var $fermata = this.cur.measure.$fermata;
+    $fermata.vexNotes = [];
+    $fermata.vexStaves = [];
+    $fermata.vexVoices = [];
+    $fermata.vexBeams = [];
+    $fermata.vexHairpin = [];
+    $fermata.vexTuplets = [];
+
     this.beamProcessor = new BeamProcessor(this.cur.measure.$fermata);
     this.tupletProcessor = new TupletProcessor(this.cur.measure.$fermata);
 
