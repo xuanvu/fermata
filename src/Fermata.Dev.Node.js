@@ -91,6 +91,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Mapping.Direction.js",
     "Fermata.Mapping.Connector.js",
     "Fermata.Data.js",
+    "Fermata.Data.ReconstructAttributes.js",
     "Fermata.Data.PitchPitched.js",
     "Fermata.Data.PitchRest.js",
     "Fermata.Data.PitchUnpitched.js",
