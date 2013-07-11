@@ -5,7 +5,7 @@
   
   var Call = Fernata.Utils.Call;
 
-  Fermata.Render.prototype.FuncTypes = {
+  Call.FuncTypes = {
     $0n: '*',
     $1n: '+',
     $01: '?',
@@ -77,24 +77,24 @@
       // }
 
       // 0 to n
-      if (process.type === this.FuncTypes.$0n) {
+      if (process.type === Call.FuncTypes.$0n) {
         if (typeof(p.object[process.key]) !== "undefined") {
           this.callProcessMultiple(p.object[process.key], p.ctx, process.func, _arguments);
         }
       }
       // 1 to n
-      else if (process.type === this.FuncTypes.$1n) {
+      else if (process.type === Call.FuncTypes.$1n) {
         this.callProcessMultiple(p.object[process.key], p.ctx, process.func, _arguments);
       }
       // 0 or 1
-      else if (process.type === this.FuncTypes.$01) {
+      else if (process.type === Call.FuncTypes.$01) {
         if (typeof(p.object[process.key]) !== "undefined") {
           _arguments.unshift(p.object[process.key]);
           process.func.apply(p.ctx, _arguments);
         }
       }
       // 1
-      else if (process.type === this.FuncTypes.$1) {
+      else if (process.type === Call.FuncTypes.$1) {
         _arguments.unshift(p.object[process.key]);
         process.func.apply(p.ctx, _arguments);
       }

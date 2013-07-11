@@ -1,6 +1,8 @@
 (function () {
   "use strict";
 
+  var Call = Fermata.Utils.Call;
+
   Fermata.Render.prototype.renderAll = function () {
     this.renderScoreHeader(this.data.getScorePartWise());
     this.renderMeasures();
@@ -16,42 +18,42 @@
   Fermata.Render.prototype.renderScoreHeaderProcess = [
     {
       key: "attributes",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: /*_render.renderAttributes*/ null
     }, // really ? hmmm... no.
     {
       key: "part-list",
-      type: _render.FuncTypes.$1,
+      type: Call.FuncTypes.$1,
       func: _render.renderPartList
     },
     {
       key: "work",
-      type: _render.FuncTypes.$01,
+      type: Call.FuncTypes.$01,
       func: _render.renderPartList
     },
     {
       key: "movement-number",
-      type: _render.FuncTypes.$01,
+      type: Call.FuncTypes.$01,
       func: _render.renderHeaderMovNum
     },
     {
       key: "movement-title",
-      type: _render.FuncTypes.$01,
+      type: Call.FuncTypes.$01,
       func: _render.renderHeaderMovTitle
     },
     {
       key: "identification",
-      type: _render.FuncTypes.$01,
+      type: Call.FuncTypes.$01,
       func: _render.renderHeaderIdentifi
     },
     {
       key: "defaults",
-      type: _render.FuncTypes.$01,
+      type: Call.FuncTypes.$01,
       func: _render.renderHeaderdefaults
     },
     {
       key: "credit",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: _render.renderHeaderCredit
     }
   ];
@@ -88,67 +90,67 @@
   Fermata.Render.prototype.renderMeasureProcess = [
     {
       key: "attributes",
-      type: _render.FuncTypes.$1n,
+      type: Call.FuncTypes.$1n,
       func: _render.renderAttributes
     },
     {
       key: "note",
-      type: _render.FuncTypes.$01,
+      type: Call.FuncTypes.$01,
       func: _render.renderNotes
     },
     {
       key: "backup",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: _render.Renderbackup
     },
     {
       key: "forward",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: null
     },
     {
       key: "direction",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: _render.renderDirection
     },
     {
       key: "harmony",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: _render.renderHarmony
     },
     {
       key: "figured-bass",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: null
     },
     {
       key: "print",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: _render.renderPrint
     },
     {
       key: "sound",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: null
     },
     {
       key: "barline",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: _render.renderBarline
     },
     {
       key: "grouping",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: null
     },
     {
       key: "link",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: null
     },
     {
       key: "bookmark",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: null
     }
   ];

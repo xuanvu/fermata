@@ -17,6 +17,9 @@ if (typeof require !== 'undefined') {
 }
 
 (function () {
+
+  var Call = Fermata.Utils.Call;
+
 // Missing: helpers, out
   describe('Fermata.Render.Call', function () {
     var helloWorld, fermataRender, _render = Fermata.Render.prototype;
@@ -40,8 +43,8 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$1, func: foo},
-          {key: "bar", type: _render.FuncTypes.$1, func: bar}
+          {key: "foo", type: Call.FuncTypes.$1, func: foo},
+          {key: "bar", type: Call.FuncTypes.$1, func: bar}
         ];
 
         var obj = {bar: 84};
@@ -59,8 +62,8 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$01, func: foo},
-          {key: "bar", type: _render.FuncTypes.$01, func: bar}
+          {key: "foo", type: Call.FuncTypes.$01, func: foo},
+          {key: "bar", type: Call.FuncTypes.$01, func: bar}
         ];
 
         var obj = {foo: 42, bar: 84};
@@ -78,8 +81,8 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$01, func: foo},
-          {key: "bar", type: _render.FuncTypes.$01, func: bar}
+          {key: "foo", type: Call.FuncTypes.$01, func: foo},
+          {key: "bar", type: Call.FuncTypes.$01, func: bar}
         ];
 
         var obj = {bar: 84};
@@ -94,7 +97,7 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$1n, func: foo}
+          {key: "foo", type: Call.FuncTypes.$1n, func: foo}
         ];
 
         fermataRender.exploreSubNodes({object: {}, processes: processes});
@@ -108,7 +111,7 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$1n, func: foo}
+          {key: "foo", type: Call.FuncTypes.$1n, func: foo}
         ];
 
         var obj = {foo: 42};
@@ -127,7 +130,7 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$1n, func: foo}
+          {key: "foo", type: Call.FuncTypes.$1n, func: foo}
         ];
 
         fermataRender.exploreSubNodes({object: obj, processes: processes});
@@ -145,8 +148,8 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$0n, func: foo},
-          {key: "bar", type: _render.FuncTypes.$0n, func: bar}
+          {key: "foo", type: Call.FuncTypes.$0n, func: foo},
+          {key: "bar", type: Call.FuncTypes.$0n, func: bar}
         ];
 
         var obj = {bar: 42};
@@ -161,7 +164,7 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$0n, func: foo}
+          {key: "foo", type: Call.FuncTypes.$0n, func: foo}
         ];
 
         var obj = {foo: 42};
@@ -180,7 +183,7 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$0n, func: foo}
+          {key: "foo", type: Call.FuncTypes.$0n, func: foo}
         ];
 
         fermataRender.exploreSubNodes({object: obj, processes: processes});
@@ -199,8 +202,8 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$1, func: foo},
-          {key: "bar", type: _render.FuncTypes.$1, func: bar}
+          {key: "foo", type: Call.FuncTypes.$1, func: foo},
+          {key: "bar", type: Call.FuncTypes.$1, func: bar}
         ];
 
         fermataRender.exploreSubNodes({object: obj, processes: processes, ctx: ctx});
@@ -215,8 +218,8 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$01, func: foo},
-          {key: "bar", type: _render.FuncTypes.$01, func: bar}
+          {key: "foo", type: Call.FuncTypes.$01, func: foo},
+          {key: "bar", type: Call.FuncTypes.$01, func: bar}
         ];
 
         fermataRender.exploreSubNodes({object: obj, processes: processes, ctx: ctx});
@@ -231,8 +234,8 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$0n, func: foo},
-          {key: "bar", type: _render.FuncTypes.$0n, func: bar}
+          {key: "foo", type: Call.FuncTypes.$0n, func: foo},
+          {key: "bar", type: Call.FuncTypes.$0n, func: bar}
         ];
 
         fermataRender.exploreSubNodes({object: obj, processes: processes, ctx: ctx});
@@ -249,8 +252,8 @@ if (typeof require !== 'undefined') {
         var obj = {foo: [42, 43], bar: 84};
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$1n, func: foo},
-          {key: "bar", type: _render.FuncTypes.$1n, func: bar}
+          {key: "foo", type: Call.FuncTypes.$1n, func: foo},
+          {key: "bar", type: Call.FuncTypes.$1n, func: bar}
         ];
 
         fermataRender.exploreSubNodes({object: obj, processes: processes, ctx: ctx});
@@ -277,8 +280,8 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$1, func: foo},
-          {key: "bar", type: _render.FuncTypes.$1, func: bar}
+          {key: "foo", type: Call.FuncTypes.$1, func: foo},
+          {key: "bar", type: Call.FuncTypes.$1, func: bar}
         ];
 
         var obj = {foo: 42};
@@ -302,8 +305,8 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$01, func: foo},
-          {key: "bar", type: _render.FuncTypes.$01, func: bar}
+          {key: "foo", type: Call.FuncTypes.$01, func: foo},
+          {key: "bar", type: Call.FuncTypes.$01, func: bar}
         ];
 
         fermataRender.exploreSubNodes({object: obj, processes: processes}, 43, 44, 45);
@@ -336,8 +339,8 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$0n, func: foo},
-          {key: "bar", type: _render.FuncTypes.$0n, func: bar},
+          {key: "foo", type: Call.FuncTypes.$0n, func: foo},
+          {key: "bar", type: Call.FuncTypes.$0n, func: bar},
         ];
 
         fermataRender.exploreSubNodes({object: obj, processes: processes}, 44, 45, 46);
@@ -370,8 +373,8 @@ if (typeof require !== 'undefined') {
         };
 
         var processes = [
-          {key: "foo", type: _render.FuncTypes.$1n, func: foo},
-          {key: "bar", type: _render.FuncTypes.$1n, func: bar},
+          {key: "foo", type: Call.FuncTypes.$1n, func: foo},
+          {key: "bar", type: Call.FuncTypes.$1n, func: bar},
         ];
 
         fermataRender.exploreSubNodes({object: obj, processes: processes}, 44, 45, 46);
