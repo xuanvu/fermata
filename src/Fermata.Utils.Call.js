@@ -1,6 +1,10 @@
 (function () {
   "use strict";
 
+  Fermata.Utils.Call = {};
+  
+  var Call = Fernata.Utils.Call;
+
   Fermata.Render.prototype.FuncTypes = {
     $0n: '*',
     $1n: '+',
