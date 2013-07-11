@@ -21,7 +21,7 @@ if (typeof require !== 'undefined') {
   var Call = Fermata.Utils.Call;
 
 // Missing: helpers, out
-  describe('Fermata.Render.Call', function () {
+  describe('Fermata.Utils.Call', function () {
     var helloWorld, fermataRender, _render = Fermata.Render.prototype;
     before(function (done) {
       Fermata.Tests.Utils.LoadJSONFixture('hello-world.min.json', function (fixture) {

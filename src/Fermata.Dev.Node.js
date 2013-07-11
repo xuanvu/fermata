@@ -77,6 +77,7 @@ if (typeof _$jscoverage === 'undefined') {
   fermata_sources = [
     "Fermata.js",
     "Fermata.Utils.js",
+    "Fermata.Utils.Call.js",
     "Fermata.Error.js",
     "Fermata.Error.NotImplementedError.js",
     "Fermata.Error.PitchRangeError.js",
@@ -101,7 +102,6 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Render.BeamProcessor.js",
     "Fermata.Render.TupletType.js",
     "Fermata.Render.TupletProcessor.js",
-    "Fermata.Utils.Call.js",
     "Fermata.Render.SymbolSize.js",
     "Fermata.Render.NoteStorage.js",
     "Fermata.Render.NoteType.js",
