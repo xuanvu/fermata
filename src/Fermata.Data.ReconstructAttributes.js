@@ -28,10 +28,8 @@
     }
   };
 
-  Data.prototype.reconstructAttributes = function ()
+  Data.prototype.reconstructAttributes = function (measures)
   {
-    var measures = [];
-
     for (var i = 0; i < measures.length; i++) {
       var measure = measures[i];
       createAttributes(measure);
