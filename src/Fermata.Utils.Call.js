@@ -26,16 +26,11 @@
    * key is the key of the child element.
    * func is the function to apply to the child elements
    */
-  Fermata.Render.prototype.exploreSubNodes = function (p)
+  Call.exploreSubNodes = function (p)
   {
     // p -> { object, processes, ctx }
     if (p === 'undefined' || typeof(p) !== 'object') {
       return false;
-    }
-
-    // Default context
-    if (p.ctx === undefined) {
-      p.ctx = this;
     }
 
     if (p.out === undefined) {
@@ -79,12 +74,12 @@
       // 0 to n
       if (process.type === Call.FuncTypes.$0n) {
         if (typeof(p.object[process.key]) !== "undefined") {
-          this.callProcessMultiple(p.object[process.key], p.ctx, process.func, _arguments);
+          callProcessMultiple(p.object[process.key], p.ctx, process.func, _arguments);
         }
       }
       // 1 to n
       else if (process.type === Call.FuncTypes.$1n) {
-        this.callProcessMultiple(p.object[process.key], p.ctx, process.func, _arguments);
+        callProcessMultiple(p.object[process.key], p.ctx, process.func, _arguments);
       }
       // 0 or 1
       else if (process.type === Call.FuncTypes.$01) {
@@ -138,7 +133,7 @@
     }
   };
 
-  Fermata.Render.prototype.callProcessMultiple = function (child, _this, func, _arguments)
+  var callProcessMultiple = function (child, _this, func, _arguments)
   {
     if (Object.prototype.toString.call(child) !== '[object Array]') {
       _arguments.unshift(child, 0);

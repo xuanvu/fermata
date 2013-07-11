@@ -60,7 +60,7 @@
 
   Fermata.Render.prototype.renderScoreHeader = function (scoreHeader)
     {
-      this.exploreSubNodes({
+      Call.exploreSubNodes({
         object: scoreHeader,
         processes: this.renderScoreHeaderProcess,
         ctx: this
@@ -178,7 +178,7 @@
     // this.renderMeasureAttributes(measure);
 
     // Measure content
-    this.exploreSubNodes({
+    Call.exploreSubNodes({
       object: this.cur.measure,
       processes: this.renderMeasureProcess,
       ctx: this

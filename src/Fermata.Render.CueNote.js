@@ -13,7 +13,7 @@
         func: null//TODO: implement the function
       }
     ];
-    this.exploreSubNodes({ object: cueNote, processes: processes });
+    Call.exploreSubNodes({ object: cueNote, processes: processes, ctx: this });
 
     this.renderFullNote(cueNote);
     var duration = cueNote.duration;

@@ -20,7 +20,7 @@
         func: null//TODO implement
       }
     ];
-    this.exploreSubNodes({ object: graceNote, processes: processes });
+    Call.exploreSubNodes({ object: graceNote, processes: processes, ctx: this });
 
     this.renderNoteCommon(graceNote);
     this.renderFullNote(graceNote);

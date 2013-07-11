@@ -120,7 +120,7 @@
       }
     ];
 
-    this.exploreSubNodes({ object: fullNote, processes: processes });
+    Call.exploreSubNodes({ object: fullNote, processes: processes, ctx: this });
 
     var chord = false;
     if (typeof(fullNote.chord) !== "undefined")
@@ -142,7 +142,7 @@
       }
     ];
 
-    this.exploreSubNodes({ object: note, processes: processes });
+    Call.exploreSubNodes({ object: note, processes: processes, ctx: this });
   };
 
   Fermata.Render.prototype.renderPitch = function (pitch)

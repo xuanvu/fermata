@@ -32,12 +32,12 @@
   ];
 
   Fermata.Render.prototype.renderDirectionTypeWedge = function (node) {
-    this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeWedgeProcess, ctx: this,
+    Call.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeWedgeProcess, ctx: this,
                            out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'].wedge });
   };
 
   Fermata.Render.prototype.renderDirectionTypeWord = function (node) {
-    this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeWordProcess, ctx: this,
+    Call.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeWordProcess, ctx: this,
                            out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'].words });
   };
 
@@ -47,7 +47,7 @@
   ];
 
   Fermata.Render.prototype.renderDirectionType = function (node) {
-    this.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeProcess, ctx: this,
+    Call.exploreSubNodes({ object: node, processes: _render.renderDirectionTypeProcess, ctx: this,
                            out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1]['direction-type'] });
   };
 
@@ -78,7 +78,7 @@
       this.cur.measure.$fermata.direction = [];
     }
     this.cur.measure.$fermata.direction.push(Fermata.Utils.Clone(_render.renderDirectionDefault));
-    this.exploreSubNodes({ object: direction, processes: _render.renderDirectionProcess, ctx: this,
+    Call.exploreSubNodes({ object: direction, processes: _render.renderDirectionProcess, ctx: this,
                            out: this.cur.measure.$fermata.direction[this.cur.measure.$fermata.direction.length -1] });
   };
 

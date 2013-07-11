@@ -48,7 +48,7 @@ if (typeof require !== 'undefined') {
         ];
 
         var obj = {bar: 84};
-        fermataRender.exploreSubNodes({object: obj, processes: processes});
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: fermataRender});
       });
 
       it('should call all functions (?)', function (done) {
@@ -67,7 +67,7 @@ if (typeof require !== 'undefined') {
         ];
 
         var obj = {foo: 42, bar: 84};
-        fermataRender.exploreSubNodes({object: obj, processes: processes});
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: fermataRender});
       });
 
       it('should call functions with subnodes only (?)', function (done) {
@@ -86,7 +86,7 @@ if (typeof require !== 'undefined') {
         ];
 
         var obj = {bar: 84};
-        fermataRender.exploreSubNodes({object: obj, processes: processes});
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: fermataRender});
       });
 
       it('should call all functions one time (no subnode) (+)', function (done) {
@@ -100,7 +100,7 @@ if (typeof require !== 'undefined') {
           {key: "foo", type: Call.FuncTypes.$1n, func: foo}
         ];
 
-        fermataRender.exploreSubNodes({object: {}, processes: processes});
+        Call.exploreSubNodes({object: {}, processes: processes, ctx: fermataRender});
       });
 
       it('should call all functions one time (one subnode) (+)', function (done) {
@@ -115,7 +115,7 @@ if (typeof require !== 'undefined') {
         ];
 
         var obj = {foo: 42};
-        fermataRender.exploreSubNodes({object: obj, processes: processes});
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: fermataRender});
       });
 
       it('should call all functions several time (several subnode) (+)', function (done) {
@@ -133,7 +133,7 @@ if (typeof require !== 'undefined') {
           {key: "foo", type: Call.FuncTypes.$1n, func: foo}
         ];
 
-        fermataRender.exploreSubNodes({object: obj, processes: processes});
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: fermataRender});
       });
 
       it('shouln\'t call function foo (no subnode) (*)', function (done) {
@@ -153,7 +153,7 @@ if (typeof require !== 'undefined') {
         ];
 
         var obj = {bar: 42};
-        fermataRender.exploreSubNodes({object: obj, processes: processes});
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: fermataRender});
       });
 
       it('should call all functions one time (one subnode) (*)', function (done) {
@@ -168,7 +168,7 @@ if (typeof require !== 'undefined') {
         ];
 
         var obj = {foo: 42};
-        fermataRender.exploreSubNodes({object: obj, processes: processes});
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: fermataRender});
       });
 
       it('should call all functions several time (several subnode) (*)', function (done) {
@@ -186,7 +186,7 @@ if (typeof require !== 'undefined') {
           {key: "foo", type: Call.FuncTypes.$0n, func: foo}
         ];
 
-        fermataRender.exploreSubNodes({object: obj, processes: processes});
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: fermataRender});
       });
     });
 
@@ -206,7 +206,7 @@ if (typeof require !== 'undefined') {
           {key: "bar", type: Call.FuncTypes.$1, func: bar}
         ];
 
-        fermataRender.exploreSubNodes({object: obj, processes: processes, ctx: ctx});
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: ctx});
       });
 
       it('should have good context (?)', function (done) {
@@ -222,7 +222,7 @@ if (typeof require !== 'undefined') {
           {key: "bar", type: Call.FuncTypes.$01, func: bar}
         ];
 
-        fermataRender.exploreSubNodes({object: obj, processes: processes, ctx: ctx});
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: ctx});
       });
 
       it('should have good context (+)', function (done) {
@@ -238,7 +238,7 @@ if (typeof require !== 'undefined') {
           {key: "bar", type: Call.FuncTypes.$0n, func: bar}
         ];
 
-        fermataRender.exploreSubNodes({object: obj, processes: processes, ctx: ctx});
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: ctx});
       });
 
       it('should have good context (*)', function (done) {
@@ -256,7 +256,7 @@ if (typeof require !== 'undefined') {
           {key: "bar", type: Call.FuncTypes.$1n, func: bar}
         ];
 
-        fermataRender.exploreSubNodes({object: obj, processes: processes, ctx: ctx});
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: ctx});
       });
     });
 
@@ -285,7 +285,7 @@ if (typeof require !== 'undefined') {
         ];
 
         var obj = {foo: 42};
-        fermataRender.exploreSubNodes({object: obj, processes: processes}, 43, 44, 45);
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: fermataRender}, 43, 44, 45);
       });
 
       it('should pass arguments (?)', function (done) {
@@ -309,7 +309,7 @@ if (typeof require !== 'undefined') {
           {key: "bar", type: Call.FuncTypes.$01, func: bar}
         ];
 
-        fermataRender.exploreSubNodes({object: obj, processes: processes}, 43, 44, 45);
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: fermataRender}, 43, 44, 45);
       });
 
       it('should pass arguments (*)', function (done) {
@@ -343,7 +343,7 @@ if (typeof require !== 'undefined') {
           {key: "bar", type: Call.FuncTypes.$0n, func: bar},
         ];
 
-        fermataRender.exploreSubNodes({object: obj, processes: processes}, 44, 45, 46);
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: fermataRender}, 44, 45, 46);
       });
 
       it('should pass arguments (*)', function (done) {
@@ -377,7 +377,7 @@ if (typeof require !== 'undefined') {
           {key: "bar", type: Call.FuncTypes.$1n, func: bar},
         ];
 
-        fermataRender.exploreSubNodes({object: obj, processes: processes}, 44, 45, 46);
+        Call.exploreSubNodes({object: obj, processes: processes, ctx: fermataRender}, 44, 45, 46);
       });
     });
   });

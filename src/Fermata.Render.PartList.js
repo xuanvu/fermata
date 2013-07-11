@@ -28,7 +28,7 @@ It gonna fill a structure of data, used by the render-score
 
   Fermata.Render.prototype.renderScorePart = function (part) {
     // this.scorePartData.id = part.$id;
-    this.exploreSubNodes({ object: part, processes: this.renderScorePartProcess, ctx: this });
+    Call.exploreSubNodes({ object: part, processes: this.renderScorePartProcess, ctx: this });
 
     // this.PartListData[this.PartListData.length] = Fermata.Utils.Clone(this.scorePartData);
     // for (var prop in this.scorePartData) {
@@ -41,7 +41,7 @@ It gonna fill a structure of data, used by the render-score
   Fermata.Render.prototype.renderPartGroup = function (group) {
     var val;
     if (group.type === 'start' && (val = this.isPartGroupExist(group)) > 0) {
-      this.exploreSubNodes({ object: group, processes: this.renderPartGroupProcess, ctx: this });
+      Call.exploreSubNodes({ object: group, processes: this.renderPartGroupProcess, ctx: this });
       // this.scorePartData[val].partGroup.bairline = this.GroupPartData.barline;
       // this.scorePartData[val].partGroup.symbol = this.GroupPartData.symbol;
       // for (var prop in this.GroupPartData) {
@@ -80,7 +80,7 @@ It gonna fill a structure of data, used by the render-score
   ];
 
   Fermata.Render.prototype.renderPartList = function (list) {
-    this.exploreSubNodes({ object: list, processes: this.renderPartListProcess, ctx: this });
+    Call.exploreSubNodes({ object: list, processes: this.renderPartListProcess, ctx: this });
   };
 
   Fermata.Render.prototype.GroupPartData = {
