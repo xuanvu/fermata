@@ -59,9 +59,16 @@ if (typeof require !== 'undefined') {
           "clef": [
             {
               "sign": "G",
-              "line": "2"
+              "line": "2",
+              "clef-octave-change": 0
             }
-          ]
+          ],
+          staves: 1,
+          "part-symbol": {
+            "top-staff": 1,
+            "bottom-staff": 2,
+            symbol: 'brace'
+          }
         }
       },
       note: notes
