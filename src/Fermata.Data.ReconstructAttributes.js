@@ -127,6 +127,19 @@
     {key: 'beat-type', type: Call.FuncTypes.$1, dataType: 'int', dataKey: 'beat-type'}
   ];
 
+  var attributesSymbol = function (node, attributes)
+  {
+    attributes["part-symbol"].symbol = typeof(node) === 'string' ?
+            node :
+            node.$t;
+    if (node['top-staff']) {
+      attributes["part-symbol"]["top-staff"] = node['top-staff'];
+    }
+    if (node['bottom-staff']) {
+      attributes["part-symbol"]["bottom-staff"] = node['bottom-staff'];
+    }
+  };
+
   var attributesClef = function (node, i, attributes)
   {
     var clef = {
