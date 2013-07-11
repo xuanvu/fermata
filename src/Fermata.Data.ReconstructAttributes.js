@@ -64,7 +64,7 @@
   };
 
   var fillAllAttributes = function (measure) {
-    if (typeof measure.attributes === "[object array]") {
+    if (isArray(measure.attributes)) {
       for (var i = 0; i < measure.attributes.length; i++) {
         var attributesElem = measure.attributes[i];
         fillAttributes(attributesElem, measure.$fermata.attributes);
@@ -72,6 +72,10 @@
     } else {
       fillAttributes(measure.attributes, measure.$fermata.attributes);
     }
+  };
+
+  var isArray = function (obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
   };
 
   var fillAttributes = function (sourceAttr, destAttr) {
