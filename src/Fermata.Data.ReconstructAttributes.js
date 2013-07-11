@@ -9,7 +9,7 @@
   var defaultAttributes = {
     divisions: null,
     instrument: null,
-    keys: {
+    key: {
       cancel: null,
       fifths: null,
       mode: null
@@ -94,7 +94,7 @@
     var p = {object: node,
       ctx: this,
       processes: processes,
-      out: attributes.keys};
+      out: attributes.key};
     Call.exploreSubNodes(p);
   };
 

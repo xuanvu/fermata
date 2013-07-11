@@ -299,8 +299,8 @@
       {
         $fermata.vexStaves[i].addClef(clefName);
         $fermata.voiceWidth += 25;
-        if ($fermata.attributes.keys.mode !== null) {
-          var keySign = Fermata.Mapping.Clef.Sign.getVexflow($fermata.attributes.keys.fifths, $fermata.attributes.keys.mode);
+        if ($fermata.attributes.key.mode !== null) {
+          var keySign = Fermata.Mapping.Clef.Sign.getVexflow($fermata.attributes.key.fifths, $fermata.attributes.key.mode);
           new Vex.Flow.KeySignature(keySign).addToStave($fermata.vexStaves[i]);
         }
 

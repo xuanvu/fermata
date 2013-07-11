@@ -48,7 +48,7 @@ if (typeof require !== 'undefined') {
       $fermata: {
         attributes: {
           "divisions": "4",
-          "keys": {
+          "key": {
             "fifths": "1",
             "mode": "major"
           },
