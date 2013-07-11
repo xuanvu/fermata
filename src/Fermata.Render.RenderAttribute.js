@@ -41,7 +41,7 @@
       "clef-octave-change": 0
     };
 
-    this.exploreSubNodes({object: node, processes: _render.AttributesClefProcess, ctx: this, out: clef});
+    Call.exploreSubNodes({object: node, processes: _render.AttributesClefProcess, ctx: this, out: clef});
     this.cur.measure.$fermata.attributes.clef.push(clef);
   };
 
@@ -52,7 +52,7 @@
 
   Fermata.Render.prototype.AttributesTime = function (node, i, attribut)
   {
-    this.exploreSubNodes({object: node, processes: _render.AttributesTimeProcess,
+    Call.exploreSubNodes({object: node, processes: _render.AttributesTimeProcess,
       ctx: this, out: this.cur.measure.$fermata.attributes.time});
   };
 
@@ -72,7 +72,7 @@
 
   Fermata.Render.prototype.AttributesKeys = function (node, i, attribut)
   {
-    this.exploreSubNodes({object: node, ctx: this,
+    Call.exploreSubNodes({object: node, ctx: this,
       processes: typeof(node.fifths) !==
               'undefined' ? _render.AttributesKeysTraditionalProcess : _render.AttributesKeysNonTraditionalProcess,
       out: this.cur.measure.$fermata.attributes.keys});
@@ -120,7 +120,7 @@
     }
 
     if (typeof(attributes) !== 'undefined') {
-      this.exploreSubNodes({object: attributes, processes: Fermata.Render.prototype.renderAttributesProcess,
+      Call.exploreSubNodes({object: attributes, processes: Fermata.Render.prototype.renderAttributesProcess,
         ctx: this, out: this.cur.measure.$fermata.attributes}, this.cur.measure.$fermata.attributes);
     }
   };
