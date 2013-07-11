@@ -32,7 +32,7 @@
     // console.log(key);
     // console.log(attributes);
     this.clefName = Fermata.Mapping.Clef.getVexflow(attributes.clef[key - 1].sign);
-    this.change = attributes.clef[key - 1].change;
+    this.change = attributes.clef[key - 1]["clef-octave-change"];
     var noteType = Fermata.Render.getNoteType(noteData[0]);
 
     if (noteType === NoteType.NORMAL) {
@@ -43,8 +43,8 @@
 
   NoteConverter.prototype.fillAttributes = function (attributes)
   {
-    this.beatType = attributes.beat.type;
-    this.beats = attributes.beat.beats;
+    this.beatType = attributes.time["beat-type"];
+    this.beats = attributes.time.beats;
     this.divisions = attributes.divisions;
   };
 

@@ -19,7 +19,10 @@ dbg = env.Clone(
     JS_DEFINES = {
       "Fermata.Debug": "true",
       "Fermata.LogLevel": "4"
-    });
+    },
+    JS_EXTRA_FLAGS = "--formatting=pretty_print",
+    JS_COMPILATION_LEVEL = "WHITESPACE_ONLY"
+    );
 
 opt = env.Clone(
     FERMATA_BUILD_PREFIX = "prod-2",
