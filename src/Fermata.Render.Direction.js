@@ -53,7 +53,7 @@
 
   Fermata.Render.prototype.renderDirectionProcess = [
     { key: "direction-type", type: Call.FuncTypes.$1n, func: _render.renderDirectionType },
-    { key: "offset", type: Fermata.Render.prototype.FuncTypes.$01, dataType: 'int', dataKey: 'offset'},
+    { key: "offset", type: Call.FuncTypes.$01, dataType: 'int', dataKey: 'offset'},
     { key: "voice", type: Call.FuncTypes.$01, dataType: 'int', dataKey: 'voice' },
     { key: "staff", type: Call.FuncTypes.$01, dataType: 'int', dataKey: 'staff' },
     { key: "$placement", type: Call.FuncTypes.$1, dataType: 'string', dataKey: '$placement' },
