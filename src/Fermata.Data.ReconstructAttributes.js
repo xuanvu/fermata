@@ -3,7 +3,7 @@
 
   var Call = Fermata.Utils.Call;
   var Utils = Fermata.Utils;
-  
+
   var Data = Fermata.Data;
 
   var defaultAttributes = {
@@ -60,13 +60,97 @@
   var initAttributesOthers = function (previousMeasure, measure) {
     measure.$fermata.attributes = Utils.Clone(previousMeasure.$fermata.attributes);
   };
-  
+
   var hasAttributes = function (measure) {
     return typeof measure.attributes !== "undefined";
   };
-  
+
   var fillAttributes = function (measure) {
-    //TODO: code
+    var p = {object: measure.attributes,
+      processes: attributesProcess,
+      ctx: this,
+      out: measure.$fermata.attributes};
+    Call.exploreSubNodes(p, this.cur.measure.$fermata.attributes);
   };
+
+  var attributesProcess = [
+    {key: 'divisions', type: Call.FuncTypes.$01, dataType: 'int'},
+    {key: 'key', type: Call.FuncTypes.$0n, func: attributesKeys},
+    {key: 'time', type: Call.FuncTypes.$0n, func: attributesTime},
+    {key: 'staves', type: Call.FuncTypes.$01, dataType: 'int'},
+    {key: 'part-symbol', type: Call.FuncTypes.$01, func: attributesSymbol},
+    {key: 'instruments', type: Call.FuncTypes.$01, dataType: 'string'},
+    {key: 'clef', type: Call.FuncTypes.$0n, func: attributesClef},
+    {key: 'staff-details', type: Call.FuncTypes.$0n, func: null},
+    {key: 'transpose', type: Call.FuncTypes.$0n, func: null},
+    {key: 'directive', type: Call.FuncTypes.$0n, func: null},
+    {key: 'dirmeasure-styleective', type: Call.FuncTypes.$0n, func: null}
+  ];
+
+  var attributesKeys = function (node, i, attributes)
+  {
+    var processes = typeof(node.fifths) !== 'undefined' ?
+            attributesKeysTraditionalProcess :
+            attributesKeysNonTraditionalProcess;
+    var p = {object: node,
+      ctx: this,
+      processes: processes,
+      out: attributes.keys};
+    Call.exploreSubNodes(p);
+  };
+
+  var attributesKeysTraditionalProcess = [
+    {key: 'cancel', type: Call.FuncTypes.$01, func: null},
+    {key: 'fifths', type: Call.FuncTypes.$1, dataType: 'int'},
+    {key: 'mode', type: Call.FuncTypes.$01, dataType: 'string'},
+    {key: 'key-octave', type: Call.FuncTypes.$0n, func: null}
+  ];
+
+  var attributesKeysNonTraditionalProcess = [
+    {key: "key-step", type: Call.FuncTypes.$1, func: null},
+    {key: "key-alter", type: Call.FuncTypes.$1, func: null},
+    {key: "key-accidental", type: Call.FuncTypes.$01, func: null},
+    {key: 'key-octave', type: Call.FuncTypes.$0n, func: null}
+  ];
+
+  var attributesTime = function (node, i, attributes)
+  {
+    var p = {
+      object: node,
+      processes: attributesTimeProcess,
+      ctx: this,
+      out: attributes.time
+    };
+    Call.exploreSubNodes(p);
+  };
+
+  var attributesTimeProcess = [
+    {key: 'beats', type: Call.FuncTypes.$1, dataType: 'int'},
+    {key: 'beat-type', type: Call.FuncTypes.$1, dataType: 'int', dataKey: 'beat-type'}
+  ];
+
+  var attributesClef = function (node, i, attributes)
+  {
+    var clef = {
+      sign: null,
+      line: null,
+      "clef-octave-change": 0
+    };
+    var p = {
+      object: node,
+      processes: attributesClefProcess,
+      ctx: this,
+      out: clef
+    };
+
+    Call.exploreSubNodes(p);
+    attributes.clef.push(clef);
+  };
+
+  var attributesClefProcess = [
+    {key: 'sign', type: Call.FuncTypes.$1, dataType: 'string'},
+    {key: 'line', type: Call.FuncTypes.$01, dataType: 'int'},
+    {key: 'clef-octave-change', type: Call.FuncTypes.$01, dataType: 'int', dataKey: 'clef-octave-change'}
+  ];
 
 }).call(this);
