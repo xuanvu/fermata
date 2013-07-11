@@ -1,51 +1,52 @@
 if (typeof require !== 'undefined') {
   var Fermata,
-  fs = require('fs'),
-  assert = require('assert');
+          fs = require('fs'),
+          assert = require('assert');
 
   // Use Scons build version or devel version (using node vm)
   if (fs.existsSync(__dirname + '/../build/fermata/fermata.node.js')) {
     Fermata = require('..');
   }
   else {
-    Fermata = require((process.env['FERMATA_COV'] ? '../src-cov' : '../src') + '/Fermata.Dev.Node.js');
+    Fermata = require((process.env['FERMATA_COV'] ? '../src-cov' : '../src') +
+            '/Fermata.Dev.Node.js');
   }
 
   // Test utils
   Fermata.Tests = require('./Fermata.Tests.Utils.js').Tests;
 }
 
-(function(){
-  var Render = Fermata.Render; 
+(function () {
+  var Render = Fermata.Render;
   var BeamType = Fermata.Render.BeamType;
-  
+
   var renderMeasure = function (notesData)
   {
     var measure = createMeasure(notesData);
     var measureIdx = 0;
     var partIdx = 0;
-    
+
     var part = {
-      measure:[measure]
+      measure: [measure]
     };
     var parts = {
-      idx:[part]
+      idx: [part]
     };
     var data = {
       getParts: function () {
-        return parts
+        return parts;
       }
     };
- 
+
     var fermataRender = new Render(data);
     fermataRender.renderMeasure(measureIdx, partIdx);
-  }
-  
+  };
+
   var createMeasure = function (notesData) {
     var notes = createNotes(notesData);
     var measure = {
-      attributes: [
-        {
+      $fermata: {
+        attributes: {
           "divisions": "4",
           "key": {
             "fifths": "1",
@@ -55,25 +56,34 @@ if (typeof require !== 'undefined') {
             "beats": "2",
             "beat-type": "4"
           },
-          "clef": {
-            "sign": "G",
-            "line": "2"
+          "clef": [
+            {
+              "sign": "G",
+              "line": "2",
+              "clef-octave-change": 0
+            }
+          ],
+          staves: 1,
+          "part-symbol": {
+            "top-staff": 1,
+            "bottom-staff": 2,
+            symbol: 'brace'
           }
         }
-      ],
+      },
       note: notes
     };
-    
+
     return measure;
   };
-  
-  var createNotes = function (notesData) { 
+
+  var createNotes = function (notesData) {
     var notes = [];
-    
-    for (var i = 0 ; i < notesData.length ; i++)
+
+    for (var i = 0; i < notesData.length; i++)
     {
       var noteData = notesData[i];
-      
+
       noteData.beam = {};
       if (notes.length === 0) {
         noteData.beam.content = BeamType.BEGIN;
@@ -84,7 +94,7 @@ if (typeof require !== 'undefined') {
       else {
         noteData.beam.content = BeamType.CONTINUE;
       }
-      
+
       noteData.duration = "2";
       noteData.duration = "1";
       noteData.type = "eighth";
@@ -92,11 +102,11 @@ if (typeof require !== 'undefined') {
       notes.push(noteData);
     }
     return notes;
-  }
-  
+  };
+
   describe("Fermata.Render.BeamProcessor.Integ", function () {
-    describe("#Measure Rendering", function (){
-      it("stem forced up", function (){
+    describe("#Measure Rendering", function () {
+      it("stem forced up", function () {
 
         var notesData = [
           {
@@ -128,8 +138,8 @@ if (typeof require !== 'undefined') {
 
         renderMeasure(notesData);
       });
-      
-      it("stem forced down", function (){
+
+      it("stem forced down", function () {
 
         var notesData = [
           {
@@ -161,8 +171,8 @@ if (typeof require !== 'undefined') {
 
         renderMeasure(notesData);
       });
-      
-      it("stem unspecified (close pitch)", function (){
+
+      it("stem unspecified (close pitch)", function () {
 
         var notesData = [
           {
@@ -187,11 +197,11 @@ if (typeof require !== 'undefined') {
             }
           }
         ];
-        
-        renderMeasure(notesData);      
+
+        renderMeasure(notesData);
       });
-      
-      it("stem unspecified (distant pitch)", function (){
+
+      it("stem unspecified (distant pitch)", function () {
 
         var notesData = [
           {
@@ -216,15 +226,15 @@ if (typeof require !== 'undefined') {
             }
           }
         ];
-        
+
         assert.throws(function () {
           renderMeasure(notesData);
         },
-        Fermata.Vex.RuntimeError
-        );        
+                Fermata.Vex.RuntimeError
+                );
       });
-      
-      it("stem forced bad", function (){
+
+      it("stem forced bad", function () {
 
         var notesData = [
           {
@@ -253,13 +263,13 @@ if (typeof require !== 'undefined') {
             stem: "up"
           }
         ];
-        
+
         assert.throws(function () {
           renderMeasure(notesData);
         },
-        Fermata.Vex.RuntimeError
-        );        
-      });      
+                Fermata.Vex.RuntimeError
+                );
+      });
     });
   });
 }).call(this);

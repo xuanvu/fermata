@@ -3,6 +3,7 @@
 
   // Includes
   var BeamProcessor = Fermata.Render.BeamProcessor;
+  var Call = Fermata.Utils.Call;
 
   Fermata.Render.prototype.renderNoteProcess = {};
   Fermata.Render.prototype.renderNoteProcess[Fermata.Render.NoteType.NORMAL] = Fermata.Render.prototype.renderNormalNote;
@@ -102,24 +103,24 @@
     var processes = [
       {
         key: "pitch",
-        type: this.FuncTypes.$01,
+        type: Call.FuncTypes.$01,
         func: function (arg) {
           _this.renderPitch(arg);
         }
       },
       {
         key: "unpitched",
-        type: this.FuncTypes.$01,
+        type: Call.FuncTypes.$01,
         func: null//TODO: implement the function
       },
       {
         key: "rest",
-        type: this.FuncTypes.$01,
+        type: Call.FuncTypes.$01,
         func: null//TODO: implement the function
       }
     ];
 
-    this.exploreSubNodes({ object: fullNote, processes: processes });
+    Call.exploreSubNodes({ object: fullNote, processes: processes, ctx: this });
 
     var chord = false;
     if (typeof(fullNote.chord) !== "undefined")
@@ -134,14 +135,14 @@
     var processes = [
       {
         key: "type",
-        type: this.FuncTypes.$01,
+        type: Call.FuncTypes.$01,
         func: function (arg) {
           _this.renderType(arg);
         }//TODO: add the others elements
       }
     ];
 
-    this.exploreSubNodes({ object: note, processes: processes });
+    Call.exploreSubNodes({ object: note, processes: processes, ctx: this });
   };
 
   Fermata.Render.prototype.renderPitch = function (pitch)
