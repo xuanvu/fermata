@@ -1,24 +1,26 @@
 (function () {
   "use strict";
 
+  var Call = Fermata.Utils.Call;
+
   Fermata.Render.prototype.renderGraceNote = function (graceNote)
   {
     var _this = this;
     var processes = [
       {
         key: "grace",
-        type: this.FuncTypes.$1,
+        type: Call.FuncTypes.$1,
         func: function (arg) {
           _this.renderGrace(arg);
         }
       },
       {
         key: "tie",
-        type: this.FuncTypes.$0n,
+        type: Call.FuncTypes.$0n,
         func: null//TODO implement
       }
     ];
-    this.exploreSubNodes({ object: graceNote, processes: processes });
+    Call.exploreSubNodes({ object: graceNote, processes: processes, ctx: this });
 
     this.renderNoteCommon(graceNote);
     this.renderFullNote(graceNote);

@@ -1,6 +1,8 @@
 (function () {
   "use strict";
 
+  var Call = Fermata.Utils.Call;
+
   Fermata.Render.prototype.renderAll = function () {
     this.renderScoreHeader(this.data.getScorePartWise());
     this.renderMeasures();
@@ -16,49 +18,49 @@
   Fermata.Render.prototype.renderScoreHeaderProcess = [
     {
       key: "attributes",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: /*_render.renderAttributes*/ null
     }, // really ? hmmm... no.
     {
       key: "part-list",
-      type: _render.FuncTypes.$1,
+      type: Call.FuncTypes.$1,
       func: _render.renderPartList
     },
     {
       key: "work",
-      type: _render.FuncTypes.$01,
+      type: Call.FuncTypes.$01,
       func: _render.renderPartList
     },
     {
       key: "movement-number",
-      type: _render.FuncTypes.$01,
+      type: Call.FuncTypes.$01,
       func: _render.renderHeaderMovNum
     },
     {
       key: "movement-title",
-      type: _render.FuncTypes.$01,
+      type: Call.FuncTypes.$01,
       func: _render.renderHeaderMovTitle
     },
     {
       key: "identification",
-      type: _render.FuncTypes.$01,
+      type: Call.FuncTypes.$01,
       func: _render.renderHeaderIdentifi
     },
     {
       key: "defaults",
-      type: _render.FuncTypes.$01,
+      type: Call.FuncTypes.$01,
       func: _render.renderHeaderdefaults
     },
     {
       key: "credit",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: _render.renderHeaderCredit
     }
   ];
 
   Fermata.Render.prototype.renderScoreHeader = function (scoreHeader)
     {
-      this.exploreSubNodes({
+      Call.exploreSubNodes({
         object: scoreHeader,
         processes: this.renderScoreHeaderProcess,
         ctx: this
@@ -87,68 +89,63 @@
 
   Fermata.Render.prototype.renderMeasureProcess = [
     {
-      key: "attributes",
-      type: _render.FuncTypes.$1n,
-      func: _render.renderAttributes
-    },
-    {
       key: "note",
-      type: _render.FuncTypes.$01,
+      type: Call.FuncTypes.$01,
       func: _render.renderNotes
     },
     {
       key: "backup",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: _render.Renderbackup
     },
     {
       key: "forward",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: null
     },
     {
       key: "direction",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: _render.renderDirection
     },
     {
       key: "harmony",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: _render.renderHarmony
     },
     {
       key: "figured-bass",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: null
     },
     {
       key: "print",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: _render.renderPrint
     },
     {
       key: "sound",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: null
     },
     {
       key: "barline",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: _render.renderBarline
     },
     {
       key: "grouping",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: null
     },
     {
       key: "link",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: null
     },
     {
       key: "bookmark",
-      type: _render.FuncTypes.$0n,
+      type: Call.FuncTypes.$0n,
       func: null
     }
   ];
@@ -161,14 +158,14 @@
       part: this.parts.idx[partIdx],
       partIdx: partIdx
     };
-    this.cur.measure.$fermata = {
-      vexNotes: [],
-      vexStaves: [],
-      vexVoices: [],
-      vexBeams: [],
-      vexHairpin: [],
-      vexTuplets: []
-    };
+    var $fermata = this.cur.measure.$fermata;
+    $fermata.vexNotes = [];
+    $fermata.vexStaves = [];
+    $fermata.vexVoices = [];
+    $fermata.vexBeams = [];
+    $fermata.vexHairpin = [];
+    $fermata.vexTuplets = [];
+
     this.beamProcessor = new BeamProcessor(this.cur.measure.$fermata);
     this.tupletProcessor = new TupletProcessor(this.cur.measure.$fermata);
 
@@ -176,7 +173,7 @@
     // this.renderMeasureAttributes(measure);
 
     // Measure content
-    this.exploreSubNodes({
+    Call.exploreSubNodes({
       object: this.cur.measure,
       processes: this.renderMeasureProcess,
       ctx: this
@@ -302,12 +299,12 @@
       {
         $fermata.vexStaves[i].addClef(clefName);
         $fermata.voiceWidth += 25;
-        if ($fermata.attributes.keys.mode !== null) {
-          var keySign = Fermata.Mapping.Clef.Sign.getVexflow($fermata.attributes.keys.fifths, $fermata.attributes.keys.mode);
+        if ($fermata.attributes.key.mode !== null) {
+          var keySign = Fermata.Mapping.Clef.Sign.getVexflow($fermata.attributes.key.fifths, $fermata.attributes.key.mode);
           new Vex.Flow.KeySignature(keySign).addToStave($fermata.vexStaves[i]);
         }
 
-        $fermata.vexStaves[i].addTimeSignature($fermata.attributes.beat.beats + '/' + $fermata.attributes.beat.type);
+        $fermata.vexStaves[i].addTimeSignature($fermata.attributes.time.beats + '/' + $fermata.attributes.time["beat-type"]);
         $fermata.voiceWidth += 25;
       }
       else {
@@ -350,8 +347,8 @@
       for (var voiceIdx in $fermata.vexNotes[staffIdx]) {
         if ($fermata.vexNotes[staffIdx].hasOwnProperty(voiceIdx)) {
           var voice = new Vex.Flow.Voice({
-            num_beats: measure.$fermata.attributes.beat.beats,
-            beat_value: measure.$fermata.attributes.beat.type,
+            num_beats: measure.$fermata.attributes.time.beats,
+            beat_value: measure.$fermata.attributes.time["beat-type"],
             resolution: Vex.Flow.RESOLUTION
             
           });
