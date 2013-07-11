@@ -5,6 +5,7 @@
 var vm = require('vm'),
     fs = require('fs'),
     path = require('path');
+    jsondiffpatch = require('jsondiffpatch');
 
 /*global _$jscoverage:true */
 if (typeof _$jscoverage === 'undefined') {
@@ -77,8 +78,16 @@ if (typeof _$jscoverage === 'undefined') {
   fermata_sources = [
     "Fermata.js",
     "Fermata.Utils.js",
+    "Fermata.Utils.AttributeDiff.js",
+    "Fermata.Utils.AttributeDiff.UpdateBase.js",
+    "Fermata.Utils.AttributeDiff.UpdateBeatType.js",
+    "Fermata.Utils.AttributeDiff.UpdateBeats.js",
+    "Fermata.Utils.AttributeDiff.UpdateDivisions.js",
+    "Fermata.Utils.AttributeDiff.processorList.js",
     "Fermata.Utils.Call.js",
     "Fermata.Error.js",
+    "Fermata.Error.BeatsValueError.js",
+    "Fermata.Error.BeatTypeValueError.js",
     "Fermata.Error.NotImplementedError.js",
     "Fermata.Error.PitchRangeError.js",
     "Fermata.Error.OctaveRangeError.js",
@@ -98,6 +107,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Data.PitchEncapsulator.js",
     "Fermata.Data.Edit.js",
     "Fermata.Data.Edit.Rest.js",
+    "Fermata.Data.Measure.js",
     "Fermata.Render.js",
     "Fermata.Render.BeamType.js",
     "Fermata.Render.BeamProcessor.js",
