@@ -19,8 +19,7 @@
     };
     var new_part = {
       '$id': id,
-      'measure': [],
-      'attributes': [{'time': null, 'key': null}]
+      'measure': []
     };
     this.score['score-partwise']['part-list']['score-part'].push(new_part_info);
     this.score['score-partwise'].part.push(new_part);
@@ -41,7 +40,10 @@
 
     this.forEachPart(function (part) {
       if (!part.hasOwnProperty('measure') || part.measure === null || part.measure === undefined) {
-        part.measure = [];
+        part.measure = [{
+          'attributes': [{'time': null, 'key': null}],
+          'note': []
+        }];
       }
 
       if (idx > part.measure.length) {
