@@ -157,11 +157,11 @@ describe('Fermata.Data', function () {
 
     it('should set the beat of each part with the one passed at the measure passed', function () {
       var measure_idx = 0;
-      var beat = 4;
+      var beat = 5;
 
       fermataData.setBeat(measure_idx, beat);
       for (var i = 0, len = fermataData.score['score-partwise'].part.length; i < len; i++) {
-        assert.equal(beat, fermataData.score['score-partwise'].part[i].measure[measure_idx].attributes[0].time.beats);
+        assert.equal(beat, fermataData.score['score-partwise'].part[i].measure[measure_idx].$fermata.attributes.time.beats);
       }
     });
   });
@@ -174,11 +174,11 @@ describe('Fermata.Data', function () {
 
     it('should set the beat type of each part with the one passed at the measure passed', function () {
       var measure_idx = 0;
-      var beatType = 3;
+      var beatType = 2;
 
       fermataData.setBeatType(measure_idx, beatType);
       for (var i = 0, len = fermataData.score['score-partwise'].part.length; i < len; i++) {
-        assert.equal(beatType, fermataData.score['score-partwise'].part[i].measure[measure_idx].attributes[0].time['beat-type']);
+        assert.equal(beatType, fermataData.score['score-partwise'].part[i].measure[measure_idx].$fermata.attributes.time['beat-type']);
       }
     });
   });
