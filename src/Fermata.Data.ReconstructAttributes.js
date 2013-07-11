@@ -40,7 +40,7 @@
         initAttributesOther(previousMeasure, measure);
       }
       if (hasAttributes(measure)) {
-        fillAttributes(measure);
+        fillAllAttributes(measure);
       }
     }
   };
@@ -55,7 +55,7 @@
     measure.$fermata.attributes = Utils.Clone(defaultAttributes);
   };
 
-  var initAttributesOthers = function (previousMeasure, measure) {
+  var initAttributesOther = function (previousMeasure, measure) {
     measure.$fermata.attributes = Utils.Clone(previousMeasure.$fermata.attributes);
   };
 
@@ -63,12 +63,23 @@
     return typeof measure.attributes !== "undefined";
   };
 
-  var fillAttributes = function (measure) {
-    var p = {object: measure.attributes,
+  var fillAllAttributes = function (measure) {
+    if (typeof measure.attributes === "[object array]") {
+      for (var i = 0; i < measure.attributes.length; i++) {
+        var attributesElem = measure.attributes[i];
+        fillAttributes(attributesElem, measure.$fermata.attributes);
+      }
+    } else {
+      fillAttributes(measure.attributes, measure.$fermata.attributes);
+    }
+  };
+
+  var fillAttributes = function (sourceAttr, destAttr) {
+    var p = {object: sourceAttr,
       processes: attributesProcess,
       ctx: this,
-      out: measure.$fermata.attributes};
-    Call.exploreSubNodes(p, measure.$fermata.attributes);
+      out: destAttr};
+    Call.exploreSubNodes(p, destAttr);
   };
 
   var attributesProcess = [
