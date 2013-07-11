@@ -3,7 +3,7 @@
 
   Fermata.Utils.Call = {};
   
-  var Call = Fernata.Utils.Call;
+  var Call = Fermata.Utils.Call;
 
   Call.FuncTypes = {
     $0n: '*',
