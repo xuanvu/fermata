@@ -56,10 +56,12 @@ if (typeof require !== 'undefined') {
             "beats": "2",
             "beat-type": "4"
           },
-          "clef": {
-            "sign": "G",
-            "line": "2"
-          }
+          "clef": [
+            {
+              "sign": "G",
+              "line": "2"
+            }
+          ]
         }
       },
       note: notes
