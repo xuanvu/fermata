@@ -114,15 +114,6 @@
     },
     setTitle: function (title) {
       this.score['score-partwise']['movement-title'] = title + '';
-    },
-    reconstructAttributes: function () {
-      for (var i = 0; i < this.getParts().idx.length; i++) {
-        var part = this.getPart(i, CacheParts.IDX);
-        var measures = part.measures;
-        for (var i = 0; i < measures.length; i++) {
-          var measure = measures[i];
-        }
-      }
     }
   };
 
