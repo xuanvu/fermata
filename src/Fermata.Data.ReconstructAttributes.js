@@ -68,7 +68,7 @@
       processes: attributesProcess,
       ctx: this,
       out: measure.$fermata.attributes};
-    Call.exploreSubNodes(p, this.cur.measure.$fermata.attributes);
+    Call.exploreSubNodes(p, measure.$fermata.attributes);
   };
 
   var attributesProcess = [
