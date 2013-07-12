@@ -68,6 +68,14 @@ if (typeof require !== 'undefined') {
         assert.equal(instrument['instrument-name'], fermataData.score['score-partwise']['part-list']['score-part'][len]['score-instrument']['instrument-name']);
       });
     });
+    
+    var checkMeasureNumbers = function (measures) {
+      for (var i = 0 ; i < measures.length ; i++) {
+        var measure = measures[i];
+        
+        assert.equal(measure.$number, (i + 1).toString());
+      }
+    };
 
     describe('addMeasure()', function () {
       var fermataData;
@@ -83,19 +91,22 @@ if (typeof require !== 'undefined') {
         fermataEmptyData.addPart({'instrument-name': 'Piano'});
         part = fermataData.getPart(0);
         fermataEmptyData.addMeasure(0);
-        assert.equal(1, fermataEmptyData.score['score-partwise'].part[0].measure.length);
+        assert.equal(1, part.measure.length);
+        checkMeasureNumbers(part.measure);
       });
 
       it('should add 1 measure at the end', function () {
         var part = fermataData.getPart(0), length = part.measure.length;
         fermataData.addMeasure(length);
         assert.equal(length + 1, part.measure.length);
+        checkMeasureNumbers(part.measure);
       });
 
       it('should add 42 measure at the end', function () {
         var part = fermataData.getPart(0), length = part.measure.length;
         fermataData.addMeasure(length, 42);
         assert.equal(length + 42, part.measure.length);
+        checkMeasureNumbers(part.measure);
       });
 
       it('should set a barline on the last measure', function () {
@@ -105,6 +116,7 @@ if (typeof require !== 'undefined') {
                 1].barline.$location, 'right');
         assert.equal(part.measure[part.measure.length -
                 1].barline['bar-style'], 'light-heavy');
+        checkMeasureNumbers(part.measure);
       });
 
       it('should add 1 measure at the beginning', function () {
@@ -112,6 +124,7 @@ if (typeof require !== 'undefined') {
         fermataData.addMeasure(0, 1);
         assert.equal(length + 1, part.measure.length);
         assert.equal(part.measure[0].barline, undefined);
+        checkMeasureNumbers(part.measure);
       });
     });
 
