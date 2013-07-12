@@ -456,6 +456,10 @@ if (typeof require !== 'undefined') {
         var nbRest = 2;
         var data = getTestData(nbNote, nbRest);
         var measure = new Measure(data);
+        var expectedAttributes = getTestData(nbNote, nbRest).attributes[0];
+        expectedAttributes.time.beats = "7";
+        expectedAttributes.time["beat-type"] = "8";
+        expectedAttributes.divisions = "6";
 
         // When
         measure.setBeat(7, 8);
@@ -463,7 +467,7 @@ if (typeof require !== 'undefined') {
         measure.updateAttributes();
 
         // Then
-        assert.deepEqual(measure.data.attributes[0], measure.attributes);
+        assert.deepEqual(measure.data.attributes[0], expectedAttributes);
       });
     });
   });
