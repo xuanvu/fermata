@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  
+
   var Utils = Fermata.Utils;
 
   Fermata.Data.prototype.addPart = function (instrument, id) {
@@ -11,7 +11,7 @@
               _score['part-list']['score-part'] !== null) {
         id = 'P' +
                 (this.score['score-partwise']['part-list']['score-part'].length +
-                1);
+                        1);
       } else {
         this.score['score-partwise']['part-list']['score-part'] = [];
         this.score['score-partwise'].part = [];
@@ -39,6 +39,34 @@
     });
   };
 
+  var defaultMeasure = {
+    $number: "1",
+    note: [],
+    $fermata: {
+      attributes: {
+        divisions: "1",
+        key: {
+          "fifths": "0"
+        },
+        time: {
+          beats: 4,
+          "beat-type": 4
+        },
+        clef: [
+          {
+            sign: "G",
+            line: "2"
+          }
+        ],
+        "part-symbol": {
+          "top-staff": 1,
+          "bottom-staff": 2,
+          symbol: 'brace'
+        }
+      }
+    }
+  };
+
   Fermata.Data.prototype.addMeasure = function (idx, number) {
     if (number === undefined) {
       number = 1;
@@ -47,10 +75,7 @@
     this.forEachPart(function (part) {
       if (!part.hasOwnProperty('measure') || part.measure === null ||
               part.measure === undefined) {
-        part.measure = [{
-            'attributes': [{'time': null, 'key': null}],
-            'note': []
-          }];
+        part.measure = [Utils.Clone(defaultMeasure)];
       }
 
       if (idx > part.measure.length) {
