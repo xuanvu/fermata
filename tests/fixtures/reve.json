@@ -1,0 +1,1956 @@
+{
+  "score-partwise": {
+    "$version": "3.0",
+    "movement-title": "Après un rêve",
+    "identification": {
+      "creator": {
+        "$type": "composer",
+        "content": "Gabriel Fauré"
+      },
+      "rights": "Copyright © 2002 Recordare LLC",
+      "encoding": {
+        "software": ["Finale 2011 for Windows", "Dolet 6.0 for Finale"],
+        "encoding-date": "2011-08-10",
+        "supports": [{
+            "$attribute": "new-system",
+            "$element": "print",
+            "$type": "yes",
+            "$value": "yes"
+          }, {
+            "$attribute": "new-page",
+            "$element": "print",
+            "$type": "yes",
+            "$value": "yes"
+          }]
+      }
+    },
+    "defaults": {
+      "scaling": {
+        "millimeters": "6.35",
+        "tenths": "40"
+      },
+      "page-layout": {
+        "page-height": "1760",
+        "page-width": "1360",
+        "page-margins": {
+          "$type": "both",
+          "left-margin": "80",
+          "right-margin": "80",
+          "top-margin": "80",
+          "bottom-margin": "80"
+        }
+      },
+      "system-layout": {
+        "system-margins": {
+          "left-margin": "0",
+          "right-margin": "0"
+        },
+        "system-distance": "127",
+        "top-system-distance": "127"
+      },
+      "staff-layout": {
+        "staff-distance": "80"
+      },
+      "appearance": {
+        "line-width": [{
+            "$type": "stem",
+            "content": "1.25"
+          }, {
+            "$type": "beam",
+            "content": "5"
+          }, {
+            "$type": "staff",
+            "content": "0.8333"
+          }, {
+            "$type": "light barline",
+            "content": "2.0833"
+          }, {
+            "$type": "heavy barline",
+            "content": "6.6667"
+          }, {
+            "$type": "leger",
+            "content": "1.25"
+          }, {
+            "$type": "ending",
+            "content": "0.7682"
+          }, {
+            "$type": "wedge",
+            "content": "0.957"
+          }, {
+            "$type": "enclosure",
+            "content": "1.6667"
+          }, {
+            "$type": "tuplet bracket",
+            "content": "1.3542"
+          }],
+        "note-size": [{
+            "$type": "grace",
+            "content": "66"
+          }, {
+            "$type": "cue",
+            "content": "66"
+          }],
+        "distance": [{
+            "$type": "hyphen",
+            "content": "60"
+          }, {
+            "$type": "beam",
+            "content": "8"
+          }]
+      },
+      "music-font": {
+        "$font-family": "Maestro,engraved",
+        "$font-size": "18"
+      },
+      "word-font": {
+        "$font-family": "Times New Roman",
+        "$font-size": "8.25"
+      },
+      "lyric-font": {
+        "$font-family": "Times New Roman",
+        "$font-size": "10"
+      }
+    },
+    "part-list": {
+      "score-part": [{
+          "$id": "P1",
+          "part-name": {
+            "$print-object": "no",
+            "content": "Voice"
+          },
+          "score-instrument": {
+            "$id": "P1-I14",
+            "instrument-name": "Choir Aahs"
+          },
+          "midi-instrument": {
+            "$id": "P1-I14",
+            "midi-channel": "1",
+            "midi-program": "53",
+            "volume": "80",
+            "pan": "0"
+          }
+        }, {
+          "$id": "P2",
+          "part-name": "Piano",
+          "score-instrument": {
+            "$id": "P2-I1",
+            "instrument-name": "Grand Piano"
+          },
+          "midi-instrument": {
+            "$id": "P2-I1",
+            "midi-channel": "2",
+            "midi-program": "1",
+            "volume": "80",
+            "pan": "0"
+          },
+          "part-group": ["1"]
+        }],
+      "part-group": [{
+          "$number": "1",
+          "$type": "start",
+          "group-symbol": {
+            "$default-x": "-7",
+            "content": "brace"
+          },
+          "group-barline": "yes"
+        }, {
+          "$number": "1",
+          "$type": "stop"
+        }]
+    },
+    "part": [{
+        "$id": "P1",
+        "measure": [{
+            "$number": "1",
+            "$width": "366",
+            "print": {
+              "system-layout": {
+                "system-margins": {
+                  "left-margin": "3",
+                  "right-margin": "0"
+                },
+                "top-system-distance": "280"
+              },
+              "measure-numbering": "system"
+            },
+            "attributes": [{
+                "divisions": "24",
+                "key": {
+                  "fifths": "-3",
+                  "mode": "major"
+                },
+                "time": {
+                  "beats": "3",
+                  "beat-type": "4"
+                },
+                "clef": {
+                  "sign": "G",
+                  "line": "2"
+                }
+              }],
+            "direction": {
+              "$directive": "yes",
+              "$placement": "above",
+              "direction-type": {
+                "words": {
+                  "$default-y": "15",
+                  "$font-size": "10.5",
+                  "$font-weight": "bold",
+                  "content": "Andantino"
+                }
+              },
+              "sound": {
+                "$tempo": "60"
+              },
+              "noteAfter": 0
+            },
+            "note": [{
+                "rest": {
+                  "$measure": "yes"
+                },
+                "duration": "72",
+                "voice": "1"
+              }]
+          }, {
+            "$number": "2",
+            "$width": "245",
+            "direction": [{
+                "$placement": "above",
+                "direction-type": {
+                  "words": {
+                    "$default-x": "15",
+                    "$default-y": "15",
+                    "$font-size": "9",
+                    "$font-style": "italic",
+                    "content": "dolce"
+                  }
+                },
+                "noteAfter": 0
+              }, {
+                "$placement": "above",
+                "direction-type": {
+                  "wedge": {
+                    "$default-y": "20",
+                    "$spread": "0",
+                    "$type": "crescendo"
+                  }
+                },
+                "offset": "-8",
+                "noteBefore": 0,
+                "noteAfter": 1
+              }, {
+                "direction-type": {
+                  "wedge": {
+                    "$spread": "11",
+                    "$type": "stop"
+                  }
+                },
+                "offset": "-11",
+                "noteBefore": 2
+              }],
+            "note": [{
+                "$default-x": "27",
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "24",
+                "voice": "1",
+                "type": "quarter",
+                "stem": {
+                  "$default-y": "6",
+                  "content": "up"
+                },
+                "lyric": {
+                  "$default-y": "-80",
+                  "$number": "1",
+                  "syllabic": "single",
+                  "text": "Dans"
+                }
+              }, {
+                "$default-x": "99",
+                "pitch": {
+                  "step": "C",
+                  "octave": "5"
+                },
+                "duration": "24",
+                "voice": "1",
+                "type": "quarter",
+                "stem": {
+                  "$default-y": "-50.5",
+                  "content": "down"
+                },
+                "lyric": {
+                  "$default-y": "-80",
+                  "$number": "1",
+                  "syllabic": "single",
+                  "text": "un"
+                }
+              }, {
+                "$default-x": "171",
+                "pitch": {
+                  "step": "D",
+                  "octave": "5"
+                },
+                "duration": "24",
+                "voice": "1",
+                "type": "quarter",
+                "stem": {
+                  "$default-y": "-45.5",
+                  "content": "down"
+                },
+                "lyric": {
+                  "$default-y": "-80",
+                  "$number": "1",
+                  "syllabic": "begin",
+                  "text": "som"
+                }
+              }]
+          }, {
+            "$number": "3",
+            "$width": "303",
+            "note": [{
+                "$default-x": "26",
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "5"
+                },
+                "duration": "24",
+                "tie": {
+                  "$type": "start"
+                },
+                "voice": "1",
+                "type": "quarter",
+                "stem": {
+                  "$default-y": "-40.5",
+                  "content": "down"
+                },
+                "notations": {
+                  "tied": {
+                    "$type": "start"
+                  }
+                },
+                "lyric": {
+                  "$default-y": "-80",
+                  "$number": "1",
+                  "syllabic": "end",
+                  "text": "meil",
+                  "extend": {}
+                }
+              }, {
+                "$default-x": "92",
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "5"
+                },
+                "duration": "8",
+                "tie": {
+                  "$type": "stop"
+                },
+                "voice": "1",
+                "type": "eighth",
+                "time-modification": {
+                  "actual-notes": "3",
+                  "normal-notes": "2"
+                },
+                "stem": {
+                  "$default-y": "-40",
+                  "content": "down"
+                },
+                "beam": {
+                  "$number": "1",
+                  "content": "begin"
+                },
+                "notations": {
+                  "tied": {
+                    "$type": "stop"
+                  },
+                  "tuplet": {
+                    "$bracket": "no",
+                    "$number": "1",
+                    "$placement": "above",
+                    "$type": "start"
+                  }
+                }
+              }, {
+                "$default-x": "122",
+                "pitch": {
+                  "step": "D",
+                  "octave": "5"
+                },
+                "duration": "8",
+                "voice": "1",
+                "type": "eighth",
+                "time-modification": {
+                  "actual-notes": "3",
+                  "normal-notes": "2"
+                },
+                "stem": {
+                  "$default-y": "-42",
+                  "content": "down"
+                },
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                },
+                "lyric": {
+                  "$default-y": "-80",
+                  "$number": "1",
+                  "syllabic": "single",
+                  "text": "que"
+                }
+              }, {
+                "$default-x": "162",
+                "pitch": {
+                  "step": "C",
+                  "octave": "5"
+                },
+                "duration": "8",
+                "voice": "1",
+                "type": "eighth",
+                "time-modification": {
+                  "actual-notes": "3",
+                  "normal-notes": "2"
+                },
+                "stem": {
+                  "$default-y": "-45",
+                  "content": "down"
+                },
+                "beam": {
+                  "$number": "1",
+                  "content": "end"
+                },
+                "notations": {
+                  "tuplet": {
+                    "$number": "1",
+                    "$type": "stop"
+                  }
+                },
+                "lyric": {
+                  "$default-y": "-80",
+                  "$number": "1",
+                  "syllabic": "begin",
+                  "text": "char"
+                }
+              }, {
+                "$default-x": "205",
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "5"
+                },
+                "duration": "8",
+                "voice": "1",
+                "type": "eighth",
+                "time-modification": {
+                  "actual-notes": "3",
+                  "normal-notes": "2"
+                },
+                "stem": {
+                  "$default-y": "-40",
+                  "content": "down"
+                },
+                "beam": {
+                  "$number": "1",
+                  "content": "begin"
+                },
+                "notations": {
+                  "tuplet": {
+                    "$bracket": "no",
+                    "$number": "1",
+                    "$placement": "above",
+                    "$type": "start"
+                  }
+                },
+                "lyric": {
+                  "$default-y": "-80",
+                  "$number": "1",
+                  "syllabic": "end",
+                  "text": "mait"
+                }
+              }, {
+                "$default-x": "244",
+                "pitch": {
+                  "step": "D",
+                  "octave": "5"
+                },
+                "duration": "8",
+                "voice": "1",
+                "type": "eighth",
+                "time-modification": {
+                  "actual-notes": "3",
+                  "normal-notes": "2"
+                },
+                "stem": {
+                  "$default-y": "-43",
+                  "content": "down"
+                },
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                },
+                "lyric": {
+                  "$default-y": "-80",
+                  "$number": "1",
+                  "syllabic": "single",
+                  "text": "ton"
+                }
+              }, {
+                "$default-x": "276",
+                "pitch": {
+                  "step": "C",
+                  "octave": "5"
+                },
+                "duration": "8",
+                "voice": "1",
+                "type": "eighth",
+                "time-modification": {
+                  "actual-notes": "3",
+                  "normal-notes": "2"
+                },
+                "stem": {
+                  "$default-y": "-45",
+                  "content": "down"
+                },
+                "beam": {
+                  "$number": "1",
+                  "content": "end"
+                },
+                "notations": {
+                  "tuplet": {
+                    "$number": "1",
+                    "$type": "stop"
+                  }
+                },
+                "lyric": {
+                  "$default-y": "-80",
+                  "$number": "1",
+                  "syllabic": "begin",
+                  "text": "i"
+                }
+              }]
+          }, {
+            "$number": "4",
+            "$width": "284",
+            "direction": [{
+                "$placement": "above",
+                "direction-type": {
+                  "wedge": {
+                    "$default-y": "20",
+                    "$spread": "11",
+                    "$type": "diminuendo"
+                  }
+                },
+                "offset": "3",
+                "noteAfter": 0
+              }, {
+                "direction-type": {
+                  "wedge": {
+                    "$spread": "0",
+                    "$type": "stop"
+                  }
+                },
+                "offset": "2",
+                "noteBefore": 0,
+                "noteAfter": 1
+              }],
+            "note": [{
+                "$default-x": "27",
+                "pitch": {
+                  "step": "C",
+                  "octave": "5"
+                },
+                "duration": "48",
+                "voice": "1",
+                "type": "half",
+                "stem": {
+                  "$default-y": "-50.5",
+                  "content": "down"
+                },
+                "lyric": {
+                  "$default-y": "-80",
+                  "$number": "1",
+                  "syllabic": "middle",
+                  "text": "ma"
+                }
+              }, {
+                "$default-x": "197",
+                "pitch": {
+                  "step": "B",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "24",
+                "voice": "1",
+                "type": "quarter",
+                "stem": {
+                  "$default-y": "-55.5",
+                  "content": "down"
+                },
+                "lyric": {
+                  "$default-y": "-80",
+                  "$number": "1",
+                  "syllabic": "end",
+                  "text": "ge"
+                }
+              }]
+          }]
+      }, {
+        "$id": "P2",
+        "measure": [{
+            "$number": "1",
+            "$width": "366",
+            "print": {
+              "staff-layout": [{
+                  "$number": "1",
+                  "staff-distance": "65"
+                }, {
+                  "$number": "2",
+                  "staff-distance": "48"
+                }],
+              "measure-numbering": "none"
+            },
+            "attributes": [{
+                "divisions": "2",
+                "key": {
+                  "fifths": "-3",
+                  "mode": "major"
+                },
+                "time": {
+                  "beats": "3",
+                  "beat-type": "4"
+                },
+                "staves": "2",
+                "clef": [{
+                    "$number": "1",
+                    "sign": "G",
+                    "line": "2"
+                  }, {
+                    "$number": "2",
+                    "sign": "F",
+                    "line": "4"
+                  }]
+              }],
+            "direction": {
+              "$placement": "below",
+              "direction-type": {
+                "dynamics": {
+                  "$default-x": "129",
+                  "$default-y": "-75",
+                  "$halign": "left",
+                  "pp": {}
+                }
+              },
+              "staff": "1",
+              "sound": {
+                "$dynamics": "40"
+              },
+              "noteAfter": 0
+            },
+            "note": [{
+                "$default-x": "140",
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "3",
+                  "content": "up"
+                },
+                "staff": "1",
+                "beam": {
+                  "$number": "1",
+                  "content": "begin"
+                }
+              }, {
+                "$default-x": "140",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "140",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "178",
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "3",
+                  "content": "up"
+                },
+                "staff": "1",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "178",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "178",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "214",
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "3",
+                  "content": "up"
+                },
+                "staff": "1",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "214",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "214",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "252",
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "3",
+                  "content": "up"
+                },
+                "staff": "1",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "252",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "252",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "289",
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "3",
+                  "content": "up"
+                },
+                "staff": "1",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "289",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "289",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "327",
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "3",
+                  "content": "up"
+                },
+                "staff": "1",
+                "beam": {
+                  "$number": "1",
+                  "content": "end"
+                }
+              }, {
+                "$default-x": "327",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "327",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "rest": {
+                  "$measure": "yes"
+                },
+                "duration": "6",
+                "voice": "2",
+                "staff": "2"
+              }],
+            "backup": {
+              "duration": "6"
+            }
+          }, {
+            "$number": "2",
+            "$width": "245",
+            "note": [{
+                "$default-x": "27",
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "3",
+                  "content": "up"
+                },
+                "staff": "1",
+                "beam": {
+                  "$number": "1",
+                  "content": "begin"
+                }
+              }, {
+                "$default-x": "27",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "27",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "63",
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "3",
+                  "content": "up"
+                },
+                "staff": "1",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "63",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "63",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "99",
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "3",
+                  "content": "up"
+                },
+                "staff": "1",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "99",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "99",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "135",
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "3",
+                  "content": "up"
+                },
+                "staff": "1",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "135",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "135",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "171",
+                "pitch": {
+                  "step": "B",
+                  "alter": "-1",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "3",
+                  "content": "up"
+                },
+                "staff": "1",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "171",
+                "chord": {},
+                "pitch": {
+                  "step": "D",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "183",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "171",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "207",
+                "pitch": {
+                  "step": "B",
+                  "alter": "-1",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "3",
+                  "content": "up"
+                },
+                "staff": "1",
+                "beam": {
+                  "$number": "1",
+                  "content": "end"
+                }
+              }, {
+                "$default-x": "207",
+                "chord": {},
+                "pitch": {
+                  "step": "D",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "219",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "207",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "rest": {
+                  "$measure": "yes"
+                },
+                "duration": "6",
+                "voice": "2",
+                "staff": "2"
+              }],
+            "backup": {
+              "duration": "6"
+            }
+          }, {
+            "$number": "3",
+            "$width": "303",
+            "note": [{
+                "$default-x": "26",
+                "pitch": {
+                  "step": "A",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "accidental": "natural",
+                "stem": {
+                  "$default-y": "91",
+                  "content": "up"
+                },
+                "staff": "2",
+                "beam": {
+                  "$number": "1",
+                  "content": "begin"
+                }
+              }, {
+                "$default-x": "26",
+                "chord": {},
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "26",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "26",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "59",
+                "pitch": {
+                  "step": "A",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "91",
+                  "content": "up"
+                },
+                "staff": "2",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "59",
+                "chord": {},
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "59",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "59",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "92",
+                "pitch": {
+                  "step": "A",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "91",
+                  "content": "up"
+                },
+                "staff": "2",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "92",
+                "chord": {},
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "92",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "92",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "142",
+                "pitch": {
+                  "step": "A",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "91",
+                  "content": "up"
+                },
+                "staff": "2",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "142",
+                "chord": {},
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "142",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "142",
+                "chord": {},
+                "pitch": {
+                  "step": "G",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "205",
+                "pitch": {
+                  "step": "A",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "91",
+                  "content": "up"
+                },
+                "staff": "2",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "205",
+                "chord": {},
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "205",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "217",
+                "chord": {},
+                "pitch": {
+                  "step": "F",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "260",
+                "pitch": {
+                  "step": "A",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "91",
+                  "content": "up"
+                },
+                "staff": "2",
+                "beam": {
+                  "$number": "1",
+                  "content": "end"
+                }
+              }, {
+                "$default-x": "260",
+                "chord": {},
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "260",
+                "chord": {},
+                "pitch": {
+                  "step": "E",
+                  "alter": "-1",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "272",
+                "chord": {},
+                "pitch": {
+                  "step": "F",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "26",
+                "pitch": {
+                  "step": "F",
+                  "octave": "1"
+                },
+                "duration": "6",
+                "voice": "2",
+                "type": "half",
+                "dot": {},
+                "stem": {
+                  "$default-y": "-105.5",
+                  "content": "down"
+                },
+                "staff": "2"
+              }, {
+                "$default-x": "26",
+                "chord": {},
+                "pitch": {
+                  "step": "F",
+                  "octave": "2"
+                },
+                "duration": "6",
+                "voice": "2",
+                "type": "half",
+                "dot": {},
+                "stem": "down",
+                "staff": "2"
+              }],
+            "backup": {
+              "duration": "6"
+            }
+          }, {
+            "$number": "4",
+            "$width": "284",
+            "note": [{
+                "$default-x": "27",
+                "pitch": {
+                  "step": "A",
+                  "alter": "-1",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "accidental": "flat",
+                "stem": {
+                  "$default-y": "88.5",
+                  "content": "up"
+                },
+                "staff": "2",
+                "beam": {
+                  "$number": "1",
+                  "content": "begin"
+                }
+              }, {
+                "$default-x": "27",
+                "chord": {},
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "39",
+                "chord": {},
+                "pitch": {
+                  "step": "D",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "27",
+                "chord": {},
+                "pitch": {
+                  "step": "F",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "69",
+                "pitch": {
+                  "step": "A",
+                  "alter": "-1",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "88.5",
+                  "content": "up"
+                },
+                "staff": "2",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "69",
+                "chord": {},
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "82",
+                "chord": {},
+                "pitch": {
+                  "step": "D",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "69",
+                "chord": {},
+                "pitch": {
+                  "step": "F",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "112",
+                "pitch": {
+                  "step": "A",
+                  "alter": "-1",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "88.5",
+                  "content": "up"
+                },
+                "staff": "2",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "112",
+                "chord": {},
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "124",
+                "chord": {},
+                "pitch": {
+                  "step": "D",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "112",
+                "chord": {},
+                "pitch": {
+                  "step": "F",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "154",
+                "pitch": {
+                  "step": "A",
+                  "alter": "-1",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "88.5",
+                  "content": "up"
+                },
+                "staff": "2",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "154",
+                "chord": {},
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "167",
+                "chord": {},
+                "pitch": {
+                  "step": "D",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "154",
+                "chord": {},
+                "pitch": {
+                  "step": "F",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "197",
+                "pitch": {
+                  "step": "A",
+                  "alter": "-1",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "88.5",
+                  "content": "up"
+                },
+                "staff": "2",
+                "beam": {
+                  "$number": "1",
+                  "content": "continue"
+                }
+              }, {
+                "$default-x": "197",
+                "chord": {},
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "209",
+                "chord": {},
+                "pitch": {
+                  "step": "D",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "197",
+                "chord": {},
+                "pitch": {
+                  "step": "F",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "239",
+                "pitch": {
+                  "step": "A",
+                  "alter": "-1",
+                  "octave": "3"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": {
+                  "$default-y": "88.5",
+                  "content": "up"
+                },
+                "staff": "2",
+                "beam": {
+                  "$number": "1",
+                  "content": "end"
+                }
+              }, {
+                "$default-x": "239",
+                "chord": {},
+                "pitch": {
+                  "step": "C",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "252",
+                "chord": {},
+                "pitch": {
+                  "step": "D",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "2"
+              }, {
+                "$default-x": "239",
+                "chord": {},
+                "pitch": {
+                  "step": "F",
+                  "octave": "4"
+                },
+                "duration": "1",
+                "voice": "1",
+                "type": "eighth",
+                "stem": "up",
+                "staff": "1"
+              }, {
+                "$default-x": "27",
+                "pitch": {
+                  "step": "B",
+                  "alter": "-1",
+                  "octave": "1"
+                },
+                "duration": "6",
+                "voice": "2",
+                "type": "half",
+                "dot": {},
+                "stem": {
+                  "$default-y": "-90.5",
+                  "content": "down"
+                },
+                "staff": "2"
+              }, {
+                "$default-x": "27",
+                "chord": {},
+                "pitch": {
+                  "step": "B",
+                  "alter": "-1",
+                  "octave": "2"
+                },
+                "duration": "6",
+                "voice": "2",
+                "type": "half",
+                "dot": {},
+                "stem": "down",
+                "staff": "2"
+              }],
+            "backup": {
+              "duration": "6"
+            }
+          }]
+      }]
+  }
+}
