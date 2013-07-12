@@ -224,6 +224,7 @@
   Measure.prototype.updateAttributes = function () {
     if (this.isRendered()) {
       this.data.attributes = [Utils.Clone(this.attributes)];
+      Utils.epureAttributes(this.data.attributes[0]);
     }
   };
 
@@ -234,6 +235,7 @@
 
     var result = attributeDiff.getResult();
     this.data.attributes = [result];
+    Utils.epureAttributes(this.data.attributes[0]);
   };
 
 }).call(this);
