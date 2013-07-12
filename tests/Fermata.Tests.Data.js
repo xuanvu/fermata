@@ -224,17 +224,13 @@ if (typeof require !== 'undefined') {
 
 
     describe('#saveAttributes', function () {
-      var fermataData;
-      beforeEach(function () {
-        fermataData = new Fermata.Data(helloWorld);
-      });
-
       it('hello world', function () {
         // Given
+        var fermataData = new Fermata.Data(helloWorld);
         var expectedAttributes = [];
         var actualAttributes = [];
         extractAttributes(fermataData.getParts().idx, expectedAttributes);
-        
+
         // When
         fermataData.saveAttributes();
 
