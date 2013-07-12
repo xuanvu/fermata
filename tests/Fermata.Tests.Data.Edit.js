@@ -68,11 +68,11 @@ if (typeof require !== 'undefined') {
         assert.equal(instrument['instrument-name'], fermataData.score['score-partwise']['part-list']['score-part'][len]['score-instrument']['instrument-name']);
       });
     });
-    
+
     var checkMeasureNumbers = function (measures) {
-      for (var i = 0 ; i < measures.length ; i++) {
+      for (var i = 0; i < measures.length; i++) {
         var measure = measures[i];
-        
+
         assert.equal(measure.$number, (i + 1).toString());
       }
     };
@@ -141,6 +141,20 @@ if (typeof require !== 'undefined') {
         fermataData.removeMeasure(10, 24);
         assert.equal(length + 42 - 24, part.measure.length);
         checkMeasureNumbers(part.measure);
+      });
+    });
+
+    describe('basic edition', function () {
+      it('create score, add measures and set beat', function () {
+        var score = new Fermata.Data();
+        score.setTitle("test score");
+
+        score.addPart({
+          'instrument-name': "piano"
+        });
+
+        score.addMeasure(0, 10);
+        score.setBeat(0, 5);
       });
     });
   });
