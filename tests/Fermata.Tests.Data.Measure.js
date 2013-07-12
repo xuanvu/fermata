@@ -24,13 +24,15 @@ if (typeof require !== 'undefined') {
 
   var getTestData = function (nbNote, nbRest) {
     var measure = {
-      attributes: {
-        divisions: 1,
-        time: {
-          beats: nbNote + nbRest,
-          "beat-type": 4
+      attributes: [
+        {
+          divisions: 1,
+          time: {
+            beats: nbNote + nbRest,
+            "beat-type": 4
+          }
         }
-      },
+      ],
       note: [],
       $fermata: {
         attributes: {
@@ -107,8 +109,8 @@ if (typeof require !== 'undefined') {
         measure.initBeat(beats, beatType);
 
         // Then
-        assert.strictEqual(data.attributes.time.beats, beats);
-        assert.strictEqual(data.attributes.time["beat-type"], beatType);
+        assert.strictEqual(data.attributes[0].time.beats, beats);
+        assert.strictEqual(data.attributes[0].time["beat-type"], beatType);
       });
 
       it("bad beats value: string", function () {
@@ -309,7 +311,7 @@ if (typeof require !== 'undefined') {
 
         // Then
         assert.equal(measure.getDivisions(), expectedDivisions);
-        for (var i = 0 ; i < data.note.length ; i++) {
+        for (var i = 0; i < data.note.length; i++) {
           var note = data.note[i];
           assert.equal(note.duration, expectedDuration);
         }
@@ -453,7 +455,7 @@ if (typeof require !== 'undefined') {
         measure.updateAttributes();
 
         // Then
-        assert.deepEqual(measure.data.attributes, measure.attributes);
+        assert.deepEqual(measure.data.attributes[0], measure.attributes);
       });
     });
   });
