@@ -119,7 +119,7 @@
     setFifths: function (measure_idx, fifths) {
       for (var i = 0, len = this.score['score-partwise'].part.length; i <
               len; i++) {
-        this.score['score-partwise'].part[i].measure[measure_idx].attributes[0].key.fifths = fifths +
+        this.score['score-partwise'].part[i].measure[measure_idx].$fermata.attributes.key.fifths = fifths +
                 '';
       }
     },
