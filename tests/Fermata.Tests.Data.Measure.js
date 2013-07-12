@@ -26,10 +26,10 @@ if (typeof require !== 'undefined') {
     var measure = {
       attributes: [
         {
-          divisions: 1,
+          divisions: "1",
           time: {
-            beats: nbNote + nbRest,
-            "beat-type": 4
+            beats: (nbNote + nbRest).toString()),
+            "beat-type": "4"
           }
         }
       ],
@@ -51,7 +51,7 @@ if (typeof require !== 'undefined') {
         }
       }
     };
-
+    
     var i = 0;
     for (i = 0; i < nbNote; i++) {
       var note = createPitchNote();
