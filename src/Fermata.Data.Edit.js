@@ -81,6 +81,7 @@
       if (idx > part.measure.length) {
         idx = part.measure.length;
       }
+// <<<<<<< HEAD
 
       var baseAttributes;
       if (part.measure.length === 0) {
@@ -92,15 +93,23 @@
       }
       for (var i = 0; i < number; i++) {
         var measure = {
-          '$number': idx + number,
+          '$number': (idx + i + 1).toString(),
           'note': [],
           $fermata: {
             attributes: Utils.Clone(baseAttributes)
           }
         };
 
-        part.measure.splice(idx, 0, measure);
+        part.measure.splice(idx + i + 1, 0, measure);
+// =======
+//       var i = 0;
+//       for (i = 0 ; i < number ; i++) {
+//         part.measure.splice(idx + i, 0, {'$number': (idx + i + 1).toString(), 'note': [] });
+// >>>>>>> 2e6a76eb1ec40a291d292a0bcacbda7fd36a1d01
         Fermata.Data.prototype.fillWithRest(part, idx);
+      }
+      for (i = number + idx ; i < part.measure.length ; i++) {
+        part.measure[i].$number = (1 + i).toString();
       }
 
       if (idx + i >= part.measure.length) {
@@ -131,6 +140,10 @@
     this.forEachPart(function (part) {
       if (idx >= 0 && idx < part.measure.length) {
         part.measure.splice(idx, number);
+      }
+
+      for (var i = idx; i < part.measure.length; i++) {
+        part.measure[i].$number = (i + 1).toString();
       }
     });
   };
