@@ -49,10 +49,13 @@
       if (idx > part.measure.length) {
         idx = part.measure.length;
       }
-
-      for (var i = 0 ; i < number ; i++) {
-        part.measure.splice(idx, 0, {'$number': idx + number, 'note': [] });
+      var i = 0;
+      for (i = 0 ; i < number ; i++) {
+        part.measure.splice(idx + i, 0, {'$number': (idx + i + 1).toString(), 'note': [] });
         Fermata.Data.prototype.fillWithRest(part, idx);
+      }
+      for (i = number + idx ; i < part.measure.length ; i++) {
+        part.measure[i].$number = (1 + i).toString();
       }
 
       if (idx + i >= part.measure.length) {
