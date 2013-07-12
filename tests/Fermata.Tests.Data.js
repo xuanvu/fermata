@@ -17,6 +17,9 @@ if (typeof require !== 'undefined') {
 }
 
 (function () {
+
+  var Utils = Fermata.Utils;
+
   describe('Fermata.Data', function () {
     var helloWorld;
     beforeEach(function (done) {
@@ -217,6 +220,45 @@ if (typeof require !== 'undefined') {
         fermataData.setTitle(title);
         assert.equal(title, fermataData.score['score-partwise']['movement-title']);
       });
+    });
+
+
+    describe('#saveAttributes', function () {
+      var fermataData;
+      beforeEach(function () {
+        fermataData = new Fermata.Data(helloWorld);
+      });
+
+      it('hello world', function () {
+        // Given
+        var expectedAttributes = [];
+        var actualAttributes = [];
+        extractAttributes(fermataData.getParts().idx, expectedAttributes);
+        
+        // When
+        fermataData.saveAttributes();
+
+        // Then
+        extractAttributes(fermataData.getParts().idx, actualAttributes);
+        assert.deepEqual(actualAttributes, expectedAttributes);
+      });
+
+      var extractAttributes = function (parts, dest) {
+        for (var i = 0; i < parts.length; i++) {
+          var part = parts[i];
+          var attributesTab = [];
+          expectedAttributes.push(attributesTab);
+          var measures = part.measure;
+          for (var j = 0; j < measures.length; j++) {
+            var measure = measures[j];
+            if (typeof measure.attributes !== "undefined") {
+              attributesTab.push(Utils.Clone(measure.attributes[0]));
+            } else {
+              attributesTab.push(null);
+            }
+          }
+        }
+      };
     });
   });
 }).call(this);
