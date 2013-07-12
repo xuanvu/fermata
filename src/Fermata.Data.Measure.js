@@ -233,6 +233,8 @@
     filterDefaultAttributes(attr);
     if (attr.clef.length === 1) {
       attr.clef = attr.clef[0];
+    } else if (attr.clef.length === 0) {
+      delete attr.clef;
     }
   };
 
