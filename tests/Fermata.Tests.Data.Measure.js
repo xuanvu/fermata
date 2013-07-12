@@ -40,10 +40,18 @@ if (typeof require !== 'undefined') {
           time: {
             beats: nbNote + nbRest,
             "beat-type": 4
+          },
+          clef: [],
+          staves: "1",
+          "part-symbol": {
+            "top-staff": 1,
+            "bottom-staff": 2,
+            symbol: 'brace'
           }
         }
       }
     };
+
     var i = 0;
     for (i = 0; i < nbNote; i++) {
       var note = createPitchNote();
