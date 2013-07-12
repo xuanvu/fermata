@@ -28,7 +28,7 @@ if (typeof require !== 'undefined') {
         {
           divisions: "1",
           time: {
-            beats: (nbNote + nbRest).toString()),
+            beats: (nbNote + nbRest).toString(),
             "beat-type": "4"
           }
         }
