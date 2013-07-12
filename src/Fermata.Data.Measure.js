@@ -249,7 +249,7 @@
     if (attr.staves === defaultStaves) {
       delete attr.staves;
     }
-    if (isDefaultPartSybol(attr["part-symbol"])) {
+    if (isDefaultPartSymbol(attr["part-symbol"])) {
       delete attr["part-symbol"];
     }
   };
