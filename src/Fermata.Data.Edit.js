@@ -59,7 +59,7 @@
 
       var baseAttributes;
       if (idx === 0) {
-        baseAttributes = part.measure[1].$fermata.attributes;
+        baseAttributes = part.measure[0].$fermata.attributes;
       } else {
         baseAttributes = part.measure[idx - 1].$fermata.attributes;
       }
