@@ -278,8 +278,12 @@
     var attributeDiff = new AttributeDiff(previousAttributes, attributes);
 
     var result = attributeDiff.getResult();
-    this.data.attributes = [result];
-    Utils.epureAttributes(this.data.attributes[0]);
+    if (result !== null) {
+      this.data.attributes = [result];
+      Utils.epureAttributes(this.data.attributes[0]);
+    } else if (typeof this.data.attributes !== "undefined") {
+      delete this.data.attributes;
+    }
   };
 
 }).call(this);

@@ -255,6 +255,8 @@ if (typeof require !== 'undefined') {
 
         // Then
         extractAttributes(fermataData.getParts().idx, actualAttributes);
+        console.log(expectedAttributes);
+        console.log(actualAttributes);
         assert.deepEqual(actualAttributes, expectedAttributes);
       });
 
