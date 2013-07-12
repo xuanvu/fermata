@@ -257,7 +257,7 @@
   var isDefaultPartSymbol = function (partSymbol) {
     var defaultValues = [
       {key: "top-staff", value: "1"},
-      {key: "bottom_staff", value: "2"},
+      {key: "bottom-staff", value: "2"},
       {key: "symbol", value: "brace"}
     ];
 
