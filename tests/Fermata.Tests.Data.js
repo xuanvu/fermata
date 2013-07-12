@@ -247,7 +247,7 @@ if (typeof require !== 'undefined') {
         for (var i = 0; i < parts.length; i++) {
           var part = parts[i];
           var attributesTab = [];
-          expectedAttributes.push(attributesTab);
+          dest.push(attributesTab);
           var measures = part.measure;
           for (var j = 0; j < measures.length; j++) {
             var measure = measures[j];
