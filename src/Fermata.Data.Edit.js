@@ -58,10 +58,10 @@
       }
 
       var baseAttributes;
-      if (number === 0) {
+      if (idx === 0) {
         baseAttributes = part.measure[1].$fermata.attributes;
       } else {
-        baseAttributes = part.measure[number - 1].$fermata.attributes;
+        baseAttributes = part.measure[idx - 1].$fermata.attributes;
       }
       for (var i = 0; i < number; i++) {
         var measure = {
