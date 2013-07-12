@@ -1,5 +1,9 @@
 from vexflow_scons import *
 
+otherModules_sources = [
+  "jsondiffpatch/jsondiffpatch.min"
+];
+
 vexflow_sources = [
     "header.js",
     "vex.js",
@@ -117,7 +121,9 @@ fermata_sources = [
     ]
 
 vexflow_sources_deps = ['../../deps/vexflow/src/' + s for s in vexflow_sources]
-sources = vexflow_sources_deps + fermata_sources
+otherModules_sources = ['../../node_modules/' + s for S in otherModules_sources]
+
+sources = vexflow_sources_deps + fermata_sources + otherModules_sources
 
 Import('dbg opt node')
 build_and_stamp("fermata.js", sources, dbg)
