@@ -226,12 +226,12 @@
       this.data.attributes = [Utils.Clone(this.attributes)];
     }
   };
-  
+
   Measure.prototype.updateFromPrevious = function (previousMeasureData) {
     var previousAttributes = previousMeasureData.$fermata.attributes;
     var attributes = this.attributes;
     var attributeDiff = new AttributeDiff(previousAttributes, attributes);
-    
+
     var result = attributeDiff.getResult();
     this.data.attributes = [result];
   };
