@@ -176,7 +176,8 @@
   var attributesClefProcess = [
     {key: 'sign', type: Call.FuncTypes.$1, dataType: 'string'},
     {key: 'line', type: Call.FuncTypes.$01, dataType: 'int'},
-    {key: 'clef-octave-change', type: Call.FuncTypes.$01, dataType: 'int', dataKey: 'clef-octave-change'}
+    {key: 'clef-octave-change', type: Call.FuncTypes.$01, dataType: 'int', dataKey: 'clef-octave-change'},
+    {key: '$number', type: Call.FuncTypes.$01, dataType: 'int', dataKey: '$number'}
   ];
 
 }).call(this);
