@@ -108,6 +108,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Data.Edit.js",
     "Fermata.Data.Edit.Rest.js",
     "Fermata.Data.Measure.js",
+    "Fermata.Data.saveAttributes.js",
     "Fermata.Render.js",
     "Fermata.Render.BeamType.js",
     "Fermata.Render.BeamProcessor.js",
