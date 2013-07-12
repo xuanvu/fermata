@@ -243,6 +243,21 @@ if (typeof require !== 'undefined') {
         assert.deepEqual(actualAttributes, expectedAttributes);
       });
 
+      it('reve', function () {
+        // Given
+        var fermataData = new Fermata.Data(reve);
+        var expectedAttributes = [];
+        var actualAttributes = [];
+        extractAttributes(fermataData.getParts().idx, expectedAttributes);
+
+        // When
+        fermataData.saveAttributes();
+
+        // Then
+        extractAttributes(fermataData.getParts().idx, actualAttributes);
+        assert.deepEqual(actualAttributes, expectedAttributes);
+      });
+
       var extractAttributes = function (parts, dest) {
         for (var i = 0; i < parts.length; i++) {
           var part = parts[i];
