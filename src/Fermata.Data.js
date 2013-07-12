@@ -117,11 +117,9 @@
       });
     },
     setFifths: function (measure_idx, fifths) {
-      for (var i = 0, len = this.score['score-partwise'].part.length; i <
-              len; i++) {
-        this.score['score-partwise'].part[i].measure[measure_idx].$fermata.attributes.key.fifths = fifths +
-                '';
-      }
+      this.forEachPart(function (part) {
+        part.measure[measure_idx].$fermata.attributes.key.fifths = parseInt(fifths, 10);
+      });
     },
     setTitle: function (title) {
       this.score['score-partwise']['movement-title'] = title + '';
