@@ -22,7 +22,11 @@ if (typeof require !== 'undefined') {
 
   describe('Fermata.Data', function () {
     var helloWorld;
+    var reve;
     beforeEach(function (done) {
+      Fermata.Tests.Utils.LoadJSONFixture('reve.min.json', function (fixture) {
+        reve = fixture;
+      });
       Fermata.Tests.Utils.LoadJSONFixture('hello-world.min.json', function (fixture) {
         helloWorld = fixture;
         done();
