@@ -1,6 +1,7 @@
 (function () {
   "use strict";
 
+  var AttributeDiff = Fermata.Utils.AttributeDiff;
   var BeatsValueError = Fermata.Error.BeatsValueError;
   var BeatTypeValueError = Fermata.Error.BeatTypeValueError;
   var SoundType = Fermata.Values.SoundType;
@@ -224,6 +225,15 @@
     if (this.isRendered()) {
       this.data.attributes = Utils.Clone(this.attributes);
     }
+  };
+  
+  Measure.prototype.updateFromPrevious = function (previousMeasureData) {
+    var previousAttributes = previousMeasureData.$fermata.attributes;
+    var attributes = this.attributes;
+    var attributeDiff = new AttributeDiff(previousAttributes, attributes);
+    
+    var result = attributeDiff.getResult();
+    this.data.attributes = [result];
   };
 
 }).call(this);
