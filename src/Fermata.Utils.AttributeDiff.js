@@ -12,8 +12,8 @@
   var AttributeDiff = Fermata.Utils.AttributeDiff;
 
   AttributeDiff.prototype.fillResult = function () {
-    for (var i = 0; i < this.processorList.length; i++) {
-      var attributesProcessor = this.processorList[i];
+    for (var i = 0; i < AttributeDiff.processorList.length; i++) {
+      var attributesProcessor = AttributeDiff.processorList[i];
 
       if (attributesProcessor.canProcess(this.delta)) {
         attributesProcessor.process(this.attr1, this.attr2, this.delta, this.result);
