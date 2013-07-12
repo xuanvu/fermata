@@ -84,7 +84,7 @@
 
       var baseAttributes;
       if (part.measure.length === 0) {
-        baseAttributes = defaultMeasure;
+        baseAttributes = defaultMeasure.$fermata.attributes;
       } else if (idx === 0) {
         baseAttributes = part.measure[0].$fermata.attributes;
       } else {
