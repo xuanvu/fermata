@@ -1,14 +1,15 @@
 if (typeof require !== 'undefined') {
   var Fermata,
-      fs = require('fs'),
-      assert = require('assert');
+          fs = require('fs'),
+          assert = require('assert');
 
   // Use Scons build version or devel version (using node vm)
   if (fs.existsSync(__dirname + '/../build/fermata/fermata.node.js')) {
     Fermata = require('..');
   }
   else {
-    Fermata = require((process.env['FERMATA_COV'] ? '../src-cov' : '../src') + '/Fermata.Dev.Node.js');
+    Fermata = require((process.env['FERMATA_COV'] ? '../src-cov' : '../src') +
+            '/Fermata.Dev.Node.js');
   }
 
   // Test utils
@@ -160,7 +161,8 @@ describe('Fermata.Data', function () {
       var beat = 5;
 
       fermataData.setBeat(measure_idx, beat);
-      for (var i = 0, len = fermataData.score['score-partwise'].part.length; i < len; i++) {
+      for (var i = 0, len = fermataData.score['score-partwise'].part.length; i <
+              len; i++) {
         assert.equal(beat, fermataData.score['score-partwise'].part[i].measure[measure_idx].$fermata.attributes.time.beats);
       }
     });
@@ -177,7 +179,8 @@ describe('Fermata.Data', function () {
       var beatType = 2;
 
       fermataData.setBeatType(measure_idx, beatType);
-      for (var i = 0, len = fermataData.score['score-partwise'].part.length; i < len; i++) {
+      for (var i = 0, len = fermataData.score['score-partwise'].part.length; i <
+              len; i++) {
         assert.equal(beatType, fermataData.score['score-partwise'].part[i].measure[measure_idx].$fermata.attributes.time['beat-type']);
       }
     });
@@ -194,7 +197,8 @@ describe('Fermata.Data', function () {
       var fifths = 0;
 
       fermataData.setFifths(measure_idx, fifths);
-      for (var i = 0, len = fermataData.score['score-partwise'].part.length; i < len; i++) {
+      for (var i = 0, len = fermataData.score['score-partwise'].part.length; i <
+              len; i++) {
         assert.equal(fifths, fermataData.score['score-partwise'].part[i].measure[measure_idx].attributes[0].key.fifths);
       }
     });
