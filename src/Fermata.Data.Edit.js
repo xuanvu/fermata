@@ -87,6 +87,10 @@
       if (idx >= 0 && idx < part.measure.length) {
         part.measure.splice(idx, number);
       }
+
+      for (var i = idx; i < part.measure.length; i++) {
+        part.measure[i].$number = (i + 1).toString();
+      }
     });
   };
 }).call(this);
