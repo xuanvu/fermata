@@ -140,6 +140,7 @@ if (typeof require !== 'undefined') {
         assert.equal(length + 42, part.measure.length);
         fermataData.removeMeasure(10, 24);
         assert.equal(length + 42 - 24, part.measure.length);
+        checkMeasureNumbers(part.measure);
       });
     });
   });
