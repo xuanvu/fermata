@@ -225,7 +225,49 @@
     if (this.isRendered()) {
       this.data.attributes = [Utils.Clone(this.attributes)];
       Utils.epureAttributes(this.data.attributes[0]);
+      filterAttributes(this.data.attributes[0]);
     }
+  };
+
+  var filterAttributes = function (attr) {
+    filterDefaultAttributes(attr);
+    if (attr.clef.length === 1) {
+      attr.clef = attr.clef[0];
+    }
+  };
+
+  var filterDefaultAttributes = function (attr) {
+    var defaultClefOctaveChange = "0";
+    var defaultStaves = "1";
+
+    for (var i = 0; i < attr.clef.length; i++) {
+      var clef = attr.clef[i];
+      if (clef["clef-octave-change"] === defaultClefOctaveChange) {
+        delete clef["clef-octave-change"];
+      }
+    }
+    if (attr.staves === defaultStaves) {
+      delete attr.staves;
+    }
+    if (isDefaultPartSybol(attr["part-symbol"])) {
+      delete attr["part-symbol"];
+    }
+  };
+
+  var isDefaultPartSymbol = function (partSymbol) {
+    var defaultValues = [
+      {key: "top-staff", value: "1"},
+      {key: "bottom_staff", value: "2"},
+      {key: "symbol", value: "brace"}
+    ];
+
+    for (var i = 0; i < defaultValues.length; i++) {
+      var defaultValue = defaultValues[i];
+      if (partSymbol[defaultValue.key] !== defaultValue.value) {
+        return false;
+      }
+    }
+    return true;
   };
 
   Measure.prototype.updateFromPrevious = function (previousMeasureData) {
