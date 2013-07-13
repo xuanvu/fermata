@@ -193,6 +193,8 @@
     var maxWidth;
     var maxNotes = 0;
     var i, j;
+    var notePerVoice = [];
+    var curVoice = 1;
 
     for (j = 0 ; j < this.parts.idx.length ; j++) {
       if (! isNaN(this.parts.idx[j].measure[columnId].$width)) {
@@ -201,13 +203,13 @@
         }
       }
 
-      var notePerVoice = [];
       for (i = 0 ; i < this.parts.idx[j].measure[columnId].note.length ; i++) {
-        if (typeof notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] === "undefined") {
-          notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] = this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
+        curVoice = typeof(this.parts.idx[j].measure[columnId].note[i].voice) !== 'undefined') ? this.parts.idx[j].measure[columnId].note[i].voice : 1;
+        if (typeof notePerVoice[curVoice] === "undefined") {
+          notePerVoice[curVoice] = this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
         }
         else {
-          notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] += this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
+          notePerVoice[curVoice] += this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
         }
       }
       
