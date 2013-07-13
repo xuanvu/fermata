@@ -122,7 +122,7 @@ fermata_sources = [
 otherModules_sources = ['../../node_modules/' + s for s in otherModules_sources]
 vexflow_sources_deps = ['../../deps/vexflow/src/' + s for s in vexflow_sources]
 
-sources = vexflow_sources_deps + fermata_sources + otherModules_sources
+sources = otherModules_sources + vexflow_sources_deps + fermata_sources
 
 Import('dbg opt node')
 build_and_stamp("fermata.js", sources, dbg)
