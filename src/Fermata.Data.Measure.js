@@ -1,6 +1,7 @@
 (function () {
   "use strict";
 
+  var AttributeDiff = Fermata.Utils.AttributeDiff;
   var BeatsValueError = Fermata.Error.BeatsValueError;
   var BeatTypeValueError = Fermata.Error.BeatTypeValueError;
   var SoundType = Fermata.Values.SoundType;
@@ -29,14 +30,14 @@
     validateBeat(beats, beatType);
 
     if (typeof this.data.attributes === "undefined") {
-      this.data.attributes = {};
+      this.data.attributes = [{}];
     }
-    if (typeof this.data.attributes.time === "undefined") {
-      this.data.attributes.time = {};
+    if (typeof this.data.attributes[0].time === "undefined") {
+      this.data.attributes[0].time = {};
     }
 
-    this.data.attributes.time.beats = beats;
-    this.data.attributes.time["beat-type"] = beatType;
+    this.data.attributes[0].time.beats = beats;
+    this.data.attributes[0].time["beat-type"] = beatType;
   };
 
   Measure.prototype.setBeat = function (beats, beatType) {
@@ -192,7 +193,7 @@
     if (this.isRendered()) {
       return this.attributes.time["beat-type"];
     } else {
-      return this.data.attributes.time["beat-type"];
+      return this.data.attributes[0].time["beat-type"];
     }
   };
 
@@ -200,7 +201,7 @@
     if (this.isRendered()) {
       return this.attributes.time.beats;
     } else {
-      return this.data.attributes.time.beats;
+      return this.data.attributes[0].time.beats;
     }
   };
 
@@ -208,7 +209,7 @@
     if (this.isRendered()) {
       return this.attributes.divisions;
     } else {
-      return this.data.attributes.divisions;
+      return this.data.attributes[0].divisions;
     }
   };
 
@@ -216,13 +217,72 @@
     if (this.isRendered()) {
       this.attributes.divisions = divisions;
     } else {
-      this.data.attributes.divisions = divisions;
+      this.data.attributes[0].divisions = divisions;
     }
   };
 
   Measure.prototype.updateAttributes = function () {
     if (this.isRendered()) {
-      this.data.attributes = Utils.Clone(this.attributes);
+      this.data.attributes = [Utils.Clone(this.attributes)];
+      Utils.epureAttributes(this.data.attributes[0]);
+      filterAttributes(this.data.attributes[0]);
+    }
+  };
+
+  var filterAttributes = function (attr) {
+    filterDefaultAttributes(attr);
+    if (attr.clef.length === 1) {
+      attr.clef = attr.clef[0];
+    } else if (attr.clef.length === 0) {
+      delete attr.clef;
+    }
+  };
+
+  var filterDefaultAttributes = function (attr) {
+    var defaultClefOctaveChange = "0";
+    var defaultStaves = "1";
+
+    for (var i = 0; i < attr.clef.length; i++) {
+      var clef = attr.clef[i];
+      if (clef["clef-octave-change"] === defaultClefOctaveChange) {
+        delete clef["clef-octave-change"];
+      }
+    }
+    if (attr.staves === defaultStaves) {
+      delete attr.staves;
+    }
+    if (isDefaultPartSymbol(attr["part-symbol"])) {
+      delete attr["part-symbol"];
+    }
+  };
+
+  var isDefaultPartSymbol = function (partSymbol) {
+    var defaultValues = [
+      {key: "top-staff", value: "1"},
+      {key: "bottom-staff", value: "2"},
+      {key: "symbol", value: "brace"}
+    ];
+
+    for (var i = 0; i < defaultValues.length; i++) {
+      var defaultValue = defaultValues[i];
+      if (partSymbol[defaultValue.key] !== defaultValue.value) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  Measure.prototype.updateFromPrevious = function (previousMeasureData) {
+    var previousAttributes = previousMeasureData.$fermata.attributes;
+    var attributes = this.attributes;
+    var attributeDiff = new AttributeDiff(previousAttributes, attributes);
+
+    var result = attributeDiff.getResult();
+    if (result !== null) {
+      this.data.attributes = [result];
+      Utils.epureAttributes(this.data.attributes[0]);
+    } else if (typeof this.data.attributes !== "undefined") {
+      delete this.data.attributes;
     }
   };
 

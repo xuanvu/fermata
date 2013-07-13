@@ -24,13 +24,15 @@ if (typeof require !== 'undefined') {
 
   var getTestData = function (nbNote, nbRest) {
     var measure = {
-      attributes: {
-        divisions: 1,
-        time: {
-          beats: nbNote + nbRest,
-          "beat-type": 4
+      attributes: [
+        {
+          divisions: "1",
+          time: {
+            beats: (nbNote + nbRest).toString(),
+            "beat-type": "4"
+          }
         }
-      },
+      ],
       note: [],
       $fermata: {
         attributes: {
@@ -38,10 +40,18 @@ if (typeof require !== 'undefined') {
           time: {
             beats: nbNote + nbRest,
             "beat-type": 4
+          },
+          clef: [],
+          staves: "1",
+          "part-symbol": {
+            "top-staff": 1,
+            "bottom-staff": 2,
+            symbol: 'brace'
           }
         }
       }
     };
+    
     var i = 0;
     for (i = 0; i < nbNote; i++) {
       var note = createPitchNote();
@@ -107,8 +117,8 @@ if (typeof require !== 'undefined') {
         measure.initBeat(beats, beatType);
 
         // Then
-        assert.strictEqual(data.attributes.time.beats, beats);
-        assert.strictEqual(data.attributes.time["beat-type"], beatType);
+        assert.strictEqual(data.attributes[0].time.beats, beats);
+        assert.strictEqual(data.attributes[0].time["beat-type"], beatType);
       });
 
       it("bad beats value: string", function () {
@@ -309,7 +319,7 @@ if (typeof require !== 'undefined') {
 
         // Then
         assert.equal(measure.getDivisions(), expectedDivisions);
-        for (var i = 0 ; i < data.note.length ; i++) {
+        for (var i = 0; i < data.note.length; i++) {
           var note = data.note[i];
           assert.equal(note.duration, expectedDuration);
         }
@@ -446,6 +456,10 @@ if (typeof require !== 'undefined') {
         var nbRest = 2;
         var data = getTestData(nbNote, nbRest);
         var measure = new Measure(data);
+        var expectedAttributes = getTestData(nbNote, nbRest).attributes[0];
+        expectedAttributes.time.beats = "7";
+        expectedAttributes.time["beat-type"] = "8";
+        expectedAttributes.divisions = "6";
 
         // When
         measure.setBeat(7, 8);
@@ -453,7 +467,7 @@ if (typeof require !== 'undefined') {
         measure.updateAttributes();
 
         // Then
-        assert.deepEqual(measure.data.attributes, measure.attributes);
+        assert.deepEqual(measure.data.attributes[0], expectedAttributes);
       });
     });
   });

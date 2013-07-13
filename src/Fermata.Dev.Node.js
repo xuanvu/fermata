@@ -84,6 +84,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Utils.AttributeDiff.UpdateBeats.js",
     "Fermata.Utils.AttributeDiff.UpdateDivisions.js",
     "Fermata.Utils.AttributeDiff.processorList.js",
+    "Fermata.Utils.epureAttributes.js",
     "Fermata.Utils.Call.js",
     "Fermata.Error.js",
     "Fermata.Error.BeatsValueError.js",
@@ -108,6 +109,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Data.Edit.js",
     "Fermata.Data.Edit.Rest.js",
     "Fermata.Data.Measure.js",
+    "Fermata.Data.saveAttributes.js",
     "Fermata.Render.js",
     "Fermata.Render.BeamType.js",
     "Fermata.Render.BeamProcessor.js",
@@ -141,8 +143,15 @@ if (typeof _$jscoverage === 'undefined') {
     concatenated += fs.readFileSync(path.resolve(__dirname, file), 'UTF-8');
   });
 
+
   // VM
-  var context = vm.createContext({ module: module, require: require, console: console, _$jscoverage: _$jscoverage });
+  var context = vm.createContext({
+    module: module,
+    require: require,
+    console: console,
+    _$jscoverage: _$jscoverage,
+    jsondiffpatch: jsondiffpatch
+});
   vm.runInContext(concatenated, context);
 
   module.exports = context.Fermata;
