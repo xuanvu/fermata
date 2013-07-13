@@ -7,6 +7,10 @@
  *
  */
 
+if (typeof require !== 'undefined') {
+  var jsondiffpatch = require('jsondiffpatch');
+}
+
 /*global Fermata:true */
 var Fermata = Fermata || {};
 Fermata.Vex = Vex;

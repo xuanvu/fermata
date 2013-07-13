@@ -1,7 +1,8 @@
 if (typeof require !== 'undefined') {
   var Fermata,
-          fs = require('fs'),
-          assert = require('assert');
+      fs = require('fs'),
+      assert = require('assert'),
+      jsondiffpatch = require('jsondiffpatch');
   // Use Scons build version or devel version (using node vm)
   if (fs.existsSync(__dirname + '/../build/fermata/fermata.node.js')) {
     Fermata = require('..');
@@ -11,7 +12,6 @@ if (typeof require !== 'undefined') {
             '/Fermata.Dev.Node.js');
   }
 
-// Test utils
   Fermata.Tests = require('./Fermata.Tests.Utils.js').Tests;
 }
 
