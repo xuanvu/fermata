@@ -204,7 +204,7 @@
       }
 
       for (i = 0 ; i < this.parts.idx[j].measure[columnId].note.length ; i++) {
-        curVoice = typeof(this.parts.idx[j].measure[columnId].note[i].voice) !== 'undefined') ? this.parts.idx[j].measure[columnId].note[i].voice : 1;
+        curVoice = (typeof(this.parts.idx[j].measure[columnId].note[i].voice) !== 'undefined') ? this.parts.idx[j].measure[columnId].note[i].voice : 1;
         if (typeof notePerVoice[curVoice] === "undefined") {
           notePerVoice[curVoice] = this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
         }
