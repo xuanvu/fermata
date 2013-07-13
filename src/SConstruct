@@ -89,7 +89,6 @@ fermata_sources = [
     "Fermata.Data.PitchRest.js",
     "Fermata.Data.PitchUnpitched.js",
     "Fermata.Data.PitchEncapsulator.js",
-    "Fermata.Data.Measure.js",
     "Fermata.Data.ReconstructAttributes.js",
     "Fermata.Data.Measure.js",
     "Fermata.Data.Edit.js",
