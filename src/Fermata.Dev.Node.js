@@ -143,8 +143,15 @@ if (typeof _$jscoverage === 'undefined') {
     concatenated += fs.readFileSync(path.resolve(__dirname, file), 'UTF-8');
   });
 
+
   // VM
-  var context = vm.createContext({ module: module, require: require, console: console, _$jscoverage: _$jscoverage });
+  var context = vm.createContext({
+    module: module,
+    require: require,
+    console: console,
+    _$jscoverage: _$jscoverage,
+    jsondiffpatch: jsondiffpatch
+});
   vm.runInContext(concatenated, context);
 
   module.exports = context.Fermata;
