@@ -84,6 +84,7 @@ fermata_sources = [
     "Fermata.Mapping.Clef.js",
     "Fermata.Mapping.Direction.js",
     "Fermata.Mapping.Connector.js",
+    "Fermata.Mapping.Barline.js",
     "Fermata.Data.js",
     "Fermata.Data.PitchPitched.js",
     "Fermata.Data.PitchRest.js",
