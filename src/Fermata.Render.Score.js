@@ -210,7 +210,7 @@
           notePerVoice[this.parts.idx[j].measure[columnId].note[i].voice] += this.noteWidth(this.parts.idx[j].measure[columnId].note[i]);
         }
       }
-      
+
       for (i = 0 ; i < notePerVoice.length ; i++) {
         if (typeof notePerVoice[i] !== "undefined" && notePerVoice[i] > maxNotes) {
           maxNotes = notePerVoice[i];
@@ -330,7 +330,7 @@
           if (tmpNote.first_note === tmpNote.last_note) {
             renderOption.right_shift_px += 70;
           }
-          console.log(data[i].placement);
+          //console.log(data[i].placement);
           var hp = new Vex.Flow.StaveHairpin(tmpNote, Fermata.Mapping.Direction.getVexflow(data[i]['direction-type'].wedge.$type));
           hp.setPosition(Fermata.Mapping.Direction.getVexflow(data[i].$placement));
           hp.setRenderOptions(renderOption);
@@ -350,7 +350,7 @@
             num_beats: measure.$fermata.attributes.time.beats,
             beat_value: measure.$fermata.attributes.time["beat-type"],
             resolution: Vex.Flow.RESOLUTION
-            
+
           });
           voice.setStrict(false);
           voice.addTickables($fermata.vexNotes[staffIdx][voiceIdx]);
