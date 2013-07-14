@@ -8,20 +8,24 @@
 
   // TODO: Fill with other values.
   var ValueLast = {
-    HALF:       "0",
-    QUARTER:    "1",
-    EIGHTH:     "2"
+    FULL:       "0", 
+    HALF:       "1",
+    QUARTER:    "2",
+    EIGHTH:     "3"
   };
 
   Fermata.Data.prototype.getDuration = function (type) {
-    if (type === ValueLast.HALF) {
-      return 8;
-    }
-    else if (type === ValueLast.QUARTER) {
+    if (type === ValueLast.FULL) {
       return 4;
     }
-    else if (type === ValueLast.EIGHTH) {
+    else if (type === ValueLast.HALF) {
       return 2;
+    }
+    else if (type === ValueLast.QUARTER) {
+      return 1;
+    }
+    else if (type === ValueLast.EIGHTH) {
+      return 1/2;
     }
     else {
       var errorMsg = "this duration is not supported yet.";
@@ -99,7 +103,10 @@
   };
 
   Fermata.Data.prototype.getValue = function (type) {
-    if (type === ValueLast.HALF) {
+    if (type === ValueLast.FULL) {
+      return "full";
+    }
+    else if (type === ValueLast.HALF) {
       return "half";
     }
     else if (type === ValueLast.QUARTER) {
@@ -142,6 +149,8 @@
             idxN = measure.note.length;
           }
           part.measure[idxM].note.splice(idxN, 0, note);
+          var _measure = new Fermata.Data.Measure(part.measure[idxM]);
+          _measure.adjustNotesDuration();
         }
       }
     }
@@ -163,6 +172,8 @@
             'voice': part.measure[idxM].note[idxN].voice
           };
           part.measure[idxM].note.splice(idxN, 1, rest);
+          var _measure = new Fermata.Data.Measure(part.measure[idxM]);
+          _measure.adjustNotesDuration();
         }
       }
     }
