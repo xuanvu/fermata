@@ -38,41 +38,41 @@ describe('Fermata.Data.Edit.Note', function () {
 
     // idxS, idxM, idxN, pitch, type, voice
     it('should add a full in first measure', function () {
-      fermataData.addNote(1, 0, 0, 3, 0, 1);
+      fermataData.addNote(0, 0, 0, 3, 0, 1);
 
-      assert.doesNotThrow(_render.renderAll());
+      _render.renderAll();
       assert.equal(fermataData['score']['score-partwise']['part'][0].measure.length, 10);
       assert.equal(fermataData['score']['score-partwise']['part'][0].measure[0].note.length, 1);
       assert.ok(typeof(fermataData['score']['score-partwise']['part'][0].measure[0].note[0]) !== 'undefined');
     });
 
     it('should add two half in first measure', function () {
-      fermataData.addNote(1, 0, 0, 3, 1, 1);
-      fermataData.addNote(1, 0, 0, 3, 1, 1);
+      fermataData.addNote(0, 0, 0, 3, 1, 1);
+      fermataData.addNote(0, 0, 0, 3, 1, 1);
 
-      assert.doesNotThrow(_render.renderAll());
+      _render.renderAll();
       assert.equal(fermataData['score']['score-partwise']['part'][0].measure.length, 10);
       assert.equal(fermataData['score']['score-partwise']['part'][0].measure[0].note.length, 2);
     });
 
     it('should add three quarter in first measure', function () {
-      fermataData.addNote(1, 0, 0, 3, 2, 1);
-      fermataData.addNote(1, 0, 0, 3, 2, 1);
-      fermataData.addNote(1, 0, 0, 3, 2, 1);
+      fermataData.addNote(0, 0, 0, 3, 2, 1);
+      fermataData.addNote(0, 0, 0, 3, 2, 1);
+      fermataData.addNote(0, 0, 0, 3, 2, 1);
       
-      assert.doesNotThrow(_render.renderAll());
+      _render.renderAll();
       assert.equal(fermataData['score']['score-partwise']['part'][0].measure.length, 10);
       assert.equal(fermataData['score']['score-partwise']['part'][0].measure[0].note.length, 4);
       assert.ok(typeof(fermataData['score']['score-partwise']['part'][0].measure[0].note[3].rest) !== 'undefined');
     });
 
     it('should add four quarter in first measure', function () {
-      fermataData.addNote(1, 0, 0, 3, 2, 1);
-      fermataData.addNote(1, 0, 0, 3, 2, 1);
-      fermataData.addNote(1, 0, 0, 3, 2, 1);
-      fermataData.addNote(1, 0, 0, 3, 2, 1);
+      fermataData.addNote(0, 0, 0, 3, 2, 1);
+      fermataData.addNote(0, 0, 0, 3, 2, 1);
+      fermataData.addNote(0, 0, 0, 3, 2, 1);
+      fermataData.addNote(0, 0, 0, 3, 2, 1);
       
-      assert.doesNotThrow(_render.renderAll());
+      _render.renderAll();
       assert.equal(fermataData['score']['score-partwise']['part'][0].measure.length, 10);
       assert.equal(fermataData['score']['score-partwise']['part'][0].measure[0].note.length, 4);
       assert.ok(typeof(fermataData['score']['score-partwise']['part'][0].measure[0].note[3].rest) === 'undefined');
