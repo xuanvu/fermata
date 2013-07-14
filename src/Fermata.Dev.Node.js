@@ -87,8 +87,6 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Utils.epureAttributes.js",
     "Fermata.Utils.Call.js",
     "Fermata.Error.js",
-    "Fermata.Error.BeatsValueError.js",
-    "Fermata.Error.BeatTypeValueError.js",
     "Fermata.Error.NotImplementedError.js",
     "Fermata.Error.PitchRangeError.js",
     "Fermata.Error.OctaveRangeError.js",
@@ -100,17 +98,20 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Mapping.Clef.js",
     "Fermata.Mapping.Direction.js",
     "Fermata.Mapping.Connector.js",
+    "Fermata.Mapping.Barline.js",
     "Fermata.Data.js",
-    "Fermata.Data.ReconstructAttributes.js",
     "Fermata.Data.PitchPitched.js",
     "Fermata.Data.PitchRest.js",
     "Fermata.Data.PitchUnpitched.js",
     "Fermata.Data.PitchEncapsulator.js",
+    "Fermata.Data.ReconstructAttributes.js",
+    "Fermata.Data.Measure.js",
     "Fermata.Data.Edit.js",
     "Fermata.Data.Edit.Rest.js",
-    "Fermata.Data.Measure.js",
+    "Fermata.Data.Edit.Note.js",
     "Fermata.Data.saveAttributes.js",
     "Fermata.Render.js",
+    "Fermata.Render.Backup.js",
     "Fermata.Render.BeamType.js",
     "Fermata.Render.BeamProcessor.js",
     "Fermata.Render.TupletType.js",
@@ -132,7 +133,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Drawer.js",
     "Fermata.Drawer.Score.js",
     "Fermata.Node.js"
-  ];
+    ];
 
   // Execute
   var concatenated = '';

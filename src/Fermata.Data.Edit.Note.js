@@ -25,7 +25,7 @@
       return 1;
     }
     else if (type === ValueLast.EIGHTH) {
-      return 1/2;
+      return 0.5;
     }
     else {
       var errorMsg = "this duration is not supported yet.";
