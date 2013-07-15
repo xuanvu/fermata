@@ -8,10 +8,10 @@
 
   // TODO: Fill with other values.
   var ValueLast = {
-    FULL:       "0", 
-    HALF:       "1",
-    QUARTER:    "2",
-    EIGHTH:     "3"
+    FULL:       0, 
+    HALF:       1,
+    QUARTER:    2,
+    EIGHTH:     3
   };
 
   Fermata.Data.prototype.getDuration = function (type) {
