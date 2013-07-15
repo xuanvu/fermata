@@ -7,6 +7,5 @@
 
   var PitchRangeError = Fermata.Error.PitchRangeError;
 
-  PitchRangeError.prototype = new Error();
-  PitchRangeError.prototype.constructor = PitchRangeError;
+  PitchRangeError.prototype = Error.prototype;
 }).call(this);

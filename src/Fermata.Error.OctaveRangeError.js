@@ -10,6 +10,5 @@
 
   var OctaveRangeError = Fermata.Error.OctaveRangeError;
 
-  OctaveRangeError.prototype = new PitchRangeError();
-  OctaveRangeError.prototype.constructor = OctaveRangeError;
+  OctaveRangeError.prototype = PitchRangeError.prototype;
 }).call(this);

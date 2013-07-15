@@ -10,6 +10,5 @@
 
   var StepRangeError = Fermata.Error.StepRangeError;
 
-  StepRangeError.prototype = new PitchRangeError();
-  StepRangeError.prototype.constructor = StepRangeError;
+  StepRangeError.prototype = PitchRangeError;
 }).call(this);

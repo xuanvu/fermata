@@ -7,6 +7,5 @@
 
   var NotImplementedError = Fermata.Error.NotImplementedError;
 
-  NotImplementedError.prototype = new Error();
-  NotImplementedError.prototype.constructor = NotImplementedError;
+  NotImplementedError.prototype = Error.prototype;
 }).call(this);
