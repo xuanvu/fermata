@@ -5,7 +5,7 @@
   var _render = Fermata.Render.prototype;
 
   Fermata.Drawer.prototype.drawAll = function () {
-    // Todo: precalcul in render
+    this.renderer.ctx.clear();
     this.container.height += this.parts.idx.length * Fermata.Drawer.PART_HEIGHT;
 
     for (var i = 0 ; i < this.parts.idx.length ; i++) {

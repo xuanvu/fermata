@@ -354,7 +354,6 @@
             resolution: Vex.Flow.RESOLUTION
 
           });
-          voice.setStrict(false);
           voice.addTickables($fermata.vexNotes[staffIdx][voiceIdx]);
           // Add notes to voice
           // Format and justify the notes to 500 pixels
