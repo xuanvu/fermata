@@ -286,4 +286,10 @@
     }
   };
 
+  Measure.prototype.clearMeasure = function() {
+    for (var i = 0; i < this.data.note.length; i++) {
+      this.data.note[i].st.remove();
+    }
+  };
+
 }).call(this);

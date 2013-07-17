@@ -10,7 +10,10 @@
     this.renderAllStaves();
   };
 
-  Fermata.Render.prototype.renderOneMeasure = function (nbMeasure, nbPart) {
+  Fermata.Render.prototype.renderOneMeasure = function (nbMeasure, nbPart, init) {
+    if (init === true) {
+      var _measure = new Fermata.Data.Measure(this.data.getPart(nbPart).measure[nbMeasure]);
+    }
     this.renderMeasure(nbMeasure, nbPart);
     this.renderMeasureWidth(nbMeasure);
     this.renderStaves(nbMeasure, nbPart);
