@@ -13,6 +13,7 @@
   Fermata.Render.prototype.renderOneMeasure = function (nbMeasure, nbPart, init) {
     if (init === true) {
       var _measure = new Fermata.Data.Measure(this.data.getPart(nbPart).measure[nbMeasure]);
+      _measure.clearMeasure();
     }
     this.renderMeasure(nbMeasure, nbPart);
     this.renderMeasureWidth(nbMeasure);
