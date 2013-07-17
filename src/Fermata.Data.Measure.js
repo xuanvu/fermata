@@ -287,8 +287,13 @@
   };
 
   Measure.prototype.clearMeasure = function() {
-    for (var i = 0; i < this.data.note.length; i++) {
-      this.data.note[i].st.remove();
+    console.log(this.data);
+    for(var i = 1; i < this.data.$fermata.vexNotes.length; i++) {
+      for (var j = 1; j < this.data.$fermata.vexNotes[i].length; j++) {
+        for (var k = 0; k < this.data.$fermata.vexNotes[i][j].length; k++) {
+          this.data.$fermata.vexNotes[i][j][k].st.remove();
+        }
+      }
     }
   };
 
