@@ -10,6 +10,12 @@
     this.renderAllStaves();
   };
 
+  Fermata.Render.prototype.renderOneMeasure = function (nbMeasure, nbPart) {
+    this.renderMeasure(nbMeasure, nbPart);
+    this.renderMeasureWidth(nbMeasure);
+    this.renderStaves(nbMeasure, nbPart);
+  };
+
   // Includes
   var BeamProcessor = Fermata.Render.BeamProcessor;
   var TupletProcessor = Fermata.Render.TupletProcessor;
