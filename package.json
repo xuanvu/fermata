@@ -1,7 +1,15 @@
 {
   "name": "flat-fermata",
   "version": "0.0.1",
-  "description": "MusicXML engraving javascript library using vexflow",
+  "author": "Flat EIP team <contact@flat.io>",
+  "contributors": [ 
+    { "name": "Vincent Giersch", "email": "mail@vincent.sh" },
+    { "name": "Pierre Rannou", "email": "pierre@rannou.pl" },
+    { "name": "Cyril Coutelier", "email": "coutel_c@epitech.eu" },
+    { "name": "Corentin Gurtner", "email": "gurtne_c@epitech.eu" },
+    { "name": "Vianney Bouchaud", "email": "vianney@bouchaud.org" }
+  ],
+  "description": "MusicXML engraving javascript library using Vexflow",
   "dependencies": {
     "jsdom": ">= 0.3.4",
     "canvas": ">= 1.0.0",
