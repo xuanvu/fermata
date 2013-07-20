@@ -98,6 +98,15 @@
         callback(this.scoreCache.part.idx[i], i);
       }
     },
+    forEachMeasure: function (callback) {
+      this.forEachPart(function (part) {
+        var measures = part.measure;
+        for (var i = 0; i < measures.length; i++) {
+          var measure = measures[i];
+          callback(measure);
+        }
+      });
+    },
     setBeat: function (measure_idx, beats) {
       this.forEachPart(function (part) {
         for (var i = 0; i < part.measure.length; i++) {
