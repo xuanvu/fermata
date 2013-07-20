@@ -275,5 +275,33 @@ if (typeof require !== 'undefined') {
         }
       };
     });
+
+    describe('#extract - integ', function () {
+      it('hello world', function () {
+        // Given
+        var fermataData = new Fermata.Data(helloWorld);
+        var render = new Fermata.Render(fermataData);
+
+        // When
+        render.renderAll();
+        var extractedData = fermataData.extract();
+
+        // Then
+        assert.deepEqual(extractedData, helloWorld);
+      });
+
+      it('reve', function () {
+        // Given
+        var fermataData = new Fermata.Data(reve);
+        var render = new Fermata.Render(fermataData);
+
+        // When
+        render.renderAll();
+        var extractedData = fermataData.extract();
+
+        // Then
+        assert.deepEqual(extractedData, reve);
+      });
+    });
   });
 }).call(this);
