@@ -284,7 +284,7 @@ if (typeof require !== 'undefined') {
 
         // When
         render.renderAll();
-        var extractedData = fermataData.extract();
+        var extractedData = fermataData.export();
 
         // Then
         assert.deepEqual(extractedData, helloWorld);
@@ -297,7 +297,7 @@ if (typeof require !== 'undefined') {
 
         // When
         render.renderAll();
-        var extractedData = fermataData.extract();
+        var extractedData = fermataData.export();
 
         // Then
         assert.deepEqual(extractedData, reve);
@@ -313,7 +313,7 @@ if (typeof require !== 'undefined') {
         measure.$fermata = {};
 
         // When
-        var extractedData = fermataData.extract();
+        var extractedData = fermataData.export();
 
         // Then
         assert.deepEqual(extractedData, helloWorld);
