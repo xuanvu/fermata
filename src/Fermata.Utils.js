@@ -23,4 +23,12 @@
     return ({ first: 0, last: obj.length - 1 });
   };
 
+  Fermata.Utils.minusToCamelCase = function (str) {
+    return str.replace(/-([a-z])/g, camelCaseHandler);
+  };
+
+  var camelCaseHandler = function (c) {
+    return c[1].toUpperCase();
+  };
+
 }).call(this);

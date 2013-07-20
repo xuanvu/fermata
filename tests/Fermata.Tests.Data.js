@@ -275,5 +275,49 @@ if (typeof require !== 'undefined') {
         }
       };
     });
+
+    describe('#extract - integ', function () {
+      it('hello world', function () {
+        // Given
+        var fermataData = new Fermata.Data(helloWorld);
+        var render = new Fermata.Render(fermataData);
+
+        // When
+        render.renderAll();
+        var extractedData = fermataData.export();
+
+        // Then
+        assert.deepEqual(extractedData, helloWorld);
+      });
+
+      it('reve', function () {
+        // Given
+        var fermataData = new Fermata.Data(reve);
+        var render = new Fermata.Render(fermataData);
+
+        // When
+        render.renderAll();
+        var extractedData = fermataData.export();
+
+        // Then
+        assert.deepEqual(extractedData, reve);
+      });
+    });
+
+    describe('#extract - unit', function () {
+      it('hello world', function () {
+        // Given
+        var fermataData = new Fermata.Data(helloWorld);
+        var part = fermataData.getPart(0, Fermata.Data.cacheParts.IDX);
+        var measure = part.measure[0];
+        measure.$fermata = {};
+
+        // When
+        var extractedData = fermataData.export();
+
+        // Then
+        assert.deepEqual(extractedData, helloWorld);
+      });
+    });
   });
 }).call(this);

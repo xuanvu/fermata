@@ -1,5 +1,7 @@
 (function () {
   "use strict";
+  
+  var Utils = Fermata.Utils;
 
   Fermata.Utils.Call = {};
 
@@ -10,10 +12,6 @@
     $1n: '+',
     $01: '?',
     $1: 'default'
-  };
-
-  var camelCaseHandler = function (c) {
-    return c[1].toUpperCase();
   };
 
   /**
@@ -52,7 +50,7 @@
         if (typeof(process._key) === 'undefined') {
           if (typeof(process.dataKey) === 'undefined' || process.dataKey ===
                   'CamelCase') {
-            process._key = process.key.replace(/-([a-z])/g, camelCaseHandler);
+            process._key = Utils.minusToCamelCase(process.key);
           }
           else if (typeof(process.dataKey) === 'string') {
             process._key = process.dataKey;
