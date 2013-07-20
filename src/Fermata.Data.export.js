@@ -47,7 +47,7 @@
       var scorePart = scoreParts[i];
 
       for (var key in scorePart) {
-        var camelCaseKey = minusToCamelCase(key);
+        var camelCaseKey = Utils.minusToCamelCase(key);
         if (camelCaseKey !== key &&
                 scorePart[camelCaseKey] !== "undefined") {
           delete scorePart[camelCaseKey];
@@ -55,14 +55,4 @@
       }
     }
   };
-
-  var minusToCamelCase = function (str) {
-    return str.replace(/-([a-z])/g, camelCaseHandler);
-    ;
-  };
-
-  var camelCaseHandler = function (c) {
-    return c[1].toUpperCase();
-  };
-
 }).call(this);
