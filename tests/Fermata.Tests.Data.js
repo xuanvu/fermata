@@ -303,5 +303,21 @@ if (typeof require !== 'undefined') {
         assert.deepEqual(extractedData, reve);
       });
     });
+
+    describe('#extract - unit', function () {
+      it('hello world', function () {
+        // Given
+        var fermataData = new Fermata.Data(helloWorld);
+        var part = fermataData.getPart(0, Fermata.Data.cacheParts.IDX);
+        var measure = part.measure[0];
+        measure.$fermata = {};
+
+        // When
+        var extractedData = fermataData.extract();
+
+        // Then
+        assert.deepEqual(extractedData, helloWorld);
+      });
+    });
   });
 }).call(this);
