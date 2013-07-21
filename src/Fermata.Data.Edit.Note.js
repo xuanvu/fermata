@@ -5,6 +5,7 @@
   var SoundType = Fermata.Values.SoundType;
   var NotImplementedError = Fermata.Error.NotImplementedError;
   var Step = Fermata.Values.Step;
+  var Measure = Fermata.Data.Measure;
 
   // TODO: Fill with other values.
   var ValueLast = {
@@ -135,22 +136,27 @@
       var part = this.getPart(idxS, Fermata.Data.cacheParts.IDX);
       if (part !== undefined) {
         if (idxM >= 0 && idxM < part.measure.length) {
-          var measure = part.measure[idxM];
-          var clef = measure.$fermata.attributes.clef[0];
-          var divisions = measure.$fermata.attributes.divisions;
+          var measureData = part.measure[idxM];
+          var clef = measureData.$fermata.attributes.clef[0];
+          var divisions = measureData.$fermata.attributes.divisions;
+          var quarterDuration = this.getDuration(type);
+          var divisionsDuration = quarterDuration * divisions;
+          if (divisionsDuration < 1) {
+            var measure = new Measure(measureData);
+            measure.multiplyDivisions(1 / divisionsDuration);
+            divisionsDuration = 1;
+          }
           var note = {
-            'duration': this.getDuration(type) * divisions,
+            'duration': divisionsDuration,
             'pitch': this.getPitch(pitch, clef.sign, clef.line),
             'stem': this.getQueue(voice),
             'type': this.getValue(type),
             'voice': voice
           };
-          if (idxN < 0 || idxN > measure.note.length) {
-            idxN = measure.note.length;
+          if (idxN < 0 || idxN > measureData.note.length) {
+            idxN = measureData.note.length;
           }
           part.measure[idxM].note.splice(idxN, 0, note);
-          var _measure = new Fermata.Data.Measure(part.measure[idxM]);
-          _measure.adjustNotesDuration();
         }
       }
     }
