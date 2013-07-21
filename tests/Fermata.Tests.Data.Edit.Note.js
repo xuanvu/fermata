@@ -63,9 +63,9 @@ describe('Fermata.Data.Edit.Note', function () {
       assert.equal(measure.note.length, 4);
       assert.equal(measure.$fermata.attributes.divisions, 2);
       assert.equal(notes[0].duration, 4);
-      assert.equal(notes[0].duration, 2);
-      assert.equal(notes[0].duration, 1);
-      assert.equal(notes[0].duration, 1);
+      assert.equal(notes[1].duration, 2);
+      assert.equal(notes[2].duration, 1);
+      assert.equal(notes[3].duration, 1);
     });
 
     it('should add one half in first measure', function () {
