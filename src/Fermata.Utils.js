@@ -32,7 +32,7 @@
       if (obj.hasOwnProperty(i) &&
               i !== "$fermata") {
         if (obj[i] && typeof obj[i] === "object") {
-          newObj[i] = Fermata.Utils.Clone(obj[i]);
+          newObj[i] = Fermata.Utils.CloneEpure$fermata(obj[i]);
         }
         else {
           newObj[i] = obj[i];
