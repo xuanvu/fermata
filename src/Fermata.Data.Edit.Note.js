@@ -164,7 +164,7 @@
       }
     }
   };
-  
+
   var isEnoughSpace = function (notes, divisionsDuration, idx) {
     var i = idx;
     while (i < notes.length && divisionsDuration > 0) {
@@ -182,11 +182,11 @@
     }
     return divisionsDuration === 0;
   };
-  
+
   var removeSpaces = function (notes, divisionsDuration, idx) {
     while (divisionsDuration > 0) {
       var note = notes[idx];
-            if (note.duration > divisionsDuration) {
+      if (note.duration > divisionsDuration) {
         note.duration -= divisionsDuration;
         divisionsDuration = 0;
       } else {
@@ -194,7 +194,7 @@
         notes.splice(idx, 0);
       }
     }
-  }
+  };
 
   var isRest = function (note) {
     return SoundType.geSoundType(note) === SoundType.REST;
