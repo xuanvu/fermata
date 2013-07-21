@@ -46,6 +46,28 @@ describe('Fermata.Data.Edit.Note', function () {
       assert.ok(typeof(fermataData['score']['score-partwise']['part'][0].measure[0].note[0]) !== 'undefined');
     });
 
+    it('should add a half and a eight in first measure', function () {
+      // Given
+      var part = fermataData['score']['score-partwise']['part'][0];
+      var measure = part.measure[0];
+      var notes = measure.note;
+
+      // When
+      fermataData.addNote(0, 0, 0, 3, 1, 1);
+      fermataData.addNote(0, 0, 0, 3, 2, 1);
+      fermataData.addNote(0, 0, 0, 3, 3, 1);
+      fermataData.addNote(0, 0, 0, 3, 3, 1);
+      _render.renderAll();
+
+      // Then
+      assert.equal(fermataData['score']['score-partwise']['part'][0].measure[0].note.length, 4);
+      assert.equal(measure.$fermata.attributes.divisions, 2);
+      assert.equal(notes[0].duration, 4);
+      assert.equal(notes[0].duration, 2);
+      assert.equal(notes[0].duration, 1);
+      assert.equal(notes[0].duration, 1);
+    });
+
     it('should add one half in first measure', function () {
       fermataData.addNote(0, 0, 0, 3, 1, 1);
 
