@@ -175,9 +175,7 @@
     removeSpaces(measureData.note, divisionsDuration, idxN);
     var clef = measureData.$fermata.attributes.clef[0];
     if (divisionsDuration < 1) {
-      var measure = new Measure(measureData);
-      measure.multiplyDivisions(1 / divisionsDuration);
-      divisionsDuration = 1;
+      adaptMeasureDivisions(measureData, divisionsDuration);
     }
     var note = {
       'duration': divisionsDuration,
@@ -203,6 +201,12 @@
         notes.splice(idx, 0);
       }
     }
+  };
+
+  var adaptMeasureDivisions = function (measureData, divisionsDuration) {
+    var measure = new Measure(measureData);
+    measure.multiplyDivisions(1 / divisionsDuration);
+    divisionsDuration = 1;
   };
 
   Fermata.Data.prototype.removeNote = function (idxS, idxM, idxN) {
