@@ -177,7 +177,7 @@
         return true;
       } else {
         divisionsDuration -= note.duration;
-        notes.splice(idx, 0);
+        i++;
       }
     }
     return divisionsDuration === 0;
