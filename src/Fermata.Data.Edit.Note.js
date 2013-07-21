@@ -198,7 +198,7 @@
         divisionsDuration = 0;
       } else {
         divisionsDuration -= note.duration;
-        notes.splice(idx, 0);
+        notes.splice(idx, 1);
       }
     }
   };
