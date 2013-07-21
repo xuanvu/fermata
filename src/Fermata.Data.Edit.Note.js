@@ -136,12 +136,13 @@
       var part = this.getPart(idxS, Fermata.Data.cacheParts.IDX);
       if (part !== undefined) {
         if (idxM >= 0 && idxM < part.measure.length) {
-          var measureData = part.measure[idxM];
-          var divisions = measureData.$fermata.attributes.divisions;
+          var measure = part.measure[idxM];
+          var divisions = measure.$fermata.attributes.divisions;
           var quarterDuration = typeToQuarterDuration(type);
           var divisionsDuration = quarterDuration * divisions;
-          if (isEnoughSpace(measureData.note, divisionsDuration, idxN)) {
-            makeAddNote(measureData, divisionsDuration, idxN, pitch, voice, type);
+
+          if (isEnoughSpace(measure.note, divisionsDuration, idxN)) {
+            makeAddNote(measure, divisionsDuration, idxN, pitch, voice, type);
           }
         }
       }
