@@ -171,11 +171,11 @@
     return SoundType.getSoundType(note) === SoundType.REST;
   };
 
-  var makeAddNote = function (measureData, divisionsDuration, idxN, pitch, voice, type) {
-    removeSpaces(measureData.note, divisionsDuration, idxN);
-    var clef = measureData.$fermata.attributes.clef[0];
+  var makeAddNote = function (measure, divisionsDuration, idxN, pitch, voice, type) {
+    removeSpaces(measure.note, divisionsDuration, idxN);
+    var clef = measure.$fermata.attributes.clef[0];
     if (divisionsDuration < 1) {
-      adaptMeasureDivisions(measureData, divisionsDuration);
+      adaptMeasureDivisions(measure, divisionsDuration);
     }
     var note = {
       'duration': divisionsDuration,
@@ -184,10 +184,10 @@
       'type': getValue(type),
       'voice': voice
     };
-    if (idxN < 0 || idxN > measureData.note.length) {
-      idxN = measureData.note.length;
+    if (idxN < 0 || idxN > measure.note.length) {
+      idxN = measure.note.length;
     }
-    measureData.note.splice(idxN, 0, note);
+    measure.note.splice(idxN, 0, note);
   };
 
   var removeSpaces = function (notes, divisionsDuration, idx) {
