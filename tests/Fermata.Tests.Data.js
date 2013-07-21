@@ -319,5 +319,46 @@ if (typeof require !== 'undefined') {
         assert.deepEqual(extractedData, helloWorld);
       });
     });
+
+    describe('#isTimeCompliant - unit', function () {
+      it('hello world - true', function () {
+        // Given
+        var fermataData = new Fermata.Data(helloWorld);
+
+        // When
+        var timeCompliant = fermataData.isTimeCompliant();
+
+        // Then
+        assert.equal(timeCompliant, true);
+      });
+
+      it('hello world - false (too low)', function () {
+        // Given
+        var fermataData = new Fermata.Data(helloWorld);
+        var part = fermataData.getPart(0, Fermata.Data.cacheParts.IDX);
+        var measure = part.measure[0];
+        measure.note.pop();
+
+        // When
+        var timeCompliant = fermataData.isTimeCompliant();
+
+        // Then
+        assert.equal(timeCompliant, false);
+      });
+
+      it('hello world - false (too much)', function () {
+        // Given
+        var fermataData = new Fermata.Data(helloWorld);
+        var part = fermataData.getPart(0, Fermata.Data.cacheParts.IDX);
+        var measure = part.measure[0];
+        measure.note.push({duration: 1});
+
+        // When
+        var timeCompliant = fermataData.isTimeCompliant();
+
+        // Then
+        assert.equal(timeCompliant, false);
+      });
+    });
   });
 }).call(this);
