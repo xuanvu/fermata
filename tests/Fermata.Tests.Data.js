@@ -276,7 +276,7 @@ if (typeof require !== 'undefined') {
       };
     });
 
-    describe('#extract - integ', function () {
+    describe('#exportData - integ', function () {
       it('hello world', function () {
         // Given
         var fermataData = new Fermata.Data(helloWorld);
@@ -284,7 +284,7 @@ if (typeof require !== 'undefined') {
 
         // When
         render.renderAll();
-        var extractedData = fermataData.export();
+        var extractedData = fermataData.exportData();
 
         // Then
         assert.deepEqual(extractedData, helloWorld);
@@ -297,14 +297,14 @@ if (typeof require !== 'undefined') {
 
         // When
         render.renderAll();
-        var extractedData = fermataData.export();
+        var extractedData = fermataData.exportData();
 
         // Then
         assert.deepEqual(extractedData, reve);
       });
     });
 
-    describe('#extract - unit', function () {
+    describe('#exportData - unit', function () {
       it('hello world', function () {
         // Given
         var fermataData = new Fermata.Data(helloWorld);
@@ -313,7 +313,7 @@ if (typeof require !== 'undefined') {
         measure.$fermata = {};
 
         // When
-        var extractedData = fermataData.export();
+        var extractedData = fermataData.exportData();
 
         // Then
         assert.deepEqual(extractedData, helloWorld);
