@@ -142,6 +142,7 @@
           var quarterDuration = typeToQuarterDuration(type);
           var divisionsDuration = quarterDuration * divisions;
           if (isEnoughSpace(measureData, divisionsDuration, idxN)) {
+            removeSpaces(measureData, divisionsDuration, idxN);
             if (divisionsDuration < 1) {
               var measure = new Measure(measureData);
               measure.multiplyDivisions(1 / divisionsDuration);
@@ -181,6 +182,19 @@
     }
     return divisionsDuration === 0;
   };
+  
+  var removeSpaces = function (notes, divisionsDuration, idx) {
+    while (divisionsDuration > 0) {
+      var note = notes[idx];
+            if (note.duration > divisionsDuration) {
+        note.duration -= divisionsDuration;
+        divisionsDuration = 0;
+      } else {
+        divisionsDuration -= note.duration;
+        notes.splice(idx, 0);
+      }
+    }
+  }
 
   var isRest = function (note) {
     return SoundType.geSoundType(note) === SoundType.REST;
