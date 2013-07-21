@@ -376,6 +376,18 @@ if (typeof require !== 'undefined') {
       it('hello world - false', function () {
         // Given
         var fermataData = new Fermata.Data(helloWorld);
+        fermataData.addNote(0, 0, 0, 0, 2);
+
+        // When
+        var timeCompliant = fermataData.isTimeCompliant();
+
+        // Then
+        assert.equal(timeCompliant, false);
+      });
+
+      it('hello world - false with division change', function () {
+        // Given
+        var fermataData = new Fermata.Data(helloWorld);
         fermataData.addNote(0, 0, 0, 0, 3);
 
         // When
