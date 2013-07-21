@@ -15,7 +15,7 @@
     EIGHTH:     3
   };
 
-  Fermata.Data.prototype.getDuration = function (type) {
+  var getDuration = function (type) {
     if (type === ValueLast.FULL) {
       return 4;
     }
@@ -34,7 +34,7 @@
     }
   };
 
-  Fermata.Data.prototype.getQueue = function (voice) {
+  var getQueue = function (voice) {
     // "up" and "down" are defined by the number of voices in the stave
     // TODO: return something else than "up" (voice calculation?)
     return "up";
@@ -62,7 +62,7 @@
     return valueCorrection;
   };
 
-  Fermata.Data.prototype.getStep = function (val) {
+  var getStep = function (val) {
     if (val === 0) {
       return "C";
     }
@@ -86,7 +86,7 @@
     }
   };
 
-  Fermata.Data.prototype.getPitch = function (pitch, sign, line) {
+  var getPitch = function (pitch, sign, line) {
     var valueCorrection = calcValueCorrection(sign, line);
     pitch = parseInt(pitch, 10);
     pitch += valueCorrection;
@@ -94,16 +94,16 @@
     var n_octave = -p_octave;
     var step = "L";
     if (pitch < 0) {
-      step = this.getStep(pitch % n_octave);
+      step = getStep(pitch % n_octave);
     }
     else {
-      step = this.getStep(pitch % p_octave);
+      step = getStep(pitch % p_octave);
     }
     var octave = 4 + Math.floor(pitch / p_octave);
     return {'octave': octave, 'step': step};
   };
 
-  Fermata.Data.prototype.getValue = function (type) {
+  var getValue = function (type) {
     if (type === ValueLast.FULL) {
       return "full";
     }
@@ -139,7 +139,7 @@
           var measureData = part.measure[idxM];
           var clef = measureData.$fermata.attributes.clef[0];
           var divisions = measureData.$fermata.attributes.divisions;
-          var quarterDuration = this.getDuration(type);
+          var quarterDuration = getDuration(type);
           var divisionsDuration = quarterDuration * divisions;
           if (divisionsDuration < 1) {
             var measure = new Measure(measureData);
@@ -148,9 +148,9 @@
           }
           var note = {
             'duration': divisionsDuration,
-            'pitch': this.getPitch(pitch, clef.sign, clef.line),
-            'stem': this.getQueue(voice),
-            'type': this.getValue(type),
+            'pitch': getPitch(pitch, clef.sign, clef.line),
+            'stem': getQueue(voice),
+            'type': getValue(type),
             'voice': voice
           };
           if (idxN < 0 || idxN > measureData.note.length) {
@@ -199,14 +199,14 @@
           var clef = measure.$fermata.attributes.clef[0];
           if (note.rest === undefined) {
             if (pitch !== undefined) {
-              note.pitch = this.getPitch(pitch, clef.sign, clef.line);
+              note.pitch = getPitch(pitch, clef.sign, clef.line);
             }
             if (type !== undefined) {
-              note.type = this.getValue(type);
+              note.type = getValue(type);
             }
             if (voice !== undefined) {
               note.voice = voice;
-              note.stem = this.getQueue(voice);
+              note.stem = getQueue(voice);
             }
           }
         }
