@@ -60,7 +60,7 @@ describe('Fermata.Data.Edit.Note', function () {
       _render.renderAll();
 
       // Then
-      assert.equal(fermataData['score']['score-partwise']['part'][0].measure[0].note.length, 4);
+      assert.equal(measure.note.length, 4);
       assert.equal(measure.$fermata.attributes.divisions, 2);
       assert.equal(notes[0].duration, 4);
       assert.equal(notes[0].duration, 2);
