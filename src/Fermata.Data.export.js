@@ -5,7 +5,7 @@
 
   var Data = Fermata.Data;
 
-  Data.prototype.export = function () {
+  Data.prototype.exportData = function () {
     this.saveAttributes();
     var exportData = Utils.CloneEpure$fermata(this.score);
     removeCamelCaseKeys(exportData);
