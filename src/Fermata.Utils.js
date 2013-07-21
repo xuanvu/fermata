@@ -10,8 +10,7 @@
   };
 
   Utils.Clone = function (obj) {
-    var newObj = (Object.prototype.toString.call(obj) ===
-            '[object Array]') ? [] : {};
+    var newObj = (Utils.isArray(obj)) ? [] : {};
     for (var i in obj) {
       if (obj.hasOwnProperty(i)) {
         if (obj[i] && typeof obj[i] === "object") {
@@ -26,8 +25,7 @@
   };
 
   Utils.CloneEpure$fermata = function (obj) {
-    var newObj = (Object.prototype.toString.call(obj) ===
-            '[object Array]') ? [] : {};
+    var newObj = (Utils.isArray(obj)) ? [] : {};
     for (var i in obj) {
       if (obj.hasOwnProperty(i) &&
               i !== "$fermata") {
