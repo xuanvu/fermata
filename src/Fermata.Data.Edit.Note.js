@@ -157,7 +157,6 @@
         return false;
       }
       if (note.duration > divisionsDuration) {
-        note.duration -= divisionsDuration;
         return true;
       } else {
         divisionsDuration -= note.duration;
