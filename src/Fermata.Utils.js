@@ -3,11 +3,13 @@
 
   Fermata.Utils = {};
   
-  Fermata.Utils.isArray = function (obj) {
+  var Utils = Fermata.Utils;
+  
+  Utils.isArray = function (obj) {
     return Object.prototype.toString.call(obj) === '[object Array]';
   };
 
-  Fermata.Utils.Clone = function (obj) {
+  Utils.Clone = function (obj) {
     var newObj = (Object.prototype.toString.call(obj) ===
             '[object Array]') ? [] : {};
     for (var i in obj) {
@@ -23,7 +25,7 @@
     return newObj;
   };
 
-  Fermata.Utils.CloneEpure$fermata = function (obj) {
+  Utils.CloneEpure$fermata = function (obj) {
     var newObj = (Object.prototype.toString.call(obj) ===
             '[object Array]') ? [] : {};
     for (var i in obj) {
@@ -41,12 +43,12 @@
   };
 
   // Delete ?
-  Fermata.Utils.FirstLast = function (obj)
+  Utils.FirstLast = function (obj)
   {
     return ({first: 0, last: obj.length - 1});
   };
 
-  Fermata.Utils.minusToCamelCase = function (str) {
+  Utils.minusToCamelCase = function (str) {
     return str.replace(/-([a-z])/g, camelCaseHandler);
   };
 
