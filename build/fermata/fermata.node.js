@@ -28,7 +28,7 @@
  This library makes use of Simon Tatham's awesome font - Gonville.
 
  Build ID: debug-4@84161de73e7898406094c22c081bfc597c832090
- Build date: 2013-07-19 02:50:28.530346
+ Build date: 2013-07-21 15:38:52.565085
 
 */
 function Vex() {
@@ -6246,10 +6246,10 @@ Vex.Flow.Stroke.prototype.draw = function() {
 };
 /*
 
- Fermata 0.0.1
+ Fermata 0.0.2
 
- Build ID: debug-4@3bf25b82773f596dd82239381a317f660d2b052e
- Build date: 2013-07-19 02:50:28.530369
+ Build ID: debug-4@e832e7f6e2eab229f375b205a94de79ea8291809
+ Build date: 2013-07-21 15:38:52.565107
 
 */
 if(typeof require !== "undefined") {
@@ -6259,8 +6259,12 @@ var Fermata = Fermata || {};
 Fermata.Vex = Vex;
 (function() {
   Fermata.Utils = {};
-  Fermata.Utils.Clone = function(obj) {
-    var newObj = Object.prototype.toString.call(obj) === "[object Array]" ? [] : {};
+  var Utils = Fermata.Utils;
+  Utils.isArray = function(obj) {
+    return Object.prototype.toString.call(obj) === "[object Array]"
+  };
+  Utils.Clone = function(obj) {
+    var newObj = Utils.isArray(obj) ? [] : {};
     for(var i in obj) {
       if(obj.hasOwnProperty(i)) {
         if(obj[i] && typeof obj[i] === "object") {
@@ -6272,8 +6276,27 @@ Fermata.Vex = Vex;
     }
     return newObj
   };
-  Fermata.Utils.FirstLast = function(obj) {
+  Utils.CloneEpure$fermata = function(obj) {
+    var newObj = Utils.isArray(obj) ? [] : {};
+    for(var i in obj) {
+      if(obj.hasOwnProperty(i) && i !== "$fermata") {
+        if(obj[i] && typeof obj[i] === "object") {
+          newObj[i] = Fermata.Utils.CloneEpure$fermata(obj[i])
+        }else {
+          newObj[i] = obj[i]
+        }
+      }
+    }
+    return newObj
+  };
+  Utils.FirstLast = function(obj) {
     return{first:0, last:obj.length - 1}
+  };
+  Utils.minusToCamelCase = function(str) {
+    return str.replace(/-([a-z])/g, camelCaseHandler)
+  };
+  var camelCaseHandler = function(c) {
+    return c[1].toUpperCase()
   }
 }).call(this);
 (function() {
@@ -6449,12 +6472,10 @@ Fermata.Vex = Vex;
   }
 }).call(this);
 (function() {
+  var Utils = Fermata.Utils;
   Fermata.Utils.Call = {};
   var Call = Fermata.Utils.Call;
   Call.FuncTypes = {$0n:"*", $1n:"+", $01:"?", $1:"default"};
-  var camelCaseHandler = function(c) {
-    return c[1].toUpperCase()
-  };
   Call.exploreSubNodes = function(p) {
     if(p === "undefined" || typeof p !== "object") {
       return false
@@ -6473,7 +6494,7 @@ Fermata.Vex = Vex;
       if(typeof process.dataType !== "undefined") {
         if(typeof process._key === "undefined") {
           if(typeof process.dataKey === "undefined" || process.dataKey === "CamelCase") {
-            process._key = process.key.replace(/-([a-z])/g, camelCaseHandler)
+            process._key = Utils.minusToCamelCase(process.key)
           }else {
             if(typeof process.dataKey === "string") {
               process._key = process.dataKey
@@ -6777,6 +6798,14 @@ Fermata.Values = {};
     for(var i = 0;i < this.scoreCache.part.idx.length;i++) {
       callback(this.scoreCache.part.idx[i], i)
     }
+  }, forEachMeasure:function(callback) {
+    this.forEachPart(function(part) {
+      var measures = part.measure;
+      for(var i = 0;i < measures.length;i++) {
+        var measure = measures[i];
+        callback(measure)
+      }
+    })
   }, setBeat:function(measure_idx, beats) {
     this.forEachPart(function(part) {
       for(var i = 0;i < part.measure.length;i++) {
@@ -7604,6 +7633,28 @@ Fermata.Values = {};
   var saveAttributesOther = function(previousMeasure, measureData) {
     var measure = new Measure(measureData);
     measure.updateFromPrevious(previousMeasure)
+  }
+}).call(this);
+(function() {
+  var Utils = Fermata.Utils;
+  var Data = Fermata.Data;
+  Data.prototype.exportData = function() {
+    this.saveAttributes();
+    var exportData = Utils.CloneEpure$fermata(this.score);
+    removeCamelCaseKeys(exportData);
+    return exportData
+  };
+  var removeCamelCaseKeys = function(exportData) {
+    var scoreParts = exportData["score-partwise"]["part-list"]["score-part"];
+    for(var i = 0;i < scoreParts.length;i++) {
+      var scorePart = scoreParts[i];
+      for(var key in scorePart) {
+        var camelCaseKey = Utils.minusToCamelCase(key);
+        if(camelCaseKey !== key && scorePart[camelCaseKey] !== "undefined") {
+          delete scorePart[camelCaseKey]
+        }
+      }
+    }
   }
 }).call(this);
 (function() {
