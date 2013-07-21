@@ -15,7 +15,7 @@
     EIGHTH:     3
   };
 
-  var getDuration = function (type) {
+  var typeToQuarterDuration = function (type) {
     if (type === ValueLast.FULL) {
       return 4;
     }
@@ -139,7 +139,7 @@
           var measureData = part.measure[idxM];
           var clef = measureData.$fermata.attributes.clef[0];
           var divisions = measureData.$fermata.attributes.divisions;
-          var quarterDuration = getDuration(type);
+          var quarterDuration = typeToQuarterDuration(type);
           var divisionsDuration = quarterDuration * divisions;
           if (divisionsDuration < 1) {
             var measure = new Measure(measureData);
