@@ -332,6 +332,17 @@ if (typeof require !== 'undefined') {
         assert.equal(timeCompliant, true);
       });
 
+      it('reve - true', function () {
+        // Given
+        var fermataData = new Fermata.Data(reve);
+
+        // When
+        var timeCompliant = fermataData.isTimeCompliant();
+
+        // Then
+        assert.equal(timeCompliant, true);
+      });
+
       it('hello world - false (too low)', function () {
         // Given
         var fermataData = new Fermata.Data(helloWorld);
@@ -358,6 +369,33 @@ if (typeof require !== 'undefined') {
 
         // Then
         assert.equal(timeCompliant, false);
+      });
+    });
+
+    describe('#isTimeCompliant - integ', function () {
+      it('hello world - false', function () {
+        // Given
+        var fermataData = new Fermata.Data(helloWorld);
+        fermataData.addNote(0, 0, 0, 0, 3);
+
+        // When
+        var timeCompliant = fermataData.isTimeCompliant();
+
+        // Then
+        assert.equal(timeCompliant, false);
+      });
+
+      it('hello world - false', function () {
+        // Given
+        var fermataData = new Fermata.Data(helloWorld);
+        fermataData.addNote(0, 0, 0, 0, 3);
+        fermataData.removeNote(0, 0, 0);
+
+        // When
+        var timeCompliant = fermataData.isTimeCompliant();
+
+        // Then
+        assert.equal(timeCompliant, true);
       });
     });
   });
