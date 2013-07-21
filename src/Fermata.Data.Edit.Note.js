@@ -174,9 +174,6 @@
   var makeAddNote = function (measure, divisionsDuration, idxN, pitch, voice, type) {
     removeSpaces(measure.note, divisionsDuration, idxN);
     var clef = measure.$fermata.attributes.clef[0];
-    if (divisionsDuration < 1) {
-      adaptMeasureDivisions(measure, divisionsDuration);
-    }
     var note = {
       'duration': divisionsDuration,
       'pitch': getPitch(pitch, clef.sign, clef.line),
@@ -188,6 +185,9 @@
       idxN = measure.note.length;
     }
     measure.note.splice(idxN, 0, note);
+    if (divisionsDuration < 1) {
+      adaptMeasureDivisions(measure, divisionsDuration);
+    }
   };
 
   var removeSpaces = function (notes, divisionsDuration, idx) {
@@ -206,7 +206,6 @@
   var adaptMeasureDivisions = function (measureData, divisionsDuration) {
     var measure = new Measure(measureData);
     measure.multiplyDivisions(1 / divisionsDuration);
-    divisionsDuration = 1;
   };
 
   Fermata.Data.prototype.removeNote = function (idxS, idxM, idxN) {
