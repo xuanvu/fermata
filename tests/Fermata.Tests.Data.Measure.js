@@ -433,6 +433,21 @@ if (typeof require !== 'undefined') {
         assert.equal(actualDuration, 4);
       });
 
+      it("with strings", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        changeIntToStringInDurations(data);
+        var measure = new Measure(data);
+
+        // When
+        var actualDuration = measure.getActualDuration();
+
+        // Then
+        assert.equal(actualDuration, 4);
+      });
+
       it("non compliant", function () {
         // Given 
         var nbNote = 2;
@@ -471,4 +486,13 @@ if (typeof require !== 'undefined') {
       });
     });
   });
+  
+  var changeIntToStringInDurations = function (measure) {
+    var notes = measure.note;
+    for (var i = 0 ; i < notes.length ; i++) {
+      var note = notes[i];
+
+      note.duration = note.duration.toString();
+    }
+  };
 }).call(this);
