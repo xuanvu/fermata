@@ -141,8 +141,8 @@
           var divisions = measureData.$fermata.attributes.divisions;
           var quarterDuration = typeToQuarterDuration(type);
           var divisionsDuration = quarterDuration * divisions;
-          if (isEnoughSpace(measureData, divisionsDuration, idxN)) {
-            removeSpaces(measureData, divisionsDuration, idxN);
+          if (isEnoughSpace(measureData.note, divisionsDuration, idxN)) {
+            removeSpaces(measureData.note, divisionsDuration, idxN);
             if (divisionsDuration < 1) {
               var measure = new Measure(measureData);
               measure.multiplyDivisions(1 / divisionsDuration);
