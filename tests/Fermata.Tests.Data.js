@@ -276,7 +276,7 @@ if (typeof require !== 'undefined') {
       };
     });
 
-    describe('#extract - integ', function () {
+    describe('#exportData - integ', function () {
       it('hello world', function () {
         // Given
         var fermataData = new Fermata.Data(helloWorld);
@@ -304,7 +304,7 @@ if (typeof require !== 'undefined') {
       });
     });
 
-    describe('#extract - unit', function () {
+    describe('#exportData - unit', function () {
       it('hello world', function () {
         // Given
         var fermataData = new Fermata.Data(helloWorld);
