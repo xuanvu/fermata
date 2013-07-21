@@ -7,38 +7,9 @@
 
   Data.prototype.export = function () {
     this.saveAttributes();
-
-    var $fermataList = [];
-    this.remove$fermata($fermataList);
-    var exportData = Utils.Clone(this.score);
-    this.restore$fermata($fermataList);
-    
+    var exportData = Utils.CloneEpure$fermata(this.score);
     removeCamelCaseKeys(exportData);
     return exportData;
-  };
-
-  Data.prototype.remove$fermata = function ($fermataList) {
-    this.forEachMeasure(function (measure) {
-      if (typeof measure.$fermata !== "undefined") {
-        $fermataList.push(measure.$fermata);
-        delete measure.$fermata;
-      } else {
-        $fermataList.push(null);
-      }
-    });
-  };
-
-  Data.prototype.restore$fermata = function ($fermataList) {
-    var fermataIdx = 0;
-
-    this.forEachMeasure(function (measure) {
-      var $fermata = $fermataList[fermataIdx];
-
-      if ($fermata !== null) {
-        measure.$fermata = $fermata;
-      }
-      fermataIdx++;
-    });
   };
 
   var removeCamelCaseKeys = function (exportData) {
