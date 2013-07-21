@@ -397,7 +397,7 @@ if (typeof require !== 'undefined') {
         assert.equal(timeCompliant, false);
       });
 
-      it('hello world - false', function () {
+      it('hello world - true', function () {
         // Given
         var fermataData = new Fermata.Data(helloWorld);
         fermataData.addNote(0, 0, 0, 0, 3);
