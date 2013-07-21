@@ -2,6 +2,11 @@
   "use strict";
 
   Fermata.Utils = {};
+  
+  Fermata.Utils.isArray = function (obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
+  };
+
   Fermata.Utils.Clone = function (obj) {
     var newObj = (Object.prototype.toString.call(obj) ===
             '[object Array]') ? [] : {};
