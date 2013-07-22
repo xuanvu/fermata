@@ -155,8 +155,8 @@
   Measure.prototype.removeExcedentDivisionsInRest = function (divisionsToRemove, voiceIdx) {
     var voice = this.getVoice(voiceIdx);
     var i = voice.length - 1;
-    while (i > 0 && isRest(voice.note[i]) && divisionsToRemove > 0) {
-      var note = voice.note[i];
+    while (i > 0 && isRest(voice[i]) && divisionsToRemove > 0) {
+      var note = voice[i];
       if (divisionsToRemove < note.duration) {
         note.duration = divisionsToRemove;
       } else {
