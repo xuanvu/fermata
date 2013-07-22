@@ -26,6 +26,9 @@
   };
 
   Measure.prototype.getVoice = function (idx) {
+    if (this.getVoices()[idx] === "undefined") {
+      this.createVoice(idx);
+    }
     return this.getVoices()[idx];
   };
 
@@ -59,8 +62,12 @@
   };
 
   Measure.prototype.isCompliant = function () {
+    var voicesCount = this.getVoices().length;
     var authorizedDuration = this.getAuthorizedDuration();
-    for (var i = 0; i < this.getVoices().length; i++) {
+    if (voicesCount === 0) {
+      return authorizedDuration === 0;
+    }
+    for (var i = 0; i < voicesCount; i++) {
       var actualDuration = this.getActualDuration(i);
       if (authorizedDuration !== actualDuration) {
         return false;
