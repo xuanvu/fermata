@@ -24,6 +24,10 @@
     }
     return this.voices;
   };
+  
+  Measure.prototype.getVoice = function (idx) {
+    return this.getVoices[idx];
+  };
 
   Measure.prototype.fillVoices = function (notes) {
     for (var i = 0; i < notes.length; i++) {
@@ -192,7 +196,7 @@
     if (typeof voiceIdx === "undefined") {
       voiceIdx = 0;
     }
-    var notes = this.getVoice()[voiceIdx];
+    var notes = this.getVoice(voiceIdx);
     var actualDuration = 0;
     for (var i = 0; i < notes.length; i++) {
       var note = notes[i];
