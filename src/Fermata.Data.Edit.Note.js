@@ -170,6 +170,22 @@
     }
     return divisionsNeeded;
   };
+  
+  var calcAvailableSpaceFromEnd = function (notes, divisionsNeeded) {
+    var i = notes.length - 1;
+    while (i >= 0 && divisionsNeeded > 0) {
+      var note = notes[i];
+      if (!isRest(note)) {
+        return divisionsNeeded;
+      } else if (note.duration > divisionsNeeded) {
+        return 0;
+      } else {
+         divisionsNeeded -= note.duration;
+        i--;
+      }
+    }
+    return divisionsNeeded;
+  };
 
   var isRest = function (note) {
     return SoundType.getSoundType(note) === SoundType.REST;
