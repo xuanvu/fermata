@@ -178,7 +178,7 @@
     while (i >= 0 && divisionsNeeded > 0) {
       var note = notes[i];
       if (!isRest(note)) {
-        return divisionsNeeded;
+        return spaceAvailable - divisionsNeeded;
       } else if (note.duration > divisionsNeeded) {
         return 0;
       } else {
@@ -213,9 +213,12 @@
   };
 
   var removeSpaces = function (notes, divisionsDuration, idx) {
+    var spaceConsumed = divisionsDuration;
     while (divisionsDuration > 0) {
       var note = notes[idx];
-      if (note.duration > divisionsDuration) {
+      if (!isRest(note)) {
+        return spaceConsumed - divisionsDuration;
+      } else if (note.duration > divisionsDuration) {
         note.duration -= divisionsDuration;
         divisionsDuration = 0;
       } else {
@@ -223,6 +226,7 @@
         notes.splice(idx, 1);
       }
     }
+    return spaceConsumed - divisionsDuration;
   };
 
   var adaptMeasureDivisions = function (measureData, divisionsDuration) {
