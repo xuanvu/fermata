@@ -31,11 +31,23 @@ if (typeof require !== 'undefined') {
   };
 
   describe("Fermata.Data.PitchRest", function () {
-   describe("#getType", function () {
+    var attributes;
+    beforeEach(function (done) {
+      attributes = {
+        clef: [{
+            sign: "G",
+            line: "2"
+          }
+        ],
+        divisions: 1
+      };
+      done();
+    });
+    describe("#getType", function () {
       it("getType", function () {
         // Given 
         var note = initNote("C", 4);
-        var pitch = new PitchRest(note);
+        var pitch = new PitchRest(note, attributes);
 
         // When
         var type = pitch.getType();
