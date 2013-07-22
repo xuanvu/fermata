@@ -132,7 +132,7 @@
     var vexPitches = [];
     for (var i = 0 ; i < noteData.length ; i++)
     {
-      dataPitch = PitchEncapsulator.encapsulate(noteData[i], this.clefName);
+      dataPitch = PitchEncapsulator.encapsulate(noteData[i], this.attributes);
       vexPitches.push(this.convertPitch(dataPitch));
     }
 
