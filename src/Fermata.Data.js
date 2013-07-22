@@ -132,6 +132,18 @@
     },
     setTitle: function (title) {
       this.score['score-partwise']['movement-title'] = title + '';
+    },
+    isTimeCompliant: function () {
+      var compliant = true;
+      this.forEachMeasure(function (measureData) {
+        var measure = new Fermata.Data.Measure(measureData);
+
+        if (!measure.isCompliant()) {
+          compliant = false;
+        }
+      });
+
+      return compliant;
     }
   };
 

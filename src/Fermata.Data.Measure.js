@@ -13,9 +13,48 @@
     if (this.isRendered()) {
       this.attributes = measureData.$fermata.attributes;
     }
+    this.voices = null;
   };
 
   var Measure = Fermata.Data.Measure;
+
+  Measure.prototype.getVoices = function () {
+    if (this.voices === null) {
+      this.fillVoices(this.data.note);
+    }
+    return this.voices;
+  };
+
+  Measure.prototype.getVoice = function (idx) {
+    if (typeof this.getVoices()[idx] === "undefined") {
+      this.createVoice(idx);
+    }
+    return this.getVoices()[idx];
+  };
+
+  Measure.prototype.fillVoices = function (notes) {
+    this.voices = [];
+    for (var i = 0; i < notes.length; i++) {
+      var note = notes[i];
+
+      var voiceIdx = 0;
+      if (typeof note.voice !== "undefined") {
+        voiceIdx = parseInt(note.voice, 10) - 1;
+      }
+      if (typeof this.voices[voiceIdx] === "undefined") {
+        this.createVoice(voiceIdx);
+      }
+      this.voices[voiceIdx].push(note);
+    }
+  };
+
+  Measure.prototype.createVoice = function (idx) {
+    for (var i = 0; i <= idx; i++) {
+      if (typeof this.voices[i] === "undefined") {
+        this.voices[i] = [];
+      }
+    }
+  };
 
   Measure.prototype.isRendered = function () {
     return typeof this.data.$fermata !== "undefined" &&
@@ -23,7 +62,18 @@
   };
 
   Measure.prototype.isCompliant = function () {
-    return this.getAuthorizedDuration() === this.getActualDuration();
+    var voicesCount = this.getVoices().length;
+    var authorizedDuration = this.getAuthorizedDuration();
+    if (voicesCount === 0) {
+      return authorizedDuration === 0;
+    }
+    for (var i = 0; i < voicesCount; i++) {
+      var actualDuration = this.getActualDuration(i);
+      if (authorizedDuration !== actualDuration) {
+        return false;
+      }
+    }
+    return true;
   };
 
   Measure.prototype.initBeat = function (beats, beatType) {
@@ -90,23 +140,29 @@
 
   Measure.prototype.adjustNotesDuration = function () {
     var authorizedDuration = this.getAuthorizedDuration();
-    var actualDuration = this.getActualDuration();
+    for (var i = 0; i < this.getVoices().length; i++) {
+      var actualDuration = this.getActualDuration(i);
 
-    if (authorizedDuration > actualDuration) {
-      this.fillMissingDivisionsWithRest(authorizedDuration - actualDuration);
-    } else if (authorizedDuration < actualDuration) {
-      this.removeExcedentDivisionsInRest(actualDuration - authorizedDuration);
+      if (authorizedDuration > actualDuration) {
+        this.fillMissingDivisionsWithRest(authorizedDuration - actualDuration, i);
+      } else if (authorizedDuration < actualDuration) {
+        this.removeExcedentDivisionsInRest(actualDuration -
+                authorizedDuration, i);
+      }
     }
   };
 
-  Measure.prototype.removeExcedentDivisionsInRest = function (divisionsToRemove) {
-    var i = this.data.note.length - 1;
-    while (i > 0 && isRest(this.data.note[i]) && divisionsToRemove > 0) {
-      var note = this.data.note[i];
+  Measure.prototype.removeExcedentDivisionsInRest = function (divisionsToRemove, voiceIdx) {
+    var voice = this.getVoice(voiceIdx);
+    var i = voice.length - 1;
+    while (i > 0 && isRest(voice[i]) && divisionsToRemove > 0) {
+      var note = voice[i];
       if (divisionsToRemove < note.duration) {
         note.duration = divisionsToRemove;
       } else {
-        this.data.note.pop();
+        voice.pop();
+        var noteIdx = this.data.note.indexOf(note);
+        this.data.note.splice(noteIdx, 1);
       }
       divisionsToRemove -= note.duration;
       i--;
@@ -117,7 +173,8 @@
     return SoundType.getSoundType(note) === SoundType.REST;
   };
 
-  Measure.prototype.fillMissingDivisionsWithRest = function (divisionsToAdd) {
+  Measure.prototype.fillMissingDivisionsWithRest = function (divisionsToAdd, voiceIdx) {
+    var voice = this.getVoice(voiceIdx);
     var beatTypeDivisions = this.getBeatTypeDivisions();
     while (divisionsToAdd > 0) {
       var note = createRest();
@@ -127,7 +184,13 @@
         note.duration = beatTypeDivisions;
       }
       divisionsToAdd -= note.duration;
-      this.data.note.push(note);
+      voice.push(note);
+      var noteIdx = 0;
+      if (voice.length > 1) {
+        var previousNote = voice[voice.length - 2];
+        noteIdx = this.data.note.indexOf(previousNote) + 1;
+      }
+      this.data.note.splice(noteIdx, 0, note);
     }
   };
 
@@ -150,16 +213,25 @@
     return 4 / wholeDivision;
   };
 
-  Measure.prototype.getActualDuration = function () {
+  Measure.prototype.getActualDuration = function (voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+    var notes = this.getVoice(voiceIdx);
     var actualDuration = 0;
-    for (var i = 0; i < this.data.note.length; i++) {
-      var note = this.data.note[i];
-      var noteDuration = note.duration;
-
-      actualDuration += noteDuration;
+    for (var i = 0; i < notes.length; i++) {
+      var note = notes[i];
+      if (!isChord(note)) {
+        var noteDuration = parseInt(note.duration, 10);
+        actualDuration += noteDuration;
+      }
     }
 
     return actualDuration;
+  };
+
+  var isChord = function (note) {
+    return typeof note.chord !== "undefined";
   };
 
   var validateBeat = function (beats, beatType) {
@@ -286,9 +358,9 @@
     }
   };
 
-  Measure.prototype.clearMeasure = function() {
+  Measure.prototype.clearMeasure = function () {
     console.log(this.data);
-    for(var i = 1; i < this.data.$fermata.vexNotes.length; i++) {
+    for (var i = 1; i < this.data.$fermata.vexNotes.length; i++) {
       for (var j = 1; j < this.data.$fermata.vexNotes[i].length; j++) {
         for (var k = 0; k < this.data.$fermata.vexNotes[i][j].length; k++) {
           this.data.$fermata.vexNotes[i][j][k].st.remove();
