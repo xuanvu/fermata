@@ -26,7 +26,7 @@
   };
 
   Measure.prototype.getVoice = function (idx) {
-    return this.getVoices[idx];
+    return this.getVoices()[idx];
   };
 
   Measure.prototype.fillVoices = function (notes) {
