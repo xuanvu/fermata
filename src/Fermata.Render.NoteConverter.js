@@ -101,7 +101,7 @@
 
   NoteConverter.prototype.convertNormalNote = function (noteData)
   {
-    var dataPitch = PitchEncapsulator.encapsulate(noteData[0], this.clefName);
+    var dataPitch = PitchEncapsulator.encapsulate(noteData[0], this.attributes);
     var vexDuration = this.convertDuration(noteData[0]);
     var stem = null;
 

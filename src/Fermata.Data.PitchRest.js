@@ -4,12 +4,15 @@
   //includes
   var Clef = Fermata.Mapping.Clef;
   var SoundType = Fermata.Values.SoundType;
+  var Utils = Fermata.Utils;
 
   //TODO better constructor (check args)
-  Fermata.Data.PitchRest = function (noteData, clef)
+  Fermata.Data.PitchRest = function (noteData, attributes)
   {
     this.data = noteData;
-    this.clef = clef;
+    this.attributes = attributes;
+    this.clef = attributes.clef[0];
+    this.clefName = Fermata.Mapping.Clef.getVexflow(this.clef.sign);
   };
 
   var otherDurationLine = 3;
@@ -37,7 +40,7 @@
     }
     else
     {
-      return Clef.getMusicXml(this.clef);
+      return Clef.getMusicXml(this.clefName);
     }
   };
 
@@ -54,7 +57,7 @@
     }
     else
     {
-      return PitchRest.ClefMapping[this.clef];
+      return PitchRest.ClefMapping[this.clefName];
     }
   };
 
