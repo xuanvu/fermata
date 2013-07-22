@@ -2,7 +2,6 @@
   "use strict";
 
   //includes
-  var Clef = Fermata.Mapping.Clef;
   var SoundType = Fermata.Values.SoundType;
   var Utils = Fermata.Utils;
 
@@ -12,20 +11,12 @@
     this.data = noteData;
     this.attributes = attributes;
     this.clef = attributes.clef[0];
-    this.clefName = Fermata.Mapping.Clef.getVexflow(this.clef.sign);
   };
 
   var otherDurationLine = 3;
   var wholeDurationLine = 4;
 
   var PitchRest = Fermata.Data.PitchRest;
-
-  //TODO: use the mapping file
-  PitchRest.ClefMapping = {
-    "treble": 4,
-    "alto": 4,
-    "bass": 3
-  };
 
   PitchRest.prototype.getType = function ()
   {
