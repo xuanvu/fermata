@@ -149,21 +149,26 @@
     }
   };
 
-  var isEnoughSpace = function (notes, divisionsDuration, idx) {
+  var isEnoughSpace = function (notes, divisionsNeeded, idx) {
+    divisionsNeeded -= calcAvailableSpaceAtIdx(notes, divisionsNeeded, idx);
+    return divisionsNeeded === 0;
+  };
+
+  var calcAvailableSpaceAtIdx = function (notes, divisionsDuration, idx) {
     var i = idx;
     while (i < notes.length && divisionsDuration > 0) {
       var note = notes[i];
       if (!isRest(note)) {
-        return false;
+        return divisionsDuration;
       }
       if (note.duration > divisionsDuration) {
-        return true;
+        return 0;
       } else {
         divisionsDuration -= note.duration;
         i++;
       }
     }
-    return divisionsDuration === 0;
+    return divisionsDuration;
   };
 
   var isRest = function (note) {
