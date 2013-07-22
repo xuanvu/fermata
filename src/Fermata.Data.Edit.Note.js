@@ -155,6 +155,7 @@
   };
 
   var calcAvailableSpaceAtIdx = function (notes, divisionsNeeded, idx) {
+    var spaceAvailable = divisionsNeeded;
     var i = idx;
     while (i < notes.length && divisionsNeeded > 0) {
       var note = notes[i];
@@ -168,10 +169,11 @@
         i++;
       }
     }
-    return divisionsNeeded;
+    return spaceAvailable - divisionsNeeded;
   };
   
   var calcAvailableSpaceFromEnd = function (notes, divisionsNeeded) {
+    var spaceAvailable = divisionsNeeded;
     var i = notes.length - 1;
     while (i >= 0 && divisionsNeeded > 0) {
       var note = notes[i];
@@ -184,7 +186,7 @@
         i--;
       }
     }
-    return divisionsNeeded;
+    return spaceAvailable - divisionsNeeded;
   };
 
   var isRest = function (note) {
