@@ -20,7 +20,7 @@
 
   Measure.prototype.getVoices = function () {
     if (this.voices === null) {
-      this.fillVoices(measureData.note);
+      this.fillVoices(this.data.note);
     }
     return this.voices;
   };
