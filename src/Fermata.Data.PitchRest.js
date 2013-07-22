@@ -40,7 +40,13 @@
     }
     else
     {
-      return Clef.getMusicXml(this.clefName);
+      var pitch;
+      if (isWhole(this.data, this.attributes)) {
+        pitch = Utils.lineToPitch(wholeDurationLine, this.clef);
+      } else {
+        pitch = Utils.lineToPitch(otherDurationLine, this.clef);
+      }
+      return pitch.step;
     }
   };
 
@@ -57,7 +63,13 @@
     }
     else
     {
-      return PitchRest.ClefMapping[this.clefName];
+      var pitch;
+      if (isWhole(this.data, this.attributes)) {
+        pitch = Utils.lineToPitch(wholeDurationLine, this.clef);
+      } else {
+        pitch = Utils.lineToPitch(otherDurationLine, this.clef);
+      }
+      return pitch.octave;
     }
   };
 
