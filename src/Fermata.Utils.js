@@ -86,8 +86,8 @@
 
   var distanceFromG = {
     "G": 0,
-    "C": Step.idx.G - Step.idx.C,
-    "F": Step.idx.G - Step.idx.F + Step.values.length
+    "C": Fermata.Values.Step.idx.G - Fermata.Values.Step.idx.C,
+    "F": Fermata.Values.Step.idx.G - Fermata.Values.Step.idx.F + Fermata.Values.Step.values.length
   };
 
   var getStep = function (val) {
