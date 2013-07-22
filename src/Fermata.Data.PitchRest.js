@@ -12,6 +12,9 @@
     this.clef = clef;
   };
 
+  var otherDurationLine = 3;
+  var wholeDurationLine = 4;
+
   var PitchRest = Fermata.Data.PitchRest;
 
   //TODO: use the mapping file
