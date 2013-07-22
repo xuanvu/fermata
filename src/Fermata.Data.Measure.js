@@ -24,7 +24,7 @@
     }
     return this.voices;
   };
-  
+
   Measure.prototype.getVoice = function (idx) {
     return this.getVoices[idx];
   };
@@ -44,7 +44,7 @@
     }
   };
 
-  Measure.prototype.fillVoices = function (idx) {
+  Measure.prototype.createVoice = function (idx) {
     for (var i = 0; i <= idx; i++) {
       if (typeof this.voices[i] === "undefined") {
         this.voices[i] = [];
@@ -59,7 +59,7 @@
 
   Measure.prototype.isCompliant = function () {
     var authorizedDuration = this.getAuthorizedDuration();
-    for (var i = 0 ; i < this.getVoices().length ; i++) {
+    for (var i = 0; i < this.getVoices().length; i++) {
       var actualDuration = this.getActualDuration(i);
       if (authorizedDuration !== actualDuration) {
         return false;
