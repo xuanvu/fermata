@@ -151,10 +151,20 @@
 
   var isEnoughSpace = function (notes, divisionsNeeded, idx) {
     divisionsNeeded -= calcAvailableSpaceAtIdx(notes, divisionsNeeded, idx);
-    if (divisionsNeeded > 0 && idx < notes.length) {
+    if (divisionsNeeded > 0 && !isContinousSpace(notes, idx)) {
       divisionsNeeded -= calcAvailableSpaceFromEnd(notes, divisionsNeeded);
     }
     return divisionsNeeded === 0;
+  };
+
+  var isContinousSpace = function (notes, idx) {
+    for (var i = idx; i < notes.length; i++) {
+      var note = notes[i];
+      if (!isRest(note)) {
+        return false;
+      }
+    }
+    return true;
   };
 
   var calcAvailableSpaceAtIdx = function (notes, divisionsNeeded, idx) {
