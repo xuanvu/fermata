@@ -154,21 +154,21 @@
     return divisionsNeeded === 0;
   };
 
-  var calcAvailableSpaceAtIdx = function (notes, divisionsDuration, idx) {
+  var calcAvailableSpaceAtIdx = function (notes, divisionsNeeded, idx) {
     var i = idx;
-    while (i < notes.length && divisionsDuration > 0) {
+    while (i < notes.length && divisionsNeeded > 0) {
       var note = notes[i];
       if (!isRest(note)) {
-        return divisionsDuration;
+        return divisionsNeeded;
       }
-      if (note.duration > divisionsDuration) {
+      if (note.duration > divisionsNeeded) {
         return 0;
       } else {
-        divisionsDuration -= note.duration;
+        divisionsNeeded -= note.duration;
         i++;
       }
     }
-    return divisionsDuration;
+    return divisionsNeeded;
   };
 
   var isRest = function (note) {
