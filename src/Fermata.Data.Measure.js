@@ -140,23 +140,29 @@
 
   Measure.prototype.adjustNotesDuration = function () {
     var authorizedDuration = this.getAuthorizedDuration();
-    var actualDuration = this.getActualDuration();
+    for (var i = 0; i < this.getVoices().length; i++) {
+      var actualDuration = this.getActualDuration(i);
 
-    if (authorizedDuration > actualDuration) {
-      this.fillMissingDivisionsWithRest(authorizedDuration - actualDuration);
-    } else if (authorizedDuration < actualDuration) {
-      this.removeExcedentDivisionsInRest(actualDuration - authorizedDuration);
+      if (authorizedDuration > actualDuration) {
+        this.fillMissingDivisionsWithRest(authorizedDuration - actualDuration, i);
+      } else if (authorizedDuration < actualDuration) {
+        this.removeExcedentDivisionsInRest(actualDuration -
+                authorizedDuration, i);
+      }
     }
   };
 
-  Measure.prototype.removeExcedentDivisionsInRest = function (divisionsToRemove) {
-    var i = this.data.note.length - 1;
-    while (i > 0 && isRest(this.data.note[i]) && divisionsToRemove > 0) {
-      var note = this.data.note[i];
+  Measure.prototype.removeExcedentDivisionsInRest = function (divisionsToRemove, voiceIdx) {
+    var voice = this.getVoice(voiceIdx);
+    var i = voice.length - 1;
+    while (i > 0 && isRest(voice.note[i]) && divisionsToRemove > 0) {
+      var note = voice.note[i];
       if (divisionsToRemove < note.duration) {
         note.duration = divisionsToRemove;
       } else {
-        this.data.note.pop();
+        voice.pop();
+        var noteIdx = this.data.note.indexOf(note);
+        this.data.note.splice(noteIdx, 1);
       }
       divisionsToRemove -= note.duration;
       i--;
@@ -167,7 +173,8 @@
     return SoundType.getSoundType(note) === SoundType.REST;
   };
 
-  Measure.prototype.fillMissingDivisionsWithRest = function (divisionsToAdd) {
+  Measure.prototype.fillMissingDivisionsWithRest = function (divisionsToAdd, voiceIdx) {
+    var voice = this.getVoice(voiceIdx);
     var beatTypeDivisions = this.getBeatTypeDivisions();
     while (divisionsToAdd > 0) {
       var note = createRest();
@@ -177,7 +184,13 @@
         note.duration = beatTypeDivisions;
       }
       divisionsToAdd -= note.duration;
-      this.data.note.push(note);
+      voice.push(note);
+      var noteIdx = 0;
+      if (voice.length > 1) {
+        var previousNote = voice[voice.length - 2];
+        noteIdx = this.data.note.indexOf(previousNote) + 1;
+      }
+      this.data.note.splice(noteIdx, 0, note);
     }
   };
 
