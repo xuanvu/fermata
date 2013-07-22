@@ -54,7 +54,14 @@
   };
 
   Measure.prototype.isCompliant = function () {
-    return this.getAuthorizedDuration() === this.getActualDuration();
+    var authorizedDuration = this.getAuthorizedDuration();
+    for (var i = 0 ; i < this.getVoices().length ; i++) {
+      var actualDuration = this.getActualDuration(i);
+      if (authorizedDuration !== actualDuration) {
+        return false;
+      }
+    }
+    return true;
   };
 
   Measure.prototype.initBeat = function (beats, beatType) {
@@ -181,10 +188,14 @@
     return 4 / wholeDivision;
   };
 
-  Measure.prototype.getActualDuration = function () {
+  Measure.prototype.getActualDuration = function (voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+    var notes = this.getVoice()[voiceIdx];
     var actualDuration = 0;
-    for (var i = 0; i < this.data.note.length; i++) {
-      var note = this.data.note[i];
+    for (var i = 0; i < notes.length; i++) {
+      var note = notes[i];
       if (!isChord(note)) {
         var noteDuration = parseInt(note.duration, 10);
         actualDuration += noteDuration;
