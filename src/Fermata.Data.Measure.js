@@ -154,12 +154,17 @@
     var actualDuration = 0;
     for (var i = 0; i < this.data.note.length; i++) {
       var note = this.data.note[i];
-      var noteDuration = parseInt(note.duration, 10);
-
-      actualDuration += noteDuration;
+      if (!isChord(note)) {
+        var noteDuration = parseInt(note.duration, 10);
+        actualDuration += noteDuration;
+      }
     }
 
     return actualDuration;
+  };
+
+  var isChord = function (note) {
+    return typeof note.chord !== "undefined";
   };
 
   var validateBeat = function (beats, beatType) {
@@ -286,9 +291,9 @@
     }
   };
 
-  Measure.prototype.clearMeasure = function() {
+  Measure.prototype.clearMeasure = function () {
     console.log(this.data);
-    for(var i = 1; i < this.data.$fermata.vexNotes.length; i++) {
+    for (var i = 1; i < this.data.$fermata.vexNotes.length; i++) {
       for (var j = 1; j < this.data.$fermata.vexNotes[i].length; j++) {
         for (var k = 0; k < this.data.$fermata.vexNotes[i][j].length; k++) {
           this.data.$fermata.vexNotes[i][j][k].st.remove();
