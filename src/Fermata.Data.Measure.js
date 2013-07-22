@@ -26,7 +26,7 @@
   };
 
   Measure.prototype.getVoice = function (idx) {
-    if (this.getVoices()[idx] === "undefined") {
+    if (typeof this.getVoices()[idx] === "undefined") {
       this.createVoice(idx);
     }
     return this.getVoices()[idx];
