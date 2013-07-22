@@ -212,21 +212,21 @@
     }
   };
 
-  var removeSpaces = function (notes, divisionsDuration, idx) {
-    var spaceConsumed = divisionsDuration;
-    while (divisionsDuration > 0) {
+  var removeSpaces = function (notes, divisionsNeeded, idx) {
+    var spaceConsumed = divisionsNeeded;
+    while (divisionsNeeded > 0) {
       var note = notes[idx];
       if (!isRest(note)) {
-        return spaceConsumed - divisionsDuration;
-      } else if (note.duration > divisionsDuration) {
-        note.duration -= divisionsDuration;
-        divisionsDuration = 0;
+        return spaceConsumed - divisionsNeeded;
+      } else if (note.duration > divisionsNeeded) {
+        note.duration -= divisionsNeeded;
+        divisionsNeeded = 0;
       } else {
-        divisionsDuration -= note.duration;
+        divisionsNeeded -= note.duration;
         notes.splice(idx, 1);
       }
     }
-    return spaceConsumed - divisionsDuration;
+    return spaceConsumed - divisionsNeeded;
   };
 
   var adaptMeasureDivisions = function (measureData, divisionsDuration) {
