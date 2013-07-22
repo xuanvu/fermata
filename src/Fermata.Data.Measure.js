@@ -13,9 +13,34 @@
     if (this.isRendered()) {
       this.attributes = measureData.$fermata.attributes;
     }
+    this.voices = [];
+    this.fillVoices(measureData.note);
   };
 
   var Measure = Fermata.Data.Measure;
+
+  Measure.prototype.fillVoices = function (notes) {
+    for (var i = 0; i < notes.length; i++) {
+      var note = notes[i];
+
+      var voiceIdx = 0;
+      if (typeof note.voice !== "undefined") {
+        voiceIdx = parseInt(note.voice, 10) - 1;
+      }
+      if (typeof this.voices[voiceIdx] === "undefined") {
+        this.createVoice(voiceIdx);
+      }
+      this.voices[voiceIdx].push(note);
+    }
+  };
+
+  Measure.prototype.fillVoices = function (idx) {
+    for (var i = 0 ; i <= idx ; i++) {
+      if (typeof this.voices[i] === "undefined") {
+        this.voices[i] = [];
+      }
+    }
+  };
 
   Measure.prototype.isRendered = function () {
     return typeof this.data.$fermata !== "undefined" &&
