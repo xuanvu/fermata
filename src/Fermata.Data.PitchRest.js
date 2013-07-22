@@ -13,10 +13,10 @@
     this.clef = attributes.clef[0];
   };
 
+  var PitchRest = Fermata.Data.PitchRest;
+
   var otherDurationLine = 3;
   var wholeDurationLine = 4;
-
-  var PitchRest = Fermata.Data.PitchRest;
 
   PitchRest.prototype.getType = function ()
   {
