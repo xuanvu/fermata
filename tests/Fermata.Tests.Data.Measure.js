@@ -462,6 +462,21 @@ if (typeof require !== 'undefined') {
         // Then
         assert.equal(actualDuration, 5);
       });
+
+      it("empty notes", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        data.note = [];
+        var measure = new Measure(data);
+
+        // When
+        var actualDuration = measure.getActualDuration();
+
+        // Then
+        assert.equal(actualDuration, 0);
+      });
     });
 
     describe("#updateAttributes", function () {
