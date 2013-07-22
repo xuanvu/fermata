@@ -43,6 +43,7 @@
     this.beatType = attributes.time["beat-type"];
     this.beats = attributes.time.beats;
     this.divisions = attributes.divisions;
+    this.attributes = attributes;
   };
 
   NoteConverter.prototype.fillAttributesDefault = function ()
