@@ -348,7 +348,8 @@ if (typeof require !== 'undefined') {
         var fermataData = new Fermata.Data(helloWorld);
         var part = fermataData.getPart(0, Fermata.Data.cacheParts.IDX);
         var measure = part.measure[0];
-        measure.note.pop();
+        var note = measure.note[0];
+        note.duration = "2";
 
         // When
         var timeCompliant = fermataData.isTimeCompliant();
