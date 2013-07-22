@@ -151,6 +151,9 @@
 
   var isEnoughSpace = function (notes, divisionsNeeded, idx) {
     divisionsNeeded -= calcAvailableSpaceAtIdx(notes, divisionsNeeded, idx);
+    if (divisionsNeeded > 0 && idx < notes.length) {
+      divisionsNeeded -= calcAvailableSpaceFromEnd(notes, divisionsNeeded);
+    }
     return divisionsNeeded === 0;
   };
 
@@ -214,6 +217,9 @@
 
   var removeSpaces = function (notes, divisionsNeeded, idx) {
     divisionsNeeded -= removeSpacesAtIdx(notes, divisionsNeeded, idx);
+    if (divisionsNeeded > 0) {
+      removeSpacesFromEnd(notes, divisionsNeeded);
+    }
   };
 
   var removeSpacesAtIdx = function (notes, divisionsNeeded, idx) {
@@ -234,7 +240,6 @@
   };
 
   var removeSpacesFromEnd = function (notes, divisionsNeeded) {
-    var spaceConsumed = divisionsNeeded;
     while (divisionsNeeded > 0) {
       var note = notes[notes.length - 1];
       if (note.duration > divisionsNeeded) {
@@ -245,7 +250,6 @@
         notes.splice(-1, 1);
       }
     }
-    return spaceConsumed - divisionsNeeded;
   };
 
   var adaptMeasureDivisions = function (measureData, divisionsDuration) {
