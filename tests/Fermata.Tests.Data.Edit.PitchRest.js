@@ -131,7 +131,7 @@ if (typeof require !== 'undefined') {
       };
 
       var isLast = function (idx, tab) {
-        return idx = tab.length - 1;
+        return idx === tab.length - 1;
       };
     });
   });
