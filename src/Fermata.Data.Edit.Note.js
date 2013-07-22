@@ -213,6 +213,10 @@
   };
 
   var removeSpaces = function (notes, divisionsNeeded, idx) {
+    divisionsNeeded -= removeSpacesAtIdx(notes, divisionsNeeded, idx);
+  };
+
+  var removeSpacesAtIdx = function (notes, divisionsNeeded, idx) {
     var spaceConsumed = divisionsNeeded;
     while (divisionsNeeded > 0) {
       var note = notes[idx];
