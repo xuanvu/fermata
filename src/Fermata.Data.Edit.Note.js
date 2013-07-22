@@ -173,10 +173,10 @@
     while (i < notes.length && divisionsNeeded > 0) {
       var note = notes[i];
       if (!isRest(note)) {
-        return divisionsNeeded;
+        return spaceAvailable - divisionsNeeded;
       }
       if (note.duration > divisionsNeeded) {
-        return 0;
+        divisionsNeeded = 0;
       } else {
         divisionsNeeded -= note.duration;
         i++;
@@ -193,7 +193,7 @@
       if (!isRest(note)) {
         return spaceAvailable - divisionsNeeded;
       } else if (note.duration > divisionsNeeded) {
-        return 0;
+        divisionsNeeded = 0;
       } else {
         divisionsNeeded -= note.duration;
         i--;
