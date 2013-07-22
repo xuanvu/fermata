@@ -61,4 +61,11 @@
     }
   };
 
+  var isWhole = function (note, attributes) {
+    var divisionDuration = note.duration;
+    var divisions = attributes.divisions;
+    var quarterDuration = divisionDuration / divisions;
+    return quarterDuration === 4;
+  };
+
 }).call(this);
