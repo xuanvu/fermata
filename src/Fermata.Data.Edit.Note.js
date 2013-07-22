@@ -233,6 +233,21 @@
     return spaceConsumed - divisionsNeeded;
   };
 
+  var removeSpacesFromEnd = function (notes, divisionsNeeded) {
+    var spaceConsumed = divisionsNeeded;
+    while (divisionsNeeded > 0) {
+      var note = notes[notes.length - 1];
+      if (note.duration > divisionsNeeded) {
+        note.duration -= divisionsNeeded;
+        divisionsNeeded = 0;
+      } else {
+        divisionsNeeded -= note.duration;
+        notes.splice(-1, 1);
+      }
+    }
+    return spaceConsumed - divisionsNeeded;
+  };
+
   var adaptMeasureDivisions = function (measureData, divisionsDuration) {
     var measure = new Measure(measureData);
     measure.multiplyDivisions(1 / divisionsDuration);
