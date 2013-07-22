@@ -27,8 +27,8 @@
 
  This library makes use of Simon Tatham's awesome font - Gonville.
 
- Build ID: debug-4@84161de73e7898406094c22c081bfc597c832090
- Build date: 2013-07-21 15:38:52.565085
+ Build ID: debug-4@20ce8ec8c8e1a2254f7a230eee8c1acb57f7a683
+ Build date: 2013-07-22 17:13:05.603473
 
 */
 function Vex() {
@@ -668,10 +668,10 @@ Vex.Flow.Font = {"glyphs":{"v0":{"x_min":0, "x_max":514.5, "ha":525, "o":"m 236 
 "vbf":{"x_min":-53.078125, "x_max":513.140625, "ha":485, "o":"m 185 383 b 196 384 187 383 191 384 b 277 334 230 384 259 365 b 288 301 281 324 288 306 b 288 297 288 298 288 297 b 294 302 289 297 291 299 b 394 370 323 338 367 367 b 404 371 398 370 401 371 b 510 272 453 371 498 328 b 513 237 513 262 513 251 b 507 172 513 217 511 192 b 326 -34 487 59 412 -26 b 314 -36 322 -36 318 -36 b 274 -24 298 -36 283 -31 l 265 -16 b 224 44 246 -1 232 20 b 223 49 224 47 223 49 b 223 49 223 49 223 49 b 149 -197 221 48 149 -194 b 149 -198 149 -197 149 -198 b 170 -210 149 -202 155 -205 b 187 -215 174 -210 175 -212 b 204 -231 201 -219 204 -222 b 197 -245 204 -240 202 -242 l 194 -248 l 76 -248 l -42 -248 l -46 -245 b -53 -231 -51 -242 -53 -240 b -35 -215 -53 -222 -49 -217 b -13 -210 -21 -212 -20 -212 b -6 -208 -10 -209 -8 -208 b 0 -206 -6 -208 -2 -206 b 25 -188 13 -201 21 -195 b 163 280 28 -183 163 276 b 166 291 163 283 164 287 b 167 302 167 295 167 299 b 155 324 167 315 161 324 b 155 324 155 324 155 324 b 65 230 125 322 85 280 b 53 215 61 217 58 215 b 51 215 53 215 51 215 b 42 224 46 215 42 217 b 57 263 42 231 47 244 b 140 360 77 305 104 337 b 152 370 144 365 149 369 b 185 383 157 376 172 381 m 374 306 b 366 308 371 308 368 308 b 300 273 348 308 321 294 b 284 254 288 262 287 259 b 280 242 283 249 281 245 b 257 169 279 240 270 213 l 236 98 l 236 93 b 251 48 238 77 243 61 b 279 27 258 37 272 27 b 281 27 279 27 280 27 b 291 31 281 27 287 30 b 396 170 334 52 378 109 b 406 247 402 197 406 224 b 401 277 406 259 405 270 b 374 306 397 290 383 303 "}, 
 "vc3":{"x_min":-10.890625, "x_max":299.4375, "ha":294, "o":"m 136 460 b 142 462 137 462 140 462 b 166 449 152 462 161 456 b 171 428 168 446 168 445 b 288 131 194 322 238 209 b 298 115 295 120 296 117 b 299 106 298 112 299 109 b 273 81 299 91 287 81 b 255 86 268 81 261 83 b 155 116 225 104 183 116 l 152 116 l 149 108 b 141 83 148 102 144 91 b 134 48 137 69 134 58 b 149 9 134 34 140 24 b 153 -1 152 5 153 1 b 149 -9 153 -5 152 -6 b 144 -11 148 -11 147 -11 b 122 2 138 -11 133 -6 b 95 61 104 20 95 38 b 107 108 95 74 99 90 b 108 113 107 111 108 112 b 107 113 108 113 108 113 b 102 113 106 113 104 113 b 31 86 76 108 53 98 b 14 80 24 81 20 80 b -10 106 0 80 -10 91 b 0 131 -10 115 -9 116 b 115 430 49 209 91 317 b 136 460 119 451 123 456 "}}, 
 "cssFontWeight":"normal", "ascender":1903, "underlinePosition":-125, "cssFontStyle":"normal", "boundingBox":{"yMin":-2065.375, "xMin":-695.53125, "yMax":1901.578125, "xMax":1159.671875}, "resolution":1E3, "descender":-2066, "familyName":"VexFlow-18", "lineHeight":4093, "underlineThickness":50};
-Vex.Flow.renderGlyph = function(ctx, x_pos, y_pos, point, val, nocache) {
+Vex.Flow.renderGlyph = function(ctx, x_pos, y_pos, point, val, nocache, st) {
   var scale = point * 72 / (Vex.Flow.Font.resolution * 100);
   var metrics = Vex.Flow.Glyph.loadMetrics(Vex.Flow.Font, val, !nocache);
-  Vex.Flow.Glyph.renderOutline(ctx, metrics.outline, scale, x_pos, y_pos)
+  Vex.Flow.Glyph.renderOutline(ctx, metrics.outline, scale, x_pos, y_pos, st)
 };
 Vex.Flow.Glyph = function(code, point, options) {
   this.code = code;
@@ -772,7 +772,7 @@ Vex.Flow.Glyph.loadMetrics = function(font, code, cache) {
     throw new Vex.RuntimeError("BadGlyph", "Glyph " + this.code + " has no outline defined.");
   }
 };
-Vex.Flow.Glyph.renderOutline = function(ctx, outline, scale, x_pos, y_pos) {
+Vex.Flow.Glyph.renderOutline = function(ctx, outline, scale, x_pos, y_pos, st) {
   var outlineLength = outline.length;
   ctx.beginPath();
   ctx.moveTo(x_pos, y_pos);
@@ -797,7 +797,12 @@ Vex.Flow.Glyph.renderOutline = function(ctx, outline, scale, x_pos, y_pos) {
         break
     }
   }
-  ctx.fill()
+  if(ctx instanceof Vex.Flow.RaphaelContext) {
+    ctx.closePath();
+    ctx.fill(st)
+  }else {
+    ctx.fill()
+  }
 };
 Vex.Flow.Stave = function(x, y, width, options) {
   if(arguments.length > 0) {
@@ -1693,6 +1698,7 @@ Vex.Flow.StaveNote.prototype.init = function(note_struct) {
   superclass.init.call(this, note_struct);
   this.keys = note_struct.keys;
   this.clef = note_struct.clef;
+  this.st = null;
   this.glyph = Vex.Flow.durationToGlyph(this.duration, this.noteType);
   if(!this.glyph) {
     throw new Vex.RuntimeError("BadArguments", "Invalid note initialization data (No glyph found): " + JSON.stringify(note_struct));
@@ -1724,6 +1730,11 @@ Vex.Flow.StaveNote.prototype.init = function(note_struct) {
   this.keyProps.sort(function(a, b) {
     return a.line - b.line
   });
+  this.ledger_lines = [];
+  var highest_line;
+  var lowest_line;
+  var default_head_x;
+  var head_x;
   this.modifiers = [];
   this.render_options = {glyph_font_scale:38, stem_height:35, stroke_px:3, stroke_spacing:10, annotation_spacing:5};
   var auto_stem_direction;
@@ -1983,7 +1994,7 @@ Vex.Flow.StaveNote.prototype.draw = function() {
   var keys = this.keys;
   var glyph = this.glyph;
   var stem_direction = this.stem_direction;
-  var default_head_x = null;
+  this.default_head_x = null;
   var render_head = true;
   var render_stem = this.beam == null;
   var render_flag = this.beam == null;
@@ -1996,13 +2007,16 @@ Vex.Flow.StaveNote.prototype.draw = function() {
   var start_i = 0;
   var end_i = keys.length;
   var step_i = 1;
+  if(ctx instanceof Vex.Flow.RaphaelContext) {
+    this.st = ctx.paper.set()
+  }
   if(stem_direction == Vex.Flow.StaveNote.STEM_DOWN) {
     start_i = keys.length - 1;
     end_i = -1;
     step_i = -1
   }
-  var highest_line = 5;
-  var lowest_line = 1;
+  this.highest_line = 5;
+  this.lowest_line = 1;
   function drawSlashNoteHead(stavenote, ctx, x, y) {
     ctx.beginPath();
     ctx.moveTo(x, y + 11);
@@ -2020,8 +2034,8 @@ Vex.Flow.StaveNote.prototype.draw = function() {
   for(var i = start_i;i != end_i;i += step_i) {
     var note_props = this.keyProps[i];
     var line = note_props.line;
-    highest_line = line > highest_line ? line : highest_line;
-    lowest_line = line < lowest_line ? line : lowest_line;
+    this.highest_line = line > this.highest_line ? line : this.highest_line;
+    this.lowest_line = line < this.lowest_line ? line : this.lowest_line;
     if(last_line == null) {
       last_line = line
     }else {
@@ -2029,7 +2043,7 @@ Vex.Flow.StaveNote.prototype.draw = function() {
         displaced = !displaced
       }else {
         displaced = false;
-        default_head_x = x
+        this.default_head_x = x
       }
     }
     last_line = line;
@@ -2041,17 +2055,17 @@ Vex.Flow.StaveNote.prototype.draw = function() {
       y_bottom = y
     }
     var code_head = glyph.code_head;
-    var head_x = x_begin + (displaced ? glyph.head_width * stem_direction : 0);
+    this.head_x = x_begin + (displaced ? glyph.head_width * stem_direction : 0);
     if(note_props.code) {
       code_head = note_props.code;
-      head_x = x_begin + note_props.shift_right
+      this.head_x = x_begin + note_props.shift_right
     }
     if(render_head) {
-      head_x = Math.round(head_x);
+      this.head_x = Math.round(this.head_x);
       if(this.noteType == "s") {
-        drawSlashNoteHead(this, ctx, head_x + (this.stem_direction == 1 ? 1 : 0), y)
+        drawSlashNoteHead(this, ctx, this.head_x + (this.stem_direction == 1 ? 1 : 0), y)
       }else {
-        Vex.Flow.renderGlyph(ctx, head_x, y, this.render_options.glyph_font_scale, code_head)
+        Vex.Flow.renderGlyph(ctx, this.head_x, y, this.render_options.glyph_font_scale, code_head, false, this.st)
       }
       if(line <= 0 || line >= 6) {
         var line_y = y;
@@ -2063,23 +2077,9 @@ Vex.Flow.StaveNote.prototype.draw = function() {
             line_y += 5
           }
         }
-        ctx.fillRect(head_x - this.render_options.stroke_px, line_y, head_x + glyph.head_width - head_x + this.render_options.stroke_px * 2, 1)
+        var ledger_line = ctx.fillRect(this.head_x - this.render_options.stroke_px, line_y, this.head_x + glyph.head_width - this.head_x + this.render_options.stroke_px * 2, 1, false, true);
+        this.ledger_lines.push({"line":line, "obj":ledger_line})
       }
-    }
-  }
-  if(!glyph.rest) {
-    var that = this;
-    function stroke(y) {
-      if(default_head_x != null) {
-        head_x = default_head_x
-      }
-      ctx.fillRect(head_x - that.render_options.stroke_px, y, head_x + glyph.head_width - head_x + that.render_options.stroke_px * 2, 1)
-    }
-    for(var line = 6;line <= highest_line;++line) {
-      stroke(this.stave.getYForNote(line))
-    }
-    for(var line = 0;line >= lowest_line;--line) {
-      stroke(this.stave.getYForNote(line))
     }
   }
   var note_stem_height = (y_bottom - y_top) * stem_direction + this.render_options.stem_height * stem_direction;
@@ -2098,7 +2098,7 @@ Vex.Flow.StaveNote.prototype.draw = function() {
         stem_y -= 4
       }
     }
-    ctx.fillRect(stem_x, stem_y - (note_stem_height < 0 ? 0 : note_stem_height), 1, Math.abs(note_stem_height))
+    ctx.fillRect(stem_x, stem_y - (note_stem_height < 0 ? 0 : note_stem_height), 1, Math.abs(note_stem_height), this.st)
   }
   if(glyph.flag && render_flag) {
     var flag_x, flag_y, flag_code;
@@ -4846,12 +4846,18 @@ Vex.Flow.RaphaelContext.prototype.rect = function(x, y, width, height) {
   var r = this.paper.rect(x, y, width - 0.5, height - 0.5).attr(this.attributes).attr("fill", "none").attr("stroke-width", this.lineWidth);
   return this
 };
-Vex.Flow.RaphaelContext.prototype.fillRect = function(x, y, width, height) {
+Vex.Flow.RaphaelContext.prototype.fillRect = function(x, y, width, height, st, return_obj) {
   if(height < 0) {
     y += height;
     height = -height
   }
   var r = this.paper.rect(x, y, width - 0.5, height - 0.5).attr(this.attributes);
+  if(st) {
+    st.push(r)
+  }
+  if(return_obj) {
+    return r
+  }
   return this
 };
 Vex.Flow.RaphaelContext.prototype.clearRect = function(x, y, width, height) {
@@ -4941,8 +4947,11 @@ Vex.Flow.RaphaelContext.prototype.arcHelper = function(x, y, radius, startAngle,
   }
   this.path += "M" + x1 + "," + y1 + "," + "A" + +radius + "," + radius + "," + "0," + largeArcFlag + "," + sweepFlag + "," + x2 + "," + y2 + "M" + this.pen.x + "," + this.pen.y
 };
-Vex.Flow.RaphaelContext.prototype.fill = function() {
-  this.paper.path(this.path).attr(this.attributes).attr("stroke-width", 0);
+Vex.Flow.RaphaelContext.prototype.fill = function(st) {
+  var e = this.paper.path(this.path).attr(this.attributes).attr("stroke-width", 0);
+  if(st) {
+    st.push(e)
+  }
   return this
 };
 Vex.Flow.RaphaelContext.prototype.stroke = function() {
@@ -6246,10 +6255,10 @@ Vex.Flow.Stroke.prototype.draw = function() {
 };
 /*
 
- Fermata 0.0.2
+ Fermata 0.0.2-1
 
- Build ID: debug-4@e832e7f6e2eab229f375b205a94de79ea8291809
- Build date: 2013-07-21 15:38:52.565107
+ Build ID: debug-4@efec89efe71d86db7a18a6edd267acfaf7d48747
+ Build date: 2013-07-22 17:13:05.603498
 
 */
 if(typeof require !== "undefined") {
@@ -6828,6 +6837,15 @@ Fermata.Values = {};
     })
   }, setTitle:function(title) {
     this.score["score-partwise"]["movement-title"] = title + ""
+  }, isTimeCompliant:function() {
+    var compliant = true;
+    this.forEachMeasure(function(measureData) {
+      var measure = new Fermata.Data.Measure(measureData);
+      if(!measure.isCompliant()) {
+        compliant = false
+      }
+    });
+    return compliant
   }}
 }).call(this);
 (function() {
@@ -7054,13 +7072,58 @@ Fermata.Values = {};
     if(this.isRendered()) {
       this.attributes = measureData.$fermata.attributes
     }
+    this.voices = null
   };
   var Measure = Fermata.Data.Measure;
+  Measure.prototype.getVoices = function() {
+    if(this.voices === null) {
+      this.fillVoices(this.data.note)
+    }
+    return this.voices
+  };
+  Measure.prototype.getVoice = function(idx) {
+    if(typeof this.getVoices()[idx] === "undefined") {
+      this.createVoice(idx)
+    }
+    return this.getVoices()[idx]
+  };
+  Measure.prototype.fillVoices = function(notes) {
+    this.voices = [];
+    for(var i = 0;i < notes.length;i++) {
+      var note = notes[i];
+      var voiceIdx = 0;
+      if(typeof note.voice !== "undefined") {
+        voiceIdx = parseInt(note.voice, 10) - 1
+      }
+      if(typeof this.voices[voiceIdx] === "undefined") {
+        this.createVoice(voiceIdx)
+      }
+      this.voices[voiceIdx].push(note)
+    }
+  };
+  Measure.prototype.createVoice = function(idx) {
+    for(var i = 0;i <= idx;i++) {
+      if(typeof this.voices[i] === "undefined") {
+        this.voices[i] = []
+      }
+    }
+  };
   Measure.prototype.isRendered = function() {
     return typeof this.data.$fermata !== "undefined" && typeof this.data.$fermata.attributes !== "undefined"
   };
   Measure.prototype.isCompliant = function() {
-    return this.getAuthorizedDuration() === this.getActualDuration()
+    var voicesCount = this.getVoices().length;
+    var authorizedDuration = this.getAuthorizedDuration();
+    if(voicesCount === 0) {
+      return authorizedDuration === 0
+    }
+    for(var i = 0;i < voicesCount;i++) {
+      var actualDuration = this.getActualDuration(i);
+      if(authorizedDuration !== actualDuration) {
+        return false
+      }
+    }
+    return true
   };
   Measure.prototype.initBeat = function(beats, beatType) {
     validateBeat(beats, beatType);
@@ -7117,23 +7180,28 @@ Fermata.Values = {};
   };
   Measure.prototype.adjustNotesDuration = function() {
     var authorizedDuration = this.getAuthorizedDuration();
-    var actualDuration = this.getActualDuration();
-    if(authorizedDuration > actualDuration) {
-      this.fillMissingDivisionsWithRest(authorizedDuration - actualDuration)
-    }else {
-      if(authorizedDuration < actualDuration) {
-        this.removeExcedentDivisionsInRest(actualDuration - authorizedDuration)
+    for(var i = 0;i < this.getVoices().length;i++) {
+      var actualDuration = this.getActualDuration(i);
+      if(authorizedDuration > actualDuration) {
+        this.fillMissingDivisionsWithRest(authorizedDuration - actualDuration, i)
+      }else {
+        if(authorizedDuration < actualDuration) {
+          this.removeExcedentDivisionsInRest(actualDuration - authorizedDuration, i)
+        }
       }
     }
   };
-  Measure.prototype.removeExcedentDivisionsInRest = function(divisionsToRemove) {
-    var i = this.data.note.length - 1;
-    while(i > 0 && isRest(this.data.note[i]) && divisionsToRemove > 0) {
-      var note = this.data.note[i];
+  Measure.prototype.removeExcedentDivisionsInRest = function(divisionsToRemove, voiceIdx) {
+    var voice = this.getVoice(voiceIdx);
+    var i = voice.length - 1;
+    while(i > 0 && isRest(voice[i]) && divisionsToRemove > 0) {
+      var note = voice[i];
       if(divisionsToRemove < note.duration) {
         note.duration = divisionsToRemove
       }else {
-        this.data.note.pop()
+        voice.pop();
+        var noteIdx = this.data.note.indexOf(note);
+        this.data.note.splice(noteIdx, 1)
       }
       divisionsToRemove -= note.duration;
       i--
@@ -7142,7 +7210,8 @@ Fermata.Values = {};
   var isRest = function(note) {
     return SoundType.getSoundType(note) === SoundType.REST
   };
-  Measure.prototype.fillMissingDivisionsWithRest = function(divisionsToAdd) {
+  Measure.prototype.fillMissingDivisionsWithRest = function(divisionsToAdd, voiceIdx) {
+    var voice = this.getVoice(voiceIdx);
     var beatTypeDivisions = this.getBeatTypeDivisions();
     while(divisionsToAdd > 0) {
       var note = createRest();
@@ -7152,7 +7221,13 @@ Fermata.Values = {};
         note.duration = beatTypeDivisions
       }
       divisionsToAdd -= note.duration;
-      this.data.note.push(note)
+      voice.push(note);
+      var noteIdx = 0;
+      if(voice.length > 1) {
+        var previousNote = voice[voice.length - 2];
+        noteIdx = this.data.note.indexOf(previousNote) + 1
+      }
+      this.data.note.splice(noteIdx, 0, note)
     }
   };
   var createRest = function() {
@@ -7167,14 +7242,23 @@ Fermata.Values = {};
   var wholeDivisionToQuarterCoeff = function(wholeDivision) {
     return 4 / wholeDivision
   };
-  Measure.prototype.getActualDuration = function() {
+  Measure.prototype.getActualDuration = function(voiceIdx) {
+    if(typeof voiceIdx === "undefined") {
+      voiceIdx = 0
+    }
+    var notes = this.getVoice(voiceIdx);
     var actualDuration = 0;
-    for(var i = 0;i < this.data.note.length;i++) {
-      var note = this.data.note[i];
-      var noteDuration = note.duration;
-      actualDuration += noteDuration
+    for(var i = 0;i < notes.length;i++) {
+      var note = notes[i];
+      if(!isChord(note)) {
+        var noteDuration = parseInt(note.duration, 10);
+        actualDuration += noteDuration
+      }
     }
     return actualDuration
+  };
+  var isChord = function(note) {
+    return typeof note.chord !== "undefined"
   };
   var validateBeat = function(beats, beatType) {
     if(!checkBeats(beats)) {
@@ -7438,8 +7522,9 @@ Fermata.Values = {};
   var SoundType = Fermata.Values.SoundType;
   var NotImplementedError = Fermata.Error.NotImplementedError;
   var Step = Fermata.Values.Step;
+  var Measure = Fermata.Data.Measure;
   var ValueLast = {FULL:0, HALF:1, QUARTER:2, EIGHTH:3};
-  Fermata.Data.prototype.getDuration = function(type) {
+  var typeToQuarterDuration = function(type) {
     if(type === ValueLast.FULL) {
       return 4
     }else {
@@ -7459,7 +7544,7 @@ Fermata.Values = {};
       }
     }
   };
-  Fermata.Data.prototype.getQueue = function(voice) {
+  var getQueue = function(voice) {
     return"up"
   };
   var distanceFromG = {"G":0, "C":Step.idx.G - Step.idx.C, "F":Step.idx.G - Step.idx.F + Step.values.length};
@@ -7475,7 +7560,7 @@ Fermata.Values = {};
     var valueCorrection = stepCorrection / 2;
     return valueCorrection
   };
-  Fermata.Data.prototype.getStep = function(val) {
+  var getStep = function(val) {
     if(val === 0) {
       return"C"
     }
@@ -7498,7 +7583,7 @@ Fermata.Values = {};
       return"B"
     }
   };
-  Fermata.Data.prototype.getPitch = function(pitch, sign, line) {
+  var getPitch = function(pitch, sign, line) {
     var valueCorrection = calcValueCorrection(sign, line);
     pitch = parseInt(pitch, 10);
     pitch += valueCorrection;
@@ -7506,14 +7591,14 @@ Fermata.Values = {};
     var n_octave = -p_octave;
     var step = "L";
     if(pitch < 0) {
-      step = this.getStep(pitch % n_octave)
+      step = getStep(pitch % n_octave)
     }else {
-      step = this.getStep(pitch % p_octave)
+      step = getStep(pitch % p_octave)
     }
     var octave = 4 + Math.floor(pitch / p_octave);
     return{"octave":octave, "step":step}
   };
-  Fermata.Data.prototype.getValue = function(type) {
+  var getValue = function(type) {
     if(type === ValueLast.FULL) {
       return"full"
     }else {
@@ -7541,18 +7626,121 @@ Fermata.Values = {};
       if(part !== undefined) {
         if(idxM >= 0 && idxM < part.measure.length) {
           var measure = part.measure[idxM];
-          var clef = measure.$fermata.attributes.clef[0];
           var divisions = measure.$fermata.attributes.divisions;
-          var note = {"duration":this.getDuration(type) * divisions, "pitch":this.getPitch(pitch, clef.sign, clef.line), "stem":this.getQueue(voice), "type":this.getValue(type), "voice":voice};
-          if(idxN < 0 || idxN > measure.note.length) {
-            idxN = measure.note.length
+          var quarterDuration = typeToQuarterDuration(type);
+          var divisionsDuration = quarterDuration * divisions;
+          if(isEnoughSpace(measure.note, divisionsDuration, idxN)) {
+            makeAddNote(measure, divisionsDuration, idxN, pitch, voice, type)
           }
-          part.measure[idxM].note.splice(idxN, 0, note);
-          var _measure = new Fermata.Data.Measure(part.measure[idxM]);
-          _measure.adjustNotesDuration()
         }
       }
     }
+  };
+  var isEnoughSpace = function(notes, divisionsNeeded, idx) {
+    divisionsNeeded -= calcAvailableSpaceAtIdx(notes, divisionsNeeded, idx);
+    if(divisionsNeeded > 0 && !isContinousSpace(notes, idx)) {
+      divisionsNeeded -= calcAvailableSpaceFromEnd(notes, divisionsNeeded)
+    }
+    return divisionsNeeded === 0
+  };
+  var isContinousSpace = function(notes, idx) {
+    for(var i = idx;i < notes.length;i++) {
+      var note = notes[i];
+      if(!isRest(note)) {
+        return false
+      }
+    }
+    return true
+  };
+  var calcAvailableSpaceAtIdx = function(notes, divisionsNeeded, idx) {
+    var spaceAvailable = divisionsNeeded;
+    var i = idx;
+    while(i < notes.length && divisionsNeeded > 0) {
+      var note = notes[i];
+      if(!isRest(note)) {
+        return spaceAvailable - divisionsNeeded
+      }
+      if(note.duration > divisionsNeeded) {
+        divisionsNeeded = 0
+      }else {
+        divisionsNeeded -= note.duration;
+        i++
+      }
+    }
+    return spaceAvailable - divisionsNeeded
+  };
+  var calcAvailableSpaceFromEnd = function(notes, divisionsNeeded) {
+    var spaceAvailable = divisionsNeeded;
+    var i = notes.length - 1;
+    while(i >= 0 && divisionsNeeded > 0) {
+      var note = notes[i];
+      if(!isRest(note)) {
+        return spaceAvailable - divisionsNeeded
+      }else {
+        if(note.duration > divisionsNeeded) {
+          divisionsNeeded = 0
+        }else {
+          divisionsNeeded -= note.duration;
+          i--
+        }
+      }
+    }
+    return spaceAvailable - divisionsNeeded
+  };
+  var isRest = function(note) {
+    return SoundType.getSoundType(note) === SoundType.REST
+  };
+  var makeAddNote = function(measure, divisionsDuration, idxN, pitch, voice, type) {
+    removeSpaces(measure.note, divisionsDuration, idxN);
+    var clef = measure.$fermata.attributes.clef[0];
+    var note = {"duration":divisionsDuration, "pitch":getPitch(pitch, clef.sign, clef.line), "stem":getQueue(voice), "type":getValue(type), "voice":voice};
+    if(idxN < 0 || idxN > measure.note.length) {
+      idxN = measure.note.length
+    }
+    measure.note.splice(idxN, 0, note);
+    if(divisionsDuration < 1) {
+      adaptMeasureDivisions(measure, divisionsDuration)
+    }
+  };
+  var removeSpaces = function(notes, divisionsNeeded, idx) {
+    divisionsNeeded -= removeSpacesAtIdx(notes, divisionsNeeded, idx);
+    if(divisionsNeeded > 0) {
+      removeSpacesFromEnd(notes, divisionsNeeded)
+    }
+  };
+  var removeSpacesAtIdx = function(notes, divisionsNeeded, idx) {
+    var spaceConsumed = divisionsNeeded;
+    while(divisionsNeeded > 0) {
+      var note = notes[idx];
+      if(!isRest(note)) {
+        return spaceConsumed - divisionsNeeded
+      }else {
+        if(note.duration > divisionsNeeded) {
+          note.duration -= divisionsNeeded;
+          divisionsNeeded = 0
+        }else {
+          divisionsNeeded -= note.duration;
+          notes.splice(idx, 1)
+        }
+      }
+    }
+    return spaceConsumed - divisionsNeeded
+  };
+  var removeSpacesFromEnd = function(notes, divisionsNeeded) {
+    while(divisionsNeeded > 0) {
+      var note = notes[notes.length - 1];
+      if(note.duration > divisionsNeeded) {
+        note.duration -= divisionsNeeded;
+        divisionsNeeded = 0
+      }else {
+        divisionsNeeded -= note.duration;
+        notes.splice(-1, 1)
+      }
+    }
+  };
+  var adaptMeasureDivisions = function(measureData, divisionsDuration) {
+    var measure = new Measure(measureData);
+    measure.multiplyDivisions(1 / divisionsDuration)
   };
   Fermata.Data.prototype.removeNote = function(idxS, idxM, idxN) {
     if(!(idxS === undefined || idxM === undefined || idxN === undefined)) {
@@ -7577,14 +7765,14 @@ Fermata.Values = {};
           var clef = measure.$fermata.attributes.clef[0];
           if(note.rest === undefined) {
             if(pitch !== undefined) {
-              note.pitch = this.getPitch(pitch, clef.sign, clef.line)
+              note.pitch = getPitch(pitch, clef.sign, clef.line)
             }
             if(type !== undefined) {
-              note.type = this.getValue(type)
+              note.type = getValue(type)
             }
             if(voice !== undefined) {
               note.voice = voice;
-              note.stem = this.getQueue(voice)
+              note.stem = getQueue(voice)
             }
           }
         }

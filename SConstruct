@@ -9,7 +9,7 @@ Based on vexflow SCons script
 from vexflow_scons import *
 
 # Create debug, opt, and licensed construction environments.
-env = default_env.Clone(FERMATA_VERSION = "0.0.2", VEX_VERSION = "1.0-pre2")
+env = default_env.Clone(FERMATA_VERSION = "0.0.2-1", VEX_VERSION = "1.0-pre2")
 
 # Create build directories and attach cleanup handlers to them
 mkdir_with_cleanup("build", env)
