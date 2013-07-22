@@ -78,7 +78,7 @@ if (typeof require !== 'undefined') {
         };
         var wholeExpectedPitch = {
           octave: 5,
-          step: "C"
+          step: "D"
         };
         var divisions = 16;
         attributes.clef[0] = clef;
