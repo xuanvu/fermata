@@ -171,7 +171,7 @@
     }
     return spaceAvailable - divisionsNeeded;
   };
-  
+
   var calcAvailableSpaceFromEnd = function (notes, divisionsNeeded) {
     var spaceAvailable = divisionsNeeded;
     var i = notes.length - 1;
@@ -182,7 +182,7 @@
       } else if (note.duration > divisionsNeeded) {
         return 0;
       } else {
-         divisionsNeeded -= note.duration;
+        divisionsNeeded -= note.duration;
         i--;
       }
     }
