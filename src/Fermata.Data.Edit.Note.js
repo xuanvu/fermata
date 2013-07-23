@@ -106,41 +106,6 @@
     return true;
   };
 
-  var calcAvailableSpaceAtIdx = function (notes, divisionsNeeded, idx) {
-    var spaceAvailable = divisionsNeeded;
-    var i = idx;
-    while (i < notes.length && divisionsNeeded > 0) {
-      var note = notes[i];
-      if (!isRest(note)) {
-        return spaceAvailable - divisionsNeeded;
-      }
-      if (note.duration > divisionsNeeded) {
-        divisionsNeeded = 0;
-      } else {
-        divisionsNeeded -= note.duration;
-        i++;
-      }
-    }
-    return spaceAvailable - divisionsNeeded;
-  };
-
-  var calcAvailableSpaceFromEnd = function (notes, divisionsNeeded) {
-    var spaceAvailable = divisionsNeeded;
-    var i = notes.length - 1;
-    while (i >= 0 && divisionsNeeded > 0) {
-      var note = notes[i];
-      if (!isRest(note)) {
-        return spaceAvailable - divisionsNeeded;
-      } else if (note.duration > divisionsNeeded) {
-        divisionsNeeded = 0;
-      } else {
-        divisionsNeeded -= note.duration;
-        i--;
-      }
-    }
-    return spaceAvailable - divisionsNeeded;
-  };
-
   var isRest = function (note) {
     return SoundType.getSoundType(note) === SoundType.REST;
   };
