@@ -450,7 +450,7 @@
         divisionsNeeded = 0;
       } else {
         divisionsNeeded -= note.duration;
-        this.makeRemoveNote(voice[voice.length - 1], voiceIdx);
+        this.makeRemoveNote(voice.length - 1, voiceIdx);
       }
     }
   };
