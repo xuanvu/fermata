@@ -22,7 +22,10 @@ if (typeof require !== 'undefined') {
   var BeatsValueError = Fermata.Error.BeatsValueError;
 
 
-  var getTestData = function (nbNote, nbRest) {
+  var getTestData = function (nbNote, nbRest, nbVoices) {
+    if (typeof nbVoices === "undefined") {
+      nbVoices = 1;
+    }
     var measure = {
       attributes: [
         {
@@ -51,34 +54,40 @@ if (typeof require !== 'undefined') {
         }
       }
     };
-    
-    var i = 0;
-    for (i = 0; i < nbNote; i++) {
-      var note = createPitchNote();
-      measure.note.push(note);
-    }
-    for (i = 0; i < nbRest; i++) {
-      var rest = createRestNote();
-      measure.note.push(rest);
+
+    for (var voiceIdx = 0; voiceIdx < nbVoices; voiceIdx++) {
+      var i = 0;
+      for (i = 0; i < nbNote; i++) {
+        var note = createPitchNote(voiceIdx);
+        measure.note.push(note);
+      }
+      for (i = 0; i < nbRest; i++) {
+        var rest = createRestNote(voiceIdx);
+        measure.note.push(rest);
+      }
     }
 
     return measure;
   };
 
-  var createPitchNote = function () {
+  var createPitchNote = function (voiceIdx) {
+    var voice = (voiceIdx + 1).toString();
     return {
       duration: 1,
       pitch: {
         sign: "C",
         line: 4
-      }
+      },
+      voice: voice
     };
   };
 
-  var createRestNote = function () {
+  var createRestNote = function (voiceIdx) {
+    var voice = (voiceIdx + 1).toString();
     return {
       duration: 1,
-      rest: {}
+      rest: {},
+      voice: voice
     };
   };
 
@@ -521,10 +530,10 @@ if (typeof require !== 'undefined') {
       });
     });
   });
-  
+
   var changeIntToStringInDurations = function (measure) {
     var notes = measure.note;
-    for (var i = 0 ; i < notes.length ; i++) {
+    for (var i = 0; i < notes.length; i++) {
       var note = notes[i];
 
       note.duration = note.duration.toString();
