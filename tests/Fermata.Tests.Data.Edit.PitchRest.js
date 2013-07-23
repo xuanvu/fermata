@@ -86,6 +86,40 @@ if (typeof require !== 'undefined') {
         testRests(attributes, wholeExpectedPitch, otherExpectedPitch);
       });
 
+      it("F clef", function () {
+        // Given 
+        var otherExpectedPitch = {
+          octave: 4,
+          step: "B"
+        };
+        var wholeExpectedPitch = {
+          octave: 5,
+          step: "D"
+        };
+        var divisions = 16;
+        var clef = fClef;
+        attributes.clef[0] = clef;
+        attributes.divisions = divisions;
+        testRests(attributes, wholeExpectedPitch, otherExpectedPitch);
+      });
+
+      it("C clef", function () {
+        // Given 
+        var otherExpectedPitch = {
+          octave: 4,
+          step: "B"
+        };
+        var wholeExpectedPitch = {
+          octave: 5,
+          step: "D"
+        };
+        var divisions = 16;
+        var clef = cClef;
+        attributes.clef[0] = clef;
+        attributes.divisions = divisions;
+        testRests(attributes, wholeExpectedPitch, otherExpectedPitch);
+      });
+
       var testRests = function (attributes, wholeExpectedPitch, otherExpectedPitch) {
         // Given
         var notes = createNotes();
