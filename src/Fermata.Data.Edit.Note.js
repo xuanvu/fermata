@@ -74,12 +74,13 @@
       var part = this.getPart(idxS, Fermata.Data.cacheParts.IDX);
       if (part !== undefined) {
         if (idxM >= 0 && idxM < part.measure.length) {
-          var measure = part.measure[idxM];
-          var divisions = measure.$fermata.attributes.divisions;
+          var measureData = part.measure[idxM];
+          var measure = new Measure(measureData);
+          var divisions = measure.getDivisions();
           var quarterDuration = typeToQuarterDuration(type);
           var divisionsDuration = quarterDuration * divisions;
 
-          if (isEnoughSpace(measure.note, divisionsDuration, idxN)) {
+          if (isEnoughSpace(measure, divisionsDuration, idxN)) {
             makeAddNote(measure, divisionsDuration, idxN, pitch, voice, type);
           }
         }
@@ -87,10 +88,10 @@
     }
   };
 
-  var isEnoughSpace = function (notes, divisionsNeeded, idx) {
-    divisionsNeeded -= calcAvailableSpaceAtIdx(notes, divisionsNeeded, idx);
-    if (divisionsNeeded > 0 && !isContinousSpace(notes, idx)) {
-      divisionsNeeded -= calcAvailableSpaceFromEnd(notes, divisionsNeeded);
+  var isEnoughSpace = function (measure, divisionsNeeded, idx) {
+    divisionsNeeded -= measure.calcAvailableSpaceAtIdx(divisionsNeeded, idx);
+    if (divisionsNeeded > 0 && !isContinousSpace(measure.data.note, idx)) {
+      divisionsNeeded -= measure.calcAvailableSpaceFromEnd(divisionsNeeded);
     }
     return divisionsNeeded === 0;
   };
@@ -144,15 +145,13 @@
     return SoundType.getSoundType(note) === SoundType.REST;
   };
 
-  var makeAddNote = function (measureData, divisionsDuration, idxN, line, voice, type) {
-    var measure = new Measure(measureData);
-
+  var makeAddNote = function (measure, divisionsDuration, idxN, line, voice, type) {
     if (divisionsDuration < 1) {
       measure.multiplyDivisions(1 / divisionsDuration);
       divisionsDuration = 1;
     }
     removeSpaces(measure, divisionsDuration, idxN);
-    var clef = measureData.$fermata.attributes.clef[0];
+    var clef = measure.data.$fermata.attributes.clef[0];
     var note = {
       'duration': divisionsDuration,
       'pitch': Utils.lineToPitch(line, clef),
@@ -160,10 +159,10 @@
       'type': getValue(type),
       'voice': voice
     };
-    if (idxN < 0 || idxN > measureData.note.length) {
-      idxN = measureData.note.length;
+    if (idxN < 0 || idxN > measure.data.note.length) {
+      idxN = measure.data.note.length;
     }
-    measureData.note.splice(idxN, 0, note);
+    measure.data.note.splice(idxN, 0, note);
   };
 
   var removeSpaces = function (measure, divisionsNeeded, idx) {
