@@ -6,6 +6,7 @@
   var NotImplementedError = Fermata.Error.NotImplementedError;
   var Step = Fermata.Values.Step;
   var Measure = Fermata.Data.Measure;
+  var Utils = Fermata.Utils;
 
   // TODO: Fill with other values.
   var ValueLast = {
@@ -38,69 +39,6 @@
     // "up" and "down" are defined by the number of voices in the stave
     // TODO: return something else than "up" (voice calculation?)
     return "up";
-  };
-
-  var distanceFromG = {
-    "G": 0,
-    "C": Step.idx.G - Step.idx.C,
-    "F": Step.idx.G - Step.idx.F + Step.values.length
-  };
-
-  var calcValueCorrection = function (sign, line) {
-    var clefStepIdx = Step.idx[sign];
-
-    var refGLine = 2;
-    var gSign = "G";
-    var refGStepFromOrigin = refGLine * 2;
-
-    var signShift = distanceFromG[sign];
-    var clefStepFromOrigin = line * 2;
-    var actualGStepFromOrigin = clefStepFromOrigin + signShift;
-    var stepCorrection = refGStepFromOrigin - actualGStepFromOrigin;
-    var valueCorrection = stepCorrection / 2;
-
-    return valueCorrection;
-  };
-
-  var getStep = function (val) {
-    if (val === 0) {
-      return "C";
-    }
-    if (val === 0.5 || val === -3) {
-      return "D";
-    }
-    if (val === 1 || val === -2.5) {
-      return "E";
-    }
-    if (val === 1.5 || val === -2) {
-      return "F";
-    }
-    if (val === 2 || val === -1.5) {
-      return "G";
-    }
-    if (val === 2.5 || val === -1) {
-      return "A";
-    }
-    if (val === 3 || val === -0.5) {
-      return "B";
-    }
-  };
-
-  var getPitch = function (pitch, sign, line) {
-    var valueCorrection = calcValueCorrection(sign, line);
-    pitch = parseInt(pitch, 10);
-    pitch += valueCorrection;
-    var p_octave = 3.5;
-    var n_octave = -p_octave;
-    var step = "L";
-    if (pitch < 0) {
-      step = getStep(pitch % n_octave);
-    }
-    else {
-      step = getStep(pitch % p_octave);
-    }
-    var octave = 4 + Math.floor(pitch / p_octave);
-    return {'octave': octave, 'step': step};
   };
 
   var getValue = function (type) {
@@ -206,12 +144,12 @@
     return SoundType.getSoundType(note) === SoundType.REST;
   };
 
-  var makeAddNote = function (measure, divisionsDuration, idxN, pitch, voice, type) {
+  var makeAddNote = function (measure, divisionsDuration, idxN, line, voice, type) {
     removeSpaces(measure.note, divisionsDuration, idxN);
     var clef = measure.$fermata.attributes.clef[0];
     var note = {
       'duration': divisionsDuration,
-      'pitch': getPitch(pitch, clef.sign, clef.line),
+      'pitch': Utils.lineToPitch(line, clef),
       'stem': getQueue(voice),
       'type': getValue(type),
       'voice': voice
@@ -304,7 +242,7 @@
           var clef = measure.$fermata.attributes.clef[0];
           if (note.rest === undefined) {
             if (pitch !== undefined) {
-              note.pitch = getPitch(pitch, clef.sign, clef.line);
+              note.pitch = Utils.lineToPitch(pitch, clef);
             }
             if (type !== undefined) {
               note.type = getValue(type);

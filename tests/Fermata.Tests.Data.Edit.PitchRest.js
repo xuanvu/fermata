@@ -31,11 +31,34 @@ if (typeof require !== 'undefined') {
   };
 
   describe("Fermata.Data.PitchRest", function () {
-   describe("#getType", function () {
+    var attributes;
+    var gClef;
+    var cClef;
+    var fClef;
+    beforeEach(function (done) {
+      gClef = {
+        sign: "G",
+        line: "2"
+      };
+      fClef = {
+        sign: "F",
+        line: "4"
+      };
+      cClef = {
+        sign: "C",
+        line: "3"
+      };
+      attributes = {
+        clef: [gClef],
+        divisions: 1
+      };
+      done();
+    });
+    describe("#getType", function () {
       it("getType", function () {
         // Given 
         var note = initNote("C", 4);
-        var pitch = new PitchRest(note);
+        var pitch = new PitchRest(note, attributes);
 
         // When
         var type = pitch.getType();
@@ -43,6 +66,112 @@ if (typeof require !== 'undefined') {
         // Then
         assert.strictEqual(type, SoundType.REST);
       });
+    });
+
+    describe("#getStep & getOctave", function () {
+      it("G clef", function () {
+        // Given 
+        var otherExpectedPitch = {
+          octave: 4,
+          step: "B"
+        };
+        var wholeExpectedPitch = {
+          octave: 5,
+          step: "D"
+        };
+        var divisions = 16;
+        var clef = gClef;
+        attributes.clef[0] = clef;
+        attributes.divisions = divisions;
+        testRests(attributes, wholeExpectedPitch, otherExpectedPitch);
+      });
+
+      it("F clef", function () {
+        // Given 
+        var otherExpectedPitch = {
+          octave: 3,
+          step: "D"
+        };
+        var wholeExpectedPitch = {
+          octave: 3,
+          step: "F"
+        };
+        var divisions = 16;
+        var clef = fClef;
+        attributes.clef[0] = clef;
+        attributes.divisions = divisions;
+        testRests(attributes, wholeExpectedPitch, otherExpectedPitch);
+      });
+
+      it("C clef", function () {
+        // Given 
+        var otherExpectedPitch = {
+          octave: 4,
+          step: "C"
+        };
+        var wholeExpectedPitch = {
+          octave: 4,
+          step: "E"
+        };
+        var divisions = 16;
+        var clef = cClef;
+        attributes.clef[0] = clef;
+        attributes.divisions = divisions;
+        testRests(attributes, wholeExpectedPitch, otherExpectedPitch);
+      });
+
+      var testRests = function (attributes, wholeExpectedPitch, otherExpectedPitch) {
+        // Given
+        var notes = createNotes();
+        var pitch = new PitchRest(note, attributes);
+        var pitchesData = [];
+
+        // When
+        for (var i = 0; i < notes.length; i++) {
+          var note = notes[i];
+          var pitch = new PitchRest(note, attributes);
+          var pitchData = {
+            octave: pitch.getOctave(),
+            step: pitch.getStep()
+          };
+          pitchesData.push(pitchData);
+        }
+
+        // Then
+        checkPitched(pitchesData, otherExpectedPitch, wholeExpectedPitch);
+      };
+
+      var createNotes = function () {
+        var notes = [];
+        for (var i = 1; i <= 64; i *= 2) {
+          var note = {
+            rest: {},
+            duration: i.toString()
+          };
+
+          notes.push(note);
+        }
+
+        return notes;
+      };
+
+      var checkPitched = function (pitchesData, otherExpectedPitch, wholeExpectedPitch) {
+        for (var i = 0; i < pitchesData.length; i++) {
+          var pitchData = pitchesData[i];
+          if (isWhole(i, pitchesData)) {
+            assert.deepEqual(pitchData, wholeExpectedPitch);
+          } else {
+            assert.deepEqual(pitchData, otherExpectedPitch);
+          }
+        }
+      };
+      var isWhole = function (idx, pitchesData) {
+        return isLast(idx, pitchesData);
+      };
+
+      var isLast = function (idx, tab) {
+        return idx === tab.length - 1;
+      };
     });
   });
 }).call(this);
