@@ -902,6 +902,29 @@ if (typeof require !== 'undefined') {
         checkNotesToBeRemoved(measure, voiceIdx, notesToBeRemoved);
       });
     });
+
+    describe("#removeSpacesFromEnd", function () {
+      it("enough space", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var divisionsNeeded = 2;
+
+        var notesToBeRemoved = [
+          data.note[2],
+          data.note[3]
+        ];
+
+        // When
+        measure.removeSpacesFromEnd(divisionsNeeded, voiceIdx);
+
+        // Then
+        assert.equal(data.note.length, 2);
+        checkNotesToBeRemoved(measure, voiceIdx, notesToBeRemoved);
+      });
+    });
   });
 
   var checkNotesToBeRemoved = function (measure, voiceIdx, notesToBeRemoved) {
