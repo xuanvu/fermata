@@ -26,34 +26,7 @@ if (typeof require !== 'undefined') {
     if (typeof nbVoices === "undefined") {
       nbVoices = 1;
     }
-    var measure = {
-      attributes: [
-        {
-          divisions: "1",
-          time: {
-            beats: (nbNote + nbRest).toString(),
-            "beat-type": "4"
-          }
-        }
-      ],
-      note: [],
-      $fermata: {
-        attributes: {
-          divisions: 1,
-          time: {
-            beats: nbNote + nbRest,
-            "beat-type": 4
-          },
-          clef: [],
-          staves: "1",
-          "part-symbol": {
-            "top-staff": 1,
-            "bottom-staff": 2,
-            symbol: 'brace'
-          }
-        }
-      }
-    };
+    var measure = createBaseMeasure(nbNote + nbRest);
 
     for (var voiceIdx = 0; voiceIdx < nbVoices; voiceIdx++) {
       var i = 0;
@@ -68,6 +41,57 @@ if (typeof require !== 'undefined') {
     }
 
     return measure;
+  };
+
+  var getTestDataFromTab = function (typeTab, nbVoices) {
+    if (typeof nbVoices === "undefined") {
+      nbVoices = 1;
+    }
+    var measure = createBaseMeasure(typeTab.length);
+    for (var voiceIdx = 0; voiceIdx < nbVoices; voiceIdx++) {
+      for (var i = 0; i < typeTab.length; i++) {
+        var type = typeTab[i];
+        var note;
+        if (type === "r") {
+          note = createRestNote(voiceIdx);
+          measure.note.push(note);
+        } else {
+          note = createPitchNote(voiceIdx);
+        }
+      }
+    }
+    return measure;
+  };
+
+  var createBaseMeasure = function (beats) {
+    var measure = {
+      attributes: [
+        {
+          divisions: "1",
+          time: {
+            beats: beats.toString(),
+            "beat-type": "4"
+          }
+        }
+      ],
+      note: [],
+      $fermata: {
+        attributes: {
+          divisions: 1,
+          time: {
+            beats: beats,
+            "beat-type": 4
+          },
+          clef: [],
+          staves: "1",
+          "part-symbol": {
+            "top-staff": 1,
+            "bottom-staff": 2,
+            symbol: 'brace'
+          }
+        }
+      }
+    };
   };
 
   var createPitchNote = function (voiceIdx) {
