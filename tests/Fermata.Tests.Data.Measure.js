@@ -71,6 +71,10 @@ if (typeof require !== 'undefined') {
   };
 
   var createPitchNote = function (voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
     var voice = (voiceIdx + 1).toString();
     return {
       duration: 1,
@@ -83,6 +87,10 @@ if (typeof require !== 'undefined') {
   };
 
   var createRestNote = function (voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
     var voice = (voiceIdx + 1).toString();
     return {
       duration: 1,
