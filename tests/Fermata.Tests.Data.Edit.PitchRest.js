@@ -93,8 +93,8 @@ if (typeof require !== 'undefined') {
           step: "D"
         };
         var wholeExpectedPitch = {
-          octave: 5,
-          step: "D"
+          octave: 3,
+          step: "F"
         };
         var divisions = 16;
         var clef = fClef;
@@ -110,8 +110,8 @@ if (typeof require !== 'undefined') {
           step: "C"
         };
         var wholeExpectedPitch = {
-          octave: 5,
-          step: "D"
+          octave: 4,
+          step: "E"
         };
         var divisions = 16;
         var clef = cClef;
