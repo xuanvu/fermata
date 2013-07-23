@@ -512,7 +512,7 @@
     this.makeAddNote(rest, voice.length, voiceIdx);
   };
 
-  Measure.prototype.isContinousSpaces = function (noteIdx, voiceIdx) {
+  Measure.prototype.isContinousSpacesToEnd = function (noteIdx, voiceIdx) {
     if (typeof voiceIdx === "undefined") {
       voiceIdx = 0;
     }
