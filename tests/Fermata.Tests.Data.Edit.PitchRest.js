@@ -71,7 +71,6 @@ if (typeof require !== 'undefined') {
     describe("#getStep & getOctave", function () {
       it("G clef", function () {
         // Given 
-        var clef = gClef;
         var otherExpectedPitch = {
           octave: 4,
           step: "B"
@@ -81,8 +80,14 @@ if (typeof require !== 'undefined') {
           step: "D"
         };
         var divisions = 16;
+        var clef = gClef;
         attributes.clef[0] = clef;
         attributes.divisions = divisions;
+        testRests(attributes, wholeExpectedPitch, otherExpectedPitch);
+      });
+
+      var testRests = function (attributes, wholeExpectedPitch, otherExpectedPitch) {
+        // Given
         var notes = createNotes();
         var pitch = new PitchRest(note, attributes);
         var pitchesData = [];
@@ -100,7 +105,7 @@ if (typeof require !== 'undefined') {
 
         // Then
         checkPitched(pitchesData, otherExpectedPitch, wholeExpectedPitch);
-      });
+      };
 
       var createNotes = function () {
         var notes = [];
