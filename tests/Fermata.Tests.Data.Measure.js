@@ -854,7 +854,43 @@ if (typeof require !== 'undefined') {
         assert.equal(availableSpace, expectedResult);
       });
     });
+
+    describe("#removeSpacesAtIdx", function () {
+      it("enough space", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+        var divisionsNeeded = 2;
+        var expectedResult = divisionsNeeded;
+
+        var notesToBeRemoved = [
+          data.note[0],
+          data.note[1]
+        ];
+
+        // When
+        var consumedSpace = measure.removeSpacesAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(consumedSpace, expectedResult);
+        checkNotesToBeRemoved(measure, voiceIdx, notesToBeRemoved);
+      });
+    });
   });
+
+  var checkNotesToBeRemoved = function (measure, voiceIdx, notesToBeRemoved) {
+    var voice = measure.getVoice(voiceIdx);
+    var notes = measure.data.note;
+    for (var i = 0; i < notesToBeRemoved.length; i++) {
+      var note = notesToBeRemoved[i];
+
+      assert.equal(notes.indexOf(note), -1);
+      assert.equal(voice.indexOf(note), -1);
+    }
+  };
 
   var changeIntToStringInDurations = function (measure) {
     var notes = measure.note;
