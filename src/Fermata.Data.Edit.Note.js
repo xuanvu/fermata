@@ -176,6 +176,43 @@
     }
   };
 
+  Fermata.Data.prototype.changeNoteDuration = function (staveIdx, measureIdx, noteIdx, voice, type) {
+    var voiceIdx = voice - 1;
+    var part = this.getPart(staveIdx, Fermata.Data.cacheParts.IDX);
+    var measureData = part.measure[measureIdx];
+    var measure = new Measure(measureData);
+    var note = measure.getVoice(voiceIdx)[noteIdx];
+    if (isRest(note)) {
+      // TODO: throw an exception
+      return;
+    }
+
+    var divisions = measure.getDivisions();
+    var quarterDuration = typeToQuarterDuration(type);
+    var divisionsDuration = quarterDuration * divisions;
+    var oldDuration = note.duration;
+    var durationShift = divisionsDuration - oldDuration;
+    if (durationShift > 0) {
+      if (!isEnoughSpaceToIncreaseDuraiton(measure, divisionsDuration -
+              oldDuration)) {
+        // Throw an exception
+        return ;
+      }
+      note.duration = divisionsDuration;
+      measure.removeSpacesFromEnd(durationShift, voiceIdx);
+    } else {
+      durationShift = -durationShift;
+      if (divisionsDuration < 1) {
+        var coeff = 1 / divisionsDuration;
+        measure.multiplyDivisions(coeff);
+        divisionsDuration = 1;
+        durationShift *- coeff;
+      }
+      note.duration = divisionsDuration;
+      measure.addSpacesAtEnd(durationShift, voiceIdx);
+    }
+  };
+
   Fermata.Data.prototype.changeNotePitch = function (staveIdx, measureIdx, noteIdx, value) {
     var note = this.fetchNote(staveIdx, measureIdx, noteIdx);
     var pitch = PitchEncapsulator.encapsulate(note, null);
