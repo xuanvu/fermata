@@ -2,6 +2,7 @@
   "use strict";
 
   //includes
+  var Clef = Fermata.Mapping.Clef;
   var SoundType = Fermata.Values.SoundType;
   var Utils = Fermata.Utils;
 
@@ -11,12 +12,20 @@
     this.data = noteData;
     this.attributes = attributes;
     this.clef = attributes.clef[0];
+    this.clefName = Fermata.Mapping.Clef.getVexflow(this.clef.sign);
   };
 
   var PitchRest = Fermata.Data.PitchRest;
 
   var otherDurationLine = 3;
   var wholeDurationLine = 4;
+
+  //TODO: use the mapping file
+  PitchRest.ClefMapping = {
+    "treble": 4,
+    "alto": 4,
+    "bass": 3
+  };
 
   PitchRest.prototype.getType = function ()
   {
@@ -31,13 +40,7 @@
     }
     else
     {
-      var pitch;
-      if (isWhole(this.data, this.attributes)) {
-        pitch = Utils.lineToPitch(wholeDurationLine, this.clef);
-      } else {
-        pitch = Utils.lineToPitch(otherDurationLine, this.clef);
-      }
-      return pitch.step;
+      return Clef.getMusicXml(this.clefName);
     }
   };
 
@@ -54,13 +57,7 @@
     }
     else
     {
-      var pitch;
-      if (isWhole(this.data, this.attributes)) {
-        pitch = Utils.lineToPitch(wholeDurationLine, this.clef);
-      } else {
-        pitch = Utils.lineToPitch(otherDurationLine, this.clef);
-      }
-      return pitch.octave;
+      return PitchRest.ClefMapping[this.clefName];
     }
   };
 
