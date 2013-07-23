@@ -649,6 +649,48 @@ if (typeof require !== 'undefined') {
         assert.equal(measure.data.note[8], newNote);
       });
     });
+
+    describe("#makeRemoveNote", function () {
+      it("basic case", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var suppressionIdx = 2;
+        var noteToDelete = measure.getVoice(voiceIdx)[suppressionIdx];
+
+        // When
+        measure.makeRemoveNote(suppressionIdx);
+
+        // Then
+        assert.equal(measure.data.note.length, 3);
+        assert.equal(measure.voices[voiceIdx].length, 3);
+        assert.equal(measure.voices[voiceIdx].indexOf(noteToDelete), -1);
+        assert.equal(measure.data.note.indexOf(noteToDelete), -1);
+      });
+
+      it("basic case", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var voiceIdx = 1;
+        var suppressionIdx = 2;
+        var noteToDelete = measure.getVoice(voiceIdx)[suppressionIdx];
+
+        // When
+        measure.makeRemoveNote(suppressionIdx, 1);
+
+        // Then
+        assert.equal(measure.data.note.length, 7);
+        assert.equal(measure.voices[voiceIdx].length, 3);
+        assert.equal(measure.voices[voiceIdx].indexOf(noteToDelete), -1);
+        assert.equal(measure.data.note.indexOf(noteToDelete), -1);
+      });
+    });
   });
 
   var changeIntToStringInDurations = function (measure) {
