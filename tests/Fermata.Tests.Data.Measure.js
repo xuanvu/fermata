@@ -697,7 +697,7 @@ if (typeof require !== 'undefined') {
         assert.equal(measure.data.note.indexOf(noteToDelete), -1);
       });
 
-      it("basic case", function () {
+      it("voice 2", function () {
         // Given 
         var nbNote = 2;
         var nbRest = 2;
