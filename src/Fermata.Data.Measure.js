@@ -502,4 +502,24 @@
     return this.data.note.indexOf(note);
   };
 
+  Measure.prototype.addSpacesAtEnd = function (durationToAdd, voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = this.getVoice(voiceIdx);
+    var rest = createRest(durationToAdd, voiceIdx);
+    this.makeAddNote(rest, voice.length - 1, voiceIdx);
+  };
+
+  var createRest = function (duration, voiceIdx) {
+    var rest = {
+      rest: {},
+      duration: duration,
+      voice: (voiceIdx + 1).toString()
+    };
+
+    return rest;
+  };
+
 }).call(this);
