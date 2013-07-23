@@ -528,6 +528,42 @@ if (typeof require !== 'undefined') {
         assert.equal(measure.voices[0][insertionIdx], newNote);
         assert.equal(measure.data.note[insertionIdx], newNote);
       });
+
+      it("defaut voice", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 2;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx);
+        // Then
+        assert.equal(measure.data.note.length, 9);
+        assert.equal(measure.voices[0].length, 5);
+        assert.equal(measure.voices[0][insertionIdx], newNote);
+        assert.equal(measure.data.note[insertionIdx], newNote);
+      });
+
+      it("on empty voice", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 0;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx, 3);
+        // Then
+        assert.equal(measure.data.note.length, 9);
+        assert.equal(measure.voices[2].length, 1);
+        assert.equal(measure.voices[2][insertionIdx], newNote);
+        assert.equal(measure.data.note[0], newNote);
+      });
     });
   });
 
