@@ -715,6 +715,93 @@ if (typeof require !== 'undefined') {
         assert.equal(measure.data.note.indexOf(noteToDelete), -1);
       });
     });
+
+    describe("#calcAvailableSpaceAtIdx", function () {
+      it("enough space", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+        var divisionsNeeded = 2;
+        var expectedResult = divisionsNeeded;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+
+      it("not enough space (reach end) - miss 1", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 2;
+        var divisionsNeeded = 3;
+        var expectedResult = 2;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+
+      it("not enough space (reach end) - miss 2", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 3;
+        var divisionsNeeded = 3;
+        var expectedResult = 1;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+
+      it("not enough space (reach note) - miss 1", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 1;
+        var divisionsNeeded = 3;
+        var expectedResult = 2;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+
+      it("not enough space (reach note) - miss 1", function () {
+        // Given 
+        var noteTab = ["r", "r", "n", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 1;
+        var divisionsNeeded = 3;
+        var expectedResult = 1;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+    });
   });
 
   var changeIntToStringInDurations = function (measure) {
