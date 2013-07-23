@@ -565,7 +565,7 @@ if (typeof require !== 'undefined') {
         var insertionIdx = 0;
 
         // When
-        measure.makeAddNote(newNote, insertionIdx, 3);
+        measure.makeAddNote(newNote, insertionIdx, 2);
         // Then
         assert.equal(measure.data.note.length, 9);
         assert.equal(measure.voices[2].length, 1);
