@@ -54,10 +54,10 @@ if (typeof require !== 'undefined') {
         var note;
         if (type === "r") {
           note = createRestNote(voiceIdx);
-          measure.note.push(note);
         } else {
           note = createPitchNote(voiceIdx);
         }
+        measure.note.push(note);
       }
     }
     return measure;
@@ -92,6 +92,8 @@ if (typeof require !== 'undefined') {
         }
       }
     };
+
+    return measure;
   };
 
   var createPitchNote = function (voiceIdx) {
