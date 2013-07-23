@@ -95,6 +95,7 @@ if (typeof _$jscoverage === 'undefined') {
     "Fermata.Values.Octave.js",
     "Fermata.Values.Step.js",
     "Fermata.Values.SoundType.js",
+    "Fermata.Utils.lineToPitch.js",
     "Fermata.Mapping.Clef.js",
     "Fermata.Mapping.Direction.js",
     "Fermata.Mapping.Connector.js",

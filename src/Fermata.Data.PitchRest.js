@@ -2,24 +2,21 @@
   "use strict";
 
   //includes
-  var Clef = Fermata.Mapping.Clef;
   var SoundType = Fermata.Values.SoundType;
+  var Utils = Fermata.Utils;
 
   //TODO better constructor (check args)
-  Fermata.Data.PitchRest = function (noteData, clef)
+  Fermata.Data.PitchRest = function (noteData, attributes)
   {
     this.data = noteData;
-    this.clef = clef;
+    this.attributes = attributes;
+    this.clef = attributes.clef[0];
   };
 
   var PitchRest = Fermata.Data.PitchRest;
 
-  //TODO: use the mapping file
-  PitchRest.ClefMapping = {
-    "treble": 4,
-    "alto": 4,
-    "bass": 3
-  };
+  var otherDurationLine = 3;
+  var wholeDurationLine = 4;
 
   PitchRest.prototype.getType = function ()
   {
@@ -34,7 +31,13 @@
     }
     else
     {
-      return Clef.getMusicXml(this.clef);
+      var pitch;
+      if (isWhole(this.data, this.attributes)) {
+        pitch = Utils.lineToPitch(wholeDurationLine, this.clef);
+      } else {
+        pitch = Utils.lineToPitch(otherDurationLine, this.clef);
+      }
+      return pitch.step;
     }
   };
 
@@ -51,8 +54,21 @@
     }
     else
     {
-      return PitchRest.ClefMapping[this.clef];
+      var pitch;
+      if (isWhole(this.data, this.attributes)) {
+        pitch = Utils.lineToPitch(wholeDurationLine, this.clef);
+      } else {
+        pitch = Utils.lineToPitch(otherDurationLine, this.clef);
+      }
+      return pitch.octave;
     }
+  };
+
+  var isWhole = function (note, attributes) {
+    var divisionDuration = note.duration;
+    var divisions = attributes.divisions;
+    var quarterDuration = divisionDuration / divisions;
+    return quarterDuration === 4;
   };
 
 }).call(this);

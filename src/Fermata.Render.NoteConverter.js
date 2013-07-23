@@ -27,10 +27,7 @@
       this.fillAttributesDefault();
     }
 
-    // console.log(noteData);
     var key = (typeof(noteData[0].staff) === 'undefined') ? 1 : noteData[0].staff;
-    // console.log(key);
-    // console.log(attributes);
     this.clefName = Fermata.Mapping.Clef.getVexflow(attributes.clef[key - 1].sign);
     this.change = attributes.clef[key - 1]["clef-octave-change"];
     var noteType = Fermata.Render.getNoteType(noteData[0]);
@@ -46,6 +43,7 @@
     this.beatType = attributes.time["beat-type"];
     this.beats = attributes.time.beats;
     this.divisions = attributes.divisions;
+    this.attributes = attributes;
   };
 
   NoteConverter.prototype.fillAttributesDefault = function ()
@@ -103,7 +101,7 @@
 
   NoteConverter.prototype.convertNormalNote = function (noteData)
   {
-    var dataPitch = PitchEncapsulator.encapsulate(noteData[0], this.clefName);
+    var dataPitch = PitchEncapsulator.encapsulate(noteData[0], this.attributes);
     var vexDuration = this.convertDuration(noteData[0]);
     var stem = null;
 
@@ -134,7 +132,7 @@
     var vexPitches = [];
     for (var i = 0 ; i < noteData.length ; i++)
     {
-      dataPitch = PitchEncapsulator.encapsulate(noteData[i], this.clefName);
+      dataPitch = PitchEncapsulator.encapsulate(noteData[i], this.attributes);
       vexPitches.push(this.convertPitch(dataPitch));
     }
 

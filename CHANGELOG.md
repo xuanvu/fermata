@@ -2,7 +2,11 @@
 
 ## 0.0.2
 
-* Export data feature
+* Features:
+  * Export data
+  * Check if score is "time compliant"
+* Fix add note
+* Update vexflow
 
 ## 0.0.1
 

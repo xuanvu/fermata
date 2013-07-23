@@ -2,9 +2,9 @@
   "use strict";
 
   Fermata.Utils = {};
-  
+
   var Utils = Fermata.Utils;
-  
+
   Utils.isArray = function (obj) {
     return Object.prototype.toString.call(obj) === '[object Array]';
   };
