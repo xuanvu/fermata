@@ -89,8 +89,8 @@ if (typeof require !== 'undefined') {
       it("F clef", function () {
         // Given 
         var otherExpectedPitch = {
-          octave: 4,
-          step: "B"
+          octave: 3,
+          step: "D"
         };
         var wholeExpectedPitch = {
           octave: 5,
@@ -107,7 +107,7 @@ if (typeof require !== 'undefined') {
         // Given 
         var otherExpectedPitch = {
           octave: 4,
-          step: "B"
+          step: "C"
         };
         var wholeExpectedPitch = {
           octave: 5,
