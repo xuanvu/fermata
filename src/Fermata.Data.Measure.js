@@ -509,7 +509,7 @@
 
     var voice = this.getVoice(voiceIdx);
     var rest = createRest(durationToAdd, voiceIdx);
-    this.makeAddNote(rest, voice.length - 1, voiceIdx);
+    this.makeAddNote(rest, voice.length, voiceIdx);
   };
 
   var createRest = function (duration, voiceIdx) {
