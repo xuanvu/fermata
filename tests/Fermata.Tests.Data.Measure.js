@@ -804,6 +804,56 @@ if (typeof require !== 'undefined') {
         assert.equal(availableSpace, expectedResult);
       });
     });
+
+    describe("#calcAvailableSpaceFromEnd", function () {
+      it("enough space", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var divisionsNeeded = 2;
+        var expectedResult = divisionsNeeded;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceFromEnd(divisionsNeeded, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+
+      it("not enough space (reach begining)", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var divisionsNeeded = 5;
+        var expectedResult = 4;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceFromEnd(divisionsNeeded, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+
+      it("not enough space (reach note)", function () {
+        // Given 
+        var noteTab = ["r", "r", "w", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var divisionsNeeded = 4;
+        var expectedResult = 1;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceFromEnd(divisionsNeeded, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+    });
   });
 
   var changeIntToStringInDurations = function (measure) {
