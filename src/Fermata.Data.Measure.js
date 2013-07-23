@@ -512,6 +512,21 @@
     this.makeAddNote(rest, voice.length, voiceIdx);
   };
 
+  Measure.prototype.isContinousSpaces = function (noteIdx, voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = this.getVoice(voiceIdx);
+    for (var i = noteIdx ; i < voice.length ; i++) {
+      var note = voice[i];
+      if (!isRest(note)) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   var createRest = function (duration, voiceIdx) {
     var rest = {
       rest: {},
