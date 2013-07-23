@@ -926,6 +926,25 @@ if (typeof require !== 'undefined') {
         checkNotesToBeRemoved(measure, voiceIdx, notesToBeRemoved);
       });
     });
+
+    describe("#addSpacesAtEnd", function () {
+      it("basic test", function () {
+        // Given 
+        var noteTab = ["n", "n", "n", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var divisionsToAdd = 2;
+
+        // When
+        measure.addSpacesAtEnd(divisionsToAdd, voiceIdx);
+
+        // Then
+        assert.equal(data.note.length, 5);
+        assert.equal(measure.getVoice(voiceIdx).length, 5);
+        assert.ok(isRest(data.note[4]));
+      });
+    });
   });
 
   var checkNotesToBeRemoved = function (measure, voiceIdx, notesToBeRemoved) {
@@ -947,4 +966,9 @@ if (typeof require !== 'undefined') {
       note.duration = note.duration.toString();
     }
   };
+
+  var isRest = function (note) {
+    return typeof note.rest !== "undefined";
+  };
+
 }).call(this);
