@@ -97,20 +97,6 @@
     return divisionsNeeded === 0;
   };
 
-  var isContinousSpace = function (notes, idx) {
-    for (var i = idx; i < notes.length; i++) {
-      var note = notes[i];
-      if (!isRest(note)) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  var isRest = function (note) {
-    return SoundType.getSoundType(note) === SoundType.REST;
-  };
-
   var makeAddNote = function (measure, divisionsDuration, idxN, line, voice, type) {
     if (divisionsDuration < 1) {
       measure.multiplyDivisions(1 / divisionsDuration);
