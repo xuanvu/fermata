@@ -500,6 +500,26 @@ if (typeof require !== 'undefined') {
         assert.deepEqual(measure.data.attributes[0], expectedAttributes);
       });
     });
+
+    describe("#makeAddNote", function () {
+      it("basic case", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 2;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx);
+        // Then
+        assert.equal(measure.data.note.length, 5);
+        assert.equal(measure.voices[0].length, 5);
+        assert.equal(measure.voices[0][insertionIdx], newNote);
+        assert.equal(measure.data.note[insertionIdx], newNote);
+      });
+    });
   });
   
   var changeIntToStringInDurations = function (measure) {
