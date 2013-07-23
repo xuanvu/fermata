@@ -68,7 +68,7 @@
     if (clearStep < 0) {
       clearStep += Step.values.length;
     }
-    
+
     return clearStep;
   };
 

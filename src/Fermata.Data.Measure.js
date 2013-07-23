@@ -144,7 +144,8 @@
       var actualDuration = this.getActualDuration(i);
 
       if (authorizedDuration > actualDuration) {
-        this.fillMissingDivisionsWithRest(authorizedDuration - actualDuration, i);
+        this.fillMissingDivisionsWithRest(authorizedDuration -
+                actualDuration, i);
       } else if (authorizedDuration < actualDuration) {
         this.removeExcedentDivisionsInRest(actualDuration -
                 authorizedDuration, i);
@@ -367,6 +368,37 @@
         }
       }
     }
+  };
+
+  Measure.prototype.makeAddNote = function (note, noteIdx, voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = this.getVoice(voiceIdx);
+    voice.splice(noteIdx, 0, note);
+    var insertionIdx = this.calcInsertionIdx(noteIdx, voice);
+    this.notes.splice(insertionIdx, 0, note);
+  };
+
+  Measure.prototype.calcInsertionIdx = function (noteIdx, voice) {
+    var insertionIdx = 0;
+    if (voice.length > 1) {
+      if (noteIdx === voice.length - 1) {
+        var previousNote = voice[voice.length - 2];
+        var previousNoteIdx = this.getIdxInNotes(previousNote);
+        insertionIdx = previousNoteIdx + 1;
+      } else {
+        var nextNote = voice[noteIdx + 1];
+        insertionIdx = this.getIdxInNotes(nextNote);
+      }
+    }
+
+    return insertionIdx;
+  };
+
+  Measure.prototype.getIdxInNotes = function (note) {
+    return this.notes.indexOf(note);
   };
 
 }).call(this);
