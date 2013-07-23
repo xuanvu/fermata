@@ -90,7 +90,8 @@
 
   var isEnoughSpace = function (measure, divisionsNeeded, idx) {
     divisionsNeeded -= measure.calcAvailableSpaceAtIdx(divisionsNeeded, idx);
-    if (divisionsNeeded > 0 && !isContinousSpace(measure.data.note, idx)) {
+    if (divisionsNeeded > 0 &&
+            !measure.isContinousSpacesToEnd(idx)) {
       divisionsNeeded -= measure.calcAvailableSpaceFromEnd(divisionsNeeded);
     }
     return divisionsNeeded === 0;
