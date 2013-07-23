@@ -945,6 +945,98 @@ if (typeof require !== 'undefined') {
         assert.ok(isRest(data.note[4]));
       });
     });
+
+    describe("#isContinousSpacesToEnd", function () {
+      it("from start - true", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+
+        // When
+        var continousSpaces = measure.isContinousSpacesToEnd(noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(continousSpaces, true);
+      });
+
+      it("from start - false at start", function () {
+        // Given 
+        var noteTab = ["n", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+
+        // When
+        var continousSpaces = measure.isContinousSpacesToEnd(noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(continousSpaces, false);
+      });
+
+      it("from start - false at middle", function () {
+        // Given 
+        var noteTab = ["r", "r", "n", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+
+        // When
+        var continousSpaces = measure.isContinousSpacesToEnd(noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(continousSpaces, false);
+      });
+
+      it("from start - false at end", function () {
+        // Given 
+        var noteTab = ["r", "r", "n", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+
+        // When
+        var continousSpaces = measure.isContinousSpacesToEnd(noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(continousSpaces, false);
+      });
+
+      it("from middle - true", function () {
+        // Given 
+        var noteTab = ["n", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 1;
+
+        // When
+        var continousSpaces = measure.isContinousSpacesToEnd(noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(continousSpaces, true);
+      });
+
+      it("from middle - false at middle", function () {
+        // Given 
+        var noteTab = ["n", "n", "r", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 2;
+
+        // When
+        var continousSpaces = measure.isContinousSpacesToEnd(noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(continousSpaces, false);
+      });
+    });
   });
 
   var checkNotesToBeRemoved = function (measure, voiceIdx, notesToBeRemoved) {
