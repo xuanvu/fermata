@@ -878,6 +878,29 @@ if (typeof require !== 'undefined') {
         assert.equal(consumedSpace, expectedResult);
         checkNotesToBeRemoved(measure, voiceIdx, notesToBeRemoved);
       });
+
+      it("not enough space (reach note)", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 1;
+        var divisionsNeeded = 3;
+        var expectedResult = 2;
+
+        var notesToBeRemoved = [
+          data.note[1],
+          data.note[2]
+        ];
+
+        // When
+        var consumedSpace = measure.removeSpacesAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(consumedSpace, expectedResult);
+        checkNotesToBeRemoved(measure, voiceIdx, notesToBeRemoved);
+      });
     });
   });
 
