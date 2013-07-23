@@ -572,6 +572,82 @@ if (typeof require !== 'undefined') {
         assert.equal(measure.voices[2][insertionIdx], newNote);
         assert.equal(measure.data.note[0], newNote);
       });
+
+      it("at begining - voice 1", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 0;
+        var voiceIdx = 0;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx, voiceIdx);
+        // Then
+        assert.equal(measure.data.note.length, 9);
+        assert.equal(measure.voices[voiceIdx].length, 5);
+        assert.equal(measure.voices[voiceIdx][insertionIdx], newNote);
+        assert.equal(measure.data.note[0], newNote);
+      });
+
+      it("at end - voice 1", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 4;
+        var voiceIdx = 0;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx, voiceIdx);
+        // Then
+        assert.equal(measure.data.note.length, 9);
+        assert.equal(measure.voices[voiceIdx].length, 5);
+        assert.equal(measure.voices[voiceIdx][insertionIdx], newNote);
+        assert.equal(measure.data.note[4], newNote);
+      });
+
+      it("at begining - voice 2", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 0;
+        var voiceIdx = 1;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx, voiceIdx);
+        // Then
+        assert.equal(measure.data.note.length, 9);
+        assert.equal(measure.voices[voiceIdx].length, 5);
+        assert.equal(measure.voices[voiceIdx][insertionIdx], newNote);
+        assert.equal(measure.data.note[4], newNote);
+      });
+
+      it("at end - voice 2", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 4;
+        var voiceIdx = 1;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx, voiceIdx);
+        // Then
+        assert.equal(measure.data.note.length, 9);
+        assert.equal(measure.voices[voiceIdx].length, 5);
+        assert.equal(measure.voices[voiceIdx][insertionIdx], newNote);
+        assert.equal(measure.data.note[8], newNote);
+      });
     });
   });
 
