@@ -922,6 +922,7 @@ if (typeof require !== 'undefined') {
 
         // Then
         assert.equal(data.note.length, 2);
+        assert.equal(measure.getVoice(voiceIdx).length, 2);
         checkNotesToBeRemoved(measure, voiceIdx, notesToBeRemoved);
       });
     });
