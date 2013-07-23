@@ -170,15 +170,11 @@
     }
   };
 
-  var isRest = function (note) {
-    return SoundType.getSoundType(note) === SoundType.REST;
-  };
-
   Measure.prototype.fillMissingDivisionsWithRest = function (divisionsToAdd, voiceIdx) {
     var voice = this.getVoice(voiceIdx);
     var beatTypeDivisions = this.getBeatTypeDivisions();
     while (divisionsToAdd > 0) {
-      var note = createRest();
+      var note = createRest(1, voiceIdx);
       if (divisionsToAdd < beatTypeDivisions) {
         note.duration = divisionsToAdd;
       } else {
@@ -193,13 +189,6 @@
       }
       this.data.note.splice(noteIdx, 0, note);
     }
-  };
-
-  var createRest = function () {
-    return {
-      duration: 1,
-      rest: {}
-    };
   };
 
   Measure.prototype.getAuthorizedDuration = function () {
