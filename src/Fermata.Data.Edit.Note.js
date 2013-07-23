@@ -144,9 +144,15 @@
     return SoundType.getSoundType(note) === SoundType.REST;
   };
 
-  var makeAddNote = function (measure, divisionsDuration, idxN, line, voice, type) {
-    removeSpaces(measure.note, divisionsDuration, idxN);
-    var clef = measure.$fermata.attributes.clef[0];
+  var makeAddNote = function (measureData, divisionsDuration, idxN, line, voice, type) {
+    var measure = new Measure(measureData);
+
+    if (divisionsDuration < 1) {
+      measure.multiplyDivisions(1 / divisionsDuration);
+      divisionsDuration = 1;
+    }
+    removeSpaces(measure, divisionsDuration, idxN);
+    var clef = measureData.$fermata.attributes.clef[0];
     var note = {
       'duration': divisionsDuration,
       'pitch': Utils.lineToPitch(line, clef),
@@ -154,19 +160,16 @@
       'type': getValue(type),
       'voice': voice
     };
-    if (idxN < 0 || idxN > measure.note.length) {
-      idxN = measure.note.length;
+    if (idxN < 0 || idxN > measureData.note.length) {
+      idxN = measureData.note.length;
     }
-    measure.note.splice(idxN, 0, note);
-    if (divisionsDuration < 1) {
-      adaptMeasureDivisions(measure, divisionsDuration);
-    }
+    measureData.note.splice(idxN, 0, note);
   };
 
-  var removeSpaces = function (notes, divisionsNeeded, idx) {
-    divisionsNeeded -= removeSpacesAtIdx(notes, divisionsNeeded, idx);
+  var removeSpaces = function (measure, divisionsNeeded, idx) {
+    divisionsNeeded -= measure.removeSpacesAtIdx(divisionsNeeded, idx);
     if (divisionsNeeded > 0) {
-      removeSpacesFromEnd(notes, divisionsNeeded);
+      measure.removeSpacesFromEnd(divisionsNeeded);
     }
   };
 
