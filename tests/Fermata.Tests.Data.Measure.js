@@ -969,7 +969,7 @@ if (typeof require !== 'undefined') {
         assert.equal(voice.length, 3);
         assert.equal(voice[0].duration, 1);
         assert.equal(voice[1].duration, 2);
-        assert.equal(voice[2].duration, 4);        
+        assert.equal(voice[2].duration, 4);
       });
 
       it("power of two - need 2", function () {
@@ -985,7 +985,7 @@ if (typeof require !== 'undefined') {
         var voiceIdx = 0;
         var divisionsNeeded = 2;
         var voice = measure.getVoice(voiceIdx);
-       var notesToBeRemoved = [
+        var notesToBeRemoved = [
           data.note[1]
         ];
 
@@ -998,7 +998,7 @@ if (typeof require !== 'undefined') {
         assert.equal(voice.length, 3);
         assert.equal(voice[0].duration, 1);
         assert.equal(voice[1].duration, 2);
-        assert.equal(voice[2].duration, 4);        
+        assert.equal(voice[2].duration, 4);
       });
     });
 
