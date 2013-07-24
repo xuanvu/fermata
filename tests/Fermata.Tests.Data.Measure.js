@@ -1121,24 +1121,7 @@ if (typeof require !== 'undefined') {
     });
 
     describe("#addSpacesAtEnd", function () {
-      it("basic test", function () {
-        // Given 
-        var noteTab = ["n", "n", "n", "n"];
-        var data = getTestDataFromTab(noteTab);
-        var measure = new Measure(data);
-        var voiceIdx = 0;
-        var divisionsToAdd = 2;
-
-        // When
-        measure.addSpacesAtEnd(divisionsToAdd, voiceIdx);
-
-        // Then
-        assert.equal(data.note.length, 5);
-        assert.equal(measure.getVoice(voiceIdx).length, 5);
-        assert.ok(isRest(data.note[4]));
-      });
-
-      it("nothingToAdd", function () {
+      it("add 0 divisions", function () {
         // Given 
         var noteTab = ["n", "n", "n", "n"];
         var data = getTestDataFromTab(noteTab);
@@ -1151,6 +1134,25 @@ if (typeof require !== 'undefined') {
 
         // Then
         assert.equal(data.note.length, 4);
+      });
+
+      it("add 1 division", function () {
+        // Given 
+        var noteTab = ["n", "n", "n", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        measure.multiplyDivisions(2);
+        var voiceIdx = 0;
+        var divisionsToAdd = 1;
+
+        // When
+        measure.addSpacesAtEnd(divisionsToAdd, voiceIdx);
+
+        // Then
+        assert.equal(data.note.length, 5);
+        assert.equal(measure.getVoice(voiceIdx).length, 5);
+        assert.ok(isRest(data.note[4]));
+        assert.equal(data.note[4].duration, 1);
       });
     });
 
