@@ -232,4 +232,8 @@
 
     return note;
   };
+  
+  var isRest = function (note) {
+    return SoundType.getSoundType(note) === SoundType.REST;
+  };
 }).call(this);
