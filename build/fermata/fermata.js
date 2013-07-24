@@ -27,8 +27,8 @@
 
  This library makes use of Simon Tatham's awesome font - Gonville.
 
- Build ID: debug-4@20ce8ec8c8e1a2254f7a230eee8c1acb57f7a683
- Build date: 2013-07-25 00:15:35.608490
+ Build ID: debug-4@451d288f69833eb26d41513b7581e003c511ad6f
+ Build date: 2013-07-25 00:17:34.168681
 
 */
 function Vex() {
@@ -2111,7 +2111,7 @@ Vex.Flow.StaveNote.prototype.draw = function() {
       flag_y = y_bottom - note_stem_height;
       flag_code = glyph.code_flag_upstem
     }
-    Vex.Flow.renderGlyph(ctx, flag_x, flag_y, this.render_options.glyph_font_scale, flag_code)
+    Vex.Flow.renderGlyph(ctx, flag_x, flag_y, this.render_options.glyph_font_scale, flag_code, false, this.st)
   }
   for(var i = 0;i < this.modifiers.length;++i) {
     var mod = this.modifiers[i];
@@ -6257,8 +6257,8 @@ Vex.Flow.Stroke.prototype.draw = function() {
 
  Fermata 0.0.3
 
- Build ID: debug-4@b38145f7645cc73af0a92d3800b78e24aba51542
- Build date: 2013-07-25 00:15:35.608515
+ Build ID: debug-4@32089b2c0ee54d868f4f718fac231dbb4df28ad3
+ Build date: 2013-07-25 00:17:34.168712
 
 */
 if(typeof require !== "undefined") {
