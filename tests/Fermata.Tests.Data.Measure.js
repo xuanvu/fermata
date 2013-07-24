@@ -972,7 +972,7 @@ if (typeof require !== 'undefined') {
         assert.equal(voice[2].duration, 4);
       });
 
-      it("power of two - need 2", function () {
+      it("power of two - need 3", function () {
         // Given 
         var noteTab = ["r", "r", "r", "r", "r"];
         var data = getTestDataFromTab(noteTab);
@@ -983,7 +983,7 @@ if (typeof require !== 'undefined') {
         var measure = new Measure(data);
         measure.multiplyDivisions(2);
         var voiceIdx = 0;
-        var divisionsNeeded = 2;
+        var divisionsNeeded = 3;
         var voice = measure.getVoice(voiceIdx);
         var notesToBeRemoved = [
           data.note[1]
