@@ -22,13 +22,54 @@ if (typeof require !== 'undefined') {
   var BeatsValueError = Fermata.Error.BeatsValueError;
 
 
-  var getTestData = function (nbNote, nbRest) {
+  var getTestData = function (nbNote, nbRest, nbVoices) {
+    if (typeof nbVoices === "undefined") {
+      nbVoices = 1;
+    }
+    var measure = createBaseMeasure(nbNote + nbRest);
+
+    for (var voiceIdx = 0; voiceIdx < nbVoices; voiceIdx++) {
+      var i = 0;
+      for (i = 0; i < nbNote; i++) {
+        var note = createPitchNote(voiceIdx);
+        measure.note.push(note);
+      }
+      for (i = 0; i < nbRest; i++) {
+        var rest = createRestNote(voiceIdx);
+        measure.note.push(rest);
+      }
+    }
+
+    return measure;
+  };
+
+  var getTestDataFromTab = function (typeTab, nbVoices) {
+    if (typeof nbVoices === "undefined") {
+      nbVoices = 1;
+    }
+    var measure = createBaseMeasure(typeTab.length);
+    for (var voiceIdx = 0; voiceIdx < nbVoices; voiceIdx++) {
+      for (var i = 0; i < typeTab.length; i++) {
+        var type = typeTab[i];
+        var note;
+        if (type === "r") {
+          note = createRestNote(voiceIdx);
+        } else {
+          note = createPitchNote(voiceIdx);
+        }
+        measure.note.push(note);
+      }
+    }
+    return measure;
+  };
+
+  var createBaseMeasure = function (beats) {
     var measure = {
       attributes: [
         {
           divisions: "1",
           time: {
-            beats: (nbNote + nbRest).toString(),
+            beats: beats.toString(),
             "beat-type": "4"
           }
         }
@@ -38,7 +79,7 @@ if (typeof require !== 'undefined') {
         attributes: {
           divisions: 1,
           time: {
-            beats: nbNote + nbRest,
+            beats: beats,
             "beat-type": 4
           },
           clef: [],
@@ -51,34 +92,36 @@ if (typeof require !== 'undefined') {
         }
       }
     };
-    
-    var i = 0;
-    for (i = 0; i < nbNote; i++) {
-      var note = createPitchNote();
-      measure.note.push(note);
-    }
-    for (i = 0; i < nbRest; i++) {
-      var rest = createRestNote();
-      measure.note.push(rest);
-    }
 
     return measure;
   };
 
-  var createPitchNote = function () {
+  var createPitchNote = function (voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = (voiceIdx + 1).toString();
     return {
       duration: 1,
       pitch: {
         sign: "C",
         line: 4
-      }
+      },
+      voice: voice
     };
   };
 
-  var createRestNote = function () {
+  var createRestNote = function (voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = (voiceIdx + 1).toString();
     return {
       duration: 1,
-      rest: {}
+      rest: {},
+      voice: voice
     };
   };
 
@@ -500,14 +543,539 @@ if (typeof require !== 'undefined') {
         assert.deepEqual(measure.data.attributes[0], expectedAttributes);
       });
     });
+
+    describe("#makeAddNote", function () {
+      it("basic case", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 2;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx);
+        // Then
+        assert.equal(measure.data.note.length, 5);
+        assert.equal(measure.voices[0].length, 5);
+        assert.equal(measure.voices[0][insertionIdx], newNote);
+        assert.equal(measure.data.note[insertionIdx], newNote);
+      });
+
+      it("defaut voice", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 2;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx);
+        // Then
+        assert.equal(measure.data.note.length, 9);
+        assert.equal(measure.voices[0].length, 5);
+        assert.equal(measure.voices[0][insertionIdx], newNote);
+        assert.equal(measure.data.note[insertionIdx], newNote);
+      });
+
+      it("on empty voice", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 0;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx, 2);
+        // Then
+        assert.equal(measure.data.note.length, 9);
+        assert.equal(measure.voices[2].length, 1);
+        assert.equal(measure.voices[2][insertionIdx], newNote);
+        assert.equal(measure.data.note[0], newNote);
+      });
+
+      it("at begining - voice 1", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 0;
+        var voiceIdx = 0;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx, voiceIdx);
+        // Then
+        assert.equal(measure.data.note.length, 9);
+        assert.equal(measure.voices[voiceIdx].length, 5);
+        assert.equal(measure.voices[voiceIdx][insertionIdx], newNote);
+        assert.equal(measure.data.note[0], newNote);
+      });
+
+      it("at end - voice 1", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 4;
+        var voiceIdx = 0;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx, voiceIdx);
+        // Then
+        assert.equal(measure.data.note.length, 9);
+        assert.equal(measure.voices[voiceIdx].length, 5);
+        assert.equal(measure.voices[voiceIdx][insertionIdx], newNote);
+        assert.equal(measure.data.note[4], newNote);
+      });
+
+      it("at begining - voice 2", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 0;
+        var voiceIdx = 1;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx, voiceIdx);
+        // Then
+        assert.equal(measure.data.note.length, 9);
+        assert.equal(measure.voices[voiceIdx].length, 5);
+        assert.equal(measure.voices[voiceIdx][insertionIdx], newNote);
+        assert.equal(measure.data.note[4], newNote);
+      });
+
+      it("at end - voice 2", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var newNote = {};
+        var insertionIdx = 4;
+        var voiceIdx = 1;
+
+        // When
+        measure.makeAddNote(newNote, insertionIdx, voiceIdx);
+        // Then
+        assert.equal(measure.data.note.length, 9);
+        assert.equal(measure.voices[voiceIdx].length, 5);
+        assert.equal(measure.voices[voiceIdx][insertionIdx], newNote);
+        assert.equal(measure.data.note[8], newNote);
+      });
+    });
+
+    describe("#makeRemoveNote", function () {
+      it("basic case", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var suppressionIdx = 2;
+        var noteToDelete = measure.getVoice(voiceIdx)[suppressionIdx];
+
+        // When
+        measure.makeRemoveNote(suppressionIdx);
+
+        // Then
+        assert.equal(measure.data.note.length, 3);
+        assert.equal(measure.voices[voiceIdx].length, 3);
+        assert.equal(measure.voices[voiceIdx].indexOf(noteToDelete), -1);
+        assert.equal(measure.data.note.indexOf(noteToDelete), -1);
+      });
+
+      it("voice 2", function () {
+        // Given 
+        var nbNote = 2;
+        var nbRest = 2;
+        var data = getTestData(nbNote, nbRest, 2);
+        var measure = new Measure(data);
+        var voiceIdx = 1;
+        var suppressionIdx = 2;
+        var noteToDelete = measure.getVoice(voiceIdx)[suppressionIdx];
+
+        // When
+        measure.makeRemoveNote(suppressionIdx, 1);
+
+        // Then
+        assert.equal(measure.data.note.length, 7);
+        assert.equal(measure.voices[voiceIdx].length, 3);
+        assert.equal(measure.voices[voiceIdx].indexOf(noteToDelete), -1);
+        assert.equal(measure.data.note.indexOf(noteToDelete), -1);
+      });
+    });
+
+    describe("#calcAvailableSpaceAtIdx", function () {
+      it("enough space", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+        var divisionsNeeded = 2;
+        var expectedResult = divisionsNeeded;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+
+      it("not enough space (reach end) - miss 1", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 2;
+        var divisionsNeeded = 3;
+        var expectedResult = 2;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+
+      it("not enough space (reach end) - miss 2", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 3;
+        var divisionsNeeded = 3;
+        var expectedResult = 1;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+
+      it("not enough space (reach note) - miss 1", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 1;
+        var divisionsNeeded = 3;
+        var expectedResult = 2;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+
+      it("not enough space (reach note) - miss 1", function () {
+        // Given 
+        var noteTab = ["r", "r", "n", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 1;
+        var divisionsNeeded = 3;
+        var expectedResult = 1;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+    });
+
+    describe("#calcAvailableSpaceFromEnd", function () {
+      it("enough space", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var divisionsNeeded = 2;
+        var expectedResult = divisionsNeeded;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceFromEnd(divisionsNeeded, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+
+      it("not enough space (reach begining)", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var divisionsNeeded = 5;
+        var expectedResult = 4;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceFromEnd(divisionsNeeded, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+
+      it("not enough space (reach note)", function () {
+        // Given 
+        var noteTab = ["r", "r", "w", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var divisionsNeeded = 4;
+        var expectedResult = 1;
+
+        // When
+        var availableSpace = measure.calcAvailableSpaceFromEnd(divisionsNeeded, voiceIdx);
+
+        // Then
+        assert.equal(availableSpace, expectedResult);
+      });
+    });
+
+    describe("#removeSpacesAtIdx", function () {
+      it("enough space", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+        var divisionsNeeded = 2;
+        var expectedResult = divisionsNeeded;
+
+        var notesToBeRemoved = [
+          data.note[0],
+          data.note[1]
+        ];
+
+        // When
+        var consumedSpace = measure.removeSpacesAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(consumedSpace, expectedResult);
+        checkNotesToBeRemoved(measure, voiceIdx, notesToBeRemoved);
+      });
+
+      it("not enough space (reach note)", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 1;
+        var divisionsNeeded = 3;
+        var expectedResult = 2;
+
+        var notesToBeRemoved = [
+          data.note[1],
+          data.note[2]
+        ];
+
+        // When
+        var consumedSpace = measure.removeSpacesAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(consumedSpace, expectedResult);
+        checkNotesToBeRemoved(measure, voiceIdx, notesToBeRemoved);
+      });
+    });
+
+    describe("#removeSpacesFromEnd", function () {
+      it("enough space", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var divisionsNeeded = 2;
+
+        var notesToBeRemoved = [
+          data.note[2],
+          data.note[3]
+        ];
+
+        // When
+        measure.removeSpacesFromEnd(divisionsNeeded, voiceIdx);
+
+        // Then
+        assert.equal(data.note.length, 2);
+        assert.equal(measure.getVoice(voiceIdx).length, 2);
+        checkNotesToBeRemoved(measure, voiceIdx, notesToBeRemoved);
+      });
+    });
+
+    describe("#addSpacesAtEnd", function () {
+      it("basic test", function () {
+        // Given 
+        var noteTab = ["n", "n", "n", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var divisionsToAdd = 2;
+
+        // When
+        measure.addSpacesAtEnd(divisionsToAdd, voiceIdx);
+
+        // Then
+        assert.equal(data.note.length, 5);
+        assert.equal(measure.getVoice(voiceIdx).length, 5);
+        assert.ok(isRest(data.note[4]));
+      });
+
+      it("nothingToAdd", function () {
+        // Given 
+        var noteTab = ["n", "n", "n", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var divisionsToAdd = 0;
+
+        // When
+        measure.addSpacesAtEnd(divisionsToAdd, voiceIdx);
+
+        // Then
+        assert.equal(data.note.length, 4);
+      });
+    });
+
+    describe("#isContinousSpacesToEnd", function () {
+      it("from start - true", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+
+        // When
+        var continousSpaces = measure.isContinousSpacesToEnd(noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(continousSpaces, true);
+      });
+
+      it("from start - false at start", function () {
+        // Given 
+        var noteTab = ["n", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+
+        // When
+        var continousSpaces = measure.isContinousSpacesToEnd(noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(continousSpaces, false);
+      });
+
+      it("from start - false at middle", function () {
+        // Given 
+        var noteTab = ["r", "r", "n", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+
+        // When
+        var continousSpaces = measure.isContinousSpacesToEnd(noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(continousSpaces, false);
+      });
+
+      it("from start - false at end", function () {
+        // Given 
+        var noteTab = ["r", "r", "n", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+
+        // When
+        var continousSpaces = measure.isContinousSpacesToEnd(noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(continousSpaces, false);
+      });
+
+      it("from middle - true", function () {
+        // Given 
+        var noteTab = ["n", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 1;
+
+        // When
+        var continousSpaces = measure.isContinousSpacesToEnd(noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(continousSpaces, true);
+      });
+
+      it("from middle - false at middle", function () {
+        // Given 
+        var noteTab = ["n", "n", "r", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var noteIdx = 2;
+
+        // When
+        var continousSpaces = measure.isContinousSpacesToEnd(noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(continousSpaces, false);
+      });
+    });
   });
-  
+
+  var checkNotesToBeRemoved = function (measure, voiceIdx, notesToBeRemoved) {
+    var voice = measure.getVoice(voiceIdx);
+    var notes = measure.data.note;
+    for (var i = 0; i < notesToBeRemoved.length; i++) {
+      var note = notesToBeRemoved[i];
+
+      assert.equal(notes.indexOf(note), -1);
+      assert.equal(voice.indexOf(note), -1);
+    }
+  };
+
   var changeIntToStringInDurations = function (measure) {
     var notes = measure.note;
-    for (var i = 0 ; i < notes.length ; i++) {
+    for (var i = 0; i < notes.length; i++) {
       var note = notes[i];
 
       note.duration = note.duration.toString();
     }
   };
+
+  var isRest = function (note) {
+    return typeof note.rest !== "undefined";
+  };
+
 }).call(this);

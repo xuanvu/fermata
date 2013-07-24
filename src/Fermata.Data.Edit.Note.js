@@ -74,12 +74,13 @@
       var part = this.getPart(idxS, Fermata.Data.cacheParts.IDX);
       if (part !== undefined) {
         if (idxM >= 0 && idxM < part.measure.length) {
-          var measure = part.measure[idxM];
-          var divisions = measure.$fermata.attributes.divisions;
+          var measureData = part.measure[idxM];
+          var measure = new Measure(measureData);
+          var divisions = measure.getDivisions();
           var quarterDuration = typeToQuarterDuration(type);
           var divisionsDuration = quarterDuration * divisions;
 
-          if (isEnoughSpace(measure.note, divisionsDuration, idxN)) {
+          if (isEnoughSpace(measure, divisionsDuration, idxN)) {
             makeAddNote(measure, divisionsDuration, idxN, pitch, voice, type);
           }
         }
@@ -87,66 +88,22 @@
     }
   };
 
-  var isEnoughSpace = function (notes, divisionsNeeded, idx) {
-    divisionsNeeded -= calcAvailableSpaceAtIdx(notes, divisionsNeeded, idx);
-    if (divisionsNeeded > 0 && !isContinousSpace(notes, idx)) {
-      divisionsNeeded -= calcAvailableSpaceFromEnd(notes, divisionsNeeded);
+  var isEnoughSpace = function (measure, divisionsNeeded, idx) {
+    divisionsNeeded -= measure.calcAvailableSpaceAtIdx(divisionsNeeded, idx);
+    if (divisionsNeeded > 0 &&
+            !measure.isContinousSpacesToEnd(idx)) {
+      divisionsNeeded -= measure.calcAvailableSpaceFromEnd(divisionsNeeded);
     }
     return divisionsNeeded === 0;
   };
 
-  var isContinousSpace = function (notes, idx) {
-    for (var i = idx; i < notes.length; i++) {
-      var note = notes[i];
-      if (!isRest(note)) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  var calcAvailableSpaceAtIdx = function (notes, divisionsNeeded, idx) {
-    var spaceAvailable = divisionsNeeded;
-    var i = idx;
-    while (i < notes.length && divisionsNeeded > 0) {
-      var note = notes[i];
-      if (!isRest(note)) {
-        return spaceAvailable - divisionsNeeded;
-      }
-      if (note.duration > divisionsNeeded) {
-        divisionsNeeded = 0;
-      } else {
-        divisionsNeeded -= note.duration;
-        i++;
-      }
-    }
-    return spaceAvailable - divisionsNeeded;
-  };
-
-  var calcAvailableSpaceFromEnd = function (notes, divisionsNeeded) {
-    var spaceAvailable = divisionsNeeded;
-    var i = notes.length - 1;
-    while (i >= 0 && divisionsNeeded > 0) {
-      var note = notes[i];
-      if (!isRest(note)) {
-        return spaceAvailable - divisionsNeeded;
-      } else if (note.duration > divisionsNeeded) {
-        divisionsNeeded = 0;
-      } else {
-        divisionsNeeded -= note.duration;
-        i--;
-      }
-    }
-    return spaceAvailable - divisionsNeeded;
-  };
-
-  var isRest = function (note) {
-    return SoundType.getSoundType(note) === SoundType.REST;
-  };
-
   var makeAddNote = function (measure, divisionsDuration, idxN, line, voice, type) {
-    removeSpaces(measure.note, divisionsDuration, idxN);
-    var clef = measure.$fermata.attributes.clef[0];
+    if (divisionsDuration < 1) {
+      measure.multiplyDivisions(1 / divisionsDuration);
+      divisionsDuration = 1;
+    }
+    removeSpaces(measure, divisionsDuration, idxN);
+    var clef = measure.data.$fermata.attributes.clef[0];
     var note = {
       'duration': divisionsDuration,
       'pitch': Utils.lineToPitch(line, clef),
@@ -154,55 +111,17 @@
       'type': getValue(type),
       'voice': voice
     };
-    if (idxN < 0 || idxN > measure.note.length) {
-      idxN = measure.note.length;
+    if (idxN < 0 || idxN > measure.data.note.length) {
+      idxN = measure.data.note.length;
     }
-    measure.note.splice(idxN, 0, note);
-    if (divisionsDuration < 1) {
-      adaptMeasureDivisions(measure, divisionsDuration);
-    }
+    measure.data.note.splice(idxN, 0, note);
   };
 
-  var removeSpaces = function (notes, divisionsNeeded, idx) {
-    divisionsNeeded -= removeSpacesAtIdx(notes, divisionsNeeded, idx);
+  var removeSpaces = function (measure, divisionsNeeded, idx) {
+    divisionsNeeded -= measure.removeSpacesAtIdx(divisionsNeeded, idx);
     if (divisionsNeeded > 0) {
-      removeSpacesFromEnd(notes, divisionsNeeded);
+      measure.removeSpacesFromEnd(divisionsNeeded);
     }
-  };
-
-  var removeSpacesAtIdx = function (notes, divisionsNeeded, idx) {
-    var spaceConsumed = divisionsNeeded;
-    while (divisionsNeeded > 0) {
-      var note = notes[idx];
-      if (!isRest(note)) {
-        return spaceConsumed - divisionsNeeded;
-      } else if (note.duration > divisionsNeeded) {
-        note.duration -= divisionsNeeded;
-        divisionsNeeded = 0;
-      } else {
-        divisionsNeeded -= note.duration;
-        notes.splice(idx, 1);
-      }
-    }
-    return spaceConsumed - divisionsNeeded;
-  };
-
-  var removeSpacesFromEnd = function (notes, divisionsNeeded) {
-    while (divisionsNeeded > 0) {
-      var note = notes[notes.length - 1];
-      if (note.duration > divisionsNeeded) {
-        note.duration -= divisionsNeeded;
-        divisionsNeeded = 0;
-      } else {
-        divisionsNeeded -= note.duration;
-        notes.splice(-1, 1);
-      }
-    }
-  };
-
-  var adaptMeasureDivisions = function (measureData, divisionsDuration) {
-    var measure = new Measure(measureData);
-    measure.multiplyDivisions(1 / divisionsDuration);
   };
 
   Fermata.Data.prototype.removeNote = function (idxS, idxM, idxN) {
@@ -257,6 +176,47 @@
     }
   };
 
+  Fermata.Data.prototype.changeNoteDuration = function (staveIdx, measureIdx, noteIdx, voice, type) {
+    var voiceIdx = voice - 1;
+    var part = this.getPart(staveIdx, Fermata.Data.cacheParts.IDX);
+    var measureData = part.measure[measureIdx];
+    var measure = new Measure(measureData);
+    var note = measure.getVoice(voiceIdx)[noteIdx];
+    if (isRest(note)) {
+      // TODO: throw an exception
+      return;
+    }
+
+    var divisions = measure.getDivisions();
+    var quarterDuration = typeToQuarterDuration(type);
+    var divisionsDuration = quarterDuration * divisions;
+    var oldDuration = note.duration;
+    var durationShift = divisionsDuration - oldDuration;
+    if (durationShift > 0) {
+      if (!isEnoughSpaceToIncreaseDuraiton(measure, durationShift, voiceIdx)) {
+        // TODO: Throw an exception
+        return ;
+      }
+      note.duration = divisionsDuration;
+      measure.removeSpacesFromEnd(durationShift, voiceIdx);
+    } else {
+      durationShift = -durationShift;
+      if (divisionsDuration < 1) {
+        var coeff = 1 / divisionsDuration;
+        measure.multiplyDivisions(coeff);
+        divisionsDuration = 1;
+        durationShift *= coeff;
+      }
+      note.duration = divisionsDuration;
+      measure.addSpacesAtEnd(durationShift, voiceIdx);
+    }
+  };
+  
+  var isEnoughSpaceToIncreaseDuraiton = function (measure, divisionsNeeded, voiceIdx) {
+    var availableSpaces = measure.calcAvailableSpaceFromEnd(divisionsNeeded, voiceIdx);
+    return availableSpaces === divisionsNeeded;
+  };
+
   Fermata.Data.prototype.changeNotePitch = function (staveIdx, measureIdx, noteIdx, value) {
     var note = this.fetchNote(staveIdx, measureIdx, noteIdx);
     var pitch = PitchEncapsulator.encapsulate(note, null);
@@ -275,5 +235,9 @@
     var note = measure.note[noteIdx];
 
     return note;
+  };
+  
+  var isRest = function (note) {
+    return SoundType.getSoundType(note) === SoundType.REST;
   };
 }).call(this);

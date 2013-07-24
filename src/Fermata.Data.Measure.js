@@ -144,7 +144,8 @@
       var actualDuration = this.getActualDuration(i);
 
       if (authorizedDuration > actualDuration) {
-        this.fillMissingDivisionsWithRest(authorizedDuration - actualDuration, i);
+        this.fillMissingDivisionsWithRest(authorizedDuration -
+                actualDuration, i);
       } else if (authorizedDuration < actualDuration) {
         this.removeExcedentDivisionsInRest(actualDuration -
                 authorizedDuration, i);
@@ -169,15 +170,11 @@
     }
   };
 
-  var isRest = function (note) {
-    return SoundType.getSoundType(note) === SoundType.REST;
-  };
-
   Measure.prototype.fillMissingDivisionsWithRest = function (divisionsToAdd, voiceIdx) {
     var voice = this.getVoice(voiceIdx);
     var beatTypeDivisions = this.getBeatTypeDivisions();
     while (divisionsToAdd > 0) {
-      var note = createRest();
+      var note = createRest(1, voiceIdx);
       if (divisionsToAdd < beatTypeDivisions) {
         note.duration = divisionsToAdd;
       } else {
@@ -192,13 +189,6 @@
       }
       this.data.note.splice(noteIdx, 0, note);
     }
-  };
-
-  var createRest = function () {
-    return {
-      duration: 1,
-      rest: {}
-    };
   };
 
   Measure.prototype.getAuthorizedDuration = function () {
@@ -367,6 +357,175 @@
         }
       }
     }
+  };
+
+  Measure.prototype.calcAvailableSpaceAtIdx = function (divisionsNeeded, idx, voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = this.getVoice(voiceIdx);
+    var availableSpace = divisionsNeeded;
+    var i = idx;
+    while (i < voice.length && divisionsNeeded > 0) {
+      var note = voice[i];
+      if (!isRest(note)) {
+        return availableSpace - divisionsNeeded;
+      }
+      if (note.duration > divisionsNeeded) {
+        divisionsNeeded = 0;
+      } else {
+        divisionsNeeded -= note.duration;
+        i++;
+      }
+    }
+    return availableSpace - divisionsNeeded;
+  };
+
+  Measure.prototype.calcAvailableSpaceFromEnd = function (divisionsNeeded, voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = this.getVoice(voiceIdx);
+    var availableSpace = divisionsNeeded;
+    var i = voice.length - 1;
+    while (i >= 0 && divisionsNeeded > 0) {
+      var note = voice[i];
+      if (!isRest(note)) {
+        return availableSpace - divisionsNeeded;
+      } else if (note.duration > divisionsNeeded) {
+        divisionsNeeded = 0;
+      } else {
+        divisionsNeeded -= note.duration;
+        i--;
+      }
+    }
+    return availableSpace - divisionsNeeded;
+  };
+
+  Measure.prototype.removeSpacesAtIdx = function (divisionsNeeded, idx, voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = this.getVoice(voiceIdx);
+    var spaceConsumed = divisionsNeeded;
+    while (divisionsNeeded > 0) {
+      var note = voice[idx];
+      if (!isRest(note)) {
+        return spaceConsumed - divisionsNeeded;
+      } else if (note.duration > divisionsNeeded) {
+        note.duration -= divisionsNeeded;
+        divisionsNeeded = 0;
+      } else {
+        divisionsNeeded -= note.duration;
+        this.makeRemoveNote(idx, voiceIdx);
+      }
+    }
+    return spaceConsumed - divisionsNeeded;
+  };
+
+  Measure.prototype.removeSpacesFromEnd = function (divisionsNeeded, voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = this.getVoice(voiceIdx);
+    while (divisionsNeeded > 0) {
+      var note = voice[voice.length - 1];
+      if (note.duration > divisionsNeeded) {
+        note.duration -= divisionsNeeded;
+        divisionsNeeded = 0;
+      } else {
+        divisionsNeeded -= note.duration;
+        this.makeRemoveNote(voice.length - 1, voiceIdx);
+      }
+    }
+  };
+
+  var isRest = function (note) {
+    return SoundType.getSoundType(note) === SoundType.REST;
+  };
+
+  Measure.prototype.makeAddNote = function (note, noteIdx, voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = this.getVoice(voiceIdx);
+    voice.splice(noteIdx, 0, note);
+    var insertionIdx = this.calcInsertionIdx(noteIdx, voice);
+    this.data.note.splice(insertionIdx, 0, note);
+  };
+
+  Measure.prototype.calcInsertionIdx = function (noteIdx, voice) {
+    var insertionIdx = 0;
+    if (voice.length > 1) {
+      if (noteIdx === voice.length - 1) {
+        var previousNote = voice[voice.length - 2];
+        var previousNoteIdx = this.getIdxInNotes(previousNote);
+        insertionIdx = previousNoteIdx + 1;
+      } else {
+        var nextNote = voice[noteIdx + 1];
+        insertionIdx = this.getIdxInNotes(nextNote);
+      }
+    }
+
+    return insertionIdx;
+  };
+
+  Measure.prototype.makeRemoveNote = function (noteIdx, voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = this.getVoice(voiceIdx);
+    var note = voice[noteIdx];
+    voice.splice(noteIdx, 1);
+    var idxInNotes = this.getIdxInNotes(note);
+    this.data.note.splice(idxInNotes, 1);
+  };
+
+  Measure.prototype.getIdxInNotes = function (note) {
+    return this.data.note.indexOf(note);
+  };
+
+  Measure.prototype.addSpacesAtEnd = function (durationToAdd, voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = this.getVoice(voiceIdx);
+    if (durationToAdd > 0) {
+      var rest = createRest(durationToAdd, voiceIdx);
+      this.makeAddNote(rest, voice.length, voiceIdx);
+    }
+  };
+
+  Measure.prototype.isContinousSpacesToEnd = function (noteIdx, voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
+    }
+
+    var voice = this.getVoice(voiceIdx);
+    for (var i = noteIdx; i < voice.length; i++) {
+      var note = voice[i];
+      if (!isRest(note)) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  var createRest = function (duration, voiceIdx) {
+    var rest = {
+      rest: {},
+      duration: duration,
+      voice: (voiceIdx + 1).toString()
+    };
+
+    return rest;
   };
 
 }).call(this);
