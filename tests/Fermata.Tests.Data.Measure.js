@@ -1154,6 +1154,109 @@ if (typeof require !== 'undefined') {
         assert.ok(isRest(data.note[4]));
         assert.equal(data.note[4].duration, 1);
       });
+
+      it("add 2 divisions", function () {
+        // Given 
+        var noteTab = ["n", "n", "n", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        measure.multiplyDivisions(2);
+        var voiceIdx = 0;
+        var divisionsToAdd = 2;
+
+        // When
+        measure.addSpacesAtEnd(divisionsToAdd, voiceIdx);
+
+        // Then
+        assert.equal(data.note.length, 5);
+        assert.equal(measure.getVoice(voiceIdx).length, 5);
+        assert.ok(isRest(data.note[4]));
+        assert.equal(data.note[4].duration, 2);
+      });
+
+      it("add 3 divisions", function () {
+        // Given 
+        var noteTab = ["n", "n", "n", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        measure.multiplyDivisions(2);
+        var voiceIdx = 0;
+        var divisionsToAdd = 3;
+
+        // When
+        measure.addSpacesAtEnd(divisionsToAdd, voiceIdx);
+
+        // Then
+        assert.equal(data.note.length, 6);
+        assert.equal(measure.getVoice(voiceIdx).length, 6);
+        assert.ok(isRest(data.note[4]));
+        assert.equal(data.note[4].duration, 1);
+        assert.ok(isRest(data.note[5]));
+        assert.equal(data.note[5].duration, 2);
+      });
+
+      it("add 4 divisions", function () {
+        // Given 
+        var noteTab = ["n", "n", "n", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        measure.multiplyDivisions(2);
+        var voiceIdx = 0;
+        var divisionsToAdd = 4;
+
+        // When
+        measure.addSpacesAtEnd(divisionsToAdd, voiceIdx);
+
+        // Then
+        assert.equal(data.note.length, 5);
+        assert.equal(measure.getVoice(voiceIdx).length, 5);
+        assert.ok(isRest(data.note[4]));
+        assert.equal(data.note[4].duration, 4);
+      });
+
+      it("add 5 divisions", function () {
+        // Given 
+        var noteTab = ["n", "n", "n", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        measure.multiplyDivisions(2);
+        var voiceIdx = 0;
+        var divisionsToAdd = 5;
+
+        // When
+        measure.addSpacesAtEnd(divisionsToAdd, voiceIdx);
+
+        // Then
+        assert.equal(data.note.length, 6);
+        assert.equal(measure.getVoice(voiceIdx).length, 6);
+        assert.ok(isRest(data.note[4]));
+        assert.equal(data.note[4].duration, 1);
+        assert.ok(isRest(data.note[5]));
+        assert.equal(data.note[5].duration, 4);
+      });
+
+      it("add 7 divisions", function () {
+        // Given 
+        var noteTab = ["n", "n", "n", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        measure.multiplyDivisions(2);
+        var voiceIdx = 0;
+        var divisionsToAdd = 7;
+
+        // When
+        measure.addSpacesAtEnd(divisionsToAdd, voiceIdx);
+
+        // Then
+        assert.equal(data.note.length, 7);
+        assert.equal(measure.getVoice(voiceIdx).length, 7);
+        assert.ok(isRest(data.note[4]));
+        assert.equal(data.note[4].duration, 1);
+        assert.ok(isRest(data.note[5]));
+        assert.equal(data.note[5].duration, 2);
+        assert.ok(isRest(data.note[6]));
+        assert.equal(data.note[6].duration, 4);
+      });
     });
 
     describe("#isContinousSpacesToEnd", function () {
