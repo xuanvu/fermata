@@ -416,7 +416,9 @@
       if (!isRest(note)) {
         return spaceConsumed - divisionsNeeded;
       } else if (note.duration > divisionsNeeded) {
-        note.duration -= divisionsNeeded;
+        var durationToAdd = note.duration - divisionsNeeded;
+        this.makeRemoveNote(idx, voiceIdx);
+        this.addSpacesAtIdx(durationToAdd, idx, voiceIdx);
         divisionsNeeded = 0;
       } else {
         divisionsNeeded -= note.duration;
@@ -435,7 +437,9 @@
     while (divisionsNeeded > 0) {
       var note = voice[voice.length - 1];
       if (note.duration > divisionsNeeded) {
-        note.duration -= divisionsNeeded;
+        var durationToAdd = note.duration - divisionsNeeded;
+        this.makeRemoveNote(voice.length - 1, voiceIdx);
+        this.addSpacesAtEnd(durationToAdd, voiceIdx);
         divisionsNeeded = 0;
       } else {
         divisionsNeeded -= note.duration;
@@ -497,10 +501,28 @@
     }
 
     var voice = this.getVoice(voiceIdx);
-    if (durationToAdd > 0) {
-      var rest = createRest(durationToAdd, voiceIdx);
-      this.makeAddNote(rest, voice.length, voiceIdx);
+    this.addSpacesAtIdx(durationToAdd, voice.length, voiceIdx);
+  };
+
+  Measure.prototype.addSpacesAtIdx = function (durationToAdd, idx, voiceIdx) {
+    if (typeof voiceIdx === "undefined") {
+      voiceIdx = 0;
     }
+
+    while (durationToAdd > 0) {
+      var restDuration = calcGreatestPowerOfTwo(durationToAdd);
+      var note = createRest(restDuration, voiceIdx);
+      this.makeAddNote(note, idx, voiceIdx);
+      durationToAdd -= restDuration;
+    }
+  };
+
+  var calcGreatestPowerOfTwo = function (number) {
+    var powerOfTwo = 1;
+    while (powerOfTwo * 2 <= number) {
+      powerOfTwo *= 2;
+    }
+    return powerOfTwo;
   };
 
   Measure.prototype.isContinousSpacesToEnd = function (noteIdx, voiceIdx) {
