@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.3
+* Features:
+  * change duration
+  * rest creation improved
+
 ## 0.0.2
 
 * Features:
