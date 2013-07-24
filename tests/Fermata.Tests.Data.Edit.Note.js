@@ -279,7 +279,7 @@ describe('Fermata.Data.Edit.Note', function () {
       var notes = measure.note;
 
       // When
-      fermataData.changeNoteDuration(3);
+      fermataData.changeNoteDuration(0, 0, 0, 1, 3);
 
       _render.renderAll();
       assert.equal(measure.$fermata.attributes.divisions, 2);
@@ -296,7 +296,7 @@ describe('Fermata.Data.Edit.Note', function () {
       var notes = measure.note;
 
       // When
-      fermataData.changeNoteDuration(1);
+      fermataData.changeNoteDuration(0, 0, 0, 1, 1);
 
       _render.renderAll();
       assert.equal(measure.$fermata.attributes.divisions, 1);
@@ -312,7 +312,7 @@ describe('Fermata.Data.Edit.Note', function () {
       var notes = measure.note;
 
       // When
-      fermataData.changeNoteDuration(2);
+      fermataData.changeNoteDuration(0, 0, 0, 1, 1);
 
       _render.renderAll();
       assert.equal(measure.$fermata.attributes.divisions, 1);
