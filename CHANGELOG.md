@@ -4,6 +4,8 @@
 * Features:
   * change duration
   * rest creation improved
+* Fixes
+  * rest pitch shift
 
 ## 0.0.2
 
