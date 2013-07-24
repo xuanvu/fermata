@@ -206,7 +206,7 @@
         var coeff = 1 / divisionsDuration;
         measure.multiplyDivisions(coeff);
         divisionsDuration = 1;
-        durationShift *- coeff;
+        durationShift *= coeff;
       }
       note.duration = divisionsDuration;
       measure.addSpacesAtEnd(durationShift, voiceIdx);
