@@ -193,8 +193,7 @@
     var oldDuration = note.duration;
     var durationShift = divisionsDuration - oldDuration;
     if (durationShift > 0) {
-      if (!isEnoughSpaceToIncreaseDuraiton(measure, divisionsDuration -
-              oldDuration)) {
+      if (!isEnoughSpaceToIncreaseDuraiton(measure, durationShift, voiceIdx)) {
         // Throw an exception
         return ;
       }
@@ -211,6 +210,11 @@
       note.duration = divisionsDuration;
       measure.addSpacesAtEnd(durationShift, voiceIdx);
     }
+  };
+  
+  var isEnoughSpaceToIncreaseDuraiton = function (measure, divisionsNeeded, voiceIdx) {
+    var availableSpaces = measure.calcAvailableSpaceFromEnd(divisionsNeeded, voiceIdx);
+    return availableSpaces === divisionsNeeded;
   };
 
   Fermata.Data.prototype.changeNotePitch = function (staveIdx, measureIdx, noteIdx, value) {
