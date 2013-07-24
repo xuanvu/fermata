@@ -194,7 +194,7 @@
     var durationShift = divisionsDuration - oldDuration;
     if (durationShift > 0) {
       if (!isEnoughSpaceToIncreaseDuraiton(measure, durationShift, voiceIdx)) {
-        // Throw an exception
+        // TODO: Throw an exception
         return ;
       }
       note.duration = divisionsDuration;
