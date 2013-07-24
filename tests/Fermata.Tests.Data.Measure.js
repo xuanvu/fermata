@@ -901,6 +901,30 @@ if (typeof require !== 'undefined') {
         assert.equal(consumedSpace, expectedResult);
         checkNotesToBeRemoved(measure, voiceIdx, notesToBeRemoved);
       });
+
+      it("power of two", function () {
+        // Given 
+        var noteTab = ["r", "r", "r", "r"];
+        var data = getTestDataFromTab(noteTab);
+        data.note = [{duration: "4", rest: {}}];
+        var measure = new Measure(data);
+        measure.multiplyDivisions(2);
+        var voiceIdx = 0;
+        var noteIdx = 0;
+        var divisionsNeeded = 1;
+        var expectedResult = 1;
+        var voice = measure.getVoice(voiceIdx);
+
+        // When
+        var consumedSpace = measure.removeSpacesAtIdx(divisionsNeeded, noteIdx, voiceIdx);
+
+        // Then
+        assert.equal(consumedSpace, expectedResult);
+        assert.equal(voice.length, 3);
+        assert.equal(voice[0].duration, 1);
+        assert.equal(voice[1].duration, 2);
+        assert.equal(voice[2].duration, 3);
+      });
     });
 
     describe("#removeSpacesFromEnd", function () {
