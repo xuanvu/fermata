@@ -923,7 +923,7 @@ if (typeof require !== 'undefined') {
         assert.equal(voice.length, 3);
         assert.equal(voice[0].duration, 1);
         assert.equal(voice[1].duration, 2);
-        assert.equal(voice[2].duration, 3);
+        assert.equal(voice[2].duration, 4);
       });
     });
 
