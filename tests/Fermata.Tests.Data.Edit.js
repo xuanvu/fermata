@@ -26,6 +26,36 @@ if (typeof require !== 'undefined') {
       });
     });
 
+    describe('score creation', function () {
+      it("basic test", function () {
+        // Given
+        var fermataData = new Fermata.Data();
+        var instrument = {'instrument-name': 'Piano'};
+        fermataData.setTitle("test score");
+
+        // When
+        fermataData.addPart(instrument);
+        fermataData.addMeasure(0, 10);
+        fermataData.setBeat(0, 4);
+        fermataData.setBeatType(0, 4);
+
+        var part = fermataData.getPart(0);
+        var measure = part.measure[0];
+        var attributes = measure.$fermata.attributes;
+
+        // Then
+        assert.equal(part.measure.length, 10);
+        assert.equal(attributes.divisions, 1);
+        assert.equal(attributes.time.beats, 4);
+        assert.equal(attributes.time["beat-type"], 4);
+        assert.equal(measure.note.length, 4);
+        assert.equal(measure.note[0].duration, 1);
+        assert.equal(measure.note[1].duration, 1);
+        assert.equal(measure.note[2].duration, 1);
+        assert.equal(measure.note[3].duration, 1);
+      });
+    });
+
     describe('addPart()', function () {
       var fermataData = new Fermata.Data();
       var instrument = {'instrument-name': 'Piano'};
