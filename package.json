@@ -1,6 +1,6 @@
 {
   "name": "flat-fermata",
-  "version": "0.0.2-1",
+  "version": "0.0.3",
   "author": "Flat EIP team <contact@flat.io>",
   "contributors": [ 
     { "name": "Vincent Giersch", "email": "mail@vincent.sh" },
