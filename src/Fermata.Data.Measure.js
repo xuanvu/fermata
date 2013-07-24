@@ -499,10 +499,7 @@
     }
 
     var voice = this.getVoice(voiceIdx);
-    if (durationToAdd > 0) {
-      var rest = createRest(durationToAdd, voiceIdx);
-      this.makeAddNote(rest, voice.length, voiceIdx);
-    }
+    this.addSpacesAtIdx(durationToAdd, voice.length, voiceIdx);
   };
 
   Measure.prototype.addSpacesAtIdx = function (durationToAdd, idx, voiceIdx) {
