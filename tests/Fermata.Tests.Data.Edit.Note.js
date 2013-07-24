@@ -269,6 +269,7 @@ describe('Fermata.Data.Edit.Note', function () {
       _render.renderAll();
 
       fermataData.addNote(0, 0, 0, 3, 2, 1);
+      fermataData.addNote(0, 0, 1, 3, 2, 1);
       done();
     });
 
