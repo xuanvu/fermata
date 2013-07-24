@@ -497,8 +497,10 @@
     }
 
     var voice = this.getVoice(voiceIdx);
-    var rest = createRest(durationToAdd, voiceIdx);
-    this.makeAddNote(rest, voice.length, voiceIdx);
+    if (durationToAdd > 0) {
+      var rest = createRest(durationToAdd, voiceIdx);
+      this.makeAddNote(rest, voice.length, voiceIdx);
+    }
   };
 
   Measure.prototype.isContinousSpacesToEnd = function (noteIdx, voiceIdx) {
@@ -507,7 +509,7 @@
     }
 
     var voice = this.getVoice(voiceIdx);
-    for (var i = noteIdx ; i < voice.length ; i++) {
+    for (var i = noteIdx; i < voice.length; i++) {
       var note = voice[i];
       if (!isRest(note)) {
         return false;
