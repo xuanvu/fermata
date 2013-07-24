@@ -944,6 +944,21 @@ if (typeof require !== 'undefined') {
         assert.equal(measure.getVoice(voiceIdx).length, 5);
         assert.ok(isRest(data.note[4]));
       });
+
+      it("nothingToAdd", function () {
+        // Given 
+        var noteTab = ["n", "n", "n", "n"];
+        var data = getTestDataFromTab(noteTab);
+        var measure = new Measure(data);
+        var voiceIdx = 0;
+        var divisionsToAdd = 0;
+
+        // When
+        measure.addSpacesAtEnd(divisionsToAdd, voiceIdx);
+
+        // Then
+        assert.equal(data.note.length, 4);
+      });
     });
 
     describe("#isContinousSpacesToEnd", function () {
