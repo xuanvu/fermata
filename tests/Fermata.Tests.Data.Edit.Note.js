@@ -321,5 +321,37 @@ describe('Fermata.Data.Edit.Note', function () {
       assert.equal(notes[0].duration, 1);
       assert.equal(notes[1].duration, 1);
     });
+
+    it('not enough space', function () {
+      // Given
+      var part = fermataData['score']['score-partwise']['part'][0];
+      var measure = part.measure[0];
+      var notes = measure.note;
+
+      // When
+      fermataData.changeNoteDuration(0, 0, 0, 1, 0);
+
+      _render.renderAll();
+      assert.equal(measure.$fermata.attributes.divisions, 1);
+      assert.equal(notes.length, 4);
+      assert.equal(notes[0].duration, 1);
+      assert.equal(notes[1].duration, 1);
+    });
+
+    it('on rest', function () {
+      // Given
+      var part = fermataData['score']['score-partwise']['part'][0];
+      var measure = part.measure[0];
+      var notes = measure.note;
+
+      // When
+      fermataData.changeNoteDuration(0, 0, 2, 1, 0);
+
+      _render.renderAll();
+      assert.equal(measure.$fermata.attributes.divisions, 1);
+      assert.equal(notes.length, 4);
+      assert.equal(notes[2].duration, 1);
+      assert.equal(notes[3].duration, 1);
+    });
   });
 });
