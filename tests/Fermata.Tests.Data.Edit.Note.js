@@ -259,4 +259,66 @@ describe('Fermata.Data.Edit.Note', function () {
       assert.ok(typeof(fermataData['score']['score-partwise']['part'][0].measure[3].note[6].rest) !== 'undefined');
     });
   });
+
+  describe('#changeNoteDuration', function() {
+    var fermataData, _render;
+
+    beforeEach(function (done) {
+      fermataData = new Fermata.Data(score);
+      _render = new Fermata.Render(fermataData);
+      _render.renderAll();
+
+      fermataData.addNote(0, 0, 0, 3, 2, 1);
+      done();
+    });
+
+    it('reduce duration with divisions change', function () {
+      // Given
+      var part = fermataData['score']['score-partwise']['part'][0];
+      var measure = part.measure[0];
+      var notes = measure.note;
+
+      // When
+      fermataData.changeNoteDuration(3);
+
+      _render.renderAll();
+      assert.equal(measure.$fermata.attributes.divisions, 2);
+      assert.equal(notes.length, 5);
+      assert.equal(notes[0].duration, 1);
+      assert.equal(notes[1].duration, 2);
+      assert.equal(notes[4].duration, 1);
+    });
+
+    it('increase duration', function () {
+      // Given
+      var part = fermataData['score']['score-partwise']['part'][0];
+      var measure = part.measure[0];
+      var notes = measure.note;
+
+      // When
+      fermataData.changeNoteDuration(1);
+
+      _render.renderAll();
+      assert.equal(measure.$fermata.attributes.divisions, 1);
+      assert.equal(notes.length, 3);
+      assert.equal(notes[0].duration, 2);
+      assert.equal(notes[1].duration, 1);
+    });
+
+    it('no changes', function () {
+      // Given
+      var part = fermataData['score']['score-partwise']['part'][0];
+      var measure = part.measure[0];
+      var notes = measure.note;
+
+      // When
+      fermataData.changeNoteDuration(2);
+
+      _render.renderAll();
+      assert.equal(measure.$fermata.attributes.divisions, 1);
+      assert.equal(notes.length, 4);
+      assert.equal(notes[0].duration, 1);
+      assert.equal(notes[1].duration, 1);
+    });
+  });
 });
