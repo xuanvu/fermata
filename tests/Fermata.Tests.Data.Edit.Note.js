@@ -312,7 +312,7 @@ describe('Fermata.Data.Edit.Note', function () {
       var notes = measure.note;
 
       // When
-      fermataData.changeNoteDuration(0, 0, 0, 1, 1);
+      fermataData.changeNoteDuration(0, 0, 0, 1, 2);
 
       _render.renderAll();
       assert.equal(measure.$fermata.attributes.divisions, 1);
