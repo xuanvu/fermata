@@ -437,7 +437,9 @@
     while (divisionsNeeded > 0) {
       var note = voice[voice.length - 1];
       if (note.duration > divisionsNeeded) {
-        note.duration -= divisionsNeeded;
+        var durationToAdd = note.duration - divisionsNeeded;
+        this.makeRemoveNote(voice.length - 1, voiceIdx);
+        this.addSpacesAtEnd(durationToAdd, voiceIdx);
         divisionsNeeded = 0;
       } else {
         divisionsNeeded -= note.duration;
