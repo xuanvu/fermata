@@ -28,7 +28,7 @@
  This library makes use of Simon Tatham's awesome font - Gonville.
 
  Build ID: debug-4@451d288f69833eb26d41513b7581e003c511ad6f
- Build date: 2013-07-25 00:17:34.168681
+ Build date: 2013-07-25 01:33:45.835543
 
 */
 function Vex() {
@@ -6255,10 +6255,10 @@ Vex.Flow.Stroke.prototype.draw = function() {
 };
 /*
 
- Fermata 0.0.3
+ Fermata 0.0.3-1
 
- Build ID: debug-4@32089b2c0ee54d868f4f718fac231dbb4df28ad3
- Build date: 2013-07-25 00:17:34.168712
+ Build ID: debug-4@b59713588a41909902c757ba0461dd9202e43f48
+ Build date: 2013-07-25 01:33:45.835572
 
 */
 if(typeof require !== "undefined") {
@@ -7161,7 +7161,7 @@ Fermata.Values = {};
     return this.getVoices()[idx]
   };
   Measure.prototype.fillVoices = function(notes) {
-    this.voices = [];
+    this.voices = [[]];
     for(var i = 0;i < notes.length;i++) {
       var note = notes[i];
       var voiceIdx = 0;
@@ -7660,7 +7660,7 @@ Fermata.Values = {};
       }
       for(var i = 0;i < number;i++) {
         var measure = {"$number":(idx + i + 1).toString(), "note":[], $fermata:{attributes:Utils.Clone(baseAttributes)}};
-        part.measure.splice(idx + i + 1, 0, measure);
+        part.measure.splice(idx + i, 0, measure);
         Fermata.Data.prototype.fillWithRest(part, idx)
       }
       for(i = number + idx;i < part.measure.length;i++) {
@@ -7697,6 +7697,7 @@ Fermata.Values = {};
 }).call(this);
 (function() {
   var NotImplementedError = Fermata.Error.NotImplementedError;
+  var Measure = Fermata.Data.Measure;
   Fermata.Data.prototype.getTypeFromDuration = function(beats, duration) {
     if(duration === 8) {
       return"half"
@@ -7714,40 +7715,10 @@ Fermata.Values = {};
     }
   };
   Fermata.Data.prototype.fillWithRest = function(part, idx) {
-    var nstave = 0;
-    var time;
-    var i = 0;
-    if(part.measure[idx].$fermata !== undefined) {
-      if(part.measure[idx].$fermata.attributes !== undefined && part.measure[idx].$fermata.attributes.time !== undefined) {
-        time = part.measure[idx].$fermata.attributes.time
-      }
-      if(part.measure[idx].$fermata.vexStaves !== undefined) {
-        nstave = part.mesure[idx].$fermata.vexStaves.length
-      }
-    }
-    if(nstave === 0 || time === undefined) {
-      for(i = 0;i < part.measure.length;i++) {
-        if(part.measure[i].$fermata !== undefined) {
-          if(part.measure[i].$fermata.attributes !== undefined && part.measure[i].$fermata.attributes.time !== undefined) {
-            time = part.measure[i].$fermata.attributes.time
-          }
-          if(part.measure[i].$fermata.vexStaves !== undefined) {
-            nstave = part.measure[i].$fermata.vexStaves.length
-          }
-          if(nstave !== 0 && time !== undefined) {
-            break
-          }
-        }
-      }
-    }
-    if(nstave === 0 || time === undefined) {
-      var errorMsg = "error: can't access the number of stave, or beat in part. throw exception."
-    }
-    for(i = 0;i < nstave;i++) {
-      var duration = time.beats * time.type;
-      var rest = {"duration":duration, "rest":{}, "staff":i + 1, "type":this.getTypeFromDuration(time, duration), "voice":1};
-      part.measure[idx].note.splice(i, 0, rest)
-    }
+    var measureData = part.measure[idx];
+    var measure = new Measure(measureData);
+    measure.adjustDivisions();
+    measure.adjustNotesDuration()
   }
 }).call(this);
 (function() {
