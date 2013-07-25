@@ -2,6 +2,7 @@
   "use strict";
 
   var NotImplementedError = Fermata.Error.NotImplementedError;
+  var Measure = Fermata.Data.Measure;
 
   Fermata.Data.prototype.getTypeFromDuration = function (beats, duration) {
     // TODO: study beats impact on type (well, impact is already known but has to be studied deeper).
@@ -22,50 +23,10 @@
   };
 
   Fermata.Data.prototype.fillWithRest = function (part, idx) {
-    var nstave = 0;
-    var time;
-    var i = 0;
-    if (part.measure[idx].$fermata !== undefined) {
-      if (part.measure[idx].$fermata.attributes !== undefined &&
-              part.measure[idx].$fermata.attributes.time !== undefined) {
-        time = part.measure[idx].$fermata.attributes.time;
-      }
-      if (part.measure[idx].$fermata.vexStaves !== undefined) {
-        nstave = part.mesure[idx].$fermata.vexStaves.length;
-      }
-    }
-    if (nstave === 0 || time === undefined) {
-      for (i = 0; i < part.measure.length; i++) {
-        if (part.measure[i].$fermata !== undefined) {
-          if (part.measure[i].$fermata.attributes !== undefined &&
-                  part.measure[i].$fermata.attributes.time !== undefined) {
-            time = part.measure[i].$fermata.attributes.time;
-          }
-          if (part.measure[i].$fermata.vexStaves !== undefined) {
-            nstave = part.measure[i].$fermata.vexStaves.length;
-          }
-          if (nstave !== 0 && time !== undefined) {
-            break;
-          }
-        }
-      }
-    }
-    if (nstave === 0 || time === undefined) {
-      var errorMsg = "error: can't access the number of stave, or beat in part. throw exception.";
-      //TODO: fix this !!!
-      // throw new NotImplementedError(errorMsg);
-    }
-    for (i = 0; i < nstave; i++) {
-      var duration = time.beats * time.type;
-      var rest = {
-        'duration': duration,
-        'rest': {},
-        'staff': i + 1,
-        'type': this.getTypeFromDuration(time, duration),
-        'voice': 1
-      };
-      part.measure[idx].note.splice(i, 0, rest);
-    }
+    var measureData = part.measure[idx];
+    var measure = new Measure(measureData);
+    measure.adjustDivisions();
+    measure.adjustNotesDuration();
   };
 
 }).call(this);
