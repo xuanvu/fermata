@@ -33,7 +33,7 @@
   };
 
   Measure.prototype.fillVoices = function (notes) {
-    this.voices = [];
+    this.voices = [[]];
     for (var i = 0; i < notes.length; i++) {
       var note = notes[i];
 
