@@ -99,7 +99,7 @@
           }
         };
 
-        part.measure.splice(idx + i + 1, 0, measure);
+        part.measure.splice(idx + i, 0, measure);
         Fermata.Data.prototype.fillWithRest(part, idx);
       }
       for (i = number + idx ; i < part.measure.length ; i++) {
